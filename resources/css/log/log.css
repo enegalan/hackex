@@ -1,0 +1,42 @@
+#log {
+    color: white;
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+#log h4 {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.max-size {
+    margin-top: 1.5rem;
+    font-size: 14px;
+}
+
+.log-textarea {
+    display: flex;
+    justify-content: center;
+}
+
+.log-textarea textarea {
+    resize: none;
+    background: #fff;
+    width: 100%;
+    color: #000 !important;
+    padding-top: 0.3rem !important;
+    padding-left: .3rem !important;
+    padding-right: .5rem !important;
+    font-size: 13px;
+}
+
+.log-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: -1.8rem;
+}
+
+.save-button {
+    font-weight: normal;
+}

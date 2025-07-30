@@ -8,6 +8,7 @@
 @import './scan/scan.css';
 @import './bank-account/bank-login.css';
 @import './store/store.css';
+@import './log/log.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -56,4 +57,8 @@ input[type="search"], input[type="text"], input[type="password"] {
 
 input[type="password"] {
     letter-spacing: 3px;
+}
+
+textarea:focus-visible {
+    outline: none;
 }

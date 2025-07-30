@@ -31,7 +31,8 @@ section#scan {
 .login-button,
 .transfer-button,
 .deposit-button,
-.buy-button {
+.buy-button,
+.save-button {
     background-color: #cecece;
     padding-left: 0.8rem;
     border-radius: 6px;
@@ -50,7 +51,8 @@ section#scan {
 .login-button:disabled,
 .transfer-button:disabled,
 .deposit-button:disabled,
-.buy-button:disabled {
+.buy-button:disabled,
+.save-button:disabled {
     opacity: .25;
     pointer-events: none;
 }
@@ -60,7 +62,8 @@ section#scan {
 .login-button:hover,
 .transfer-button:hover,
 .deposit-button:hover,
-.buy-button:hover {
+.buy-button:hover,
+.save-button:hover {
     background-color: #a2a2a2;
     transition: .1s ease-in;
 }

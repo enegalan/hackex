@@ -28,3 +28,7 @@ Route::get('/store', function () {
 Route::get('/messages', function () {
     return view('messages');
 });
+
+Route::get('/log', function () {
+    return view('log');
+});

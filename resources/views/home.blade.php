@@ -86,7 +86,7 @@
                 <label class="app-label">Store</label>
             </article>
             {{-- Messages --}}
-            <article onclick="redirect('/messages') window.location.href='/messages'" id="messages" class="app-frame">
+            <article onclick="redirect('/messages')" window.location.href='/messages'" id="messages" class="app-frame">
                 <button class="app-button">
                     <div class="envelope"></div>
                     <div class="open"></div>
@@ -94,7 +94,7 @@
                 <label class="app-label">Messages</label>
             </article>
             {{-- Log --}}
-            <article onclick="redirect('/log') window.location.href='/log'" id="log" class="app-frame">
+            <article onclick="redirect('/log')" window.location.href='/log'" id="log" class="app-frame">
                 <button class="app-button">
                     <div id="log-frame">
                         <span>EX:/></span>
