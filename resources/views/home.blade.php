@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head')
     <body>
+        @include('includes.modal')
         <section id="player">
             <div id="player-level">1</div>{{-- TODO: Do dynamic --}}
             <div id="player-name"><b><span id="player-name-value">Eneko</span><span>'s</span></b></div>{{-- TODO: Do dynamic --}}
@@ -9,7 +10,7 @@
         </section>
         <section id="apps">
             {{-- Processes --}}
-            <article onclick="window.location.href='/processes'" id="processes" class="app-frame">
+            <article onclick="redirect('/processes')" id="processes" class="app-frame">
                 <button class="app-button">
                     <div id="part-1"></div>
                     <div id="part-2"></div>
@@ -18,7 +19,7 @@
                 <label class="app-label">Processes</label>
             </article>
             {{-- Scan --}}
-            <article onclick="window.location.href='/scan'" id="scan" class="app-frame">
+            <article onclick="redirect('/scan')" id="scan" class="app-frame">
                 <button class="app-button">
                     <div id="part-1"></div>
                     <div id="part-2"></div>
@@ -44,7 +45,7 @@
                 <label class="app-label">Scan</label>
             </article>
             {{-- Bank Account --}}
-            <article onclick="window.location.href='/bank-account'" id="bank-account" class="app-frame">
+            <article onclick="redirect('/bank-account')" id="bank-account" class="app-frame">
                 <button class="app-button">
                     <div id="bank-logo">
                         <div id="part-1">
@@ -60,7 +61,7 @@
                 <label class="app-label">Bank account</label>
             </article>
             {{-- Store --}}
-            <article onclick="window.location.href='/store'" id="store" class="app-frame">
+            <article onclick="redirect('/store')" id="store" class="app-frame">
                 <button class="app-button">
                     <div class="bitcoin hover">
                         <div class="circle">
@@ -85,7 +86,7 @@
                 <label class="app-label">Store</label>
             </article>
             {{-- Messages --}}
-            <article onclick="window.location.href='/messages'" id="messages" class="app-frame">
+            <article onclick="redirect('/messages') window.location.href='/messages'" id="messages" class="app-frame">
                 <button class="app-button">
                     <div class="envelope"></div>
                     <div class="open"></div>
@@ -93,7 +94,7 @@
                 <label class="app-label">Messages</label>
             </article>
             {{-- Log --}}
-            <article onclick="window.location.href='/log'" id="log" class="app-frame">
+            <article onclick="redirect('/log') window.location.href='/log'" id="log" class="app-frame">
                 <button class="app-button">
                     <div id="log-frame">
                         <span>EX:/></span>
@@ -111,7 +112,7 @@
                 <label class="app-label">Log</label>
             </article>
             {{-- Apps --}}
-            <article onclick="window.location.href='/apps'" id="apps" class="app-frame">
+            <article onclick="openWindow('apps')" id="apps" class="app-frame">
                 <button class="app-button">
                     <div id="apps-grid">
                         <div id="app-1"></div>
@@ -123,7 +124,7 @@
                 <label class="app-label">Apps</label>
             </article>
             {{-- My Device --}}
-            <article onclick="window.location.href='/device'" id="device" class="app-frame">
+            <article onclick="redirect('/device')" id="device" class="app-frame">
                 <button class="app-button">
                     <div class="mobile">
                         <div class="phone">
@@ -144,4 +145,5 @@
             </article>
         </section>
     </body>
+    @include('includes.scripts')
 </html>

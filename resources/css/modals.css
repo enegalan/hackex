@@ -1,0 +1,81 @@
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    color: white;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-frame {
+    position: relative;
+    background-color: #131313;
+    width: 80%;
+    margin: 15% auto;
+}
+
+#modal-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background: #1e1e1e;
+}
+
+#modal-top .title {
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* Modal Content/Box */
+.modal-content .title {
+    background-color: #1e1f1e;
+}
+
+/* The Close Button */
+.close {
+    color: #1d9635;
+    float: right;
+    font-size: 28px;
+    font-weight: 700;
+    padding-bottom: 4px;
+    transition: .1s ease-in;
+}
+
+.close:hover,
+.close:focus {
+    color: #136123;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .1s ease-in;
+}
+
+/* Apps modal */
+#apps-modal .modal-content ul li {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding: .6rem;
+    border: 0.5px solid #1d1d1d;
+    transition: .1s ease-in;
+}
+
+#apps-modal .modal-content ul li:hover {
+    background-color: #474747;
+    transition: .1s ease-in;
+}
+
+#apps-modal .modal-content ul li .app-info {
+    display: flex;
+    flex-direction: column;
+}
+
+#apps-modal .modal-content ul li .app-value {
+    font-size: 14px;
+}

@@ -386,7 +386,6 @@ article.app-frame#messages .app-button {
     background: radial-gradient(circle, #0a94d4, #074b93);
 }
 .open{
-    z-index: 3;
     transform-origin: 50% 0;
     -webkit-filter: drop-shadow(0 0 gray);
     -webkit-transition: all 2s linear .2s;
