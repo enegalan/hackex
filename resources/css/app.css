@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import './progress-bars.css';
+@import './back-button.css';
 @import './modals.css';
 @import './home/home.css';
 @import './home/apps.css';

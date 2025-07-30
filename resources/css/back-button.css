@@ -1,0 +1,19 @@
+section#go-back {
+    background: #00000050;
+    position: fixed;
+    width: 100%;
+    text-align: -webkit-center;
+    bottom: 3rem;
+}
+
+section#go-back svg:hover {
+    fill: #277423;
+    transition: .1s ease-in;
+}
+
+section#go-back svg {
+    fill: #3daf37;
+    height: 60px;
+    width: 60px;
+    transition: .1s ease-in;
+}

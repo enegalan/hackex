@@ -32,7 +32,7 @@
     }
 </script>
 @if (isset($scripts))
-    @if(in_array("processes", $scripts))
+    @if (in_array("processes", $scripts))
         <script id="processes-scripts">
             const processesTabs = document.querySelectorAll(".processes-tabs .tabs > *");
             processesTabs.forEach(tab => {
@@ -62,6 +62,28 @@
             if (!bypassingFrame.classList.contains('active')) bypassingFrame.classList.add('active');
             const bypassingTab = document.querySelector('#bypassing-tab');
             if (!bypassingTab.classList.contains('active')) bypassingTab.classList.add('active');
+        </script>
+    @endif
+    @if (in_array("progress-bar", $scripts))
+        <script id="progress-bar">
+            const progressBars = document.querySelectorAll('progress-bar');
+            progressBars.forEach(progressBar => {
+                const min = parseFloat(progressBar.getAttribute('min')) || 0;
+                const max = parseFloat(progressBar.getAttribute('max')) || 100;
+                const value = parseFloat(progressBar.getAttribute('value')) || 0;
+
+                const percentage = Math.max(0, Math.min(100, ((value - min) / (max - min)) * 100));
+
+                // Crear la barra si no existe
+                let bar = progressBar.querySelector('.bar');
+                if (!bar) {
+                bar = document.createElement('div');
+                bar.classList.add('bar');
+                progressBar.appendChild(bar);
+                }
+
+                bar.style.width = `${percentage}%`;
+            })
         </script>
     @endif
 @endif

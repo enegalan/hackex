@@ -24,7 +24,11 @@ section.processes-info {
 }
 
 section.processes-tabs {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
+}
+
+.processes-counters {
+    font-size: 13px;
 }
 
 .processes-tabs .tabs {
@@ -32,11 +36,113 @@ section.processes-tabs {
     justify-content: space-around;
 }
 
-#bypassing-frame li > div {
+.processes-frames li > div {
     display: flex;
     justify-content: space-between;
 }
 
+.processes-frames li {
+    padding: 1rem;
+}
+
+.process-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .1s ease-in;
+    width: 100%;
+    height: 3rem;
+    background: #222222;
+}
+
+.process-tab:hover {
+    color: #3daf37;
+}
+
 .process-tab span {
     pointer-events: none;
+}
+
+.process-tab.active {
+    background: #00000029;
+    color: #3daf37;
+}
+
+.process-tab.active:hover {
+    color: white;
+}
+
+.processes-topwrap {
+    padding-top: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.processes-frames > section {
+    display: none;
+}
+
+.processes-frames > section > ul > li:hover {
+    background: #222222;
+}
+
+.processes-frames > section.active {
+    display: block;
+    background: #00000029;
+}
+
+.process-date, .process-ago {
+    font-size: 12px;
+}
+.process-ip {
+    font-size: 17px;
+}
+
+.process-bottomwrap {
+    font-size: 14px;
+}
+
+.process-status.successful {
+    color: #3daf37;
+}
+.process-status.working {
+    color: white;
+}
+.process-status.failed {
+    color: #b60c0c;
+}
+
+.oc-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.oc-logo {
+    width: 15px;
+    height: 15px;
+    border: 2px solid white;
+    border-radius: 4px;
+    position: relative;
+}
+
+.oc-logo:before {
+    content: "";
+    border: 1px solid #fff;
+    width: 2px;
+    height: 7px;
+    position: absolute;
+    top: 2px;
+    left: 4.25px;
+}
+
+.oc-logo:after {
+    content: "";
+    border: 1px solid #fff;
+    width: 8px;
+    height: 2px;
+    position: absolute;
+    top: 4.3px;
+    left: 1.25px;
 }

@@ -4,26 +4,28 @@
     <body>
         @include('includes.modal')
         <section id="processes">
-            <h4>Processes</h4>
-            <section class="processes-info">
-                <section>
-                    <div>
-                        <span>Total: </span>
-                        <span>1</span>
-                    </div>
-                    <div>
-                        <span>Running: </span>
-                        <span>0</span>
-                    </div>
-                </section>
-                <section>
-                    <div>
-                        <span>7071</span>
-                        <div>
-                            <span> OC</span>
-                            <div class="oc-logo"></div>
+            <section class="processes-topwrap">
+                <h4>Processes</h4>
+                <section class="processes-info">
+                    <section class="processes-counters">
+                        <div class="total-counter">
+                            <span>Total: </span>
+                            <span>1</span>
                         </div>
-                    </div>
+                        <div class="running-counter">
+                            <span>Running: </span>
+                            <span>0</span>
+                        </div>
+                    </section>
+                    <section class="oc-counters">
+                        <div class="oc-counter">
+                            <span id="oc-value">7071</span>
+                            <div class="oc-label">
+                                <span> OC</span>
+                                <div class="oc-logo"></div>
+                            </div>
+                        </div>
+                    </section>
                 </section>
             </section>
             <section class="processes-tabs">
@@ -43,40 +45,168 @@
                 <section id="bypassing-frame">
                     <ul>
                         <li>
-                            <div>
-                                <div>
-                                    <span>187.62.160.15</span>
-                                    <span>139d 14h 24m</span>
-                                    <span> ago</span>
+                            <div class="process-topwrap">
+                                <div class="process-info">
+                                    <span class="process-ip">187.62.160.15</span>
+                                    <span class="process-date">139d 14h 24m</span>
+                                    <span class="process-ago"> ago</span>
                                 </div>
                                 <div class="checkbox">
                                     <input type="checkbox" name="select-process" id="select-1">
                                 </div>
                             </div>
-                            <div class="progress-bar">
-
-                            </div>
-                            <div>
-                                <div class="bypass-status">
-                                    <span>Bypass </span>
-                                    <span>successful</span>
+                            <progress-bar value="80" class="progress-bar">
+                                <div class="bar"></div>
+                            </progress-bar>
+                            <div class="process-bottomwrap">
+                                <div class="process-status successful">
+                                    <span>Bypass</span>
+                                    <span> successful</span>
                                 </div>
-                                <div class="firewall-level">
+                                <div class="process-level">
                                     <span>Firewall level </span>
                                     <span>443</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="process-topwrap">
+                                <div class="process-info">
+                                    <span class="process-ip">30.93.30.18</span>
+                                    <span class="process-date">Bypassing</span>
+                                    <span class="process-ago"></span>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="select-process" id="select-1">
+                                </div>
+                            </div>
+                            <progress-bar value="30" class="progress-bar">
+                                <div class="bar"></div>
+                            </progress-bar>
+                            <div class="process-bottomwrap">
+                                <div class="process-status working">
+                                    <span>0.21%</span>
+                                    <span> - 1d 3h 39m 10s</span>
+                                </div>
+                                <div class="process-level">
+                                    <span>Firewall level </span>
+                                    <span>436</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="process-topwrap">
+                                <div class="process-info">
+                                    <span class="process-ip">128.12.20.08</span>
+                                    <span class="process-date">12d 12h 10m</span>
+                                    <span class="process-ago"> ago</span>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="select-process" id="select-1">
+                                </div>
+                            </div>
+                            <progress-bar value="100" class="progress-bar failed">
+                                <div class="bar"></div>
+                            </progress-bar>
+                            <div class="process-bottomwrap">
+                                <div class="process-status failed">
+                                    <span>Bypass</span>
+                                    <span> failed</span>
+                                </div>
+                                <div class="process-level">
+                                    <span>Firewall level </span>
+                                    <span>649</span>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </section>
                 <section id="cracking-frame">
-
+                    <ul>
+                        <li>
+                            <div class="process-topwrap">
+                                <div class="process-info">
+                                    <span class="process-ip">187.62.160.15</span>
+                                    <span class="process-date">135d 10h 14m</span>
+                                    <span class="process-ago"> ago</span>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="select-process" id="select-1">
+                                </div>
+                            </div>
+                            <progress-bar value="100" class="progress-bar">
+                                <div class="bar"></div>
+                            </progress-bar>
+                            <div class="process-bottomwrap">
+                                <div class="process-status successful">
+                                    <span>Crack</span>
+                                    <span> successful</span>
+                                </div>
+                                <div class="process-level">
+                                    <span>Encryptor level </span>
+                                    <span>154</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="process-topwrap">
+                                <div class="process-info">
+                                    <span class="process-ip">123.162.120.15</span>
+                                    <span class="process-date">166d 20h 14m</span>
+                                    <span class="process-ago"> ago</span>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="select-process" id="select-1">
+                                </div>
+                            </div>
+                            <progress-bar value="100" class="progress-bar">
+                                <div class="bar"></div>
+                            </progress-bar>
+                            <div class="process-bottomwrap">
+                                <div class="process-status successful">
+                                    <span>Crack</span>
+                                    <span> successful</span>
+                                </div>
+                                <div class="process-level">
+                                    <span>Encryptor level </span>
+                                    <span>222</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </section>
                 <section id="network-frame">
-
+                    <ul>
+                        <li>
+                            <div class="process-topwrap">
+                                <div class="process-info">
+                                    <span class="process-ip">187.62.160.15</span>
+                                    <span class="process-date">135d 10h 14m</span>
+                                    <span class="process-ago"> ago</span>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="select-process" id="select-1">
+                                </div>
+                            </div>
+                            <progress-bar value="100" class="progress-bar">
+                                <div class="bar"></div>
+                            </progress-bar>
+                            <div class="process-bottomwrap">
+                                <div class="process-status successful">
+                                    <span>Download</span>
+                                    <span> complete</span>
+                                </div>
+                                <div class="process-level">
+                                    <span>Spyware level </span>
+                                    <span>154</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </section>
             </section>
         </section>
+        @include('includes.back-btn')
     </body>
-    @include('includes.scripts', ['scripts' => ['processes']])
+    @include('includes.scripts', ['scripts' => ['processes', 'progress-bar']])
 </html>
