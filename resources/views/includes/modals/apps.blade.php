@@ -8,49 +8,63 @@
             <section class="content">
                 <ul>
                     <li>
-                        <div class="app-logo">Logo</div>
+                        <div class="app-logo">
+                            <img src="{{ asset('apps/antivirus.webp') }}" alt="antivirus">
+                        </div>
                         <div class="app-info">
                             <span class="app-name">Antivirus</span>
                             <span class="app-value">Level <span class="app-level-value">1</span></span>
                         </div>
                     </li>
                     <li>
-                        <div class="app-logo">Logo</div>
+                        <div class="app-logo">
+                            <img src="{{ asset('apps/spam.webp') }}" alt="spam">
+                        </div>
                         <div class="app-info">
                             <span class="app-name">Spam</span>
                             <span class="app-value">Level <span class="app-level-value">1</span></span>
                         </div>
                     </li>
                     <li>
-                        <div class="app-logo">Logo</div>
+                        <div class="app-logo">
+                            <img src="{{ asset('apps/spyware.webp') }}" alt="spyware">
+                        </div>
                         <div class="app-info">
                             <span class="app-name">Spyware</span>
                             <span class="app-value">Level <span class="app-level-value">1</span></span>
                         </div>
                     </li>
                     <li>
-                        <div class="app-logo">Logo</div>
+                        <div class="app-logo">
+                            <img src="{{ asset('apps/firewall.webp') }}" alt="firewall">
+                        </div>
                         <div class="app-info">
                             <span class="app-name">Firewall</span>
                             <span class="app-value">Level <span class="app-level-value">1</span></span>
                         </div>
                     </li>
                     <li>
-                        <div class="app-logo">Logo</div>
+                        <div class="app-logo">
+                            <img src="{{ asset('apps/bypasser.webp') }}" alt="bypasser">
+                        </div>
                         <div class="app-info">
                             <span class="app-name">Bypasser</span>
                             <span class="app-value">Level <span class="app-level-value">1</span></span>
                         </div>
                     </li>
                     <li>
-                        <div class="app-logo">Logo</div>
+                        <div class="app-logo">
+                            <img src="{{ asset('apps/password_cracker.webp') }}" alt="password_cracker">
+                        </div>
                         <div class="app-info">
                             <span class="app-name">Password Cracker</span>
                             <span class="app-value">Level <span class="app-level-value">1</span></span>
                         </div>
                     </li>
                     <li>
-                        <div class="app-logo">Logo</div>
+                        <div class="app-logo">
+                            <img src="{{ asset('apps/password_encryptor.webp') }}" alt="password_encryptor">
+                        </div>
                         <div class="app-info">
                             <span class="app-name">Password Encryptor</span>
                             <span class="app-value">Level <span class="app-level-value">1</span></span>

@@ -635,3 +635,7 @@ div#apps-grid > * {
     font-weight: bold;
     font-family: 'neuropol';
 }
+
+.app-logo {
+    width: 64px;
+}
