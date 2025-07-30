@@ -1,0 +1,545 @@
+article.app-frame#processes { grid-area: 1 / 3 / 2 / 4; }
+article.app-frame#scan { grid-area: 1 / 4 / 2 / 5; }
+article.app-frame#bank-account { grid-area: 2 / 3 / 3 / 4; }
+article.app-frame#store { grid-area: 2 / 4 / 3 / 5; }
+article.app-frame#contacts { grid-area: 3 / 3 / 4 / 4; }
+article.app-frame#log { grid-area: 3 / 4 / 4 / 5; }
+article.app-frame#apps { grid-area: 4 / 3 / 5 / 4; }
+article.app-frame#device{ grid-area: 4 / 4 / 5 / 5; }
+
+.app-button {
+    background: #39475A; /* Each app will have its own background color, but just in case :P */
+    background: radial-gradient(circle, #3a5680, #152b45 100%);
+    border-radius: 18px;
+    min-width: 120px;
+    min-height: 120px;
+    border: 2px solid #94ff94;
+}
+
+/* Processes button */
+article.app-frame#processes .app-button {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+article.app-frame#processes .app-button #part-1,
+article.app-frame#processes .app-button #part-2,
+article.app-frame#processes .app-button #part-3 {
+    background: #596571;
+    border-radius: 50px;
+    width: 100%;
+    height: 20px;
+    position: relative;
+}
+article.app-frame#processes .app-button div:before {
+    content: '';
+    border-radius: 50px;
+    left: 0;
+    height: 100%;
+    position: absolute;
+    background: #1D9635;
+    background: linear-gradient(90deg,#1D9635 0%, #49D10F 83%);
+}
+article.app-frame#processes .app-button #part-1:before {width: 85%;}
+article.app-frame#processes .app-button #part-2:before {width: 45%;}
+article.app-frame#processes .app-button #part-3:before {width: 70%;}
+
+/* Scan button */
+article.app-frame#scan .app-button {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+article.app-frame#scan .app-button div {
+    position: absolute;
+    border: 8px solid #0000008c;
+    border-radius: 100px;
+}
+article.app-frame#scan .app-button #part-1 {
+    width: 125%;
+    height: 125%;
+    left: -15px;
+}
+article.app-frame#scan .app-button #part-2 {
+    width: 102%;
+    height: 102%;
+    left: -1px;
+}
+article.app-frame#scan .app-button #part-3 {
+    width: 90%;
+    height: 90%;
+    left: 6px;
+    border: 2px solid #6bb20fab;
+}
+article.app-frame#scan .app-button #part-4 {
+    width: 86%;
+    height: 86%;
+    left: 8px;
+    border-width: 6px;
+}
+article.app-frame#scan .app-button #part-5 {
+    width: 78%;
+    height: 78%;
+    left: 13px;
+    border: 2px solid #6bb20fab;
+}
+article.app-frame#scan .app-button #part-6 {
+    width: 74%;
+    height: 74%;
+    left: 15px;
+    border-width: 6px;
+}
+article.app-frame#scan .app-button #part-7 {
+    width: 60%;
+    height: 60%;
+    left: 24px;
+    border-width: 5px;
+}
+article.app-frame#scan .app-button #part-8 {
+    width: 52%;
+    height: 52%;
+    left: 28px;
+    border: 1px solid #6bb20fab;
+}
+article.app-frame#scan .app-button #part-9 {
+    width: 50.5%;
+    height: 50%;
+    left: 29px;
+    border-width: 4px;
+}
+article.app-frame#scan .app-button #part-10 {
+    width: 44.5%;
+    height: 44%;
+    left: 32px;
+    border: 1px solid #6bb20fab;
+}
+article.app-frame#scan .app-button #part-11 {
+    width: 42.5%;
+    height: 42%;
+    left: 33px;
+    border-width: 4px;
+}
+article.app-frame#scan .app-button #part-12 {
+    width: 30.5%;
+    height: 30%;
+    left: 40px;
+    border-width: 4px;
+}
+article.app-frame#scan .app-button #part-13 {
+    border: 7px solid #6bb20f;
+}
+article.app-frame#scan .app-button #part-14 {
+    border: 2px solid #6bb20f;
+    width: 60px;
+    position: absolute;
+    left: 42px;
+    transform: rotate(125deg);
+    top: 36px;
+    box-shadow: #ffffff61 -12px -2px 11px 0px;
+}
+
+/* Bank Account button */
+article.app-frame#bank-account .app-button {
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 0.5rem;
+    background: radial-gradient(circle, #fffefe, #8b8b8b);
+}
+article.app-frame#bank-account .app-button span {
+    color: #1a5492;
+    letter-spacing: .05em;
+    font-family: Times New Roman, Times, serif;
+    font-size: 2em;
+    font-weight: 700;
+}
+article.app-frame#bank-account .app-button #bank-logo {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+}
+article.app-frame#bank-account .app-button #bank-logo #part-1 {
+    background: #ff7507;
+    border-radius: 100px;
+    width: 50%;
+    height: 100%;
+}
+article.app-frame#bank-account .app-button #bank-logo #part-1 #part-2 {
+    background: #ffffff;
+    border-radius: 0;
+    width: 33%;
+    height: 70%;
+    position: absolute;
+    transform: rotate(45deg);
+    left: 39px;
+    top: 8px;
+}
+article.app-frame#bank-account .app-button #bank-logo #part-3 {
+    background: #ff7507;
+    width: 73%;
+    height: 70%;
+    position: absolute;
+    top: 6px;
+    transform: rotate(-45deg);
+    left: 5px;
+}
+article.app-frame#bank-account .app-button #bank-logo #part-4 {
+    background: #fff;
+    width: 71%;
+    height: 71%;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    transform: rotate(-45deg);
+}
+/* Store button */
+.bitcoin {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.circle {
+    border: 8px solid var(--black);
+    height: 90%;
+    transition: var(--transition);
+    will-change: transform;
+    border-radius: 50%;
+    width: 90%;
+    margin: 0 auto;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    box-shadow: inset #0000005e 2px 0px 15px 0px;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -20px;
+    left: -10%;
+    transform: scale(0.35);
+}
+
+.primary-element {
+    background-color: var(--black);
+    border: 1px solid var(--black);
+    position: absolute;
+    transition: var(--transition);
+    will-change: background;
+    z-index: 1;
+}
+
+.bg-element {
+    background-color: #2e496e;
+    position: absolute;
+    z-index: 2;
+}
+
+.element-1,
+.element-2 {
+    height: 18px;
+    left: 0;
+    width: 76px;
+}
+
+.element-1 {
+    top: 25px;
+}
+
+.element-2 {
+    top: 152px;
+}
+
+.element-3 {
+    height: 145px;
+    left: 22px;
+    top: 25px;
+    transform-origin: 0 0;
+    width: 36px;
+}
+
+.element-4,
+.element-5 {
+    height: 194px;
+    top: 0;
+    width: 20px;
+    z-index: 1;
+}
+
+.element-4 {
+    left: 38px;
+}
+
+.element-5 {
+    left: 76px;
+}
+
+.element-6 {
+    height: 18px;
+    left: 22px;
+    top: 86px;
+    width: 54px;
+}
+
+.element-7,
+.element-8 {
+    border-bottom-right-radius: 40px;
+    border-top-right-radius: 40px;
+}
+
+.element-7,
+.element-8 {
+    left: 96px;
+}
+
+.element-7 {
+    height: 68px;
+    top: 25px;
+    width: 43px;
+}
+
+.element-8 {
+    height: 77px;
+    top: 93px;
+    width: 49px;
+}
+
+.element-9,
+.element-10 {
+    border-bottom-right-radius: 40px;
+    border-top-right-radius: 40px;
+    left: 58px;
+    z-index: 10;
+}
+
+.element-9 {
+    height: 43px;
+    top: 43px;
+    width: 43px;
+    z-index: 10;
+}
+
+.element-10 {
+    height: 48px;
+    top: 104px;
+    width: 50px;
+}
+
+.element-11 {
+    z-index: 10;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+    width: 23px;
+    height: 109px;
+    top: 43px;
+    left: 0;
+}
+
+.element-12,
+.element-13 {
+    background-color: var(--black);
+    height: 8px;
+    left: 14px;
+    width: 8px;
+    z-index: 9;
+}
+
+.element-12 {
+    top: 43px;
+}
+
+.element-13 {
+    top: 144px;
+}
+
+.bitcoin:hover .primary-element,
+.bitcoin.hover .primary-element {
+    background-color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.bitcoin:hover .circle,
+.bitcoin.hover .circle {
+    border-color: var(--primary);
+    transform: rotate(-15deg);
+}
+
+/* Contacts button */
+.folder {
+    background-color: #708090;
+    border-radius: 0 6px 6px;
+    width: 80px;
+    height: 50px;
+    margin: 10px auto 0;
+    position: relative;
+    box-shadow: 4px 4px 7px #00000096;
+}
+
+.folder:before {
+    content: '';
+    width: 50%;
+    height: 12px;
+    border-radius: 0 20px 0 0;
+    background-color: #708090;
+    position: absolute;
+    top: -12px;
+    left: 0px;
+}
+
+.person {
+    width: 80px;
+    height: 45px;
+    position: relative;
+}
+.person:after {
+    content: "";
+    box-sizing: border-box;
+    border: 9px solid #d3d3d3;
+    border-bottom-width: 0;
+    border-radius: 45px 45px 0 0;
+    width: 35px;
+    height: 25px;
+    display: block;
+    position: absolute;
+    top: 19px;
+    left: 12px;
+}
+.person:before {
+    content: "";
+    box-sizing: border-box;
+    border: 7px solid #d3d3d3;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 17px;
+}
+.details:before {
+    content: "";
+    background: #d3d3d3;
+    border-radius: 100px;
+    width: 12px;
+    height: 5px;
+    position: absolute;
+    top: 6px;
+    left: -5px;
+}
+.details:after {
+    content: "";
+    background: #d3d3d3;
+    border-radius: 100px;
+    width: 12px;
+    height: 5px;
+    position: absolute;
+    top: 30px;
+    left: -5px;
+}
+
+/* Log button */
+article.app-frame#log .app-button {
+    align-items: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: radial-gradient(circle, #fffefe, #656565);
+}
+#log-frame {
+    position: relative;
+    color: #6bb20fab;
+    background: #000;
+    border: 2px solid #fff;
+    width: 90px;
+    height: 90px;
+    font-family: Courier New, Courier, monospace;
+    font-size: .4em;
+    padding: 8px;
+    padding-right: 15px;
+    text-align: left;
+}
+#log-scroll {
+    border-left: 2px solid #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 12px;
+}
+#log-scroll #close {
+    color: #6bb20fab;
+    font-size: 8px;
+    text-align: center;
+    font-family: sans-serif;
+}
+#scrollbar {
+    height: 89%;
+    width: 10px;
+    color: #000;
+    text-align: center;
+}
+#scrollbar #scroll-up {
+    background: white;
+    height: 12px;
+    padding-top: 1px;
+}
+#scrollbar #scroll-down {
+    background: white;
+    height: 12px;
+    padding-top: 1px;
+}
+#scrollbar #scroll-bar {
+    background: black;
+    height: 68%;
+}
+#scrollbar #scroll-bar:before {
+    content: "";
+    background: #6bb20fab;
+    width: 100%;
+    height: 12%;
+    position: absolute;
+    left: 0;
+    top: 36%;
+}
+
+/* Apps button */
+.app-frame#apps .app-button{
+    text-align: -webkit-center;
+}
+#apps-grid {
+    grid-column-gap: 0px;
+    grid-row-gap: 5px;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    width: 78%;
+}
+div#apps-grid > * {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+}
+#apps-grid #app-1 { background: orange; grid-area: 1 / 1 / 2 / 2; }
+#apps-grid #app-2 { background: lime; grid-area: 1 / 2 / 2 / 3; }
+#apps-grid #app-3 { background: turquoise; grid-area: 2 / 1 / 3 / 2; }
+#apps-grid #app-4 { background: fuchsia; grid-area: 2 / 2 / 3 / 3; }
+
+/* My Device button */
