@@ -26,14 +26,11 @@ section#scan {
     gap: .5rem;
 }
 
-.ip-search {
-    background-color: white;
-    border-radius: 5px;
-    padding: 0.25rem;
-    width: 100%;
-}
-
-.ping-button, .refresh-button {
+.ping-button,
+.refresh-button,
+.login-button,
+.transfer-button,
+.deposit-button {
     background-color: #cecece;
     padding-left: 0.8rem;
     border-radius: 6px;
@@ -47,13 +44,19 @@ section#scan {
 }
 
 .ping-button:disabled,
-.refresh-button:disabled {
+.refresh-button:disabled,
+.login-button:disabled,
+.transfer-button:disabled,
+.deposit-button:disabled {
     opacity: .25;
     pointer-events: none;
 }
 
 .ping-button:hover,
-.refresh-button:hover {
+.refresh-button:hover,
+.login-button:hover,
+.transfer-button:hover,
+.deposit-button:hover {
     background-color: #a2a2a2;
     transition: .1s ease-in;
 }

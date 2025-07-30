@@ -162,20 +162,20 @@ article.app-frame#bank-account .app-button span {
     font-size: 2em;
     font-weight: 700;
 }
-article.app-frame#bank-account .app-button #bank-logo {
+#bank-logo {
     display: flex;
     position: relative;
     width: 100%;
     height: 50%;
     justify-content: center;
 }
-article.app-frame#bank-account .app-button #bank-logo #part-1 {
+#bank-logo #part-1 {
     background: #ff7507;
     border-radius: 100px;
     width: 50%;
     height: 100%;
 }
-article.app-frame#bank-account .app-button #bank-logo #part-1 #part-2 {
+#bank-logo #part-1 #part-2 {
     background: #ffffff;
     border-radius: 0;
     width: 33%;
@@ -185,7 +185,7 @@ article.app-frame#bank-account .app-button #bank-logo #part-1 #part-2 {
     left: 39px;
     top: 8px;
 }
-article.app-frame#bank-account .app-button #bank-logo #part-3 {
+#bank-logo #part-3 {
     background: #ff7507;
     width: 73%;
     height: 70%;
@@ -194,7 +194,7 @@ article.app-frame#bank-account .app-button #bank-logo #part-3 {
     transform: rotate(-45deg);
     left: 5px;
 }
-article.app-frame#bank-account .app-button #bank-logo #part-4 {
+#bank-logo #part-4 {
     background: #fff;
     width: 71%;
     height: 71%;
@@ -202,6 +202,9 @@ article.app-frame#bank-account .app-button #bank-logo #part-4 {
     top: 4px;
     left: 4px;
     transform: rotate(-45deg);
+}
+.bank-name {
+    font-size: 56px !important;
 }
 /* Store button */
 .bitcoin {

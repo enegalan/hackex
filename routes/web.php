@@ -13,3 +13,10 @@ Route::get('/processes', function () {
 Route::get('/scan', function () {
     return view('scan');
 });
+
+Route::get('/bank-account', function () {
+    return view('bank-login');
+});
+Route::post('/bank-account', function () {
+    return view('bank-account');
+});

@@ -1,0 +1,147 @@
+.bank-logo {
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    position: absolute;
+    top: 25%;
+}
+
+#bank-login {
+    display: flex;
+    background-color: #fff;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+#bank-login > * {
+    font-family: Times New Roman, Times, serif;
+}
+
+#bank-login .app-frame button {
+    min-width: 120px;
+    min-height: 120px;
+    position: relative;
+    height: 100%;
+}
+
+#bank-login span {
+    color: #1a5492;
+    letter-spacing: .05em;
+    font-size: 2em;
+    font-weight: 700;
+    font-family: Times New Roman, Times, serif;
+}
+
+.bank-welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.6rem;
+    background-color: #073c74;
+    color: white;
+    font-weight: bold;
+    gap: 0.4rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.bank-login-frame {
+    padding: 2rem;
+    background-color: #084b8d;
+    color: white;
+}
+
+.bank-login-frame h3 {
+    font-size: 24px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.bank-login-frame form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+.bank-quote {
+    color: #a6a8ac;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 22px;
+    font-style: italic;
+    margin-top: 2rem;
+}
+
+.bank-commentary {
+    text-align: left;
+    color: #a6a8ac;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    font-family: Times New Roman, Times, serif;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.bank-welcome #welcome-user {
+    color: white;
+}
+
+.bank-account {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.bank-account ul li {
+    background-color: #436c9f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.bank-account ul li:nth-child(even) {
+    background-color: #7495bc;
+}
+
+.account-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.account-detail-description {
+    font-size: 12px;
+    font-style: italic;
+    display: flex;
+    gap: 0.2rem;
+    font-weight: lighter;
+}
+
+.bank-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+.transfer-button,
+.deposit-button {
+    width: 100%;
+}
+
+.account-detail-title {
+    font-size: 20px;
+}
+
+.account-detail ~ div {
+    font-size: 17px;
+}

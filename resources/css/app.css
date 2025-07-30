@@ -6,6 +6,7 @@
 @import './home/apps.css';
 @import './processes/processes.css';
 @import './scan/scan.css';
+@import './bank-account/bank-login.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -40,4 +41,18 @@ body {
     --primary: hsl(32, 91%, 50%);
     --transition: 0.3s ease-in-out;
     --white: #fff;
+}
+
+input[type="search"], input[type="text"], input[type="password"] {
+    background-color: white;
+    border-radius: 5px;
+    padding: 0.25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    width: 100%;
+    font-size: 20px;
+}
+
+input[type="password"] {
+    letter-spacing: 3px;
 }
