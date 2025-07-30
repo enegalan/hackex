@@ -32,3 +32,7 @@ Route::get('/messages', function () {
 Route::get('/log', function () {
     return view('log');
 });
+
+Route::get('/device', function () {
+    return view('my-device');
+});

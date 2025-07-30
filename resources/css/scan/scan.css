@@ -32,7 +32,14 @@ section#scan {
 .transfer-button,
 .deposit-button,
 .buy-button,
-.save-button {
+.save-button,
+.change-ip-button,
+.leaderboards-button,
+.wallpaper-button,
+.wiki-button,
+.rate-button,
+.faq-button,
+.social-links-button {
     background-color: #cecece;
     padding-left: 0.8rem;
     border-radius: 6px;
@@ -52,7 +59,14 @@ section#scan {
 .transfer-button:disabled,
 .deposit-button:disabled,
 .buy-button:disabled,
-.save-button:disabled {
+.save-button:disabled,
+.change-ip-button:disabled,
+.leaderboards-button:disabled,
+.wallpaper-button:disabled,
+.wiki-button:disabled,
+.rate-button:disabled,
+.faq-button:disabled,
+.social-links-button:disabled {
     opacity: .25;
     pointer-events: none;
 }
@@ -63,7 +77,14 @@ section#scan {
 .transfer-button:hover,
 .deposit-button:hover,
 .buy-button:hover,
-.save-button:hover {
+.save-button:hover,
+.change-ip-button:hover,
+.leaderboards-button:hover,
+.wallpaper-button:hover,
+.wiki-button:hover,
+.rate-button:hover,
+.faq-button:hover,
+.social-links-button:hover {
     background-color: #a2a2a2;
     transition: .1s ease-in;
 }

@@ -1,0 +1,47 @@
+#my-device h4 {
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 18px;
+    margin-top: 1rem;
+    margin-left: .5rem;
+    margin-bottom: 1rem;
+}
+
+section.device-info-frame {
+    color: white;
+    font-size: 14px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.6rem;
+}
+
+.ip-info {
+    margin-bottom: .5rem;
+}
+
+section.other-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.other-buttons ul {
+    display: flex;
+    gap: 1.5rem;
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.other-buttons ul,
+.leaderboards-button,
+.wallpaper-button,
+.wiki-button,
+.rate-button,
+.faq-button,
+.social-links-button {
+    width: 100%;
+}

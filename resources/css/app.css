@@ -9,6 +9,7 @@
 @import './bank-account/bank-login.css';
 @import './store/store.css';
 @import './log/log.css';
+@import './my-device/my-device.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
