@@ -5,6 +5,7 @@
 @import './home/home.css';
 @import './home/apps.css';
 @import './processes/processes.css';
+@import './scan/scan.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';

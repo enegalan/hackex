@@ -30,6 +30,10 @@
         close.addEventListener('click', closeModal);
         window.addEventListener('click', clickOutsideHandler);
     }
+    function isValidIP(ipAddress) {
+        const ipv4Regex = /^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$/;
+        return ipv4Regex.test(ipAddress);
+    }
 </script>
 @if (isset($scripts))
     @if (in_array("processes", $scripts))
@@ -83,6 +87,29 @@
                 }
 
                 bar.style.width = `${percentage}%`;
+            })
+        </script>
+    @endif
+    @if (in_array("scan", $scripts))
+        <script id="scan">
+            const ipSearchInput = document.querySelector('input#ip-search');
+            ipSearchInput.addEventListener('input', (e) => {
+                const pingButton = document.querySelector('.ping-button');
+                if (isValidIP(e.target.value)) {
+                    pingButton.disabled = false;
+                } else {
+                    pingButton.disabled = true;
+                }
+            });
+
+            const refreshButton = document.querySelector('.refresh-button');
+            refreshButton.addEventListener('click', (e) => {
+                // Simulating server response...
+                refreshButton.disabled = true;
+                setTimeout(() => {
+                    refreshButton.disabled = false;
+                }, 1000);
+                // TODO: Implement logic
             })
         </script>
     @endif

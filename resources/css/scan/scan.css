@@ -1,0 +1,77 @@
+section#scan {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 8rem;
+}
+
+.ip-user {
+    background-color: #00000050;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    transition: .1s ease-in;
+}
+
+.ip-user:hover {
+    background-color: #222;
+    transition: .1s ease-in;
+}
+
+.ip-searcher {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: .5rem;
+}
+
+.ip-search {
+    background-color: white;
+    border-radius: 5px;
+    padding: 0.25rem;
+    width: 100%;
+}
+
+.ping-button, .refresh-button {
+    background-color: #cecece;
+    padding-left: 0.8rem;
+    border-radius: 6px;
+    padding-right: 0.8rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #3d3d3d;
+    font-weight: bold;
+    letter-spacing: .25px;
+    transition: .1s ease-in;
+}
+
+.ping-button:disabled,
+.refresh-button:disabled {
+    opacity: .25;
+    pointer-events: none;
+}
+
+.ping-button:hover,
+.refresh-button:hover {
+    background-color: #a2a2a2;
+    transition: .1s ease-in;
+}
+
+#ip-list {
+    padding-top: 1rem;
+}
+
+#ip-list ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    color: white;
+}
+
+.scan-bottomwrap {
+    position: fixed;
+    bottom: 7.5rem;
+    text-align: center;
+    width: 100%;
+}
