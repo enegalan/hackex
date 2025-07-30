@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.head')
+    @include('includes.head', ['title' => 'Store'])
     <body class="store-frame" style="background: #151515; color: white;">
         @include('includes.modal')
         <header>

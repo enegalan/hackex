@@ -24,3 +24,7 @@ Route::post('/bank-account', function () {
 Route::get('/store', function () {
     return view('store');
 });
+
+Route::get('/messages', function () {
+    return view('messages');
+});
