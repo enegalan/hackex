@@ -2,7 +2,7 @@ article.app-frame#processes { grid-area: 1 / 3 / 2 / 4; }
 article.app-frame#scan { grid-area: 1 / 4 / 2 / 5; }
 article.app-frame#bank-account { grid-area: 2 / 3 / 3 / 4; }
 article.app-frame#store { grid-area: 2 / 4 / 3 / 5; }
-article.app-frame#contacts { grid-area: 3 / 3 / 4 / 4; }
+article.app-frame#messages { grid-area: 3 / 3 / 4 / 4; }
 article.app-frame#log { grid-area: 3 / 4 / 4 / 5; }
 article.app-frame#apps { grid-area: 4 / 3 / 5 / 4; }
 article.app-frame#device{ grid-area: 4 / 4 / 5 / 5; }
@@ -365,89 +365,105 @@ article.app-frame#bank-account .app-button #bank-logo #part-4 {
     top: 144px;
 }
 
-.bitcoin:hover .primary-element,
 .bitcoin.hover .primary-element {
     background-color: var(--primary);
     border: 1px solid var(--primary);
 }
 
-.bitcoin:hover .circle,
 .bitcoin.hover .circle {
     border-color: var(--primary);
     transform: rotate(-15deg);
 }
 
-/* Contacts button */
-.folder {
-    background-color: #708090;
-    border-radius: 0 6px 6px;
-    width: 80px;
-    height: 50px;
-    margin: 10px auto 0;
+/* Messages button */
+article.app-frame#messages .app-button {
+    align-items: center;
     position: relative;
-    box-shadow: 4px 4px 7px #00000096;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: radial-gradient(circle, #0a94d4, #074b93);
+}
+.open{
+    z-index: 3;
+    transform-origin: 50% 0;
+    -webkit-filter: drop-shadow(0 0 gray);
+    -webkit-transition: all 2s linear .2s;
+    -moz-transition: all 2s linear .2s;
+    border: 250px solid #0000;
+    border-top: 150px solid #ffa146;
+    border-bottom: none;
+    width: 0;
+    height: 0;
+    margin-top: -150px;
+    margin-left: -250px;
+    transition: all 2s linear;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: perspective(500px);
 }
 
-.folder:before {
-    content: '';
-    width: 50%;
-    height: 12px;
-    border-radius: 0 20px 0 0;
-    background-color: #708090;
+.envelope{
+    background: linear-gradient(90deg, #ebebeb, #f7f7f7 50%);
+    width: 500px;
+    height: 300px;
+    margin-top: -150px;
+    margin-left: -250px;
     position: absolute;
-    top: -12px;
-    left: 0px;
+    top: 60%;
+    left: 50%;
+    box-shadow: 0 1px 5px -2px #000;
 }
 
-.person {
+.envelope:before {
+    display: block;
+    position: absolute;
+    top: 65%;
+    left: -2%;
+    content: "";
+    background-color: transparent;
     width: 80px;
-    height: 45px;
-    position: relative;
+    height: 43px;
+    border-radius: 1%;
+
+    -webkit-transform: matrix(2.13,-0.23,0.33,1.68,0,0);
+    -moz-transform: matrix(2.13,-0.23,0.33,1.68,0,0);
+    transform: matrix(2.13,-0.23,0.33,1.68,0,0);
+
+    -webkit-transform-origin: center;
+    -moz-transform-origin: center;
+    transform-origin: center;
+
+    -webkit-box-shadow: 42px 31px 20px rgba(0,0,0,0.85);
+    box-shadow: 42px 31px 20px rgba(0,0,0,0.85);
+    z-index: -1;
 }
-.person:after {
-    content: "";
-    box-sizing: border-box;
-    border: 9px solid #d3d3d3;
-    border-bottom-width: 0;
-    border-radius: 45px 45px 0 0;
-    width: 35px;
-    height: 25px;
+
+.envelope:after {
     display: block;
     position: absolute;
-    top: 19px;
-    left: 12px;
-}
-.person:before {
+    top: 59%;
+    left: 50%;
     content: "";
-    box-sizing: border-box;
-    border: 7px solid #d3d3d3;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    display: block;
-    position: absolute;
-    top: 0px;
-    left: 17px;
-}
-.details:before {
-    content: "";
-    background: #d3d3d3;
-    border-radius: 100px;
-    width: 12px;
-    height: 5px;
-    position: absolute;
-    top: 6px;
-    left: -5px;
-}
-.details:after {
-    content: "";
-    background: #d3d3d3;
-    border-radius: 100px;
-    width: 12px;
-    height: 5px;
-    position: absolute;
-    top: 30px;
-    left: -5px;
+    background-color: transparent;
+    width: 80px;
+    height: 43px;
+    border-radius: 1%;
+
+    -webkit-transform: matrix(-2.17,-0.16,-0.22,1.71,0,0);
+    -moz-transform: matrix(-2.17,-0.16,-0.22,1.71,0,0);
+    transform: matrix(-2.17,-0.16,-0.22,1.71,0,0);
+
+    -webkit-transform-origin: center;
+    -moz-transform-origin: center;
+    transform-origin: center;
+
+    -webkit-box-shadow: -42px 31px 20px rgba(0,0,0,0.85);
+    box-shadow: -42px 31px 20px rgba(0,0,0,0.85);
+    
+    z-index: -1;
 }
 
 /* Log button */
@@ -543,3 +559,77 @@ div#apps-grid > * {
 #apps-grid #app-4 { background: fuchsia; grid-area: 2 / 2 / 3 / 3; }
 
 /* My Device button */
+.mobile {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.phone {
+    background: #1a1a58;
+    border-radius: 4px;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 94px;
+    display: flex;
+}
+.phone-mirror {
+    background-color: #1a1919;
+    border-radius: 3px;
+    width: 50px;
+    height: 90px;
+    position: relative;
+}
+.topWrapper {
+    float: left;
+    background-color: #2a2a2a;
+    border-radius: 0 0 4px 4px;
+    width: 25px;
+    height: 5.5px;
+    position: relative;
+    left: 26%;
+    top: .2px;
+}
+.line-rec {
+    float: left;
+    background-color: #535352;
+    border: 1px solid #d6d6d6;
+    border-radius: 5px;
+    width: 13px;
+    height: 3px;
+    margin: 0 auto;
+    position: relative;
+    top: 1px;
+    left: 15%;
+}
+.camera {
+    float: left;
+    background-color: #535352;
+    border: 1px solid #d6d6d6;
+    border-radius: 30px;
+    width: 3px;
+    height: 3px;
+    margin-right: 2px;
+    position: relative;
+    top: 1px;
+    left: 13%;
+}
+.logo-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    width: 100%;
+}
+.logo-title #logo-1 {
+    color: white;
+    font-family: 'dosis';
+}
+.logo-title #logo-2 {
+    color: #6bb20fab;
+    font-weight: bold;
+    font-family: 'neuropol';
+}

@@ -22,6 +22,12 @@ section#apps {
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
+    transition: .1s ease-in;
+}
+
+.app-frame:hover {
+    filter: brightness(.75);
+    transition: .1s ease-in;
 }
 
 .app-label {

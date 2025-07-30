@@ -9,7 +9,7 @@
         </section>
         <section id="apps">
             {{-- Processes --}}
-            <article id="processes" class="app-frame">
+            <article onclick="window.location.href='/processes'" id="processes" class="app-frame">
                 <button class="app-button">
                     <div id="part-1"></div>
                     <div id="part-2"></div>
@@ -18,7 +18,7 @@
                 <label class="app-label">Processes</label>
             </article>
             {{-- Scan --}}
-            <article id="scan" class="app-frame">
+            <article onclick="window.location.href='/scan'" id="scan" class="app-frame">
                 <button class="app-button">
                     <div id="part-1"></div>
                     <div id="part-2"></div>
@@ -44,7 +44,7 @@
                 <label class="app-label">Scan</label>
             </article>
             {{-- Bank Account --}}
-            <article id="bank-account" class="app-frame">
+            <article onclick="window.location.href='/bank-account'" id="bank-account" class="app-frame">
                 <button class="app-button">
                     <div id="bank-logo">
                         <div id="part-1">
@@ -60,7 +60,7 @@
                 <label class="app-label">Bank account</label>
             </article>
             {{-- Store --}}
-            <article id="store" class="app-frame">
+            <article onclick="window.location.href='/store'" id="store" class="app-frame">
                 <button class="app-button">
                     <div class="bitcoin hover">
                         <div class="circle">
@@ -84,18 +84,16 @@
                 </button>
                 <label class="app-label">Store</label>
             </article>
-            {{-- Contacts --}}
-            <article id="contacts" class="app-frame">
+            {{-- Messages --}}
+            <article onclick="window.location.href='/messages'" id="messages" class="app-frame">
                 <button class="app-button">
-                    <div class="folder">
-                        <div class="details"></div>
-                        <div class="person"></div>
-                    </div>
+                    <div class="envelope"></div>
+                    <div class="open"></div>
                 </button>
-                <label class="app-label">Contacts</label>
+                <label class="app-label">Messages</label>
             </article>
             {{-- Log --}}
-            <article id="log" class="app-frame">
+            <article onclick="window.location.href='/log'" id="log" class="app-frame">
                 <button class="app-button">
                     <div id="log-frame">
                         <span>EX:/></span>
@@ -113,7 +111,7 @@
                 <label class="app-label">Log</label>
             </article>
             {{-- Apps --}}
-            <article id="apps" class="app-frame">
+            <article onclick="window.location.href='/apps'" id="apps" class="app-frame">
                 <button class="app-button">
                     <div id="apps-grid">
                         <div id="app-1"></div>
@@ -125,10 +123,21 @@
                 <label class="app-label">Apps</label>
             </article>
             {{-- My Device --}}
-            <article id="device" class="app-frame">
+            <article onclick="window.location.href='/device'" id="device" class="app-frame">
                 <button class="app-button">
-                    <div class="app-img">
-                        {{-- TODO: Add image <img> --}}
+                    <div class="mobile">
+                        <div class="phone">
+                            <div class="phone-mirror">
+                                <div class="topWrapper">
+                                    <div class="camera"></div>
+                                    <div class="line-rec"></div>
+                                </div>
+                                <div class="logo-title">
+                                    <span id="logo-1">HACK</span>
+                                    <span id="logo-2">EX</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </button>
                 <label class="app-label">My Device</label>

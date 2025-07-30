@@ -12,6 +12,20 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+@font-face {
+    font-family: 'neuropol';
+    src: url('/fonts/neuropol.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'dosis';
+    src: url('/fonts/dosis.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background: #383838;
 }
