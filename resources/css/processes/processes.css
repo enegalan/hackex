@@ -56,7 +56,7 @@ section.processes-tabs {
 }
 
 .process-tab:hover {
-    color: #3daf37;
+    color: #a6e736;
 }
 
 .process-tab span {
@@ -65,7 +65,7 @@ section.processes-tabs {
 
 .process-tab.active {
     background: #00000029;
-    color: #3daf37;
+    color: #a6e736;
 }
 
 .process-tab.active:hover {
@@ -103,7 +103,7 @@ section.processes-tabs {
 }
 
 .process-status.successful {
-    color: #3daf37;
+    color: #a6e736;
 }
 .process-status.working {
     color: white;

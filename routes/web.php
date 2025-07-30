@@ -20,3 +20,7 @@ Route::get('/bank-account', function () {
 Route::post('/bank-account', function () {
     return view('bank-account');
 });
+
+Route::get('/store', function () {
+    return view('store');
+});

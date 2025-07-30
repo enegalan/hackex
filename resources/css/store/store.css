@@ -1,0 +1,76 @@
+.store-frame header {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background: #616161;
+    background: linear-gradient(0deg, #151515 30%, #4c4c4c 100%);
+}
+
+.store-frame header h3 {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 18px;
+}
+
+.bank-money-label {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.store-frame ul {
+    display: flex;
+    flex-direction: column;
+    padding-top: 3rem;
+    padding-bottom: 8rem;
+}
+
+.store-frame ul li {
+    border-bottom: 2px solid #232323;
+}
+
+.store-frame ul li form {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.store-frame ul li form section {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.app-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.app-buy-info {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.app-buy-info .vertical-separator {
+    color: #4c4c4c;
+    font-size: 22px;
+    margin-top: -6px;
+    font-weight: lighter;
+}
+
+.app-price-value {
+    color: #a6e736;
+}
+
+.buy-button {
+    font-size: 18px;
+}

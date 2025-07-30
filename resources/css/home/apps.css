@@ -41,8 +41,8 @@ article.app-frame#processes .app-button div:before {
     left: 0;
     height: 100%;
     position: absolute;
-    background: #3daf37;
-    background: linear-gradient(90deg,#3daf37 0%, #49D10F 83%);
+    background: #a6e736;
+    background: linear-gradient(90deg,#a6e736 0%, #49D10F 83%);
 }
 article.app-frame#processes .app-button #part-1:before {width: 85%;}
 article.app-frame#processes .app-button #part-2:before {width: 45%;}

@@ -7,6 +7,7 @@
 @import './processes/processes.css';
 @import './scan/scan.css';
 @import './bank-account/bank-login.css';
+@import './store/store.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
