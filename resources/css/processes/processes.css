@@ -1,0 +1,42 @@
+section#processes {
+    color: white;
+}
+
+#processes h4 {
+    font-weight: bold;
+    font-style: italic;
+}
+
+section.processes-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.processes-info > section {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.processes-info > section > div {
+    display: flex;
+    gap: 0.25rem;
+}
+
+section.processes-tabs {
+    margin-top: 2rem;
+}
+
+.processes-tabs .tabs {
+    display: flex;
+    justify-content: space-around;
+}
+
+#bypassing-frame li > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.process-tab span {
+    pointer-events: none;
+}
