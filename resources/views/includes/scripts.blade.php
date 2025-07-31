@@ -133,24 +133,7 @@
                     const signInHeight = 300;
                     const duration = 400; // ms
                     const interval = 5; // ms por paso
-
-                    // Detectar altura objetivo
-                    const targetHeight = signUpFrame.classList.contains('active') ? signUpHeight : signInHeight;
                     const startHeight = container.offsetHeight;
-                    const steps = duration / interval;
-                    const heightStep = (targetHeight - startHeight) / steps;
-
-                    let currentStep = 0;
-                    const heightInterval = setInterval(() => {
-                        currentStep++;
-                        const newHeight = startHeight + heightStep * currentStep;
-                        container.style.height = `${newHeight}px`;
-                        if (currentStep >= steps) {
-                            container.style.height = `${targetHeight}px`;
-                            clearInterval(heightInterval);
-                        }
-                    }, interval);
-
                     // Efectos de clase
                     const timeout = 650;
                     const textTimeout = 650;

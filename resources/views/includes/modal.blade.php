@@ -1,4 +1,4 @@
 {{-- Include each modal here --}}
-<section class="modals-renderer">
+<renderer class="modals-renderer">
     @include('includes.modals.apps')
-</section>
+</renderer>
