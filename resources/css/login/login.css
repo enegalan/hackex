@@ -203,6 +203,12 @@ body#login-frame {
 #login-frame section .signin .content h2 {
     margin-bottom: 2rem;
 }
+.links {
+    color: white;
+}
+.links div {
+    font-size: 14px;
+}
 .text-effect .inputBox i,
 .text-effect .content .form .links,
 .text-effect input,

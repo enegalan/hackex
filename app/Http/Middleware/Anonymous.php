@@ -4,9 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsFullyVerified
+class Anonymous
 {
     /**
      * Handle an incoming request.
@@ -15,9 +16,8 @@ class IsFullyVerified
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = auth()->user();
-        if (!$user) {
-            return response()->view('login');
+        if (Auth::check()) {
+            return back();
         }
         return $next($request);
     }

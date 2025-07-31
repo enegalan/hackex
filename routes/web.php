@@ -3,10 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsFullyVerified;
 
-Route::get('/forgot-password', function () {
-    return view('forgot-password');
-});
-
 Route::middleware([IsFullyVerified::class])->group(function () {
     Route::get('/', function () {
         return view('home');
@@ -43,3 +39,5 @@ Route::middleware([IsFullyVerified::class])->group(function () {
         return view('my-device');
     });
 });
+
+require __DIR__ . '/auth.php';
