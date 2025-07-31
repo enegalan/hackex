@@ -163,6 +163,19 @@
                     }, timeout);
                 }
             }
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                const loginBgBlocks = document.querySelectorAll('#login-frame section span');
+                loginBgBlocks.forEach(loginBgBlock => {
+                    loginBgBlock.style.transition = "0s";
+                });
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    loginBgBlocks.forEach(loginBgBlock => {
+                        loginBgBlock.style.transition = "";
+                    });
+                }, 150);
+            });
         </script>
     @endif
 @endif
