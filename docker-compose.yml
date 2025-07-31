@@ -1,0 +1,42 @@
+services:
+  hackex:
+    build:
+      context: ./
+    restart: always
+    container_name: hackex
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - local_dev
+  nginx-hackex:
+    build:
+      context: ./nginx
+    restart: always
+    container_name: nginx-hackex
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "80:80"
+      - "443:443"
+      - "5173:5173"
+    networks:
+      - local_dev
+  mariadb-hackex:
+    image: mariadb:latest
+    container_name: mariadb-hackex
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hackex
+      MYSQL_USER: hackex
+      MYSQL_PASSWORD: hackex
+    ports:
+      - "3306:3306"
+    volumes:
+      - /Users/egalan/persistent-storage:/var/lib/mysql
+      - /Users/egalan/databases/:/databases
+    networks:
+      - local_dev
+    restart: always
+networks:
+  local_dev:
+    driver: bridge
