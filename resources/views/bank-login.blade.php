@@ -30,7 +30,7 @@
                 @csrf
                 <input placeholder="username" type="text" value="Eneko" name="bank-username" id="bank-username">
                 <input placeholder="password" type="password" value="*********" name="bank-password" id="bank-password">
-                <button type="submit" style="font-weight: lighter" class="login-button">Login</button>
+                <button type="submit" style="font-weight: normal" class="login-button">Login</button>
             </form>
         </section>
         <section class="bank-quote">

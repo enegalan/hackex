@@ -113,4 +113,73 @@
             })
         </script>
     @endif
+    @if (in_array("login", $scripts))
+        <script id="login">
+            function toggleLogin() {
+                const signInFrame = document.querySelector('.signin');
+                const signInContent = signInFrame.querySelector('.content');
+                const signUpFrame = document.querySelector('.signup');
+                const signUpContent = signUpFrame.querySelector('.content');
+                const container = document.querySelector('#container'); // Suponiendo que es el padre común cuyo height cambia
+
+                // Alternar clases activas
+                signInFrame.classList.toggle('active');
+                signUpFrame.classList.toggle('active');
+
+                doEffect();
+
+                function doEffect() {
+                    const signUpHeight = 520;
+                    const signInHeight = 300;
+                    const duration = 400; // ms
+                    const interval = 5; // ms por paso
+
+                    // Detectar altura objetivo
+                    const targetHeight = signUpFrame.classList.contains('active') ? signUpHeight : signInHeight;
+                    const startHeight = container.offsetHeight;
+                    const steps = duration / interval;
+                    const heightStep = (targetHeight - startHeight) / steps;
+
+                    let currentStep = 0;
+                    const heightInterval = setInterval(() => {
+                        currentStep++;
+                        const newHeight = startHeight + heightStep * currentStep;
+                        container.style.height = `${newHeight}px`;
+                        if (currentStep >= steps) {
+                            container.style.height = `${targetHeight}px`;
+                            clearInterval(heightInterval);
+                        }
+                    }, interval);
+
+                    // Efectos de clase
+                    const timeout = 650;
+                    const textTimeout = 650;
+
+                    if (signInFrame.classList.contains('active')) {
+                        signInFrame.classList.toggle('text-effect');
+                        signInFrame.classList.toggle('effect');
+                    } else if (signUpFrame.classList.contains('active')) {
+                        signUpFrame.classList.toggle('text-effect');
+                        signUpFrame.classList.toggle('effect');
+                    }
+
+                    setTimeout(() => {
+                        if (signUpFrame.classList.contains('active')) {
+                            signUpFrame.classList.toggle('text-effect');
+                        } else if (signInFrame.classList.contains('active')) {
+                            signInFrame.classList.toggle('text-effect');
+                        }
+                    }, textTimeout);
+
+                    setTimeout(() => {
+                        if (signInFrame.classList.contains('active')) {
+                            signInFrame.classList.toggle('effect');
+                        } else if (signUpFrame.classList.contains('active')) {
+                            signUpFrame.classList.toggle('effect');
+                        }
+                    }, timeout);
+                }
+            }
+        </script>
+    @endif
 @endif

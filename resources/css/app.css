@@ -10,6 +10,7 @@
 @import './store/store.css';
 @import './log/log.css';
 @import './my-device/my-device.css';
+@import './login/login.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -62,4 +63,8 @@ input[type="password"] {
 
 textarea:focus-visible {
     outline: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }

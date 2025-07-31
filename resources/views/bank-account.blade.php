@@ -63,8 +63,8 @@
             </ul>
         </section>
         <section class="bank-buttons">
-            <button type="submit" style="font-weight: lighter" class="transfer-button">Transfer</button>
-            <button type="submit" style="font-weight: lighter" class="deposit-button">Deposit</button>
+            <button type="submit" style="font-weight: normal" class="transfer-button">Transfer</button>
+            <button type="submit" style="font-weight: normal" class="deposit-button">Deposit</button>
         </section>
         <section class="bank-commentary">
             <p>*Deposits: Purchased cryptocoins are put in Savings regardless of Max Limit</p>

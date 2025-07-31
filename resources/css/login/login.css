@@ -1,0 +1,296 @@
+#container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 12%;
+    left: 0;
+    justify-content: center;
+    transform-style: preserve-3d;
+    z-index: 2;
+    perspective: 1200px;
+}
+
+.front,
+.back {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.front {
+    width: 100%;
+    height: 100%;
+}
+
+.signin, .signup {
+    display: none !important;
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+    transition: 2s ease-in;
+}
+
+.signup {
+    transform: rotateY(360deg);
+    transition: 1s ease-in;
+}
+
+.signin.active,
+.signup.active {
+    display: flex !important;
+    transition: 2s ease-in;
+}
+
+.text-effect {
+    color: #222;
+    transition: 0s;
+    position: relative;
+}
+
+.text-effect::before {
+    content: "";
+    background: #222;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+.text-effect h2,
+.text-effect .form {
+    visibility: hidden;
+    transition: 0s;
+}
+
+.signup.effect {
+    display: flex !important;
+    transition: 1s ease-in;
+    transform: rotateY(180deg);
+}
+
+.signin.effect {
+    display: flex !important;
+    transition: 1s ease-in;
+    transform: rotateY(180deg);
+}
+
+body#login-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000;
+    font-family: 'Times New Roman', Times, serif;
+}
+#login-frame section {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+#login-frame section::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#000,#a6e736,#000);
+    animation: animate 5s linear infinite;
+}
+@keyframes animate {
+    0% {
+            transform: translateY(-100%);
+        }
+    100% {
+            transform: translateY(100%);
+        }
+}
+#login-frame section span {
+    position: relative;
+    display: block;
+    width: calc(6.25vw - 2px);
+    height: calc(6.25vw - 2px);
+    background: #181818;
+    z-index: 2;
+    transition: 1.5s;
+}
+#login-frame section span:hover {
+    background: #a6e736;
+    transition: 0s;
+}
+
+#login-frame section .signin,
+#login-frame section .signup {
+    position: absolute;
+    width: 400px;
+    background: #222;  
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0,0,0,9);
+}
+#login-frame section .signin .content,
+#login-frame section .signup .content {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    display: flex;
+    position: relative;
+    height: 520px;
+}
+#login-frame section .signin .content h2,
+#login-frame section .signup.active .content h2 {
+    font-size: 2em;
+    color: #a6e736;
+    text-transform: uppercase;
+    transition: 0s;
+}
+#login-frame section .signin .content .form,
+#login-frame section .signin .content h2,
+#login-frame section .signup .content .form,
+#login-frame section .signup .content h2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+#login-frame section .signin .content .form .inputBox,
+#login-frame section .signup .content .form .inputBox {
+    position: relative;
+    width: 100%;
+}
+#login-frame section .signin .content .form .inputBox input,
+#login-frame section .signup .content .form .inputBox input {
+    position: relative;
+    width: 100%;
+    background: #333;
+    border: none;
+    outline: none;
+    padding: 25px 10px 7.5px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1em;
+}
+#login-frame section .signin .content .form .inputBox input[type="submit"],
+#login-frame section .signup .content .form .inputBox input[type="submit"] {
+    padding: 7.5px 10px 7.5px !important;
+}
+#login-frame section .signin .content .form .inputBox i,
+#login-frame section .signup .content .form .inputBox i {
+    position: absolute;
+    left: 0;
+    padding: 15px 10px;
+    font-style: normal;
+    color: #aaa;
+    transition: 0.25s;
+    pointer-events: none;
+}
+#login-frame section .signin .content h2 {
+    margin-bottom: 2rem;
+}
+.text-effect .inputBox i,
+.text-effect .content .form .links,
+.text-effect input,
+.text-effect  .content .form .links a {
+    transition: 0s;
+
+}
+.signin .content .form .inputBox input:focus ~ i,
+.signin .content .form .inputBox input:valid ~ i,
+.signup .content .form .inputBox input:focus ~ i,
+.signup .content .form .inputBox input:valid ~ i {
+    transform: translateY(-7.5px);
+    font-size: 0.8em;
+    color: #fff;
+}
+.signin .content .form .links,
+.signup .content .form .links {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.signin .content .form .links a,
+.signup .content .form .links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: .1s ease-in;
+}
+.signin .content .form .links a:hover,
+.signup .content .form .links a:hover {
+    color: #a6e736;
+    transition: .1s ease-in;
+}
+.signin .content .form .links a:nth-child(2),
+.signup .content .form .links a:nth-child(2),
+.mail-send {
+    color: #a6e736;
+    font-weight: 600;
+}
+.signin .content .form .links a:nth-child(2):hover,
+.signup .content .form .links a:nth-child(2):hover {
+    color: #fff;
+    transition: .1s ease-in;
+}
+.signin .content .form .inputBox input[type="submit"],
+.signup .content .form .inputBox input[type="submit"] {
+    padding: 10px;
+    background: #a6e736;
+    color: #000;
+    font-weight: 600;
+    font-size: 1.35em;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+}
+#login-frame input[type="submit"] {
+    transition: .1s ease-in;
+}
+#login-frame input[type="submit"]:hover {
+    opacity: 0.6;
+    transition: .1s ease-in;
+}
+#login-frame input[type="submit"]:active {
+    opacity: 0.4;
+    transition: .1s ease-in;
+}
+.back {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    fill: #a6e736;
+    transition: .1s ease-in;
+}
+.back:hover {
+    fill: #77a625;
+    transition: .1s ease-in;
+}
+@media (max-width: 900px) {
+    #login-frame section span 
+    {
+        width: calc(10vw - 2px);
+        height: calc(10vw - 2px);
+    }
+}
+@media (max-width: 600px) {
+    #login-frame section span 
+    {
+        width: calc(20vw - 2px);
+        height: calc(20vw - 2px);
+    }
+}
