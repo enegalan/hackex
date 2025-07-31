@@ -17,7 +17,7 @@
                                     <input type="password" required> <i>Password</i> 
                                 </div>
                                 <div class="links">
-                                    <a href="#">Forgot Password</a> <a class="cursor-pointer" onclick="toggleLogin()">Sign up</a>
+                                    <a href="/forgot-password">Forgot Password</a> <a class="cursor-pointer" onclick="toggleLogin()">Sign up</a>
                                 </div>
                                 <div class="inputBox">
                                     <input type="submit" value="Login">
@@ -43,7 +43,7 @@
                                 <input type="password" required> <i>Repeat Password</i> 
                             </div>
                             <div class="links">
-                                <a href="#">Forgot Password</a> <a class="cursor-pointer" onclick="toggleLogin()">Sign in</a>
+                                <a href="/forgot-password">Forgot Password</a> <a class="cursor-pointer" onclick="toggleLogin()">Sign in</a>
                             </div>
                             <div class="inputBox">
                                 <input type="submit" value="Submit">
