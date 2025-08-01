@@ -113,13 +113,13 @@
                     const passedMs = now - createdAt;
                     const percent = Math.min(100, Math.max(0, (passedMs / totalMs) * 100)).toFixed(1);
 
-                    // Mostrar porcentaje
+                    // Show percentage
                     const progressPercentageSpan = el.querySelector('.progress-percentage');
                     if (progressPercentageSpan) progressPercentageSpan.textContent = `${percent}%`;
                     const progressBar = el.querySelector('progress-bar');
                     if (progressBar) progressBar.value = percent;
                     
-                    // Mostrar tiempo restante
+                    // Show remaining time
                     const timeRemaining = el.querySelector('.time-remaining')
                     const remainingMs = expiresAt - now;
                     if (remainingMs > 0) {
@@ -135,7 +135,7 @@
             }
             updateBypassStatuses();
             upgradeProgressBars();
-            // Actualizar cada segundo
+            // Update for each second
             setInterval(updateBypassStatuses, 1000);
         </script>
     @endif
@@ -153,12 +153,10 @@
 
             const refreshButton = document.querySelector('.refresh-button');
             refreshButton.addEventListener('click', (e) => {
-                // Simulating server response...
                 refreshButton.disabled = true;
                 setTimeout(() => {
                     refreshButton.disabled = false;
                 }, 1000);
-                // TODO: Implement logic
             })
 
             function openBypassWindow(ip, firewall_level, bypasser_level) {
