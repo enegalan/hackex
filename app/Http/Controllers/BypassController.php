@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class BypassController extends Controller {
     public static function checkAndUpdateBypass(Bypass $bypass) {
         if ($bypass->status === 0 && now()->greaterThanOrEqualTo($bypass->expires_at)) {
-            // Ha expirado, calcular si tuvo éxito o no
+            // Has expired, check if it's succeed or failed
             $successChance = self::calculateSuccessChance(
                 $bypass->User['bypasser_level'],
                 $bypass->Victim['firewall_level']
@@ -19,24 +19,23 @@ class BypassController extends Controller {
         return $bypass;
     }
     static function calculateSuccessChance(int $bypasserLevel, int $firewallLevel): int {
-        // Diferencia de niveles
         $diff = $firewallLevel - $bypasserLevel;
 
-        // Penalizador por nivel del bypasser (cuanto más alto, más difícil)
-        $progressPenalty = min(0.5, $bypasserLevel * 0.02); // hasta -50%
+        // Bypasser level penalty (more high, more difficult)
+        $progressPenalty = min(0.5, $bypasserLevel * 0.02); // to -50%
 
-        // Base chance cuando niveles son iguales
+        // Base chance for equal level players
         $baseChance = 90;
 
-        // Modificador según la diferencia de niveles
-        // Si diff > 0 (firewall más alto), reducir chance
-        // Si diff < 0 (bypasser más alto), aumentar chance
-        $levelModifier = -($diff * 8); // 8% por nivel de diferencia
+        // Level diff modificator
+        // If diff > 0 (firewall higher), decrease chance
+        // Si diff < 0 (bypasser higher), increase chance
+        $levelModifier = -($diff * 8); // 8% per level diff
 
-        // Aplicar penalización por progreso (niveles altos tienen menos chance)
+        // Apply progress penalty (higher levels less chance)
         $adjustedChance = ($baseChance + $levelModifier) * (1 - $progressPenalty);
 
-        // Limitar entre 5 y 95%
+        // Limit between 5 to 95%
         return max(5, min(95, round($adjustedChance)));
     }
 }
