@@ -13,7 +13,7 @@
                         </div>
                         <div class="app-info">
                             <span class="app-name">Antivirus</span>
-                            <span class="app-value">Level <span class="app-level-value">1</span></span>
+                            <span class="app-value">Level <span class="app-level-value">{{ Auth::user()['antivirus_level'] }}</span></span>
                         </div>
                     </li>
                     <li>
@@ -22,7 +22,7 @@
                         </div>
                         <div class="app-info">
                             <span class="app-name">Spam</span>
-                            <span class="app-value">Level <span class="app-level-value">1</span></span>
+                            <span class="app-value">Level <span class="app-level-value">{{ Auth::user()['spam_level'] }}</span></span>
                         </div>
                     </li>
                     <li>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="app-info">
                             <span class="app-name">Spyware</span>
-                            <span class="app-value">Level <span class="app-level-value">1</span></span>
+                            <span class="app-value">Level <span class="app-level-value">{{ Auth::user()['spyware_level'] }}</span></span>
                         </div>
                     </li>
                     <li>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="app-info">
                             <span class="app-name">Firewall</span>
-                            <span class="app-value">Level <span class="app-level-value">1</span></span>
+                            <span class="app-value">Level <span class="app-level-value">{{ Auth::user()['firewall_level'] }}</span></span>
                         </div>
                     </li>
                     <li>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="app-info">
                             <span class="app-name">Bypasser</span>
-                            <span class="app-value">Level <span class="app-level-value">1</span></span>
+                            <span class="app-value">Level <span class="app-level-value">{{ Auth::user()['bypasser_level'] }}</span></span>
                         </div>
                     </li>
                     <li>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="app-info">
                             <span class="app-name">Password Cracker</span>
-                            <span class="app-value">Level <span class="app-level-value">1</span></span>
+                            <span class="app-value">Level <span class="app-level-value">{{ Auth::user()['password_cracker_level'] }}</span></span>
                         </div>
                     </li>
                     <li>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="app-info">
                             <span class="app-name">Password Encryptor</span>
-                            <span class="app-value">Level <span class="app-level-value">1</span></span>
+                            <span class="app-value">Level <span class="app-level-value">{{ Auth::user()['password_encryptor_level'] }}</span></span>
                         </div>
                     </li>
                 </ul>

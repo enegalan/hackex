@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\Anonymous;
 use App\Http\Middleware\IsFullyVerified;
+use App\Models\Network;
+use App\Models\Platform;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -51,10 +54,15 @@ Route::post('/signup', function (Request $request) {
             ->withInput()
             ->with('initialToggle', true);
     }
+    $first_platform = Platform::first();
+    $first_network = Network::first();
     $user = User::create([
         'username' => $request->input('username'),
         'email' => $request->input('email'),
         'password' => Hash::make($request->input('password')),
+        'ip' => UserController::getAvailableIp(),
+        'platform_id' => $first_platform['id'],
+        'network_id' => $first_network['id'],
     ]);
     Auth::login($user);
     return redirect('/');

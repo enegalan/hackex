@@ -80,6 +80,7 @@ section.processes-tabs {
 
 .processes-frames > section {
     display: none;
+    padding-bottom: 10rem;
 }
 
 .processes-frames > section > ul > li:hover {

@@ -9,21 +9,21 @@
                 <div class="device-info">
                     <div class="ip-info">
                         <span>IP:</span>
-                        <span>218.215.254.101</span>
+                        <span>{{ Auth::user()['ip'] }}</span>
                     </div>
                     <div class="specs-info">
                         <ul>
                             <li>
                                 <span>Platform:</span>
-                                <span>Nova I</span>
+                                <span>{{ Auth::user()->Platform['name'] }}</span>
                             </li>
                             <li>
                                 <span>CPU:</span>
-                                <span>3.25 GHz 8 Core</span>
+                                <span>{{ Auth::user()->Platform['processor'] }}</span>
                             </li>
                             <li>
                                 <span>Network:</span>
-                                <span>5GS</span>
+                                <span>{{ Auth::user()->Network['name'] }}</span>
                             </li>
                         </ul>
                     </div>

@@ -10,16 +10,16 @@
                     <section class="processes-counters">
                         <div class="total-counter">
                             <span>Total: </span>
-                            <span>1</span>
+                            <span id="total-value">0</span>
                         </div>
                         <div class="running-counter">
                             <span>Running: </span>
-                            <span>0</span>
+                            <span id="running-value">0</span>
                         </div>
                     </section>
                     <section class="oc-counters">
                         <div class="oc-counter">
-                            <span id="oc-value">7071</span>
+                            <span id="oc-value">{{ Auth::user()['oc'] }}</span>
                             <div class="oc-label">
                                 <span> OC</span>
                                 <div class="oc-logo"></div>
@@ -31,6 +31,8 @@
             <section class="processes-tabs">
                 <div class="tabs">
                     <div class="process-tab" id="bypassing-tab">
+                        <input type="hidden" name="bypassing-total-value" id="bypassing-total-value-input" value="{{ Auth::user()->Bypass->count() }}">
+                        <input type="hidden" name="bypassing-running-value" id="bypassing-running-value-input" value="{{ Auth::user()->Bypass->where('status', 0)->count() }}">
                         <span>Bypassing</span>
                     </div>
                     <div class="process-tab" id="cracking-tab">
@@ -44,7 +46,60 @@
             <section class="processes-frames">
                 <section id="bypassing-frame">
                     <ul>
-                        <li>
+                        @foreach (Auth::user()->Bypass->reverse() as $bypass)
+                            @php
+                                // Ensure bypass is updated
+                                \App\Http\Controllers\BypassController::checkAndUpdateBypass($bypass);
+                            @endphp
+                            <li timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($bypass['created_at'])->toIso8601String() }}"
+                                data-expires-at="{{ \Carbon\Carbon::parse($bypass['expires_at'])->toIso8601String() }}">
+                                <div class="process-topwrap">
+                                    <div class="process-info">
+                                        <span class="process-ip">{{ $bypass->Victim['ip'] }}</span>
+                                        @if ($bypass['status'] === 0)
+                                            {{-- Working --}}
+                                            <span class="process-date">Bypassing</span>
+                                        @else
+                                            {{-- Successful or Failed --}}
+                                            <span class="process-date">{{ diffInHumanTime($bypass['expires_at'], false) }}</span>
+                                            <span class="process-ago"> ago</span>
+                                        @endif
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="select-process" class="select-1">
+                                    </div>
+                                </div>
+                                <progress-bar class="progress-bar {{ $bypass['status'] === 2 ? 'failed' : ''}}">
+                                    <div class="bar"></div>
+                                </progress-bar>
+                                <div class="process-bottomwrap">
+                                    @if ($bypass['status'] === 0)
+                                        {{-- Working --}}
+                                        <div class="process-status working">
+                                            <span class="progress-percentage">0%</span>
+                                            <span class="time-remaining"> - {{ diffInHumanTime($bypass['expires_at']) }}</span>
+                                        </div>
+                                    @elseif ($bypass['status'] === 1)
+                                        {{-- Successful --}}
+                                        <div class="process-status successful">
+                                            <span>Bypass</span>
+                                            <span> successful</span>
+                                        </div>
+                                    @elseif ($bypass['status'] === 2)
+                                        {{-- Failed --}}
+                                        <div class="process-status failed">
+                                            <span>Bypass</span>
+                                            <span> failed</span>
+                                        </div>
+                                    @endif
+                                    <div class="process-level">
+                                        <span>Firewall level </span>
+                                        <span>{{ $bypass->Victim['firewall_level'] }}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                        {{-- <li>
                             <div class="process-topwrap">
                                 <div class="process-info">
                                     <span class="process-ip">187.62.160.15</span>
@@ -201,7 +256,7 @@
                                     <span>154</span>
                                 </div>
                             </div>
-                        </li>
+                        </li> --}}
                     </ul>
                 </section>
             </section>

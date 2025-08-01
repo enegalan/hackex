@@ -6,7 +6,7 @@
         <section id="log">
             <h4><b><span>Eneko</span>'s </b><span>Log</span></h4>
             <section class="log-textarea">
-                <textarea rows="27" name="log" id="log"></textarea>
+                <textarea rows="27" name="log" id="log">{{ Auth::user()['log'] }}</textarea>
             </section>
             <section class="max-size">
                 <span>max size: </span>

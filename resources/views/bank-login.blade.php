@@ -28,9 +28,9 @@
             <h3>Login</h3>
             <form action="/bank-account" method="post">
                 @csrf
-                <input placeholder="username" type="text" value="Eneko" name="bank-username" id="bank-username">
+                <input placeholder="username" type="text" value="{{ Auth::user()['username'] }}" name="bank-username" id="bank-username">
                 <input placeholder="password" type="password" value="*********" name="bank-password" id="bank-password">
-                <button type="submit" style="font-weight: normal" class="login-button">Login</button>
+                <button type="submit" style="font-weight: normal; font-style: normal;" class="login-button">Login</button>
             </form>
         </section>
         <section class="bank-quote">

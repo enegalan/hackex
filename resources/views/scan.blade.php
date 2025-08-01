@@ -5,32 +5,31 @@
         @include('includes.modal')
         <section id="scan">
             <section class="scan-topwrap">
-                <div class="ip-searcher">
+                <form action="/ping" method="post" class="ip-searcher">
+                    @csrf
                     <input placeholder="ip address" class="ip-search" type="search" name="ip-search" id="ip-search">
                     <button disabled class="ping-button">Ping</button>
-                </div>
+                </form>
             </section>
             <section id="ip-list">
                 <ul>
-                    <li class="ip-user">
-                        <span class="ip-value">119.147.145.166</span>
-                        <div class="firewall-label">
-                            <span>Firewall level</span>
-                            <span class="firewall-value">787</span>
-                        </div>
-                    </li>
-                    <li class="ip-user">
-                        <span class="ip-value">209.107.125.19</span>
-                        <div class="firewall-label">
-                            <span>Firewall level</span>
-                            <span class="firewall-value">507</span>
-                        </div>
-                    </li>
+                    @php
+                        $users = session('ping_result') ? [session('ping_result')] : getRandomMatchedUsers(Auth::user());
+                    @endphp
+                    @foreach ($users as $user)
+                        <li onclick="openBypassWindow('{{ $user['ip'] }}', '{{ $user['firewall_level'] }}', '{{ Auth::user()['bypasser_level'] }}' )" class="ip-user">
+                            <span class="ip-value">{{ $user['ip'] }}</span>
+                            <div class="firewall-label">
+                                <span>Firewall level</span>
+                                <span class="firewall-value">{{ $user['firewall_level'] }}</span>
+                            </div>
+                        </li>
+                    @endforeach
                 </ul>
             </section>
         </section>
         <section class="scan-bottomwrap">
-            <button class="refresh-button">Refresh</button>
+            <button onclick="window.location.reload()" class="refresh-button">Refresh</button>
         </section>
         @include('includes.back-btn')
     </body>

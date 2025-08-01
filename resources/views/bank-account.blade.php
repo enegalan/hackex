@@ -22,7 +22,7 @@
             </article>
         </section>
         <section class="bank-welcome">
-            Welcome, <span id="welcome-user">Eneko</span>
+            Welcome, <span id="welcome-user">{{ Auth::user()['username'] }}</span>
         </section>
         <section class="bank-account">
             <ul>
@@ -31,7 +31,7 @@
                         <span class="account-detail-title">Checking</span>
                     </div>
                     <div>
-                        <span>8.909.790</span>
+                        <span>{{ Auth::user()['checking_bitcoins'] }}</span>
                         <i class="fa-solid fa-bitcoin-sign"></i>
                     </div>
                 </li>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div>
-                        <span>215.623</span>
+                        <span>{{ Auth::user()['secured_bitcoins'] }}</span>
                         <i class="fa-solid fa-bitcoin-sign"></i>
                     </div>
                 </li>
@@ -56,7 +56,7 @@
                         <span class="account-detail-title">Total</span>
                     </div>
                     <div>
-                        <span>9.125.413</span>
+                        <span>{{ Auth::user()['secured_bitcoins'] + Auth::user()['secured_bitcoins'] }}</span>
                         <i class="fa-solid fa-bitcoin-sign"></i>
                     </div>
                 </li>

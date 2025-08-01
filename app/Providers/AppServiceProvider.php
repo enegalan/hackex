@@ -12,6 +12,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        require __DIR__ . '/../Http/Helpers/helpers.php';
     }
 
     /**

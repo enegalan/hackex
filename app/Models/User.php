@@ -22,7 +22,32 @@ class User extends Authenticatable implements MustVerifyEmail
         'username',
         'email',
         'password',
+        'ip',
+        'level',
+        'oc',
+        'checking_bitcoins',
+        'secured_bitcoins',
+        'log',
+        'antivirus_level',
+        'spam_level',
+        'spyware_level',
+        'firewall_level',
+        'bypasser_level',
+        'password_cracker_level',
+        'password_encryptor_level',
+        'platform_id',
+        'network_id',
     ];
+
+    function Platform() {
+        return $this->belongsTo(Platform::class);
+    }
+    public function Network() {
+        return $this->belongsTo(Network::class);
+    }
+    public function Bypass() {
+        return $this->hasMany(Bypass::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

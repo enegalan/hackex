@@ -8,7 +8,7 @@
             <div class="bank-money-label">
                 <span>Bank:</span>
                 <div class="bank-money">
-                    <span id="money-value">9133189</span>
+                    <span id="money-value">{{ Auth::user()['secured_bitcoins'] + Auth::user()['checked_bitcoins'] }}</span>
                     <i class="fa-solid fa-bitcoin-sign"></i>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                             <div class="app-buy-info">
                                 <div class="app-level">
                                     <span>Level</span>
-                                    <span class="app-level-value">475</span>
+                                    <span class="app-level-value">{{ Auth::user()['firewall_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
@@ -51,7 +51,7 @@
                             <div class="app-buy-info">
                                 <div class="app-level">
                                     <span>Level</span>
-                                    <span class="app-level-value">466</span>
+                                    <span class="app-level-value">{{ Auth::user()['bypasser_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
@@ -77,7 +77,7 @@
                             <div class="app-buy-info">
                                 <div class="app-level">
                                     <span>Level</span>
-                                    <span class="app-level-value">586</span>
+                                    <span class="app-level-value">{{ Auth::user()['password_cracker_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
@@ -103,7 +103,7 @@
                             <div class="app-buy-info">
                                 <div class="app-level">
                                     <span>Level</span>
-                                    <span class="app-level-value">401</span>
+                                    <span class="app-level-value">{{ Auth::user()['password_encryptor_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
@@ -129,7 +129,7 @@
                             <div class="app-buy-info">
                                 <div class="app-level">
                                     <span>Level</span>
-                                    <span class="app-level-value">212</span>
+                                    <span class="app-level-value">{{ Auth::user()['antivirus_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
@@ -155,7 +155,7 @@
                             <div class="app-buy-info">
                                 <div class="app-level">
                                     <span>Level</span>
-                                    <span class="app-level-value">140</span>
+                                    <span class="app-level-value">{{ Auth::user()['spam_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
@@ -181,7 +181,7 @@
                             <div class="app-buy-info">
                                 <div class="app-level">
                                     <span>Level</span>
-                                    <span class="app-level-value">106</span>
+                                    <span class="app-level-value">{{ Auth::user()['spyware_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
@@ -207,7 +207,7 @@
                             <div class="app-buy-info">
                                 <div class="app-level">
                                     <span>Level</span>
-                                    <span class="app-level-value">1</span>
+                                    <span class="app-level-value">{{ Auth::user()['notepad_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">

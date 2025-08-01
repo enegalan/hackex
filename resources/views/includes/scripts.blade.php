@@ -2,9 +2,10 @@
     function redirect(url) {
         window.location.href = url;
     }
-    function openWindow(windowName) {
+    function openWindow(windowName, data = []) {
         const windows = {
-            'apps': '#apps-modal'
+            'apps': '#apps-modal',
+            'bypass': '#bypass-modal'
         };
         const foundModalName = windows[windowName];
         if (!foundModalName) {
@@ -15,10 +16,10 @@
             throw new Error("Modal not found in DOM for " + windowName);
         }
         const close = modal.querySelector('.close');
-        modal.style.display = "block";
+        modal.style.display = "flex";
         function closeModal() {
             modal.style.display = "none";
-            close.removeEventListener('click', closeModal);
+            if (close) close.removeEventListener('click', closeModal);
             window.removeEventListener('click', clickOutsideHandler);
         }
         function clickOutsideHandler(e) {
@@ -27,8 +28,9 @@
             }
         }
         // Attach listeners
-        close.addEventListener('click', closeModal);
+        if (close) close.addEventListener('click', closeModal);
         window.addEventListener('click', clickOutsideHandler);
+        return modal;
     }
     function isValidIP(ipAddress) {
         const ipv4Regex = /^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$/;
@@ -36,6 +38,26 @@
     }
 </script>
 @if (isset($scripts))
+    @if (in_array("progress-bar", $scripts))
+        <script id="progress-bar">
+            function upgradeProgressBars() {
+                const progressBars = document.querySelectorAll('progress-bar');
+                progressBars.forEach(progressBar => {
+                    const min = parseFloat(progressBar.getAttribute('min')) || 0;
+                    const max = parseFloat(progressBar.getAttribute('max')) || 100;
+                    const value = parseFloat(progressBar.value) || 0;
+                    const percentage = Math.max(0, Math.min(100, ((value - min) / (max - min)) * 100));
+                    let bar = progressBar.querySelector('.bar');
+                    if (!bar) {
+                        bar = document.createElement('div');
+                        bar.classList.add('bar');
+                        progressBar.appendChild(bar);
+                    }
+                    bar.style.width = `${percentage}%`;
+                })
+            }
+        </script>
+    @endif
     @if (in_array("processes", $scripts))
         <script id="processes-scripts">
             const processesTabs = document.querySelectorAll(".processes-tabs .tabs > *");
@@ -59,35 +81,62 @@
                     })
                     e.target.classList.add('active');
                     frame.classList.add('active');
+                    // Update counters
+                    updateCounters();
                 });
+                updateCounters();
+                function updateCounters(tabId = 'bypassing-tab') {
+                    const totalValueInputId = tabId.split('-tab')[0] + '-total-value-input';
+                    const runningValueInputId = tabId.split('-tab')[0] + '-running-value-input';
+                    // Update counters
+                    const totalCounter = document.querySelector('.total-counter #total-value');
+                    const totalValueInput = document.querySelector('#' + totalValueInputId);
+                    totalCounter.innerText = totalValueInput.getAttribute("value");
+                    const runningValueInput = document.querySelector('#' + runningValueInputId);
+                    const runningCounter = document.querySelector('.running-counter #running-value');
+                    runningCounter.innerText = runningValueInput.getAttribute("value");
+                }
             });
             // Set Bypassing as default active
             const bypassingFrame = document.querySelector('#bypassing-frame');
             if (!bypassingFrame.classList.contains('active')) bypassingFrame.classList.add('active');
             const bypassingTab = document.querySelector('#bypassing-tab');
             if (!bypassingTab.classList.contains('active')) bypassingTab.classList.add('active');
-        </script>
-    @endif
-    @if (in_array("progress-bar", $scripts))
-        <script id="progress-bar">
-            const progressBars = document.querySelectorAll('progress-bar');
-            progressBars.forEach(progressBar => {
-                const min = parseFloat(progressBar.getAttribute('min')) || 0;
-                const max = parseFloat(progressBar.getAttribute('max')) || 100;
-                const value = parseFloat(progressBar.getAttribute('value')) || 0;
+            function updateBypassStatuses() {
+                upgradeProgressBars();
+                document.querySelectorAll('*[timezone-replacing]').forEach(el => {
+                    const createdAt = new Date(el.dataset.createdAt);
+                    const expiresAt = new Date(el.dataset.expiresAt);
+                    const now = new Date();
 
-                const percentage = Math.max(0, Math.min(100, ((value - min) / (max - min)) * 100));
+                    const totalMs = expiresAt - createdAt;
+                    const passedMs = now - createdAt;
+                    const percent = Math.min(100, Math.max(0, (passedMs / totalMs) * 100)).toFixed(1);
 
-                // Crear la barra si no existe
-                let bar = progressBar.querySelector('.bar');
-                if (!bar) {
-                bar = document.createElement('div');
-                bar.classList.add('bar');
-                progressBar.appendChild(bar);
-                }
-
-                bar.style.width = `${percentage}%`;
-            })
+                    // Mostrar porcentaje
+                    const progressPercentageSpan = el.querySelector('.progress-percentage');
+                    if (progressPercentageSpan) progressPercentageSpan.textContent = `${percent}%`;
+                    const progressBar = el.querySelector('progress-bar');
+                    if (progressBar) progressBar.value = percent;
+                    
+                    // Mostrar tiempo restante
+                    const timeRemaining = el.querySelector('.time-remaining')
+                    const remainingMs = expiresAt - now;
+                    if (remainingMs > 0) {
+                        const seconds = Math.floor(remainingMs / 1000) % 60;
+                        const minutes = Math.floor(remainingMs / 60000) % 60;
+                        const hours = Math.floor(remainingMs / (3600000)) % 24;
+                        const days = Math.floor(remainingMs / (86400000));
+                        if (timeRemaining) timeRemaining.textContent = `- ${days}d ${hours}h ${minutes}m ${seconds}s left`;
+                    } else {
+                        if (timeRemaining) timeRemaining.textContent = '- expired';
+                    }
+                });
+            }
+            updateBypassStatuses();
+            upgradeProgressBars();
+            // Actualizar cada segundo
+            setInterval(updateBypassStatuses, 1000);
         </script>
     @endif
     @if (in_array("scan", $scripts))
@@ -111,6 +160,20 @@
                 }, 1000);
                 // TODO: Implement logic
             })
+
+            function openBypassWindow(ip, firewall_level, bypasser_level) {
+                const modal = openWindow('bypass');
+                const firewallSpan = modal.querySelector('.firewall_level');
+                firewallSpan.innerText = firewall_level;
+                const firewallInput = modal.querySelector('#input-firewall-level');
+                firewallInput.value = firewall_level;
+                const bypasserSpan = modal.querySelector('.bypasser_level');
+                bypasserSpan.innerText = bypasser_level;
+                const bypasserInput = modal.querySelector('#input-bypasser-level');
+                bypasserInput.value = bypasser_level;
+                const ipInput = modal.querySelector('#input-ip');
+                ipInput.value = ip;
+            }
         </script>
     @endif
     @if (in_array("login", $scripts))
@@ -122,7 +185,6 @@
                 const signUpContent = signUpFrame.querySelector('.content');
                 const container = document.querySelector('#container'); // Suponiendo que es el padre común cuyo height cambia
 
-                // Alternar clases activas
                 signInFrame.classList.toggle('active');
                 signUpFrame.classList.toggle('active');
 
@@ -132,9 +194,9 @@
                     const signUpHeight = 520;
                     const signInHeight = 300;
                     const duration = 400; // ms
-                    const interval = 5; // ms por paso
+                    const interval = 5; // ms for step
                     const startHeight = container.offsetHeight;
-                    // Efectos de clase
+                    // Class effects
                     const timeout = 650;
                     const textTimeout = 650;
 
