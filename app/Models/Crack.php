@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Crack extends Model {
@@ -9,12 +10,20 @@ class Crack extends Model {
         'user_id',
         'victim_id',
         'expires_at',
-        'status'
+        'status',
+        'visible',
     ];
+    public const WORKING = 0;
+    public const SUCCESSFUL = 1;
     public function User() {
         return $this->belongsTo(User::class);
     }
     public function Victim() {
         return $this->belongsTo(User::class, 'victim_id');
+    }
+    
+    public static function hasCredentials($user_id) {
+        $isHacked = session()->get('isHacked');
+        return !$isHacked || ($isHacked && Auth::user()->Crack()->where('victim_id', $user_id)->where('status', \App\Models\Crack::SUCCESSFUL)->exists());
     }
 }

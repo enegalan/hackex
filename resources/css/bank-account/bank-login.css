@@ -59,6 +59,7 @@
     margin-bottom: 0.5rem;
 }
 
+.bank-login-frame .form,
 .bank-login-frame form {
     display: flex;
     flex-direction: column;
@@ -66,6 +67,10 @@
     color: black;
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
+}
+
+#bank-login-form {
+    margin-top: 1rem;
 }
 
 .bank-quote {

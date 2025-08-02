@@ -626,11 +626,11 @@ div#apps-grid > * {
     font-size: 10px;
     width: 100%;
 }
-.logo-title #logo-1 {
+#logo-1 {
     color: white;
     font-family: 'dosis';
 }
-.logo-title #logo-2 {
+#logo-2 {
     color: #6bb20fab;
     font-weight: bold;
     font-family: 'neuropol';

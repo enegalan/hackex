@@ -11,7 +11,15 @@ class Transfer extends Model {
         'expires_at',
         'status',
         'type',
+        'app_name',
+        'app_level',
+        'visible',
+        'last_payment_at',
     ];
+    const DOWNLOAD = 0;
+    const UPLOAD = 1;
+    public const WORKING = 0;
+    public const SUCCESSFUL = 1;
     public function User() {
         return $this->belongsTo(User::class);
     }

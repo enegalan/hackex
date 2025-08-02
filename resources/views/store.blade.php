@@ -8,14 +8,15 @@
             <div class="bank-money-label">
                 <span>Bank:</span>
                 <div class="bank-money">
-                    <span id="money-value">{{ Auth::user()['secured_bitcoins'] + Auth::user()['checked_bitcoins'] }}</span>
+                    <span id="money-value">{{ formatNumber(Auth::user()['secured_bitcoins'] + Auth::user()['checking_bitcoins']) }}</span>
                     <i class="fa-solid fa-bitcoin-sign"></i>
                 </div>
             </div>
         </header>
         <ul>
             <li>
-                <form action="/buy/1">
+                <form method="post" action="/buy/firewall">
+                    @csrf
                     <section>
                         <div class="app-image">
                             <img src="{{ asset('apps/firewall.webp') }}" alt="firewall">
@@ -29,7 +30,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">380.000</span>
+                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('firewall', Auth::user()['firewall_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -41,7 +42,8 @@
                 </form>
             </li>
             <li>
-                <form action="/buy/2">
+                <form method="post" action="/buy/bypasser">
+                    @csrf
                     <section>
                         <div class="app-image">
                             <img src="{{ asset('apps/bypasser.webp') }}" alt="bypasser">
@@ -55,7 +57,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">372.800</span>
+                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('bypasser', Auth::user()['bypasser_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -67,7 +69,8 @@
                 </form>
             </li>
             <li>
-                <form action="/buy/3">
+                <form method="post" action="/buy/password_cracker">
+                    @csrf
                     <section>
                         <div class="app-image">
                             <img src="{{ asset('apps/password_cracker.webp') }}" alt="password_cracker">
@@ -81,7 +84,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">644.600</span>
+                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('password_cracker', Auth::user()['password_cracker_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -93,7 +96,8 @@
                 </form>
             </li>
             <li>
-                <form action="/buy/4">
+                <form method="post" action="/buy/password_encryptor">
+                    @csrf
                     <section>
                         <div class="app-image">
                             <img src="{{ asset('apps/password_encryptor.webp') }}" alt="password_encryptor">
@@ -107,7 +111,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">441.100</span>
+                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('password_encryptor', Auth::user()['password_encryptor_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -119,7 +123,8 @@
                 </form>
             </li>
             <li>
-                <form action="/buy/5">
+                <form method="post" action="/buy/antivirus">
+                    @csrf
                     <section>
                         <div class="app-image">
                             <img src="{{ asset('apps/antivirus.webp') }}" alt="antivirus">
@@ -133,7 +138,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">212.000</span>
+                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('antivirus', Auth::user()['antivirus_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -145,7 +150,8 @@
                 </form>
             </li>
             <li>
-                <form action="/buy/6">
+                <form method="post" action="/buy/spam">
+                    @csrf
                     <section>
                         <div class="app-image">
                             <img src="{{ asset('apps/spam.webp') }}" alt="spam">
@@ -159,7 +165,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">196.000</span>
+                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('spam', Auth::user()['spam_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -171,7 +177,8 @@
                 </form>
             </li>
             <li>
-                <form action="/buy/7">
+                <form method="post" action="/buy/spyware">
+                    @csrf
                     <section>
                         <div class="app-image">
                             <img src="{{ asset('apps/spyware.webp') }}" alt="spyware">
@@ -185,7 +192,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">84.800</span>
+                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('spyware', Auth::user()['spyware_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -197,7 +204,8 @@
                 </form>
             </li>
             <li>
-                <form action="/buy/8">
+                <form method="post" action="/buy/notepad">
+                    @csrf
                     <section>
                         <div class="app-image">
                             <img src="{{ asset('apps/notepad.webp') }}" alt="notepad">
@@ -211,7 +219,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">15.000</span>
+                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('notepad', Auth::user()['notepad_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>

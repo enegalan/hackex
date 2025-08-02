@@ -1,5 +1,8 @@
-{{-- Include each modal here --}}
 <renderer class="modals-renderer">
-    @include('includes.modals.apps')
-    @include('includes.modals.bypass')
+    @foreach (glob(resource_path('views/includes/modals/*.blade.php')) as $modalPath)
+    @php
+        $modalName = basename($modalPath, '.blade.php');
+    @endphp
+    @include('includes.modals.' . $modalName)
+@endforeach
 </renderer>

@@ -1,22 +1,35 @@
+@php
+    $user = session('hackedUser', Auth::user());
+@endphp
 <script id="common-scripts">
+    const windows = {
+        'apps': '#apps-modal',
+        'bypass': '#bypass-modal',
+        'hack': '#hack-modal',
+        'download': '#download-modal',
+        'viruses': '#viruses-modal',
+        'crack': '#crack-modal',
+        'antivirus': '#antivirus-modal',
+        'antivirus-confirm': '#antivirus-confirm-modal',
+        'spam': '#spam-modal',
+        'spam-confirm': '#spam-confirm-modal',
+        'spyware': '#spyware-modal',
+        'spyware-log': '#spyware-log-modal',
+        'spyware-confirm': '#spyware-confirm-modal',
+        'app_info': '#app-info-modal',
+    };
     function redirect(url) {
         window.location.href = url;
     }
-    function openWindow(windowName, data = []) {
-        const windows = {
-            'apps': '#apps-modal',
-            'bypass': '#bypass-modal'
-        };
+    function closeWindow(windowName) {
         const foundModalName = windows[windowName];
-        if (!foundModalName) {
-            throw new Error("Modal not found for " + windowName);
-        }
+        if (!foundModalName) throw new Error("Modal not found for " + windowName);
         const modal = document.querySelector(foundModalName);
-        if (!modal) {
-            throw new Error("Modal not found in DOM for " + windowName);
-        }
+        if (!modal) throw new Error("Modal not found in DOM for " + windowName);
+        modal.style.display = "none";
         const close = modal.querySelector('.close');
-        modal.style.display = "flex";
+        if (close) close.removeEventListener('click', closeModal);
+        window.removeEventListener('click', clickOutsideHandler);
         function closeModal() {
             modal.style.display = "none";
             if (close) close.removeEventListener('click', closeModal);
@@ -27,7 +40,25 @@
                 closeModal();
             }
         }
-        // Attach listeners
+    }
+    function openWindow(windowName, data = []) {
+        const foundModalName = windows[windowName];
+        if (!foundModalName) throw new Error("Modal not found for " + windowName);
+        const modal = document.querySelector(foundModalName);
+        if (!modal) throw new Error("Modal not found in DOM for " + windowName);
+        if (modal.style.display === "flex") return modal;
+        const close = modal.querySelector('.close');
+        function closeModal() {
+            modal.style.display = "none";
+            if (close) close.removeEventListener('click', closeModal);
+            window.removeEventListener('click', clickOutsideHandler);
+        }
+        function clickOutsideHandler(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        }
+        modal.style.display = "flex";
         if (close) close.addEventListener('click', closeModal);
         window.addEventListener('click', clickOutsideHandler);
         return modal;
@@ -36,6 +67,15 @@
         const ipv4Regex = /^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$/;
         return ipv4Regex.test(ipAddress);
     }
+    // Save scroll before exit
+    window.addEventListener('beforeunload', () => {
+        sessionStorage.setItem('scrollY', window.scrollY);
+    });
+    // Restore on load
+    window.addEventListener('DOMContentLoaded', () => {
+        const scrollY = sessionStorage.getItem('scrollY');
+        if (scrollY) window.scrollTo(0, parseInt(scrollY));
+    });
 </script>
 @if (isset($scripts))
     @if (in_array("progress-bar", $scripts))
@@ -81,27 +121,23 @@
                     })
                     e.target.classList.add('active');
                     frame.classList.add('active');
-                    // Update counters
-                    updateCounters();
+                    updateCounters(tabId);
+                    updateBypassStatuses();
+                    upgradeProgressBars();
+                    localStorage.setItem('lastProcessTabId', tabId);
                 });
                 updateCounters();
-                function updateCounters(tabId = 'bypassing-tab') {
-                    const totalValueInputId = tabId.split('-tab')[0] + '-total-value-input';
-                    const runningValueInputId = tabId.split('-tab')[0] + '-running-value-input';
-                    // Update counters
-                    const totalCounter = document.querySelector('.total-counter #total-value');
-                    const totalValueInput = document.querySelector('#' + totalValueInputId);
-                    totalCounter.innerText = totalValueInput.getAttribute("value");
-                    const runningValueInput = document.querySelector('#' + runningValueInputId);
-                    const runningCounter = document.querySelector('.running-counter #running-value');
-                    runningCounter.innerText = runningValueInput.getAttribute("value");
-                }
             });
             // Set Bypassing as default active
-            const bypassingFrame = document.querySelector('#bypassing-frame');
-            if (!bypassingFrame.classList.contains('active')) bypassingFrame.classList.add('active');
-            const bypassingTab = document.querySelector('#bypassing-tab');
-            if (!bypassingTab.classList.contains('active')) bypassingTab.classList.add('active');
+            const lastProcessTabId = localStorage.getItem('lastProcessTabId') || 'bypassing-tab';
+            const defaultTab = document.getElementById(lastProcessTabId);
+            const defaultFrameId = lastProcessTabId.replace('-tab', '-frame');
+            const defaultFrame = document.getElementById(defaultFrameId);
+            if (defaultTab && defaultFrame) {
+                defaultTab.classList.add('active');
+                defaultFrame.classList.add('active');
+                updateCounters(lastProcessTabId);
+            }
             function updateBypassStatuses() {
                 upgradeProgressBars();
                 document.querySelectorAll('*[timezone-replacing]').forEach(el => {
@@ -112,7 +148,6 @@
                     const totalMs = expiresAt - createdAt;
                     const passedMs = now - createdAt;
                     const percent = Math.min(100, Math.max(0, (passedMs / totalMs) * 100)).toFixed(1);
-
                     // Show percentage
                     const progressPercentageSpan = el.querySelector('.progress-percentage');
                     if (progressPercentageSpan) progressPercentageSpan.textContent = `${percent}%`;
@@ -133,10 +168,38 @@
                     }
                 });
             }
+            function updateCounters(tabId = 'bypassing-tab') {
+                const totalValueInputId = tabId.split('-tab')[0] + '-total-value-input';
+                const runningValueInputId = tabId.split('-tab')[0] + '-running-value-input';
+                // Update counters
+                const totalCounter = document.querySelector('.total-counter #total-value');
+                const totalValueInput = document.querySelector('#' + totalValueInputId);
+                totalCounter.innerText = totalValueInput.getAttribute("value");
+                const runningValueInput = document.querySelector('#' + runningValueInputId);
+                const runningCounter = document.querySelector('.running-counter #running-value');
+                runningCounter.innerText = runningValueInput.getAttribute("value");
+            }
             updateBypassStatuses();
             upgradeProgressBars();
             // Update for each second
             setInterval(updateBypassStatuses, 1000);
+
+            // Hack
+            function openHackWindow(type, id, onlyRemove = false) {
+                const modal = openWindow('hack');
+                const idInputs = modal.querySelectorAll('input[name="process_id"]');
+                idInputs.forEach(input => {
+                    input.value = id;
+                });
+                const typeInputs = modal.querySelectorAll('input[name="type"]');
+                typeInputs.forEach(input => {
+                    input.value = type;
+                });
+                if (onlyRemove) {
+                    modal.querySelector('#hack-form').style.display = "none";
+                    modal.querySelector('.modal-frame').style.height = "auto";
+                }
+            }
         </script>
     @endif
     @if (in_array("scan", $scripts))
@@ -181,7 +244,7 @@
                 const signInContent = signInFrame.querySelector('.content');
                 const signUpFrame = document.querySelector('.signup');
                 const signUpContent = signUpFrame.querySelector('.content');
-                const container = document.querySelector('#container'); // Suponiendo que es el padre común cuyo height cambia
+                const container = document.querySelector('#container');
 
                 signInFrame.classList.toggle('active');
                 signUpFrame.classList.toggle('active');
@@ -236,6 +299,126 @@
                     });
                 }, 150);
             });
+        </script>
+    @endif
+    @if (in_array('log', $scripts))
+        <script id="log">
+            function byteLength(str) {
+                return new TextEncoder().encode(str).length;
+            }
+            const textarea = document.querySelector('textarea');
+            const maxBytes = {{ \App\Enums\MaxLogSizes::getMaxLogSize($user['notepad_level'], false) }};
+            textarea.addEventListener('input', () => {
+                const currentBytes = byteLength(textarea.value);
+                if (currentBytes > maxBytes) {
+                    while (byteLength(textarea.value) > maxBytes) {
+                        textarea.value = textarea.value.slice(0, -1);
+                    }
+                }
+            });
+        </script>
+    @endif
+    @if (in_array('home', $scripts))
+        <script id="home">
+            function openDownloadModal(victimId, app_name, app_level, app_label) {
+                const modal = openWindow('download');
+                modal.querySelector('.app_level').innerText = app_level;
+                modal.querySelector('.app_label').innerText = app_label;
+                modal.querySelector('#input-app-name').value = app_name;
+                modal.querySelector('#input-user-id').value = victimId;
+            }
+            function openVirusesModal(victimId) {
+                const modal = openWindow('viruses');
+                modal.querySelector('#input-user-id').value = victimId;
+            }
+            function toggleVirusList(button, virus_name, virusFormId) {
+                const modal = openWindow('viruses');
+                const virusForm = modal.querySelector('#' + virusFormId);
+                const isVisible = virusForm.style.display === "block";
+                modal.querySelectorAll('form.virus-list').forEach(form => {
+                    form.style.display = 'none';
+                });
+                if (!isVisible) {
+                    virusForm.style.display = "block";
+                    const inputUserId = modal.querySelector('#input-user-id');
+                    const virusFormUserIdInput = virusForm.querySelector('input[name="user_id"]');
+                    virusFormUserIdInput.value = inputUserId.value;
+                }
+                modal.querySelectorAll('.virus-button').forEach(btn => {
+                    if (btn.classList.contains(virus_name + '-button')) {
+                        btn.classList.toggle('active', !isVisible);
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+            function submitUpload(virusFormId) {
+                const modal = openWindow('viruses');
+                const virusForm = modal.querySelector('#' + virusFormId);
+                if (virusForm) virusForm.submit();
+            }
+            function openAntivirusModal() {
+                const modal = openWindow('antivirus');
+            }
+            function closeAntivirusModal() {
+                closeWindow('antivirus');
+            }
+            function openAntivirusConfirmWindow(transferId, app_level, app_label, antivirus_level) {
+                const modal = openWindow('antivirus-confirm')
+                modal.querySelector('.app_level').innerText = app_level;
+                modal.querySelector('.app_label').innerText = app_label;
+                modal.querySelector('.antivirus_level').innerText = antivirus_level;
+                modal.querySelector('#input-transfer-id').value = transferId;
+            }
+            function openSpamModal() {
+                const modal = openWindow('spam');
+            }
+            function closeSpamModal() {
+                closeWindow('spam');
+            }
+            function openSpamConfirmWindow(transferId, app_level, app_label) {
+                const modal = openWindow('spam-confirm')
+                modal.querySelector('.app_level').innerText = app_level;
+                modal.querySelector('.app_label').innerText = app_label;
+                modal.querySelector('#input-transfer-id').value = transferId;
+            }
+            function openSpywareModal() {
+                const modal = openWindow('spyware');
+            }
+            function closeSpywareModal() {
+                closeWindow('spyware');
+            }
+            function openSpywareLog(transferId, log) {
+                const modal = openWindow('spyware-log');
+                modal.querySelector('#input-transfer-id').value = transferId;
+                modal.querySelector('#spyware-log').value = log;
+            }
+            function openSpywareConfirmWindow() {
+                const spywareModal = openWindow('spyware-log')
+                const transferId = spywareModal.querySelector('#input-transfer-id').value;
+                const modal = openWindow('spyware-confirm');
+                modal.querySelector('#input-transfer-id').value = transferId;
+            }
+            function openAppInfoModal(app_label, app_level, app_description, app_use) {
+                const modal = openWindow('app_info');
+                modal.querySelector('.app_label').innerText = app_label;
+                modal.querySelector('.app_level').innerText = app_level;
+                modal.querySelector('.app_description').innerText = app_description;
+                modal.querySelector('.app_use').innerText = app_use;
+            }
+            function closeAppInfoModal() {
+                closeWindow('app_info');
+            }
+        </script>
+    @endif
+    @if (in_array("crack", $scripts))
+        <script id="crack">
+            function openCrackWindow(password_cracker_level, password_cracker_label, user_id) {
+                const modal = openWindow('crack');
+                modal.querySelector('.password_cracker_level').innerText = password_cracker_level;
+                modal.querySelector('#input-user-id').value = user_id;
+                modal.querySelector('.password_cracker_label').innerText = password_cracker_label;
+            }
         </script>
     @endif
 @endif

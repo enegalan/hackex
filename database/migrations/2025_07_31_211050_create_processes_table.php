@@ -25,6 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('victim_id');
             $table->tinyInteger('status')->default(0); // 0 = working, 1 = successful, 2 = failed
             $table->timestamp('expires_at');
+            $table->tinyInteger('visible')->default(1);
             $table->timestamps();
         });
         Schema::create('transfers', function (Blueprint $table) {
@@ -33,7 +34,10 @@ return new class extends Migration
             $table->unsignedBigInteger('victim_id');
             $table->tinyInteger('status')->default(0); // 0 = working, 1 = successful, 2 = failed
             $table->tinyInteger('type')->default(0); // 0 = download, 1 = upload
+            $table->string('app_name');
+            $table->bigInteger('app_level')->default(1);
             $table->timestamp('expires_at');
+            $table->tinyInteger('visible')->default(1);
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@
                 <input type="hidden" name="ip" id="input-ip" value="192.168.0.1">
             </section>
             <section class="buttons">
-                <button class="close cancel">Cancel</button>
+                <button type="button" class="close cancel">Cancel</button>
                 <button type="submit" class="cursor-pointer">Ok</button>
             </section>
         </form>

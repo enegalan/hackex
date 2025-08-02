@@ -1,73 +1,47 @@
 <?php
 
-use App\Models\Bypass;
-use App\Models\User;
+use App\Http\Controllers\AppController;
+use App\Http\Controllers\BankController;
+use App\Http\Controllers\ScanController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsFullyVerified;
 use Illuminate\Http\Request;
 
 Route::middleware([IsFullyVerified::class])->group(function () {
-    Route::get('/', function () {
-        return view('home');
-    });
+    Route::get('/', [ViewController::class, 'home'])->name('home');
+    Route::get('/disconnect', [UserController::class, 'disconnect']);
+    Route::post('/transfer', [UserController::class, 'transfer']);
+    Route::post('/download', [UserController::class, 'download']);
+    Route::post('/upload/{app_name}', [UserController::class, 'upload']);
+    Route::post('/crack', [BankController::class, 'crack']);
+    Route::post('/antivirus', [AppController::class, 'antivirus']);
+    Route::post('/spam', [AppController::class, 'spam']);
+    Route::post('/spyware', [AppController::class, 'spyware']);
+
+    Route::get('/processes', [ViewController::class, 'processes']);
+    Route::post('/hack', [UserController::class, 'hack']);
+    Route::get('/hack', [UserController::class, 'hackRedirect']);
+    Route::post('/process-remove', [UserController::class, 'processRemove']);
     
-    Route::get('/processes', function () {
-        return view('processes');
-    });
+    Route::get('/scan', [ViewController::class, 'scan']);
+    Route::post('/ping', [ScanController::class, 'ping']);
+    Route::post('/bypass',[ScanController::class, 'createBypass']);
     
-    Route::get('/scan', function () {
-        return view('scan');
-    });
-    Route::post('/ping', function (Request $request) {
-        $ip = $request->input('ip-search');
-        if (!$ip) {
-            return back()->with('error', 'Please enter an IP address.');
-        }
-        $user = User::where('ip', $ip)->first();
-        if (!$user) {
-            return back()->with('error', 'No user found with that IP address.');
-        }
-        return back()->with('ping_result', $user);
-    });
-    Route::post('/bypass',function (Request $request) {
-        $request->validate([
-            'firewall_level' => 'required|integer|min:1',
-            'bypasser_level' => 'required|integer|min:1',
-        ]);
-        $firewallLevel = $request->input('firewall_level');
-        $bypasserLevel = $request->input('bypasser_level');
-        $ip = $request->input('ip');
-        $victim = User::where('ip', $ip)->first();
-        Bypass::create([
-            'user_id' => Auth::id(),
-            'victim_id' => $victim['id'],
-            'expires_at' => calculateBypassExpiration($firewallLevel, $bypasserLevel),
-        ]);
-        return back()->with('message', 'Bypass iniciado correctamente.');
-    });
+    Route::get('/bank-account', [ViewController::class, 'bankAccount']);
+    Route::post('/bank-account', [BankController::class, 'loginBankAccount'])->name('bank-account');
     
-    Route::get('/bank-account', function () {
-        return view('bank-login');
-    });
-    Route::post('/bank-account', function () {
-        return view('bank-account');
-    });
+    Route::get('/store', [ViewController::class, 'store']);
+    Route::post('/buy/{app_name}', [StoreController::class, 'buy']);
     
-    Route::get('/store', function () {
-        return view('store');
-    });
+    Route::get('/messages', [ViewController::class, 'messages']);
     
-    Route::get('/messages', function () {
-        return view('messages');
-    });
+    Route::get('/log', [ViewController::class, 'log']);
+    Route::post('/save-log', [UserController::class, 'saveLog']);
     
-    Route::get('/log', function () {
-        return view('log');
-    });
-    
-    Route::get('/device', function () {
-        return view('my-device');
-    });
+    Route::get('/device', [ViewController::class, 'device']);
 });
 
 require __DIR__ . '/auth.php';

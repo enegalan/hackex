@@ -1,11 +1,11 @@
-#log {
+form#log {
     color: white;
     padding-top: 1.5rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
 }
 
-#log h4 {
+form#log h4 {
     font-style: italic;
     margin-bottom: 0.5rem;
 }

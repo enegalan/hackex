@@ -1,0 +1,41 @@
+#access_boot {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    height: 100%;
+}
+
+.hackex-logo {
+    font-size: 55px;
+    display: flex;
+}
+
+.boot_text {
+    margin-top: -1.15rem;
+    margin-bottom: 0.3rem;
+}
+
+.hackex-version {
+    font-size: 11px;
+}
+
+.access_boot_transition {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    animation: access_boot_transition 2.5s ease-in-out forwards;
+}
+
+@keyframes access_boot_transition {
+    0% {
+        display: block;
+    }
+    100% {
+        display: none;
+    }
+}

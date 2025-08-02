@@ -1,6 +1,10 @@
 <?php
 
+use App\Models\Network;
+use App\Models\Transfer;
+
 require_once __DIR__ . '/str_camelcase.php';
+require_once __DIR__ . '/numbers.php';
 
 function getLevelBackgroundName($level) {
     $stages = [
@@ -42,12 +46,81 @@ function calculateBypassExpiration(int $firewallLevel, int $bypasserLevel) {
     $baseMinutes = 2;
     // Exponential penalty if bypasser is weaker than firewall
     if ($levelDiff > 0) {
-        $extraMinutes = pow($levelDiff, 2); // 1=>1, 2=>4, 3=>9, etc.
+        $extraMinutes = pow($levelDiff, 2);
     } else {
         $extraMinutes = max(0, $levelDiff); // could be 0 or negative (if bypasser is better)
     }
     $totalMinutes = $baseMinutes + $extraMinutes;
-    return Carbon::now('UTC')->addMinutes($totalMinutes);
+    return now()->addMinutes($totalMinutes);
+}
+function calculateCrackExpiration(int $passwordEncryptorLevel, int $passwordCracker) {
+    $levelDiff = $passwordEncryptorLevel - $passwordCracker;
+    // Minimum waiting time
+    $baseMinutes = 4;
+    // Exponential penalty if password cracker is weaker than password encryptor
+    if ($levelDiff > 0) {
+        $extraMinutes = pow($levelDiff, 2);
+    } else {
+        $extraMinutes = max(0, $levelDiff); // could be 0 or negative (if password cracker is better)
+    }
+    $totalMinutes = $baseMinutes + $extraMinutes;
+    return now()->addMinutes($totalMinutes);
+}
+function calculateDownloadExpiration(User $user, string $appName) {
+    $network = $user->network;
+    if (!$network || empty($network->download)) {
+        return now()->addMinutes(15); // fallback
+    }
+    $kbps = parseNetworkSpeedToKbps($network->download);
+    $levelColumn = "{$appName}_level";
+    $appLevel = $user->$levelColumn ?? 1;
+    // Each level adds +MB
+    $baseSizeInKb = 50; // 50KB
+    $totalSizeInKb = $baseSizeInKb * $appLevel;
+    $minutes = ceil($totalSizeInKb / max($kbps, 1));
+    return now()->addMinutes($minutes);
+}
+function calculateUploadExpiration(User $user, string $appName) {
+    $network = $user->network;
+    if (!$network || empty($network->upload)) {
+        return now()->addMinutes(15); // fallback
+    }
+    $kbps = parseNetworkSpeedToKbps($network->upload);
+    $levelColumn = "{$appName}_level";
+    $appLevel = $user->$levelColumn ?? 1;
+    // Each level adds +MB
+    $baseSizeInKb = 10; // 10KB
+    $totalSizeInKb = $baseSizeInKb * $appLevel;
+    $minutes = ceil($totalSizeInKb / max($kbps, 1));
+    return now()->addMinutes($minutes);
+}
+function parseNetworkSpeedToKbps(string $download): float {
+    [$value, $unit] = explode(' ', trim($download));
+    $value = floatval($value);
+    $unit = strtolower($unit);
+    return match ($unit) {
+        'bps' => $value / 1000,
+        'kbps' => $value,
+        'mbps' => $value * 1000,
+        'gbps' => $value * 1000 * 1000,
+        default => $value,
+    };
+}
+
+function calculateIncomePerHour(Transfer $transfer): float {
+    $BASE = 20; // TODO: Move this to a config
+    $level = $transfer->app_level ?? 1;
+    return $BASE * $level;
+}
+
+function getTotalEarningsForTransfer(Transfer $transfer): float {
+    if (!$transfer->expires_at) return 0;
+    $now = Carbon::now();
+    $start = new Carbon($transfer->expires_at);
+    if ($start > $now) return 0;
+    $hours = max(1, $start->diffInHours($now));
+    $incomePerHour = calculateIncomePerHour($transfer);
+    return $incomePerHour * $hours;
 }
 
 /**

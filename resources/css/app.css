@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import './progress-bars.css';
 @import './back-button.css';
+@import './disconnect-button.css';
 @import './modals.css';
 @import './home/home.css';
 @import './home/apps.css';
@@ -12,6 +13,7 @@
 @import './log/log.css';
 @import './my-device/my-device.css';
 @import './login/login.css';
+@import './access_boot/access_boot.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -32,13 +34,14 @@
 
 @font-face {
     font-family: 'dosis';
-    src: url('/fonts/dosis.otf') format('opentype');
+    src: url('/fonts/dosis.ttf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
 
 body {
-    background: #383838;
+    background: var(--bodyBg);
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -46,6 +49,7 @@ body {
     --primary: hsl(32, 91%, 50%);
     --transition: 0.3s ease-in-out;
     --white: #fff;
+    --bodyBg: #383838;
 }
 
 input[type="search"], input[type="text"], input[type="password"] {
@@ -71,11 +75,28 @@ textarea:focus-visible {
 }
 
 .input-error-message {
-    color: red;
+    color: #e72020;
     font-size: 0.9em;
     margin-top: 5px;
 }
 
+.negative {
+    color: #e72020;
+}
+
+.positive {
+    color: #a6e736;
+}
+
 .rotate-180 {
     transform: rotate(180deg);
+}
+
+.scrollbar-none {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+.scrollbar-none::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
 }

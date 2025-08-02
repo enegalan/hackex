@@ -35,6 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'bypasser_level',
         'password_cracker_level',
         'password_encryptor_level',
+        'notepad_level',
         'platform_id',
         'network_id',
     ];
@@ -47,6 +48,12 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function Bypass() {
         return $this->hasMany(Bypass::class);
+    }
+    public function Transfer() {
+        return $this->hasMany(Transfer::class);
+    }
+    public function Crack() {
+        return $this->hasMany(Crack::class);
     }
 
     /**

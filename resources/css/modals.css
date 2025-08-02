@@ -80,38 +80,82 @@
     font-size: 14px;
 }
 
-/* Bypass modal */
-#bypass-modal {
+#apps-modal .top-rightside {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+/* Bypass, Download, Crack & Antivirus Confirm modal */
+#bypass-modal,
+#download-modal,
+#crack-modal,
+#antivirus-confirm-modal,
+#spam-confirm-modal,
+#spyware-confirm-modal {
     align-items: center;
     align-content: center;
 }
 
-#bypass-modal #modal-top {justify-content: center;background: none;}
+#bypass-modal #modal-top,
+#download-modal #modal-top,
+#crack-modal #modal-top,
+#antivirus-confirm-modal #modal-top,
+#spam-confirm-modal #modal-top,
+#spyware-confirm-modal #modal-top {justify-content: center;background: none;}
 
-#bypass-modal .modal-frame {
-    background-color: #d3d3d3;
+#bypass-modal .modal-frame,
+#download-modal .modal-frame,
+#crack-modal .modal-frame,
+#antivirus-confirm-modal .modal-frame,
+#spam-confirm-modal .modal-frame,
+#spyware-confirm-modal .modal-frame {
+    background-color: #f4f4f4;
     color: black;
     padding-top: 1.5rem;
     border-radius: 18px;
     width: 60%;
 }
 
-#bypass-modal #modal-top .title {
+#bypass-modal #modal-top .title,
+#download-modal #modal-top .title,
+#crack-modal #modal-top .title,
+#antivirus-confirm-modal #modal-top .title,
+#spam-confirm-modal #modal-top .title,
+#spyware-confirm-modal #modal-top .title {
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
 }
 
-#bypass-modal .modal-content {
+#bypass-modal .modal-content,
+#download-modal .modal-content,
+#crack-modal .modal-content,
+#antivirus-confirm-modal .modal-content,
+#spam-confirm-modal .modal-content,
+#spyware-confirm-modal .modal-content {
     text-align: center;
 }
 
-#bypass-modal .buttons {
+#bypass-modal .buttons,
+#download-modal .buttons,
+#crack-modal .buttons,
+#antivirus-confirm-modal .buttons,
+#spam-confirm-modal .buttons,
+#spyware-confirm-modal .buttons {
     display: flex;
     justify-content: space-around;
 }
 
-#bypass-modal .buttons button {
+#bypass-modal .buttons button,
+#download-modal .buttons button,
+#crack-modal .buttons button,
+#antivirus-confirm-modal .buttons button,
+#spam-confirm-modal .buttons button,
+#spyware-confirm-modal .buttons button {
     color: #007ae3;
     font-weight: 600;
     border-top: 1px solid #c2c2c2;
@@ -119,20 +163,40 @@
     padding: .8rem;
 }
 
-#bypass-modal .buttons button:hover {
+#bypass-modal .buttons button:hover,
+#download-modal .buttons button:hover,
+#crack-modal .buttons button:hover,
+#antivirus-confirm-modal .buttons button:hover,
+#spam-confirm-modal .buttons button:hover,
+#spyware-confirm-modal .buttons button:hover {
     background: #c2c2c2;
 }
 
-#bypass-modal .buttons button:first-child {
+#bypass-modal .buttons button:first-child,
+#download-modal .buttons button:first-child,
+#crack-modal .buttons button:first-child,
+#antivirus-confirm-modal .buttons button:first-child,
+#spam-confirm-modal .buttons button:first-child,
+#spyware-confirm-modal .buttons button:first-child {
     border-right: 1px solid #c2c2c2;
     border-radius: 0 0 0 16px;
 }
 
-#bypass-modal .buttons button:last-child {
+#bypass-modal .buttons button:last-child,
+#download-modal .buttons button:last-child,
+#crack-modal .buttons button:last-child,
+#antivirus-confirm-modal .buttons button:last-child,
+#spam-confirm-modal .buttons button:last-child,
+#spyware-confirm-modal .buttons button:last-child {
     border-radius: 0 0 16px 0;
 }
 
-#bypass-modal .content {
+#bypass-modal .content,
+#download-modal .content,
+#crack-modal .content,
+#antivirus-confirm-modal .content,
+#spam-confirm-modal .content,
+#spyware-confirm-modal .content {
     font-size: 14px;
     margin-bottom: 1.5rem;
     padding-left: 1rem;
@@ -141,4 +205,290 @@
 
 .cancel {
     font-size: 16px !important;
+}
+
+/* Hack modal */
+#hack-modal .modal-frame {
+    background-color: #2f2f2f;
+    padding: 1.5rem 2.5rem;
+    width: 35%;
+    height: 25%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    top: 50%;
+    box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 20px;
+}
+
+#hack-modal #modal-top {
+    background: 0 0;
+    margin-bottom: 1rem;
+    font-size: 17px;
+    text-align: center;
+}
+
+#hack-modal .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    align-items: center;
+}
+
+#hack-modal .buttons > * {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hack-button, .remove-button {
+    width: 100%;
+}
+
+/* Viruses modal */
+#viruses-modal .modal-frame {
+    background-color: #2f2f2f;
+    width: 40%;
+    height: 30%;
+    padding: .8rem 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -75%);
+    box-shadow: 5px 5px 20px #00000080;
+}
+
+#viruses-modal #modal-top {
+    text-align: left;
+    background: 0 0;
+    margin-bottom: 1rem;
+    font-size: 17px;
+    padding-left: 0;
+}
+
+#viruses-modal .buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: .6rem;
+    display: flex;
+    height: 65%;
+    justify-content: center;
+}
+
+#viruses-modal .buttons > * {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#viruses-modal input[type="checkbox"] {
+    display: none;
+}
+
+#viruses-modal ul li label {
+    padding-left: 1rem;
+    width: 100%;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+#viruses-modal ul {
+    background: #3d3d3d;
+    padding-bottom: .2rem;
+    overflow-y: scroll;
+    max-height: 3.5rem;
+}
+
+#viruses-modal ul li:nth-child(2n) {
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+#viruses-modal ul li:last-of-type {
+    border-bottom: none;
+}
+
+.spam-button, .spyware-button {
+    width: 100%;
+    background-color: #3d3d3d;
+    padding-left: 0.8rem;
+    border-radius: 6px;
+    padding-right: 0.8rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #cecece;
+    font-weight: bold;
+    letter-spacing: .25px;
+    transition: .1s ease-in;
+    text-align: center;
+}
+
+.spam-button:hover,
+.spyware-button:hover {
+    background-color: #4b4b4b;
+    transition: .1s ease-in;
+}
+
+.virus-button.active {
+    border-radius: 6px 6px 0 0;
+    padding-bottom: 1.2rem;
+}
+
+.virus-list {
+    width: 100%;
+}
+
+.virus-level {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+    background: #222;
+}
+
+.virus-level:hover {
+    background: #00000050;
+}
+
+.virus-found {
+    color: white;
+    padding: 1.5rem;
+}
+
+.spam-general-info,
+.spyware-general-info {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#antivirus-modal #modal-top,
+#spam-modal #modal-top,
+#spyware-modal #modal-top {
+    justify-content: flex-start;
+    gap: .5rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    margin-bottom: .5rem;
+}
+
+#antivirus-modal .level,
+#spam-modal .level,
+#spyware-modal .level {
+    font-size: 12px;
+}
+
+#antivirus-modal section.buttons,
+#spam-modal section.buttons,
+#spyware-modal section.buttons {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#antivirus-modal .virus-level.antivirus-level,
+#spam-modal .virus-level.spam-level,
+#spyware-modal .virus-level.spyware-level {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+#spyware-modal .virus-level.spyware-level {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+#antivirus-modal .virus-level.antivirus-level:hover,
+#spam-modal .virus-level.spam-level:hover,
+#spyware-modal .virus-level.spyware-level:hover {
+    background-color: #2f2f2f;
+}
+
+#antivirus-modal ul,
+#spam-modal ul,
+#spyware-modal ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 7rem;
+}
+
+.virus-hacker-ip {
+    font-size: 18px;
+}
+
+/* Spyware modal */
+#spyware-log-modal {
+    background: none;
+}
+
+#spyware-log-modal .modal-frame {
+    padding: 1rem;
+    display: flex;
+    background: black;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(43 43 43) 100%);
+}
+
+#spyware-log {
+    background: white;
+    width: 100%;
+    color: black;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    padding-bottom: 5rem;
+}
+
+#spyware-log-modal .remove-button {
+    position: fixed;
+    bottom: 6rem;
+    left: 50%;
+    width: 15%;
+    transform: translateX(-50%);
+}
+
+/* App Info modal */
+#app-info-modal .modal-frame {
+    width: 50%;
+    height: 45%;
+    background: #1e1e1e;
+    margin-top: 12rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    color: #bebebe;
+}
+#app-info-modal #modal-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+}
+#app-info-modal .app_label {
+    font-weight: bolder;
+    font-size: 20px;
+    font-stretch: expanded;
+}
+#app-info-modal #modal-top div:nth-child(2) {
+    font-size: 14px;
+}
+
+#app-info-frame {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 15px;
 }

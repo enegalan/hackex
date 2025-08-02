@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\MaxLogSizes;
+use App\Models\Bypass;
+use App\Models\Crack;
+use App\Models\Transfer;
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
@@ -19,5 +24,182 @@ class UserController extends Controller {
             $attempts++;
         }
         return $ip;
+    }
+    function disconnect() {
+        session()->put('isHacked', false);
+        $hackedUser = session()->get('hackedUser');
+        session()->remove('hackedUser');
+        return view('home', ['access_boot' => 'Disconnecting from ' . $hackedUser['ip']]);
+    }
+    function transfer() {
+        if (session()->get('isHacked')) {
+            // Transfer victim's checking_bitcoins to session user's checking_bitcoins
+            $victim = session()->get('hackedUser');
+            $checking_bitcoins = $victim['checking_bitcoins'];
+            $auth_user = Auth::user();
+            // First, set victims's checking_bitcoins to 0
+            $victim['checking_bitcoins'] = 0;
+            // Then, add victim's checking_bitcoins to auth_user checking_bitcoins
+            $auth_user['checking_bitcoins'] += $checking_bitcoins;
+            // Finaly save both models
+            $victim->save();
+            $auth_user->save();
+            LogController::doLog(LogController::WITHDRAWAL, $victim, ['bitcoins' => $checking_bitcoins, 'ip' => $auth_user->ip]);
+        } else {
+            // Transfer session user's checking_bitcoins to secured_bitcoins
+            $user = Auth::user();
+            $maxSaving = \App\Enums\MaxSavings::getMaxSaving($user->Platform->id);
+            $currentSecured = $user->secured_bitcoins;
+            // Calculate how much bitcoins can be transfered
+            $spaceLeft = $maxSaving - $currentSecured;
+            if ($spaceLeft <= 0) return redirect()->back()->with(['error' => 'You have reached the maximum savings limit.', 'autologin' => true]);
+            // Calculate how much bitcoins will be transfered from checking
+            $transferAmount = min($user->checking_bitcoins, $spaceLeft);
+            // Transfer
+            $user->checking_bitcoins -= $transferAmount;
+            $user->secured_bitcoins += $transferAmount;
+            $user->save();
+            LogController::doLog(LogController::TRANSFER, $user, ['bitcoins' => $transferAmount]);
+        }
+        return redirect()->back()->with('autologin', true);
+    }
+    function saveLog (Request $request) {
+        $log = $request->input('log');
+        $user_id = $request->input('user_id');
+        $user = User::findOrFail($user_id);
+        return self::setLog($log, $user);
+    }
+    public static function addLog ($log, $user) {
+        $addedLog = $log . "\n" . $user['log'];
+        return self::setLog($addedLog, $user);
+    }
+    public static function setLog ($log, $user) {
+        $level = $user->notepad_level;
+        $maxLength = MaxLogSizes::getMaxLogSize($level, false);
+        // Truncate if exceedes limits
+        if (mb_strlen($log, '8bit') > $maxLength) {
+            while (mb_strlen($log, '8bit') > $maxLength) {
+                $log = mb_substr($log, 0, -1);
+            }
+        }
+        $user->log = $log;
+        $success = $user->save();
+        if ($success) return redirect()->back()->with('message', 'Log saved successfully.');
+        return redirect()->back()->with('error', 'Log could not be saved.');
+    }
+    function download (Request $request) {
+        $app_name = $request->input('app_name');
+        $user_id = $request->input('user_id');
+        $user = User::findOrFail($user_id);
+        $auth_user = Auth::user();
+        // For security reasons, check if auth user is allowed to download this user's apps
+        if (!$auth_user->Bypass()
+        ->where('victim_id', $user_id)
+        ->where('status', Bypass::SUCCESSFUL)
+        ->exists()) {
+            return redirect()->back()->with('error', 'You are not able to download any app from this user.');
+        }
+        $app_level = $user[$app_name.'_level'];
+        $auth_user->Transfer()->create([
+            'victim_id' => $user_id,
+            'type' => Transfer::DOWNLOAD,
+            'app_name' => $app_name,
+            'app_level' => $app_level,
+            'expires_at' => calculateDownloadExpiration($user, $app_name),
+        ]);
+        LogController::doLog(LogController::DOWNLOADING, $user, ['app_level' => $app_level, 'app_name' => $app_name, 'ip' => $auth_user->ip], false);
+        return redirect()->back()->with('message', 'Download has started.');
+    }
+    function upload ($app_name, Request $request) {
+        $user_id = $request->input('user_id');
+        $user = User::findOrFail($user_id);
+        $auth_user = Auth::user();
+        $app_level = $auth_user[$app_name.'_level'];
+        // For security reasons, check if auth user is allowed to download this user's apps
+        if (!$auth_user->Bypass()
+        ->where('victim_id', $user_id)
+        ->where('status', Bypass::SUCCESSFUL)
+        ->exists()) {
+            return redirect()->back()->with('error', 'You are not able to download any app from this user.');
+        }
+        // Check if user has already uploaded this app - level
+        $hasAlreadyUploaded = $auth_user->Transfer()
+        ->where('victim_id', $user_id)
+        ->where('type', Transfer::UPLOAD)
+        ->where('app_name', $app_name)
+        ->where('app_level', $app_level)->exists();
+        if ($hasAlreadyUploaded) {
+            $isUploading = $auth_user->Transfer()
+            ->where('victim_id', $user_id)
+            ->where('type', Transfer::UPLOAD)
+            ->where('app_name', $app_name)
+            ->where('app_level', $app_level)
+            ->where('status', Transfer::WORKING)->exists();
+            if ($isUploading) {
+                return redirect()->back()->with('error', 'Virus is still uploading, please wait until it finishes.');
+            } else {
+                return redirect()->back()->with('error', 'You have already uploaded this virus with level ' . $app_level . '.');
+            }
+        }
+        $auth_user->Transfer()->create([
+            'victim_id' => $user_id,
+            'type' => Transfer::UPLOAD,
+            'app_name' => $app_name,
+            'app_level' => $app_level,
+            'expires_at' => calculateUploadExpiration($auth_user, $app_name),
+        ]);
+        LogController::doLog(LogController::UPLOADING, $auth_user, ['app_level' => $app_level, 'app_name' => $app_name, 'ip' => $user->ip], false);
+        return redirect()->back()->with('message', 'Upload has started.');
+    }
+    function processRemove(Request $request) {
+        $process_id = $request->input('process_id');
+        $type = $request->input('type');
+        $model = null;
+        $virtual = false;
+        switch ($type) {
+            case 'bypass':
+                $model = Bypass::class;
+                break;
+            case 'crack':
+                $model = Crack::class;
+                $virtual = true;
+                break;
+            case 'transfer':
+                $model = Transfer::class;
+                $virtual = true;
+                break;
+        }
+        $process = $model::findOrFail($process_id);
+        if ($process && $process->User['id'] == Auth::id()) {
+            if (!$virtual) {
+                $success = $process->delete();
+            } else {
+                $process['visible'] = false;
+                $success = $process->save();
+            }
+            LogController::forgetLog($process->Victim);
+            if ($success) {
+                return back()->with('message', 'Process deleted.');
+            } else {
+                return back()->with('error', 'Could not be able to delete this process.');
+            }
+        }
+        return back()->with('error', 'Process is not found or you are not hacker of this process.');
+    }
+    function hackRedirect () {
+        return redirect()->route('home');
+    }
+    function hack(Request $request) {
+        $bypass_id = $request->input('process_id');
+        $bypass = Bypass::findOrFail($bypass_id);
+        if ($bypass && $bypass->User['id'] == Auth::id()) {
+            // Check bypass status
+            if ($bypass['status'] === Bypass::SUCCESSFUL) {
+                LogController::doLog(LogController::LOGGED_IN, $bypass->Victim, ['ip' => $bypass->User->ip]);
+                LogController::doLog(LogController::ACCESSED, $bypass->User, ['ip' => $bypass->Victim->ip]);
+                return view('home', ['victim_id' => $bypass->Victim['id'], 'access_boot' => 'Accessing ' . $bypass->Victim['ip']]);
+            }
+        }
+        return back()->with('error', 'Bypass is not found or you are not hacker of this bypass.');
     }
 }

@@ -1,3 +1,8 @@
+<?php
+    $user = session('hackedUser', Auth::user());
+    $isHacked = session('hackedUser', false);
+    $hasCredentials = !$isHacked || ($isHacked && Auth::user()->Crack()->where('victim_id', $user['id'])->where('status', \App\Models\Crack::SUCCESSFUL)->exists())
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head')
@@ -22,21 +27,45 @@
             </article>
         </section>
         <section class="bank-welcome">
-            Welcome to PNT Bank
+            Welcome{{ session('autologin') ? ', ' . $user['username'] : ' to PNT Bank' }}
         </section>
         <section class="bank-login-frame">
-            <h3>Login</h3>
-            <form action="/bank-account" method="post">
-                @csrf
-                <input placeholder="username" type="text" value="{{ Auth::user()['username'] }}" name="bank-username" id="bank-username">
-                <input placeholder="password" type="password" value="*********" name="bank-password" id="bank-password">
-                <button type="submit" style="font-weight: normal; font-style: normal;" class="login-button">Login</button>
-            </form>
+            @if (!session('autologin'))
+                <h3>Login</h3>
+            @endif
+            @if (!session('autologin'))
+                <div class="form">
+                    <input placeholder="username" type="text" value="{{ $user['username'] }}" name="bank-username" id="bank-username">
+                    <div style="display: flex; gap:.5rem;">
+                        <input placeholder="password" type="password" value="{{ $hasCredentials ? '*********' : '' }}" name="bank-password" id="bank-password">
+                        @if (!$hasCredentials && $isHacked && Auth::user()['password_cracker_level'] > 1)
+                            <button type="button" onclick="openCrackWindow({{ $user['password_cracker_level'] }}, '{{ \App\Enums\Apps::getAppName('password_cracker') }}', {{ $user['id'] }})" style="font-weight: normal; font-style: normal;" class="login-button">Crack</button>
+                        @endif
+                    </div>
+                </div>
+                @if ($isHacked && $hasCredentials || !$isHacked)
+                    <form id="bank-login-form" action="/bank-account" method="post">
+                        <button type="submit" style="font-weight: normal; font-style: normal;" class="login-button">Login</button>
+                        @csrf
+                    </form>
+                @else
+                    <div id="bank-login-form" action="/bank-account" method="post">
+                        <button type="button" style="width: 100%; font-weight: normal; font-style: normal;" class="login-button">Login</button>
+                    </div>
+                @endif
+            @endif
         </section>
-        <section class="bank-quote">
-            <q>Trust your life.</q>
-        </section>
+        @if (!session('autologin'))
+            <section class="bank-quote">
+                <q>Trust your life.</q>
+            </section>
+        @endif
+        @if (session('autologin'))
+            <script>
+                document.querySelector('#bank-login-form').submit();
+            </script>
+        @endif
     </body>
     @include('includes.back-btn')
-    @include('includes.scripts')
+    @include('includes.scripts', ['scripts' => ['crack']])
 </html>

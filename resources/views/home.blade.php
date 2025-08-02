@@ -1,11 +1,40 @@
+<?php
+
+$user = Auth::user();
+$isHacked = false;
+$user->refresh();
+if (isset($victim_id) || session('isHacked')) {
+    if (isset($victim_id)) {
+        $user = \App\Models\User::findOrFail($victim_id);
+    } else {
+        $user = \App\Models\User::findOrFail(session('hackedUser')['id']);
+    }
+    $user->refresh();
+    $isHacked = true;
+    session('hackedUser', $user);
+    session()->put('hackedUser', $user);
+}
+session()->put('isHacked', $isHacked);
+
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head')
     <body>
         @include('includes.modal')
-        <section id="player">
+        @if (isset($access_boot))
+            @include('includes.access_boot', ['text' => $access_boot])
+            @php
+                // To avoid infinite boots...
+                unset($access_boot);
+            @endphp
+        @endif
+        @if ($isHacked)
+            @include('includes.disconnect-btn')
+        @endif
+        <section style="{{ $isHacked ? 'padding-top: 2rem;' : '' }}" id="player">
             <div id="player-level">
-                <div class="level-background" id="level-bg-{{ getLevelBackgroundName(Auth::user()['level']) }}">
+                <div class="level-background" id="level-bg-{{ getLevelBackgroundName($user['level']) }}">
                     <div class="aux-1"></div>
                     <div class="aux-2"></div>
                     <div class="aux-3"></div>
@@ -14,7 +43,7 @@
                     <div class="aux-6"></div>
                     <div class="aux-5 revert"></div>
                     <div class="aux-6 revert"></div>
-                    @if (getLevelBackgroundName(Auth::user()['level']) == 'anonymous')
+                    @if (getLevelBackgroundName($user['level']) == 'anonymous')
                         <div class="anonymous-mask">
                             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 500 500">
                                 <g transform="translate(0 -552.36)">
@@ -46,23 +75,23 @@
                         </div>
                     @endif
                 </div>
-                <span id="player-level-value">{{ Auth::user()['level'] }}</span>
+                <span id="player-level-value">{{ $user['level'] }}</span>
             </div>
-            <div id="player-name"><b><span id="player-name-value">{{ Auth::user()['username'] }}</span><span>'s</span></b></div>{{-- TODO: Do dynamic --}}
-            <div id="player-platform">{{ Auth::user()->Platform['name'] }}</div>
+            <div id="player-name"><b><span id="player-name-value">{{ $user['username'] }}</span><span>'s</span></b></div>{{-- TODO: Do dynamic --}}
+            <div id="player-platform">{{ $user->Platform['name'] }}</div>
         </section>
         <section id="apps">
             {{-- Processes --}}
-            <article onclick="redirect('/processes')" id="processes" class="app-frame">
+            <article onclick="{{ !$isHacked ? "redirect('/processes')" : '' }}" id="processes" class="app-frame">
                 <button class="app-button">
                     <div id="part-1"></div>
                     <div id="part-2"></div>
                     <div id="part-3"></div>
                 </button>
-                <label class="app-label">Processes</label>
+                <span class="app-label">Processes</span>
             </article>
             {{-- Scan --}}
-            <article onclick="redirect('/scan')" id="scan" class="app-frame">
+            <article onclick="{{ !$isHacked ? "redirect('/scan')" : '' }}" id="scan" class="app-frame">
                 <button class="app-button">
                     <div id="part-1"></div>
                     <div id="part-2"></div>
@@ -85,7 +114,7 @@
 
                     <div id="part-14"></div>
                 </button>
-                <label class="app-label">Scan</label>
+                <span class="app-label">Scan</span>
             </article>
             {{-- Bank Account --}}
             <article onclick="redirect('/bank-account')" id="bank-account" class="app-frame">
@@ -101,10 +130,10 @@
                     </div>
                     <span>PNT</span>
                 </button>
-                <label class="app-label">Bank account</label>
+                <span class="app-label">Bank account</span>
             </article>
             {{-- Store --}}
-            <article onclick="redirect('/store')" id="store" class="app-frame">
+            <article onclick="{{ !$isHacked ? "redirect('/store')" : '' }}" id="store" class="app-frame">
                 <button class="app-button">
                     <div class="bitcoin hover">
                         <div class="circle">
@@ -126,15 +155,15 @@
                             </div>
                         </div>
                 </button>
-                <label class="app-label">Store</label>
+                <span class="app-label">Store</span>
             </article>
             {{-- Messages --}}
-            <article onclick="redirect('/messages')" window.location.href='/messages'" id="messages" class="app-frame">
+            <article onclick="{{ !$isHacked ? "redirect('/messages')" : '' }}" window.location.href='/messages'" id="messages" class="app-frame">
                 <button class="app-button">
                     <div class="envelope"></div>
                     <div class="open"></div>
                 </button>
-                <label class="app-label">Messages</label>
+                <span class="app-label">Messages</span>
             </article>
             {{-- Log --}}
             <article onclick="redirect('/log')" window.location.href='/log'" id="log" class="app-frame">
@@ -152,7 +181,7 @@
                         </div>
                     </div>
                 </button>
-                <label class="app-label">Log</label>
+                <span class="app-label">Log</span>
             </article>
             {{-- Apps --}}
             <article onclick="openWindow('apps')" id="apps" class="app-frame">
@@ -164,7 +193,7 @@
                         <div id="app-4"></div>
                     </div>
                 </button>
-                <label class="app-label">Apps</label>
+                <span class="app-label">Apps</span>
             </article>
             {{-- My Device --}}
             <article onclick="redirect('/device')" id="device" class="app-frame">
@@ -184,9 +213,9 @@
                         </div>
                     </div>
                 </button>
-                <label class="app-label">My Device</label>
+                <span class="app-label">My Device</span>
             </article>
         </section>
     </body>
-    @include('includes.scripts')
+    @include('includes.scripts', ['scripts' => ['home']])
 </html>

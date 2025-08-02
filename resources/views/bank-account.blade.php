@@ -1,3 +1,7 @@
+<?php
+    $user = session('hackedUser', Auth::user());
+    $isHacked = session('isHacked', false);
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head')
@@ -22,7 +26,7 @@
             </article>
         </section>
         <section class="bank-welcome">
-            Welcome, <span id="welcome-user">{{ Auth::user()['username'] }}</span>
+            <span id="welcome-user">Welcome, {{ $user['username'] }}</span>
         </section>
         <section class="bank-account">
             <ul>
@@ -31,7 +35,7 @@
                         <span class="account-detail-title">Checking</span>
                     </div>
                     <div>
-                        <span>{{ Auth::user()['checking_bitcoins'] }}</span>
+                        <span>{{ formatNumber($user['checking_bitcoins']) }}</span>
                         <i class="fa-solid fa-bitcoin-sign"></i>
                     </div>
                 </li>
@@ -41,13 +45,13 @@
                         <div class="account-detail-description">
                             <span>(Max limit: </span>
                             <div style="display:flex">
-                                <span>257.800</span>
+                                <span>{{ formatNumber(\App\Enums\MaxSavings::getMaxSaving($user->Platform->id)) }}</span>
                                 <span>)</span>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <span>{{ Auth::user()['secured_bitcoins'] }}</span>
+                        <span>{{ formatNumber($user['secured_bitcoins']) }}</span>
                         <i class="fa-solid fa-bitcoin-sign"></i>
                     </div>
                 </li>
@@ -56,15 +60,20 @@
                         <span class="account-detail-title">Total</span>
                     </div>
                     <div>
-                        <span>{{ Auth::user()['secured_bitcoins'] + Auth::user()['secured_bitcoins'] }}</span>
+                        <span>{{ formatNumber($user['checking_bitcoins'] + $user['secured_bitcoins']) }}</span>
                         <i class="fa-solid fa-bitcoin-sign"></i>
                     </div>
                 </li>
             </ul>
         </section>
         <section class="bank-buttons">
-            <button type="submit" style="font-weight: normal" class="transfer-button">Transfer</button>
-            <button type="submit" style="font-weight: normal" class="deposit-button">Deposit</button>
+            <form style="width: 100%;" action="/transfer" method="post">
+                @csrf
+                <button type="submit" style="font-weight: normal" class="transfer-button">Transfer</button>
+            </form>
+            @if (!$isHacked)
+                <button type="submit" style="font-weight: normal" class="deposit-button">Deposit</button>
+            @endif
         </section>
         <section class="bank-commentary">
             <p>*Deposits: Purchased cryptocoins are put in Savings regardless of Max Limit</p>

@@ -1,0 +1,43 @@
+#disconnect {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background: #00000050;
+    position: fixed;
+    top: 0;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.disconnect-button {
+    cursor: pointer;
+    transition: .1s ease-in;
+    animation: textColorFade 3s ease-in-out forwards infinite;
+}
+
+.disconnect-button:hover {
+    color: #95ff94;
+    transition: .1s ease-in;
+    animation: none;
+}
+
+.disconnect-button:active {
+    color: rgb(87, 87, 87);
+    transition: .1s ease-in;
+    animation: none;
+}
+
+@keyframes textColorFade {
+    0% {
+        color: #ffffff;
+    }
+    50% {
+        color: #95ff94;
+    }
+    100% {
+        color: #ffffff;
+    }
+}
