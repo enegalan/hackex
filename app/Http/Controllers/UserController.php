@@ -186,7 +186,7 @@ class UserController extends Controller {
         }
         return back()->with('error', 'Process is not found or you are not hacker of this process.');
     }
-    function hackRedirect () {
+    function hackRedirect() {
         return redirect()->route('home');
     }
     function hack(Request $request) {
@@ -194,6 +194,9 @@ class UserController extends Controller {
         $bypass = Bypass::findOrFail($bypass_id);
         if ($bypass && $bypass->User['id'] == Auth::id()) {
             // Check bypass status
+            if ($bypass['available'] === 0) {
+                return back()->with('message', 'This user is not longer available for you.');
+            }
             if ($bypass['status'] === Bypass::SUCCESSFUL) {
                 LogController::doLog(LogController::LOGGED_IN, $bypass->Victim, ['ip' => $bypass->User->ip]);
                 LogController::doLog(LogController::ACCESSED, $bypass->User, ['ip' => $bypass->Victim->ip]);
@@ -201,5 +204,24 @@ class UserController extends Controller {
             }
         }
         return back()->with('error', 'Bypass is not found or you are not hacker of this bypass.');
+    }
+    function changeIp(Request $request) {
+        $user = Auth::user();
+        // Validate enough OC
+        // TODO: Add 200 to config
+        if ($user->oc < 200) {
+            return back()->with('error', 'Not enough OC');
+        }
+        // Discount 200 OC
+        $user->oc -= 200;
+        // Change IP
+        $user->ip = UserController::getAvailableIp();
+        $user->save();
+        // Clean transfers and do bypasses unavailable where user is the victim
+        Transfer::where('victim_id', $user->id)->where('type', Transfer::UPLOAD)->delete();
+        Bypass::where('victim_id', $user->id)->update([
+            'available' => 0,
+        ]);
+        return back()->with('message', 'IP changed successfully');
     }
 }

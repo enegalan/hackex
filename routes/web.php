@@ -42,6 +42,7 @@ Route::middleware([IsFullyVerified::class])->group(function () {
     Route::post('/save-log', [UserController::class, 'saveLog']);
     
     Route::get('/device', [ViewController::class, 'device']);
+    Route::post('/ip-change', [UserController::class, 'changeIp']);
 });
 
 require __DIR__ . '/auth.php';

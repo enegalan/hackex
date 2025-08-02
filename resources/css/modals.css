@@ -89,13 +89,14 @@
     padding-bottom: 0.3rem;
 }
 
-/* Bypass, Download, Crack & Antivirus Confirm modal */
+/* Bypass, Download, Crack & Antivirus, ChangeIP Confirm modal */
 #bypass-modal,
 #download-modal,
 #crack-modal,
 #antivirus-confirm-modal,
 #spam-confirm-modal,
-#spyware-confirm-modal {
+#spyware-confirm-modal,
+#change-ip-confirm-modal {
     align-items: center;
     align-content: center;
 }
@@ -105,14 +106,16 @@
 #crack-modal #modal-top,
 #antivirus-confirm-modal #modal-top,
 #spam-confirm-modal #modal-top,
-#spyware-confirm-modal #modal-top {justify-content: center;background: none;}
+#spyware-confirm-modal #modal-top,
+#change-ip-confirm-modal #modal-top {justify-content: center;background: none;}
 
 #bypass-modal .modal-frame,
 #download-modal .modal-frame,
 #crack-modal .modal-frame,
 #antivirus-confirm-modal .modal-frame,
 #spam-confirm-modal .modal-frame,
-#spyware-confirm-modal .modal-frame {
+#spyware-confirm-modal .modal-frame,
+#change-ip-confirm-modal .modal-frame {
     background-color: #f4f4f4;
     color: black;
     padding-top: 1.5rem;
@@ -125,7 +128,8 @@
 #crack-modal #modal-top .title,
 #antivirus-confirm-modal #modal-top .title,
 #spam-confirm-modal #modal-top .title,
-#spyware-confirm-modal #modal-top .title {
+#spyware-confirm-modal #modal-top .title,
+#change-ip-confirm-modal #modal-top .title {
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
@@ -136,7 +140,8 @@
 #crack-modal .modal-content,
 #antivirus-confirm-modal .modal-content,
 #spam-confirm-modal .modal-content,
-#spyware-confirm-modal .modal-content {
+#spyware-confirm-modal .modal-content,
+#change-ip-confirm-modal .modal-content {
     text-align: center;
 }
 
@@ -145,7 +150,8 @@
 #crack-modal .buttons,
 #antivirus-confirm-modal .buttons,
 #spam-confirm-modal .buttons,
-#spyware-confirm-modal .buttons {
+#spyware-confirm-modal .buttons,
+#change-ip-confirm-modal .buttons {
     display: flex;
     justify-content: space-around;
 }
@@ -155,7 +161,8 @@
 #crack-modal .buttons button,
 #antivirus-confirm-modal .buttons button,
 #spam-confirm-modal .buttons button,
-#spyware-confirm-modal .buttons button {
+#spyware-confirm-modal .buttons button,
+#change-ip-confirm-modal .buttons button {
     color: #007ae3;
     font-weight: 600;
     border-top: 1px solid #c2c2c2;
@@ -168,7 +175,8 @@
 #crack-modal .buttons button:hover,
 #antivirus-confirm-modal .buttons button:hover,
 #spam-confirm-modal .buttons button:hover,
-#spyware-confirm-modal .buttons button:hover {
+#spyware-confirm-modal .buttons button:hover,
+#change-ip-confirm-modal .buttons button:hover {
     background: #c2c2c2;
 }
 
@@ -177,7 +185,8 @@
 #crack-modal .buttons button:first-child,
 #antivirus-confirm-modal .buttons button:first-child,
 #spam-confirm-modal .buttons button:first-child,
-#spyware-confirm-modal .buttons button:first-child {
+#spyware-confirm-modal .buttons button:first-child,
+#change-ip-confirm-modal .buttons button:first-child {
     border-right: 1px solid #c2c2c2;
     border-radius: 0 0 0 16px;
 }
@@ -187,7 +196,8 @@
 #crack-modal .buttons button:last-child,
 #antivirus-confirm-modal .buttons button:last-child,
 #spam-confirm-modal .buttons button:last-child,
-#spyware-confirm-modal .buttons button:last-child {
+#spyware-confirm-modal .buttons button:last-child,
+#change-ip-confirm-modal .buttons button:last-child {
     border-radius: 0 0 16px 0;
 }
 
@@ -196,7 +206,8 @@
 #crack-modal .content,
 #antivirus-confirm-modal .content,
 #spam-confirm-modal .content,
-#spyware-confirm-modal .content {
+#spyware-confirm-modal .content,
+#change-ip-confirm-modal .content {
     font-size: 14px;
     margin-bottom: 1.5rem;
     padding-left: 1rem;
@@ -491,4 +502,42 @@
     gap: 1rem;
     margin-top: 1rem;
     font-size: 15px;
+}
+
+/* Change IP modal */
+#change-ip-modal .modal-frame {
+    color: #bebebe;
+    background: #1e1e1e;
+    width: 50%;
+    height: 36%;
+    margin-top: 13rem;
+    padding: 1.5rem 2rem;
+    box-shadow: #00000dad 5px 5px 20px;
+}
+#change-ip-modal #modal-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+}
+#change-ip-modal .app_label {
+    font-weight: bolder;
+    font-size: 20px;
+    font-stretch: expanded;
+}
+#change-ip-modal #modal-top div:nth-child(2) {
+    font-size: 14px;
+}
+
+#change-ip-frame {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 15px;
+}
+#change-ip-frame form {
+    display: flex;
+    justify-content: center;
+    margin-top: .5rem;
 }

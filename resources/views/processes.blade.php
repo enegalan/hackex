@@ -58,7 +58,7 @@
                                 // Ensure bypass is updated
                                 \App\Http\Controllers\BypassController::checkAndUpdateBypass($bypass);
                             @endphp
-                            <li onclick="openHackWindow('bypass', {{ $bypass['id'] }}, {{ $bypass['status'] === \App\Models\Bypass::SUCCESSFUL ? false : true }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($bypass['created_at'])->toIso8601String() }}"
+                            <li onclick="openHackWindow('bypass', {{ $bypass['id'] }}, {{ $bypass['status'] === \App\Models\Bypass::SUCCESSFUL ? 'false' : 'true' }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($bypass['created_at'])->toIso8601String() }}"
                                 data-expires-at="{{ \Carbon\Carbon::parse($bypass['expires_at'])->toIso8601String() }}">
                                 <div class="process-topwrap">
                                     <div class="process-info">

@@ -9,7 +9,7 @@
                     <input type="hidden" name="process_id" id="hack-process-id">
                     <button type="submit" class="hack-button">HACK</button>
                 </form>
-                <form action="/process-remove" method="post" class="modal-content">
+                <form id="remove-form" action="/process-remove" method="post" class="modal-content">
                     @csrf
                     <input type="hidden" name="type" id="hack-process-type">
                     <input type="hidden" name="process_id" id="remove-process-id">

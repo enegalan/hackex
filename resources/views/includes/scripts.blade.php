@@ -17,6 +17,8 @@
         'spyware-log': '#spyware-log-modal',
         'spyware-confirm': '#spyware-confirm-modal',
         'app_info': '#app-info-modal',
+        'change_ip': '#change-ip-modal',
+        'change_ip_confirm': '#change-ip-confirm-modal',
     };
     function redirect(url) {
         window.location.href = url;
@@ -185,7 +187,7 @@
             setInterval(updateBypassStatuses, 1000);
 
             // Hack
-            function openHackWindow(type, id, onlyRemove = false) {
+            function openHackWindow(type, id, onlyRemove = false, onlyHack = false) {
                 const modal = openWindow('hack');
                 const idInputs = modal.querySelectorAll('input[name="process_id"]');
                 idInputs.forEach(input => {
@@ -197,6 +199,10 @@
                 });
                 if (onlyRemove) {
                     modal.querySelector('#hack-form').style.display = "none";
+                    modal.querySelector('.modal-frame').style.height = "auto";
+                }
+                if (onlyHack) {
+                    modal.querySelector('#remove-form').style.display = "none";
                     modal.querySelector('.modal-frame').style.height = "auto";
                 }
             }
@@ -418,6 +424,20 @@
                 modal.querySelector('.password_cracker_level').innerText = password_cracker_level;
                 modal.querySelector('#input-user-id').value = user_id;
                 modal.querySelector('.password_cracker_label').innerText = password_cracker_label;
+            }
+        </script>
+    @endif
+    @if (in_array("my-device", $scripts))
+        <script id="my-device">
+            function openChangeIpWindow(user_id) {
+                const modal = openWindow('change_ip');
+                modal.querySelector('#input-user-id').value = user_id;
+            }
+            function openChangeIpConfirmWindow() {
+                const changeIpWindow = openWindow('change_ip');
+                const user_id = changeIpWindow.querySelector('#input-user-id').value;
+                const modal = openWindow('change_ip_confirm');
+                modal.querySelector('#input-user-id').value = user_id;
             }
         </script>
     @endif

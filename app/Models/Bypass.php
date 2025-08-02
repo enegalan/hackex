@@ -9,7 +9,8 @@ class Bypass extends Model {
         'user_id',
         'victim_id',
         'expires_at',
-        'status'
+        'status',
+        'available',
     ];
     public const WORKING = 0;
     public const SUCCESSFUL = 1;

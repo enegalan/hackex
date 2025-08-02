@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 @if (!$isHacked)
-                    <button class="change-ip-button">Change IP</button>
+                    <button onclick="openChangeIpWindow({{ Auth::id() }})" class="change-ip-button">Change IP</button>
                 @endif
             </section>
             <section class="other-buttons">
@@ -63,5 +63,5 @@
         </section>
         @include('includes.back-btn')
     </body>
-    @include('includes.scripts', ['scripts' => []])
+    @include('includes.scripts', ['scripts' => ['my-device']])
 </html>
