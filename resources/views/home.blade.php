@@ -32,9 +32,9 @@ session()->put('isHacked', $isHacked);
         @if ($isHacked)
             @include('includes.disconnect-btn')
         @endif
-        <section style="{{ $isHacked ? 'padding-top: 2rem;' : '' }}" id="player">
-            <div id="player-level">
-                <div class="level-background" id="level-bg-{{ getLevelBackgroundName($user['level']) }}">
+        <section style="{{ $isHacked ? 'padding-top: 2rem;' : '' }}" onclick="openPlayerInfoWindow('{{ $user->username }}', {{ \App\Enums\ExpActions::getUserLevel($user) }}, {{ \App\Enums\ExpActions::getNextLevelExpGoal($user) - \App\Enums\ExpActions::getExpToNextLevel($user) }}, {{ \App\Enums\ExpActions::getNextLevelExpGoal($user) }})" id="player">
+            <div class="player-level">
+                <div class="level-background" id="level-bg-{{ getLevelBackgroundName(\App\Enums\ExpActions::getUserLevel($user)) }}">
                     <div class="aux-1"></div>
                     <div class="aux-2"></div>
                     <div class="aux-3"></div>
@@ -43,7 +43,7 @@ session()->put('isHacked', $isHacked);
                     <div class="aux-6"></div>
                     <div class="aux-5 revert"></div>
                     <div class="aux-6 revert"></div>
-                    @if (getLevelBackgroundName($user['level']) == 'anonymous')
+                    @if (getLevelBackgroundName(\App\Enums\ExpActions::getUserLevel($user)) == 'anonymous')
                         <div class="anonymous-mask">
                             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 500 500">
                                 <g transform="translate(0 -552.36)">
@@ -75,9 +75,9 @@ session()->put('isHacked', $isHacked);
                         </div>
                     @endif
                 </div>
-                <span id="player-level-value">{{ $user['level'] }}</span>
+                <span class="player-level-value">{{ \App\Enums\ExpActions::getUserLevel($user) }}</span>
             </div>
-            <div id="player-name"><b><span id="player-name-value">{{ $user['username'] }}</span><span>'s</span></b></div>{{-- TODO: Do dynamic --}}
+            <div id="player-name"><b><span id="player-name-value">{{ $user['username'] }}</span><span>'s</span></b></div>
             <div id="player-platform">{{ $user->Platform['name'] }}</div>
         </section>
         <section id="apps">
@@ -130,7 +130,7 @@ session()->put('isHacked', $isHacked);
                     </div>
                     <span>PNT</span>
                 </button>
-                <span class="app-label">Bank account</span>
+                <span class="app-label">Bank Account</span>
             </article>
             {{-- Store --}}
             <article onclick="{{ !$isHacked ? "redirect('/store')" : '' }}" id="store" class="app-frame">

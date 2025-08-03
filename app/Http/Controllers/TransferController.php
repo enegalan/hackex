@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ExpActions;
 use App\Models\Transfer;
 use Auth;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ class TransferController extends Controller {
         if ($transfer->status === Transfer::WORKING && now()->greaterThanOrEqualTo($transfer->expires_at)) {
             $transfer->status = Transfer::SUCCESSFUL;
             $transfer->save();
+            ExpActions::addExp($transfer->type . '_successful', null, true, 'transfer_' . $transfer->id);
             $app_name = $transfer->app_name;
             $app_name = $app_name . '_level';
             $level = $transfer->app_level;

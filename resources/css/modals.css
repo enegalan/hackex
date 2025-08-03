@@ -541,3 +541,44 @@
     justify-content: center;
     margin-top: .5rem;
 }
+
+/* Player Info modal */
+#player-info-modal .modal-frame {
+    width: 14%;
+    min-width: 14rem;
+    max-width: 14rem;
+    height: 35%;
+    margin-top: 10rem;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: #1e1e1e;
+    text-shadow: 2px 2px 5px black;
+}
+
+#player-info-modal #modal-top {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: .5rem;
+    height: 100%;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    z-index: 1;
+    position: absolute;
+    background: none;
+}
+
+#player-info-modal .username {
+    font-weight: bolder;
+    font-size: 20px;
+    font-stretch: expanded;
+}
+
+#player-info-modal .player-level {
+    position: absolute;
+    left: 43.5%;
+    top: 47.5%;
+    z-index: 0;
+    transform: scale(4.5);
+}

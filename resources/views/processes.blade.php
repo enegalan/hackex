@@ -112,7 +112,7 @@
                     <ul>
                         @foreach (Auth::user()->Crack->reverse() as $crack)
                             @php
-                                // Ensure transfer is updated
+                                // Ensure crack is updated
                                 \App\Http\Controllers\CrackController::checkAndUpdateCrack($crack);
                             @endphp
                             <li onclick="openHackWindow('crack', '{{ $crack['id'] }}', true)" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($crack['created_at'])->toIso8601String() }}"

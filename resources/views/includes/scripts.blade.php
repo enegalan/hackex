@@ -16,19 +16,23 @@
         'spyware': '#spyware-modal',
         'spyware-log': '#spyware-log-modal',
         'spyware-confirm': '#spyware-confirm-modal',
-        'app_info': '#app-info-modal',
-        'change_ip': '#change-ip-modal',
-        'change_ip_confirm': '#change-ip-confirm-modal',
+        'app-info': '#app-info-modal',
+        'change-ip': '#change-ip-modal',
+        'change-ip-confirm': '#change-ip-confirm-modal',
+        'player-info' : '#player-info-modal',
     };
     function redirect(url) {
         window.location.href = url;
     }
-    function closeWindow(windowName) {
+    function closeWindow(windowName, refresh = false) {
         const foundModalName = windows[windowName];
         if (!foundModalName) throw new Error("Modal not found for " + windowName);
         const modal = document.querySelector(foundModalName);
         if (!modal) throw new Error("Modal not found in DOM for " + windowName);
-        modal.style.display = "none";
+        if (refresh) {
+            modal.remove();
+            return;
+        }
         const close = modal.querySelector('.close');
         if (close) close.removeEventListener('click', closeModal);
         window.removeEventListener('click', clickOutsideHandler);
@@ -406,14 +410,24 @@
                 modal.querySelector('#input-transfer-id').value = transferId;
             }
             function openAppInfoModal(app_label, app_level, app_description, app_use) {
-                const modal = openWindow('app_info');
+                const modal = openWindow('app-info');
                 modal.querySelector('.app_label').innerText = app_label;
                 modal.querySelector('.app_level').innerText = app_level;
                 modal.querySelector('.app_description').innerText = app_description;
                 modal.querySelector('.app_use').innerText = app_use;
             }
             function closeAppInfoModal() {
-                closeWindow('app_info');
+                closeWindow('app-info');
+            }
+            function openPlayerInfoWindow(username, level, next_level_exp, next_level_exp_goal) {
+                const modal = openWindow('player-info');
+                modal.querySelector('.username').innerText = username;
+                modal.querySelector('.level').innerText = level;
+                modal.querySelector('.next_level_exp').innerText = next_level_exp;
+                modal.querySelector('.next_level_exp_goal').innerText = next_level_exp_goal;
+            }
+            function closePlayerInfoModal() {
+                closeWindow('player-info', true);
             }
         </script>
     @endif
@@ -430,13 +444,13 @@
     @if (in_array("my-device", $scripts))
         <script id="my-device">
             function openChangeIpWindow(user_id) {
-                const modal = openWindow('change_ip');
+                const modal = openWindow('change-ip');
                 modal.querySelector('#input-user-id').value = user_id;
             }
             function openChangeIpConfirmWindow() {
-                const changeIpWindow = openWindow('change_ip');
+                const changeIpWindow = openWindow('change-ip');
                 const user_id = changeIpWindow.querySelector('#input-user-id').value;
-                const modal = openWindow('change_ip_confirm');
+                const modal = openWindow('change-ip-confirm');
                 modal.querySelector('#input-user-id').value = user_id;
             }
         </script>

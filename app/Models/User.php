@@ -24,6 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'ip',
         'level',
+        'exp',
         'oc',
         'checking_bitcoins',
         'secured_bitcoins',

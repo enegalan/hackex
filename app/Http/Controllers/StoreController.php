@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\AppPrices;
 use App\Enums\Apps;
+use App\Enums\ExpActions;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -34,6 +35,7 @@ class StoreController extends Controller {
         $user->$levelColumn = $nextLevel;
         $user->save();
         LogController::doLog(LogController::PURCHASED, $user, ['app_level' => $nextLevel, 'app_name' => Apps::getAppName($app_name)]);
+        ExpActions::addExp('purchased_items', $app_name, false);
         return redirect()->back()->with('message', 'App successfully upgraded.');
     }
 }

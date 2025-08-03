@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ExpActions;
 use App\Models\Bypass;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,7 @@ class BypassController extends Controller {
             $bypass->save();
             if ($bypass->status === Bypass::SUCCESSFUL) {
                 LogController::doLog(LogController::BYPASS_SUCCESSFUL, $bypass->User, ['ip' => $bypass->Victim->ip]);
+                ExpActions::addExp('bypass_successful', null, true, 'bypass_' . $bypass->id);
             }
         }
         return $bypass;
