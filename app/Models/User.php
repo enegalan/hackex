@@ -56,7 +56,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function Crack() {
         return $this->hasMany(Crack::class);
     }
-
+    public function DailyLogin() {
+        return $this->hasMany(DailyLogin::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

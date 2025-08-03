@@ -6,11 +6,12 @@ use App\Http\Controllers\ScanController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViewController;
+use App\Http\Middleware\CheckDailyLogin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsFullyVerified;
 use Illuminate\Http\Request;
 
-Route::middleware([IsFullyVerified::class])->group(function () {
+Route::middleware([IsFullyVerified::class, CheckDailyLogin::class])->group(function () {
     Route::get('/', [ViewController::class, 'home'])->name('home');
     Route::get('/disconnect', [UserController::class, 'disconnect']);
     Route::post('/transfer', [UserController::class, 'transfer']);

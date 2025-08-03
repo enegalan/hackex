@@ -50,6 +50,9 @@ body {
     --transition: 0.3s ease-in-out;
     --white: #fff;
     --bodyBg: #383838;
+    --red: #e72020;
+    --primaryGreen: #a6e736;
+    --secondaryGreen: #94ff94;
 }
 
 input[type="search"], input[type="text"], input[type="password"] {

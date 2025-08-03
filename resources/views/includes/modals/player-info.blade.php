@@ -16,17 +16,42 @@ if (isset($victim_id) || session('isHacked')) {
 <div style="z-index: 3;" id="player-info-modal" class="modal">
     <section class="modal-frame">
         <section id="modal-top">
-            <div class="username">Username</div>
-            <div>
-                <span>Level:</span>
-                <span class="level">1</span>
-            </div>
-            <div style="font-size: 11px; margin-top: -8px;">
-                <span class="next_level_exp">0</span>
-                <span>of</span>
-                <span class="next_level_exp_goal">0</span>
-                <span>to next level</span>
-            </div>
+            <section class="player-level-info">
+                <div class="username">Username</div>
+                <div>
+                    <span>Level:</span>
+                    <span class="level">1</span>
+                </div>
+                <div style="font-size: 11px; margin-top: -4px;">
+                    <span class="next_level_exp">0</span>
+                    <span>of</span>
+                    <span class="next_level_exp_goal">0</span>
+                    <span>to next level</span>
+                </div>
+            </section>
+            @if (!$isHacked)
+                <section class="daily-login">
+                    <section class="day-streak">
+                        <div class="day-streak-frame">
+                            <span class="day_streak">{{ \App\Models\DailyLogin::getPlayerDailyStreak(Auth::user()) }}</span>
+                            <span>Day Streak</span>
+                        </div>
+                        <div class="daily-login-earned">
+                            <span>Earned</span>
+                            <span class="daily_login_earned">{{ \App\Models\DailyLogin::getPlayerDailyLoginEarned(Auth::user()) }}</span>
+                            <span>OC</span>
+                        </div>
+                    </section>
+                    <div class="days-login">
+                        @foreach (\App\Models\DailyLogin::getPlayerDailyLoginWeekDays(Auth::user()) as $weekday)
+                            <div class="day-login">
+                                <span class="{{ $weekday['logged'] ? 'day-logged' : '' }}"></span>
+                                <span>{{ $weekday['weekday'] }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                </section>
+            @endif
         </section>
         <div class="player-level">
             <div class="level-background" id="level-bg-{{ getLevelBackgroundName(\App\Enums\ExpActions::getUserLevel($user)) }}">
