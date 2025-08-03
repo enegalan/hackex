@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\BuyOCController;
 use Illuminate\Database\Eloquent\Model;
 
 class Bypass extends Model {
@@ -20,5 +21,9 @@ class Bypass extends Model {
     }
     public function Victim() {
         return $this->belongsTo(User::class, 'victim_id');
+    }
+    public static function generateBypassFinishValueOC(Bypass $bypass) {
+        $expires_at = $bypass->expires_at;
+        return BuyOCController::generateFinishValueOC($expires_at);
     }
 }

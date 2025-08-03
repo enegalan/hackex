@@ -9,6 +9,23 @@
                     <input type="hidden" name="process_id" id="hack-process-id">
                     <button type="submit" class="hack-button">HACK</button>
                 </form>
+                <form style="display: none" id="oc-form" action="/process-shorten" method="post" class="modal-content">
+                    @csrf
+                    <input type="hidden" name="type" id="oc-process-type">
+                    <input type="hidden" name="process_id" id="oc-process-id">
+                    <button type="submit" class="oc-button">
+                        <span class="oc_value">1</span>
+                        <span>OC</span>
+                    </button>
+                </form>
+                <form style="display: none" id="retry-form" action="/process-retry" method="post" class="modal-content">
+                    @csrf
+                    <input type="hidden" name="type" id="retry-process-type">
+                    <input type="hidden" name="process_id" id="retry-process-id">
+                    <button type="submit" class="retry-button">
+                        <span>RETRY</span>
+                    </button>
+                </form>
                 <form id="remove-form" action="/process-remove" method="post" class="modal-content">
                     @csrf
                     <input type="hidden" name="type" id="hack-process-type">

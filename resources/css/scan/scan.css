@@ -42,7 +42,9 @@ section#scan {
 .social-links-button,
 .hack-button,
 .remove-button,
-.upload-button {
+.upload-button,
+.oc-button,
+.retry-button {
     background-color: #cecece;
     padding-left: 0.8rem;
     border-radius: 6px;
@@ -74,7 +76,9 @@ section#scan {
 .remove-button:disabled,
 .upload-button:disabled,
 .spam-button:disabled,
-.spyware-button:disabled {
+.spyware-button:disabled,
+.oc-button:disabled,
+.retry-button:disabled {
     opacity: .25;
     pointer-events: none;
 }
@@ -95,7 +99,9 @@ section#scan {
 .social-links-button:hover,
 .hack-button:hover,
 .remove-button:hover,
-.upload-button:hover {
+.upload-button:hover,
+.oc-button:hover,
+.retry-button:hover {
     background-color: #a2a2a2;
     transition: .1s ease-in;
 }

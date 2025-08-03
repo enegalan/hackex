@@ -252,7 +252,10 @@
     justify-content: center;
 }
 
-.hack-button, .remove-button {
+.hack-button,
+.remove-button,
+.oc-button,
+.retry-button {
     width: 100%;
 }
 
@@ -615,4 +618,78 @@
     width: 13px;
     height: 16px;
     margin-bottom: -1px;
+}
+
+/* Deposit modal */
+#deposit-modal .modal-frame {
+    background: #19232e;
+    border-radius: 3px;
+    width: 25%;
+    min-width: 18rem;
+    height: 32.5%;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 1.2rem;
+    box-shadow: 1px 1px 20px #000;
+}
+
+#deposit-modal #modal-top {
+    background: none;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 10.5px;
+    padding: 0;
+    text-align: center;
+    color: #a6a8ab;
+}
+
+#deposit-frame ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.deposit {
+    background: #adafb1;
+    border-radius: 3px;
+    flex-direction: column;
+    align-items: center;
+    min-width: 45%;
+    max-width: 45%;
+    display: flex;
+    transition: .1s ease-in;
+    user-select: none;
+}
+.deposit:hover {
+    background: #dadbdb;
+    transition: .1s ease-in;
+}
+.deposit_reward {display: flex;flex-direction: column;align-items: center;background: linear-gradient(180deg, rgb(255 255 255 / 17%) 50%, rgb(0 0 0 / 15%) 100%);padding-left: .6rem;padding-right: .6rem;padding-top: .1rem;border-radius: 6px 6px 0 0;width: 100%;padding-bottom: .4rem;}
+
+.deposit_cost {
+    color: #3e3d3f;
+    font-weight: 700;
+    font-stretch: expanded;
+    font-size: 12.25px;
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+}
+
+.cryptocoins_label {
+    font-weight: 200;
+    font-size: 12px;
+    margin-top: -6px;
+    color: #494a4c;
+}
+
+.deposit_value {
+    font-size: 18px;
+    font-stretch: expanded;
+    font-weight: 650;
+    color: #0a3b6e;
+}
+
+#deposit-frame {
+    margin-top: 1rem;
 }

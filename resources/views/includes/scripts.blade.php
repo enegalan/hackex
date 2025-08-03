@@ -20,11 +20,12 @@
         'change-ip': '#change-ip-modal',
         'change-ip-confirm': '#change-ip-confirm-modal',
         'player-info' : '#player-info-modal',
+        'deposit' : '#deposit-modal',
     };
     function redirect(url) {
         window.location.href = url;
     }
-    function closeWindow(windowName, refresh = false) {
+    function closeWindow(windowName, refresh = true) {
         const foundModalName = windows[windowName];
         if (!foundModalName) throw new Error("Modal not found for " + windowName);
         const modal = document.querySelector(foundModalName);
@@ -72,6 +73,16 @@
     function isValidIP(ipAddress) {
         const ipv4Regex = /^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$/;
         return ipv4Regex.test(ipAddress);
+    }
+    function submitForm(formId, scope = null) {
+        formId = '#' + formId;
+        let form;
+        if (scope) {
+            form = scope.querySelector(formId);
+        } else {
+            form = document.querySelector(formId);
+        }
+        if (form) form.submit();
     }
     // Save scroll before exit
     window.addEventListener('beforeunload', () => {
@@ -191,9 +202,23 @@
             setInterval(updateBypassStatuses, 1000);
 
             // Hack
-            function openHackWindow(type, id, onlyRemove = false, onlyHack = false) {
+            function openHackWindow(type, id, onlyRemove = false, onlyHack = false, ocShorter = 0, retry = false) {
                 const modal = openWindow('hack');
                 const idInputs = modal.querySelectorAll('input[name="process_id"]');
+                if (onlyRemove) {
+                    modal.querySelector('#hack-form').style.display = "none";
+                    modal.querySelector('.modal-frame').style.height = "auto";
+                }
+                if (onlyHack) {
+                    modal.querySelector('.modal-frame').style.height = "auto";
+                }
+                if (ocShorter !== 0) {
+                    modal.querySelector('#oc-form').style.display = "block";
+                    modal.querySelector('.oc_value').innerText = ocShorter;
+                }
+                if (retry) {
+                    modal.querySelector('#retry-form').style.display = "block";
+                }
                 idInputs.forEach(input => {
                     input.value = id;
                 });
@@ -201,14 +226,6 @@
                 typeInputs.forEach(input => {
                     input.value = type;
                 });
-                if (onlyRemove) {
-                    modal.querySelector('#hack-form').style.display = "none";
-                    modal.querySelector('.modal-frame').style.height = "auto";
-                }
-                if (onlyHack) {
-                    modal.querySelector('#remove-form').style.display = "none";
-                    modal.querySelector('.modal-frame').style.height = "auto";
-                }
             }
         </script>
     @endif
@@ -364,8 +381,7 @@
             }
             function submitUpload(virusFormId) {
                 const modal = openWindow('viruses');
-                const virusForm = modal.querySelector('#' + virusFormId);
-                if (virusForm) virusForm.submit();
+                submitForm(virusFormId, modal);
             }
             function openAntivirusModal() {
                 const modal = openWindow('antivirus');
@@ -452,6 +468,24 @@
                 const user_id = changeIpWindow.querySelector('#input-user-id').value;
                 const modal = openWindow('change-ip-confirm');
                 modal.querySelector('#input-user-id').value = user_id;
+            }
+        </script>
+    @endif
+    @if (in_array("bank-account", $scripts))
+        <script id="bank-account">
+            function openDepositWindow(deposit_id) {
+                const modal = openWindow('deposit');
+            }
+            function closeDepositModal() {
+                closeWindow('deposit');
+            }
+            function submitDeposit(deposit_id, depositFormId) {
+                const modal = openWindow('deposit');
+                const idInputs = modal.querySelectorAll('input[name="deposit_id"]');
+                idInputs.forEach(input => {
+                    input.value = deposit_id;
+                });
+                submitForm(depositFormId, modal);
             }
         </script>
     @endif

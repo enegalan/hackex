@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\BuyOCController;
 use Illuminate\Database\Eloquent\Model;
 
 class Transfer extends Model {
@@ -25,5 +26,9 @@ class Transfer extends Model {
     }
     public function Victim() {
         return $this->belongsTo(User::class, 'victim_id');
+    }
+    public static function generateTransferFinishValueOC(Transfer $transfer) {
+        $expires_at = $transfer->expires_at;
+        return BuyOCController::generateFinishValueOC($expires_at);
     }
 }

@@ -26,6 +26,8 @@ Route::middleware([IsFullyVerified::class, CheckDailyLogin::class])->group(funct
     Route::post('/hack', [UserController::class, 'hack']);
     Route::get('/hack', [UserController::class, 'hackRedirect']);
     Route::post('/process-remove', [UserController::class, 'processRemove']);
+    Route::post('/process-shorten', [UserController::class, 'processShorten']);
+    Route::post('/process-retry', [UserController::class, 'processRetry']);
     
     Route::get('/scan', [ViewController::class, 'scan']);
     Route::post('/ping', [ScanController::class, 'ping']);
@@ -33,6 +35,7 @@ Route::middleware([IsFullyVerified::class, CheckDailyLogin::class])->group(funct
     
     Route::get('/bank-account', [ViewController::class, 'bankAccount']);
     Route::post('/bank-account', [BankController::class, 'loginBankAccount'])->name('bank-account');
+    Route::post('/deposit', [BankController::class, 'deposit']);
     
     Route::get('/store', [ViewController::class, 'store']);
     Route::post('/buy/{app_name}', [StoreController::class, 'buy']);

@@ -58,7 +58,7 @@
                                 // Ensure bypass is updated
                                 \App\Http\Controllers\BypassController::checkAndUpdateBypass($bypass);
                             @endphp
-                            <li onclick="openHackWindow('bypass', {{ $bypass['id'] }}, {{ $bypass['status'] === \App\Models\Bypass::SUCCESSFUL ? 'false' : 'true' }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($bypass['created_at'])->toIso8601String() }}"
+                            <li onclick="openHackWindow('bypass', {{ $bypass['id'] }}, {{ $bypass['status'] === \App\Models\Bypass::SUCCESSFUL ? 'false' : 'true' }}, {{ $bypass['status'] === \App\Models\Bypass::WORKING ? 'false' : 'true' }}, {{ $bypass['status'] === \App\Models\Bypass::WORKING ? formatNumber(\App\Models\Bypass::generateBypassFinishValueOC($bypass)) : 0 }}, {{ $bypass['status'] === \App\Models\Bypass::FAILED ? 'true' : 'false' }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($bypass['created_at'])->toIso8601String() }}"
                                 data-expires-at="{{ \Carbon\Carbon::parse($bypass['expires_at'])->toIso8601String() }}">
                                 <div class="process-topwrap">
                                     <div class="process-info">
@@ -115,7 +115,7 @@
                                 // Ensure crack is updated
                                 \App\Http\Controllers\CrackController::checkAndUpdateCrack($crack);
                             @endphp
-                            <li onclick="openHackWindow('crack', '{{ $crack['id'] }}', true)" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($crack['created_at'])->toIso8601String() }}"
+                            <li onclick="openHackWindow('crack', '{{ $crack['id'] }}', true, false, {{ $crack['status'] === \App\Models\Crack::WORKING ? formatNumber(\App\Models\Crack::generateCrackFinishValueOC($crack)) : 0 }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($crack['created_at'])->toIso8601String() }}"
                                 data-expires-at="{{ \Carbon\Carbon::parse($crack['expires_at'])->toIso8601String() }}">
                                 <div class="process-topwrap">
                                     <div class="process-info">
@@ -167,7 +167,7 @@
                                 // Ensure transfer is updated
                                 \App\Http\Controllers\TransferController::checkAndUpdateTransfer($transfer);
                             @endphp
-                            <li onclick="openHackWindow('transfer', '{{ $transfer['id'] }}', true)" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($transfer['created_at'])->toIso8601String() }}"
+                            <li onclick="openHackWindow('transfer', '{{ $transfer['id'] }}', true, false, {{ $transfer['status'] === \App\Models\Transfer::WORKING ? formatNumber(\App\Models\Transfer::generateTransferFinishValueOC($transfer)) : 0 }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($transfer['created_at'])->toIso8601String() }}"
                                 data-expires-at="{{ \Carbon\Carbon::parse($transfer['expires_at'])->toIso8601String() }}">
                                 <div class="process-topwrap">
                                     <div class="process-info">

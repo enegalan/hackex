@@ -45,14 +45,19 @@
                 </div>
                 @if ($isHacked && $hasCredentials || !$isHacked)
                     <form id="bank-login-form" action="/bank-account" method="post">
-                        <button type="submit" style="font-weight: normal; font-style: normal;" class="login-button">Login</button>
                         @csrf
+                        <button type="submit" style="font-weight: normal; font-style: normal;" class="login-button">Login</button>
                     </form>
                 @else
                     <div id="bank-login-form" action="/bank-account" method="post">
                         <button type="button" style="width: 100%; font-weight: normal; font-style: normal;" class="login-button">Login</button>
                     </div>
                 @endif
+            @endif
+            @if (session('autologin'))
+                <form id="bank-login-form" action="/bank-account" method="post">
+                    @csrf
+                </form>
             @endif
         </section>
         @if (!session('autologin'))
@@ -62,7 +67,8 @@
         @endif
         @if (session('autologin'))
             <script>
-                document.querySelector('#bank-login-form').submit();
+                let bankLoginForm = document.querySelector('#bank-login-form')
+                if (bankLoginForm) bankLoginForm.submit();
             </script>
         @endif
     </body>

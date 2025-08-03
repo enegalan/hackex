@@ -8,6 +8,28 @@ use Auth;
 use Illuminate\Http\Request;
 
 class BankController extends Controller {
+    const DEPOSITS = [
+        1 => [
+            'id' => 1,
+            'oc' => 400,
+            'value' => 10000,
+        ],
+        2 => [
+            'id' => 2,
+            'oc' => 1200,
+            'value' => 26000,
+        ],
+        3 => [
+            'id' => 3,
+            'oc' => 2000,
+            'value' => 60000,
+        ],
+        4 => [
+            'id' => 4,
+            'oc' => 4600,
+            'value' => 150000,
+        ],
+    ];
     function loginBankAccount() {
         if (session()->get('isHacked')) {
             $victim = session()->get('hackedUser');
@@ -44,5 +66,25 @@ class BankController extends Controller {
             'expires_at' => calculateCrackExpiration($passwordEncryptorLevel, $passwordCrackerLevel),
         ]);
         return redirect()->back()->with('message', 'Download has started.');
+    }
+    function deposit(Request $request) {
+        $deposit_id = $request->input('deposit_id');
+        $deposit = self::DEPOSITS[$deposit_id] ?? false;
+        if (!$deposit) {
+            return back()->with('error', 'This deposit does not exist.');
+        }
+        $deposit_oc = $deposit['oc'];
+        $success = BuyOCController::purchase($deposit_oc);
+        if ($success) {
+            $deposit_value = $deposit['value'];
+            // Add deposit value to Secured Savings ignoring Max limits
+            $user = Auth::user();
+            $user->secured_bitcoins += $deposit_value;
+            $success = $user->save();
+            if ($success) {
+                return back()->with(['message' => 'Deposit successfully done!.', 'autologin' => true]);
+            }
+        }
+        return back()->with('error', 'Deposit could not be done.');
     }
 }

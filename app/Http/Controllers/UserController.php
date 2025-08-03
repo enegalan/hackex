@@ -170,7 +170,7 @@ class UserController extends Controller {
                 break;
         }
         $process = $model::findOrFail($process_id);
-        if ($process && $process->User['id'] == Auth::id()) {
+        if ($process && $process->User->id == Auth::id()) {
             if (!$virtual) {
                 $success = $process->delete();
             } else {
@@ -182,6 +182,72 @@ class UserController extends Controller {
                 return back()->with('message', 'Process deleted.');
             } else {
                 return back()->with('error', 'Could not be able to delete this process.');
+            }
+        }
+        return back()->with('error', 'Process is not found or you are not hacker of this process.');
+    }
+    function processShorten(Request $request) {
+        $process_id = $request->input('process_id');
+        $type = $request->input('type');
+        $model = null;
+        switch ($type) {
+            case 'bypass':
+                $model = Bypass::class;
+                break;
+            case 'crack':
+                $model = Crack::class;
+                break;
+            case 'transfer':
+                $model = Transfer::class;
+                break;
+        }
+        $process = $model::findOrFail($process_id);
+        if ($process && $process->User->id == Auth::id()) {
+            $oc_value = BuyOCController::generateFinishValueOC($process->expires_at);
+            $success = BuyOCController::purchase($oc_value);
+            if ($success) {
+                $process->expires_at = now();
+                $process->save();
+                return back()->with('message', 'Process shortened!');
+            } else {
+                return back()->with('error', 'Could not be able to shorten this process.');
+            }
+        }
+        return back()->with('error', 'Process is not found or you are not hacker of this process.');
+    }
+    function processRetry(Request $request) {
+        $process_id = $request->input('process_id');
+        $type = $request->input('type');
+        $model = null;
+        switch ($type) {
+            case 'bypass':
+                $model = Bypass::class;
+                $process = $model::findOrFail($process_id);
+                $expires_at = calculateBypassExpiration($process->Victim->firewall_level, $process->User->bypasser_level);
+                break;
+            case 'crack':
+                $model = Crack::class;
+                $process = $model::findOrFail($process_id);
+                $expires_at = calculateCrackExpiration($process->Victim->password_encryptor_level, $process->User->password_cracker_level);
+                break;
+            case 'transfer':
+                $model = Transfer::class;
+                $process = $model::findOrFail($process_id);
+                if ($process->type === Transfer::UPLOAD) {
+                    $expires_at = calculateUploadExpiration($process->Victim, $process->app_name);
+                } else {
+                    $expires_at = calculateDownloadExpiration($process->Victim, $process->app_name);
+                }
+                break;
+        }
+        if ($process && $process->User->id == Auth::id()) {
+            $process->expires_at = $expires_at;
+            $process->status = Transfer::WORKING;
+            $success = $process->save();
+            if ($success) {
+                return back()->with('message', 'Process shortened!');
+            } else {
+                return back()->with('error', 'Could not be able to shorten this process.');
             }
         }
         return back()->with('error', 'Process is not found or you are not hacker of this process.');
@@ -207,13 +273,8 @@ class UserController extends Controller {
     }
     function changeIp(Request $request) {
         $user = Auth::user();
-        // Validate enough OC
-        // TODO: Add 200 to config
-        if ($user->oc < 200) {
-            return back()->with('error', 'Not enough OC');
-        }
-        // Discount 200 OC
-        $user->oc -= 200;
+        $changeIpCost = 200; // TODO: Add 200 to config
+        BuyOCController::purchase($changeIpCost);
         // Change IP
         $user->ip = UserController::getAvailableIp();
         $user->save();
