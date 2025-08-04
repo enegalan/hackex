@@ -32,17 +32,17 @@
                 <div class="tabs">
                     <div class="process-tab" id="bypassing-tab">
                         <input type="hidden" name="bypassing-total-value" id="bypassing-total-value-input" value="{{ Auth::user()->Bypass->count() }}">
-                        <input type="hidden" name="bypassing-running-value" id="bypassing-running-value-input" value="{{ Auth::user()->Bypass->where('status', \App\Models\Bypass::WORKING)->count() }}">
+                        <input type="hidden" name="bypassing-running-value" id="bypassing-running-value-input" value="{{ Auth::user()->Bypass()->where('status', \App\Models\Bypass::WORKING)->count() }}">
                         <span>Bypassing</span>
                     </div>
                     <div class="process-tab" id="cracking-tab">
-                        <input type="hidden" name="cracking-total-value" id="cracking-total-value-input" value="{{ Auth::user()->Crack->count() }}">
-                        <input type="hidden" name="cracking-running-value" id="cracking-running-value-input" value="{{ Auth::user()->Crack->where('status', \App\Models\Crack::WORKING)->count() }}">
+                        <input type="hidden" name="cracking-total-value" id="cracking-total-value-input" value="{{ Auth::user()->Crack()->where('visible', true)->count() }}">
+                        <input type="hidden" name="cracking-running-value" id="cracking-running-value-input" value="{{ Auth::user()->Crack()->where('visible', true)->where('status', \App\Models\Crack::WORKING)->count() }}">
                         <span>Cracking</span>
                     </div>
                     <div class="process-tab" id="transfer-tab">
-                        <input type="hidden" name="transfer-total-value" id="transfer-total-value-input" value="{{ Auth::user()->Transfer->count() }}">
-                        <input type="hidden" name="transfer-running-value" id="transfer-running-value-input" value="{{ Auth::user()->Transfer->where('status', \App\Models\Transfer::WORKING)->count() }}">
+                        <input type="hidden" name="transfer-total-value" id="transfer-total-value-input" value="{{ Auth::user()->Transfer()->where('visible', true)->count() }}">
+                        <input type="hidden" name="transfer-running-value" id="transfer-running-value-input" value="{{ Auth::user()->Transfer()->where('visible', true)->where('status', \App\Models\Transfer::WORKING)->count() }}">
                         <span>Network</span>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                                 // Ensure bypass is updated
                                 \App\Http\Controllers\BypassController::checkAndUpdateBypass($bypass);
                             @endphp
-                            <li onclick="openHackWindow('bypass', {{ $bypass['id'] }}, {{ $bypass['status'] === \App\Models\Bypass::SUCCESSFUL ? 'false' : 'true' }}, {{ $bypass['status'] === \App\Models\Bypass::WORKING ? 'false' : 'true' }}, {{ $bypass['status'] === \App\Models\Bypass::WORKING ? formatNumber(\App\Models\Bypass::generateBypassFinishValueOC($bypass)) : 0 }}, {{ $bypass['status'] === \App\Models\Bypass::FAILED ? 'true' : 'false' }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($bypass['created_at'])->toIso8601String() }}"
+                            <li onclick="openHackWindow(this, 'bypass', {{ $bypass['id'] }}, {{ $bypass['status'] === \App\Models\Bypass::SUCCESSFUL ? 'false' : 'true' }}, {{ $bypass['status'] === \App\Models\Bypass::WORKING ? 'false' : 'true' }}, {{ $bypass['status'] === \App\Models\Bypass::WORKING ? formatNumber(\App\Models\Bypass::generateBypassFinishValueOC($bypass)) : 0 }}, {{ $bypass['status'] === \App\Models\Bypass::FAILED ? 'true' : 'false' }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($bypass['created_at'])->toIso8601String() }}"
                                 data-expires-at="{{ \Carbon\Carbon::parse($bypass['expires_at'])->toIso8601String() }}">
                                 <div class="process-topwrap">
                                     <div class="process-info">
@@ -72,8 +72,15 @@
                                             <span class="process-ago"> ago</span>
                                         @endif
                                     </div>
-                                    <div class="checkbox">
-                                        <input type="checkbox" name="select-process" class="select-1">
+                                    <div onclick="event.stopPropagation()" class="checkbox-wrapper-65">
+                                        <label for="select-bypass-{{ $bypass['id'] }}">
+                                            <input onclick="openRemoveButton('bypass')" type="checkbox" name="selected_process" class="select-1" id="select-bypass-{{ $bypass['id'] }}" process_type="bypass" value="{{ $bypass['id'] }}">
+                                            <span class="cbx">
+                                                <svg width="12px" height="11px" viewBox="0 0 12 11">
+                                                    <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                                                </svg>
+                                            </span>
+                                        </label>
                                     </div>
                                 </div>
                                 <progress-bar class="progress-bar {{ $bypass['status'] === 2 ? 'failed' : ''}}">
@@ -110,12 +117,12 @@
                         <p class="empty-frame-message">You have no crack processes</p>
                     @endif
                     <ul>
-                        @foreach (Auth::user()->Crack->reverse() as $crack)
+                        @foreach (Auth::user()->Crack()->where('visible', true)->get()->reverse() as $crack)
                             @php
                                 // Ensure crack is updated
                                 \App\Http\Controllers\CrackController::checkAndUpdateCrack($crack);
                             @endphp
-                            <li onclick="openHackWindow('crack', '{{ $crack['id'] }}', true, false, {{ $crack['status'] === \App\Models\Crack::WORKING ? formatNumber(\App\Models\Crack::generateCrackFinishValueOC($crack)) : 0 }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($crack['created_at'])->toIso8601String() }}"
+                            <li onclick="openHackWindow(this, 'crack', '{{ $crack['id'] }}', true, false, {{ $crack['status'] === \App\Models\Crack::WORKING ? formatNumber(\App\Models\Crack::generateCrackFinishValueOC($crack)) : 0 }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($crack['created_at'])->toIso8601String() }}"
                                 data-expires-at="{{ \Carbon\Carbon::parse($crack['expires_at'])->toIso8601String() }}">
                                 <div class="process-topwrap">
                                     <div class="process-info">
@@ -129,8 +136,15 @@
                                             <span class="process-ago"> ago</span>
                                         @endif
                                     </div>
-                                    <div class="checkbox">
-                                        <input type="checkbox" name="select-process" class="select-1">
+                                    <div onclick="event.stopPropagation()" class="checkbox-wrapper-65">
+                                        <label for="select-crack-{{ $crack['id'] }}">
+                                            <input onclick="openRemoveButton('crack')" type="checkbox" name="selected_process" class="select-1" id="select-crack-{{ $crack['id'] }}" process_type="crack" value="{{ $crack['id'] }}">
+                                            <span class="cbx">
+                                                <svg width="12px" height="11px" viewBox="0 0 12 11">
+                                                    <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                                                </svg>
+                                            </span>
+                                        </label>
                                     </div>
                                 </div>
                                 <progress-bar class="progress-bar {{ $crack['status'] === 2 ? 'failed' : ''}}">
@@ -162,12 +176,12 @@
                         <p class="empty-frame-message">You have no network processes</p>
                     @endif
                     <ul>
-                        @foreach (Auth::user()->Transfer->reverse() as $transfer)
+                        @foreach (Auth::user()->Transfer()->where('visible', true)->get()->reverse() as $transfer)
                             @php
                                 // Ensure transfer is updated
                                 \App\Http\Controllers\TransferController::checkAndUpdateTransfer($transfer);
                             @endphp
-                            <li onclick="openHackWindow('transfer', '{{ $transfer['id'] }}', true, false, {{ $transfer['status'] === \App\Models\Transfer::WORKING ? formatNumber(\App\Models\Transfer::generateTransferFinishValueOC($transfer)) : 0 }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($transfer['created_at'])->toIso8601String() }}"
+                            <li onclick="openHackWindow(this, 'transfer', '{{ $transfer['id'] }}', true, false, {{ $transfer['status'] === \App\Models\Transfer::WORKING ? formatNumber(\App\Models\Transfer::generateTransferFinishValueOC($transfer)) : 0 }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($transfer['created_at'])->toIso8601String() }}"
                                 data-expires-at="{{ \Carbon\Carbon::parse($transfer['expires_at'])->toIso8601String() }}">
                                 <div class="process-topwrap">
                                     <div class="process-info">
@@ -185,8 +199,15 @@
                                             <span class="process-ago"> ago</span>
                                         @endif
                                     </div>
-                                    <div class="checkbox">
-                                        <input type="checkbox" name="select-process" class="select-1">
+                                    <div onclick="event.stopPropagation()" class="checkbox-wrapper-65">
+                                        <label for="select-transfer-{{ $transfer['id'] }}">
+                                            <input onclick="openRemoveButton('transfer')" type="checkbox" name="selected_process" class="select-1" id="select-transfer-{{ $transfer['id'] }}" process_type="transfer" value="{{ $transfer['id'] }}">
+                                            <span class="cbx">
+                                                <svg width="12px" height="11px" viewBox="0 0 12 11">
+                                                    <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
+                                                </svg>
+                                            </span>
+                                        </label>
                                     </div>
                                 </div>
                                 <progress-bar class="progress-bar {{ $transfer['status'] === 2 ? 'failed' : ''}}">
@@ -216,6 +237,7 @@
             </section>
         </section>
         @include('includes.back-btn')
+        @include('includes.remove-btn')
     </body>
     @include('includes.scripts', ['scripts' => ['processes', 'progress-bar']])
 </html>

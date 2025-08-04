@@ -17,6 +17,7 @@
     background-color: #131313;
     width: 80%;
     margin: 3rem auto;
+    overflow-y: scroll;
 }
 
 #modal-top {
@@ -513,9 +514,11 @@
     background: #1e1e1e;
     width: 50%;
     height: 36%;
-    margin-top: 13rem;
+    margin-top: auto;
+    margin-bottom: auto;
     padding: 1.5rem 2rem;
-    box-shadow: #00000dad 5px 5px 20px;
+    box-shadow: 5px 5px 20px #00000dad;
+    max-width: 22rem;
 }
 #change-ip-modal #modal-top {
     flex-direction: column;
@@ -692,4 +695,63 @@
 
 #deposit-frame {
     margin-top: 1rem;
+}
+
+/* Wallpaper modal */
+#wallpaper-modal .modal-frame {
+    color: #bebebe;
+    background: #1e1e1e;
+    width: 45%;
+    height: 60%;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 1.5rem 2rem;
+    box-shadow: 5px 5px 20px #00000dad;
+    max-width: 22rem;
+    top: -24px;
+}
+#wallpaper-modal #modal-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+}
+#wallpaper-modal .app_label {
+    font-weight: bolder;
+    font-size: 20px;
+    font-stretch: expanded;
+}
+#wallpaper-modal #modal-top div:nth-child(2) {
+    font-size: 14px;
+}
+
+#wallpaper-frame {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: .5rem;
+}
+#wallpaper-frame form {
+    justify-content: center;
+    margin-top: .5rem;
+    display: flex;
+}
+
+#wallpaper-frame ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .5rem .8rem;
+    width: 100%;
+    display: flex;
+}
+#wallpaper-frame ul li button img {
+    width: 7rem;
+    height: 11rem;
+}
+#wallpaper-frame button {
+    transition: .1s ease-in;
+    border-color: #303030;
+}
+#wallpaper-frame button:hover {
+    border: 1px solid #303030;
+    transition: .1s ease-in;
 }

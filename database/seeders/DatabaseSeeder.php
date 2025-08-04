@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             PlatformSeeder::class,
             NetworkSeeder::class,
             TestingUserSeeder::class,
+            WallpaperSeeder::class,
         ]);
     }
 }

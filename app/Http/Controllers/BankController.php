@@ -64,6 +64,7 @@ class BankController extends Controller {
         $auth_user->Crack()->create([
             'victim_id' => $user_id,
             'expires_at' => calculateCrackExpiration($passwordEncryptorLevel, $passwordCrackerLevel),
+            'visible' => 1,
         ]);
         return redirect()->back()->with('message', 'Download has started.');
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\ScanController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViewController;
+use App\Http\Controllers\WallpaperController;
 use App\Http\Middleware\CheckDailyLogin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsFullyVerified;
@@ -26,6 +27,7 @@ Route::middleware([IsFullyVerified::class, CheckDailyLogin::class])->group(funct
     Route::post('/hack', [UserController::class, 'hack']);
     Route::get('/hack', [UserController::class, 'hackRedirect']);
     Route::post('/process-remove', [UserController::class, 'processRemove']);
+    Route::post('/multiprocess-remove', [UserController::class, 'multiProcessRemove']);
     Route::post('/process-shorten', [UserController::class, 'processShorten']);
     Route::post('/process-retry', [UserController::class, 'processRetry']);
     
@@ -47,6 +49,7 @@ Route::middleware([IsFullyVerified::class, CheckDailyLogin::class])->group(funct
     
     Route::get('/device', [ViewController::class, 'device']);
     Route::post('/ip-change', [UserController::class, 'changeIp']);
+    Route::post('/select-wallpaper', [WallpaperController::class, 'select']);
 });
 
 require __DIR__ . '/auth.php';

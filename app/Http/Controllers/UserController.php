@@ -106,6 +106,7 @@ class UserController extends Controller {
             'app_name' => $app_name,
             'app_level' => $app_level,
             'expires_at' => calculateDownloadExpiration($user, $app_name),
+            'visible' => 1,
         ]);
         LogController::doLog(LogController::DOWNLOADING, $user, ['app_level' => $app_level, 'app_name' => $app_name, 'ip' => $auth_user->ip], false);
         return redirect()->back()->with('message', 'Download has started.');
@@ -147,6 +148,7 @@ class UserController extends Controller {
             'app_name' => $app_name,
             'app_level' => $app_level,
             'expires_at' => calculateUploadExpiration($auth_user, $app_name),
+            'visible' => 1,
         ]);
         LogController::doLog(LogController::UPLOADING, $auth_user, ['app_level' => $app_level, 'app_name' => $app_name, 'ip' => $user->ip], false);
         return redirect()->back()->with('message', 'Upload has started.');
@@ -154,6 +156,9 @@ class UserController extends Controller {
     function processRemove(Request $request) {
         $process_id = $request->input('process_id');
         $type = $request->input('type');
+        return $this->private__processRemove($process_id, $type);
+    }
+    private function private__processRemove($process_id, $type, $back_return = true) {
         $model = null;
         $virtual = false;
         switch ($type) {
@@ -178,13 +183,30 @@ class UserController extends Controller {
                 $success = $process->save();
             }
             LogController::forgetLog($process->Victim);
-            if ($success) {
-                return back()->with('message', 'Process deleted.');
-            } else {
+            if ($back_return) {
+                if ($success) {
+                    return back()->with('message', 'Process deleted.');
+                }
                 return back()->with('error', 'Could not be able to delete this process.');
             }
+            return $success;
         }
-        return back()->with('error', 'Process is not found or you are not hacker of this process.');
+        if ($back_return) {
+            return back()->with('error', 'Process is not found or you are not hacker of this process.');
+        }
+        return false;
+    }
+    function multiProcessRemove(Request $request) {
+        $data = $request->all();
+        foreach ($data as $item) {
+            $processId = $item['process_id'] ?? null;
+            $processType = $item['process_type'] ?? null;
+            $allRemoved = true;
+            if ($processId && $processType) {
+                $succes = $this->private__processRemove($processId, $processType, false);
+                if (!$succes) $allRemoved = false;
+            }
+        }
     }
     function processShorten(Request $request) {
         $process_id = $request->input('process_id');

@@ -17,3 +17,13 @@ section#go-back svg {
     width: 60px;
     transition: .1s ease-in;
 }
+
+section#remove-button {
+    width: 100%;
+    text-align: -webkit-center;
+    background: #00000050;
+    position: fixed;
+    bottom: 6.75rem;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
+}

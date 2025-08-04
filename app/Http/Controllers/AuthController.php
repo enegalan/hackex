@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Network;
 use App\Models\Platform;
 use App\Models\User;
+use App\Models\Wallpaper;
 use Auth;
 use Hash;
 use Illuminate\Http\Request;
@@ -43,6 +44,11 @@ class AuthController extends Controller {
             'ip' => UserController::getAvailableIp(),
             'platform_id' => $first_platform['id'],
             'network_id' => $first_network['id'],
+        ]);
+        $wallpaper = Wallpaper::where('name', Wallpaper::RAIDER[1])->first();
+        $user->UserWallpaper()->updateOrCreate([
+            'user_id' => $user->id,
+            'wallpaper_id' => $wallpaper['id']
         ]);
         Auth::login($user);
         return view('home', ['access_boot' => 'Booting Device...']);

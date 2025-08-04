@@ -21,6 +21,7 @@
         'change-ip-confirm': '#change-ip-confirm-modal',
         'player-info' : '#player-info-modal',
         'deposit' : '#deposit-modal',
+        'wallpaper' : '#wallpaper-modal',
     };
     function redirect(url) {
         window.location.href = url;
@@ -93,6 +94,44 @@
         const scrollY = sessionStorage.getItem('scrollY');
         if (scrollY) window.scrollTo(0, parseInt(scrollY));
     });
+    // Background initial setup
+    let body = document.body;
+    if (!body.getAttribute('wallpaper-active')) {
+        body.setAttribute('wallpaper-active', true);
+        updateBackground();
+    }
+    if (body.getAttribute('static-background')) {
+        body.style.backgroundImage = "";
+        body.style.backgroundSize = 'auto';
+        body.style.backgroundAttachment = 'auto';
+    }
+    function updateBackground() {
+        body.style.backgroundImage = "url('{{ asset($user->Wallpaper->url) }}')";
+        body.style.backgroundSize = 'cover';
+        body.style.backgroundAttachment = 'fixed';
+    };
+    function selectBackground(wallpaper_id) {
+        const csrfToken = document.querySelector('#wallpaper-modal input[name="_token"]').value;
+        fetch('/select-wallpaper', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({ wallpaper_id: wallpaper_id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.wallpaper_url) {
+                body.style.backgroundImage = `url('${data.wallpaper_url}')`;
+                body.style.backgroundSize = 'cover';
+                body.style.backgroundAttachment = 'fixed';
+            }
+        })
+        .catch(error => {
+            console.error('Error changing wallpaper:', error);
+        });
+    }
 </script>
 @if (isset($scripts))
     @if (in_array("progress-bar", $scripts))
@@ -202,7 +241,8 @@
             setInterval(updateBypassStatuses, 1000);
 
             // Hack
-            function openHackWindow(type, id, onlyRemove = false, onlyHack = false, ocShorter = 0, retry = false) {
+            function openHackWindow(scope, type, id, onlyRemove = false, onlyHack = false, ocShorter = 0, retry = false) {
+                console.log(scope);
                 const modal = openWindow('hack');
                 const idInputs = modal.querySelectorAll('input[name="process_id"]');
                 if (onlyRemove) {
@@ -225,6 +265,53 @@
                 const typeInputs = modal.querySelectorAll('input[name="type"]');
                 typeInputs.forEach(input => {
                     input.value = type;
+                });
+            }
+            function openRemoveButton(process_type) {
+                const removeButton = document.querySelector('#remove-button');
+                const processes = document.querySelectorAll('input[name="selected_process"]');
+                let anySelected = false;
+                processes.forEach(process => {
+                    if (!anySelected) {
+                        anySelected = process.checked;
+                        return;
+                    }
+                });
+                const processTypeInput = document.querySelector('input[name="process_type"]');
+                processTypeInput.value = process_type;
+                if (anySelected) {
+                    removeButton.style.display = 'block';
+                } else {
+                    removeButton.style.display = 'none';
+                }
+            }
+            function onRemoveButton() {
+                const processTypeInput = document.querySelector('input[name="process_type"]');
+                const processType = processTypeInput.value;
+                const processes = document.querySelectorAll('input[name="selected_process"]');
+                let selectedProcesses = [];
+                processes.forEach(process => {
+                    if (process.checked) {
+                        selectedProcesses.push({
+                            process_id: process.value,
+                            process_type: process.getAttribute("process_type"),
+                        });
+                    }
+                });
+                const csrfToken = document.querySelector('#remove-button input[name="_token"]').value;
+                fetch('/multiprocess-remove', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify(selectedProcesses)
+                })
+                .then(data => {
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error('Remove error:', error);
                 });
             }
         </script>
@@ -468,6 +555,12 @@
                 const user_id = changeIpWindow.querySelector('#input-user-id').value;
                 const modal = openWindow('change-ip-confirm');
                 modal.querySelector('#input-user-id').value = user_id;
+            }
+            function openWallpaperModal() {
+                const modal = openWindow('wallpaper');
+            }
+            function closeWallpaperModal() {
+                closeWindow('wallpaper');
             }
         </script>
     @endif

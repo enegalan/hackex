@@ -43,7 +43,7 @@
                             <button class="leaderboards-button">Leaderboards</button>
                         </li>
                         <li>
-                            <button class="wallpaper-button">Wallpaper</button>
+                            <button onclick="openWallpaperModal()" class="wallpaper-button">Wallpaper</button>
                         </li>
                         <li>
                             <button class="wiki-button">Wiki / Help</button>

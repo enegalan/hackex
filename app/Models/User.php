@@ -59,6 +59,19 @@ class User extends Authenticatable implements MustVerifyEmail
     public function DailyLogin() {
         return $this->hasMany(DailyLogin::class);
     }
+    public function UserWallpaper() {
+        return $this->hasOne(UserWallpaper::class);
+    }
+    public function Wallpaper() {
+        return $this->hasOneThrough(
+            Wallpaper::class,
+            UserWallpaper::class,
+            'user_id',       // Foreign key on user_wallpapers
+            'id',            // Foreign key on wallpapers
+            'id',            // Local key on users
+            'wallpaper_id'   // Local key on user_wallpapers
+        );
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head')
-    <body style="background:#084b8d;">
+    <body static-background="true" style="background:#084b8d;">
         @include('includes.modal')
         <section id="bank-login">
             <article style="flex-direction: row;width: 100%;pointer-events: none;" onclick="redirect('/bank-account')" id="bank-account" class="app-frame">

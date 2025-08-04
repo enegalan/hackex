@@ -32,4 +32,5 @@ section#apps {
 
 .app-label {
     color: white;
+    text-shadow: 2px 3px 3px black;
 }
