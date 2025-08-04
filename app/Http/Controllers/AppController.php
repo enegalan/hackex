@@ -18,7 +18,7 @@ class AppController extends Controller {
         }
         $success = $transfer->delete();
         if ($success) {
-            return back()->with('message', 'Your antivirus has cleaned the virus!');
+            return back()->with('success', 'Your antivirus has cleaned the virus!');
         } else {
             return back()->with('error', 'Error while cleaning this virus.');
         }
@@ -31,7 +31,7 @@ class AppController extends Controller {
         }
         $success = $transfer->delete();
         if ($success) {
-            return back()->with('message', 'Spam process cleaned.');
+            return back()->with('success', 'Spam process cleaned.');
         } else {
             return back()->with('error', 'Error while cleaning this Spam process.');
         }
@@ -44,7 +44,7 @@ class AppController extends Controller {
         }
         $success = $transfer->delete();
         if ($success) {
-            return back()->with('message', 'Spam process cleaned.');
+            return back()->with('success', 'Spam process cleaned.');
         } else {
             return back()->with('error', 'Error while cleaning this Spam process.');
         }

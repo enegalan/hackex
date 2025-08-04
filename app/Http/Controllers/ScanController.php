@@ -14,9 +14,12 @@ class ScanController extends Controller {
         if (!$ip) {
             return back()->with('error', 'Please enter an IP address.');
         }
+        if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+            return back()->with('error', 'Please enter a valid IP address.');
+        }
         $user = User::where('ip', $ip)->first();
         if (!$user) {
-            return back()->with('error', 'No user found with that IP address.');
+            return back()->with('error', 'No device found with that IP address.');
         }
         return back()->with('ping_result', $user);
     }
@@ -35,7 +38,7 @@ class ScanController extends Controller {
             'expires_at' => calculateBypassExpiration($firewallLevel, $bypasserLevel),
         ]);
         LogController::doLog(LogController::BYPASS, Auth::user(), ['ip' => $victim->ip]);
-        return back()->with('message', 'Bypass has started.');
+        return back()->with('success', 'Bypass has started.');
     }
     function refreshScan() {
         $user_id = Auth::id();

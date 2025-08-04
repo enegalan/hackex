@@ -20,7 +20,7 @@ class BuyOCController extends Controller {
         }
         // Discount OC
         $user->oc -= $value;
-        return $user->save();
+        return true;
     }
 
     public static function generateFinishValueOC($expires_at) {

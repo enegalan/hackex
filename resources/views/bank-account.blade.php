@@ -87,4 +87,5 @@
     </body>
     @include('includes.back-btn')
     @include('includes.scripts', ['scripts' => ['bank-account']])
+    @include('includes.notifications')
 </html>

@@ -29,7 +29,10 @@ class UserController extends Controller {
         session()->put('isHacked', false);
         $hackedUser = session()->get('hackedUser');
         session()->remove('hackedUser');
-        return view('home', ['access_boot' => 'Disconnecting from ' . $hackedUser['ip']]);
+        if (!$hackedUser) {
+            return view('home');
+        }
+        return view('home', ['access_boot' => 'Disconnecting from ' . $hackedUser->ip]);
     }
     function transfer() {
         if (session()->get('isHacked')) {
@@ -45,6 +48,7 @@ class UserController extends Controller {
             $victim->save();
             $auth_user->save();
             LogController::doLog(LogController::WITHDRAWAL, $victim, ['bitcoins' => $checking_bitcoins, 'ip' => $auth_user->ip]);
+            return view('bank-account')->with('success', $checking_bitcoins . ' Cryptocoins successfully transfered to your bank account.');
         } else {
             // Transfer session user's checking_bitcoins to secured_bitcoins
             $user = Auth::user();
@@ -52,7 +56,9 @@ class UserController extends Controller {
             $currentSecured = $user->secured_bitcoins;
             // Calculate how much bitcoins can be transfered
             $spaceLeft = $maxSaving - $currentSecured;
-            if ($spaceLeft <= 0) return redirect()->back()->with(['error' => 'You have reached the maximum savings limit.', 'autologin' => true]);
+            if ($spaceLeft <= 0) {
+                return BankController::autoLoginBankAccount(['error' => 'You have reached the maximum savings limit.']);
+            }
             // Calculate how much bitcoins will be transfered from checking
             $transferAmount = min($user->checking_bitcoins, $spaceLeft);
             // Transfer
@@ -61,19 +67,18 @@ class UserController extends Controller {
             $user->save();
             LogController::doLog(LogController::TRANSFER, $user, ['bitcoins' => $transferAmount]);
         }
-        return redirect()->back()->with('autologin', true);
     }
     function saveLog (Request $request) {
         $log = $request->input('log');
         $user_id = $request->input('user_id');
         $user = User::findOrFail($user_id);
-        return self::setLog($log, $user);
+        return self::setLog($log, $user, true);
     }
     public static function addLog ($log, $user) {
         $addedLog = $log . "\n" . $user['log'];
-        return self::setLog($addedLog, $user);
+        return self::setLog($addedLog, $user, false);
     }
-    public static function setLog ($log, $user) {
+    public static function setLog ($log, $user, $notify) {
         $level = $user->notepad_level;
         $maxLength = MaxLogSizes::getMaxLogSize($level, false);
         // Truncate if exceedes limits
@@ -84,8 +89,15 @@ class UserController extends Controller {
         }
         $user->log = $log;
         $success = $user->save();
-        if ($success) return redirect()->back()->with('message', 'Log saved successfully.');
-        return redirect()->back()->with('error', 'Log could not be saved.');
+        $data = [];
+        if ($notify) {
+            if ($success) {
+                $data['succes'] = 'Log saved successfully.';
+            } else {
+                $data['error'] = 'Log could not be saved.';
+            }
+        }
+        return redirect()->back()->with($data);
     }
     function download (Request $request) {
         $app_name = $request->input('app_name');
@@ -185,7 +197,7 @@ class UserController extends Controller {
             LogController::forgetLog($process->Victim);
             if ($back_return) {
                 if ($success) {
-                    return back()->with('message', 'Process deleted.');
+                    return back()->with('success', 'Process deleted.');
                 }
                 return back()->with('error', 'Could not be able to delete this process.');
             }
@@ -227,10 +239,10 @@ class UserController extends Controller {
         if ($process && $process->User->id == Auth::id()) {
             $oc_value = BuyOCController::generateFinishValueOC($process->expires_at);
             $success = BuyOCController::purchase($oc_value);
-            if ($success) {
+            if ($success === true) {
                 $process->expires_at = now();
                 $process->save();
-                return back()->with('message', 'Process shortened!');
+                return back()->with('success', 'Process shortened!');
             } else {
                 return back()->with('error', 'Could not be able to shorten this process.');
             }
@@ -267,7 +279,7 @@ class UserController extends Controller {
             $process->status = Transfer::WORKING;
             $success = $process->save();
             if ($success) {
-                return back()->with('message', 'Process shortened!');
+                return back()->with('message', 'Retrying process...');
             } else {
                 return back()->with('error', 'Could not be able to shorten this process.');
             }
@@ -283,7 +295,7 @@ class UserController extends Controller {
         if ($bypass && $bypass->User['id'] == Auth::id()) {
             // Check bypass status
             if ($bypass['available'] === 0) {
-                return back()->with('message', 'This user is not longer available for you.');
+                return back()->with('warning', 'This user is not longer available for you.');
             }
             if ($bypass['status'] === Bypass::SUCCESSFUL) {
                 LogController::doLog(LogController::LOGGED_IN, $bypass->Victim, ['ip' => $bypass->User->ip]);
@@ -296,7 +308,8 @@ class UserController extends Controller {
     function changeIp(Request $request) {
         $user = Auth::user();
         $changeIpCost = 200; // TODO: Add 200 to config
-        BuyOCController::purchase($changeIpCost);
+        $sucess = BuyOCController::purchase($changeIpCost);
+        if (!$sucess) return $sucess;
         // Change IP
         $user->ip = UserController::getAvailableIp();
         $user->save();
@@ -305,6 +318,6 @@ class UserController extends Controller {
         Bypass::where('victim_id', $user->id)->update([
             'available' => 0,
         ]);
-        return back()->with('message', 'IP changed successfully');
+        return back()->with('success', 'IP changed successfully');
     }
 }

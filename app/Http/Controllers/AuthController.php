@@ -21,7 +21,7 @@ class AuthController extends Controller {
     function signup(Request $request) {
         try {
             $request->validate([
-                'username' => 'required|string|max:255|unique:users,username',
+                'username' => 'required|string|max:12|unique:users,username',
                 'email' => 'required|string|email|max:255|unique:users,email',
                 'password' => 'required|string|min:8',
                 'repeat-password' => 'required|string|same:password',

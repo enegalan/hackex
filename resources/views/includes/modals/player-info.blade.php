@@ -13,6 +13,7 @@ if (isset($victim_id) || session('isHacked')) {
         $user = \App\Models\User::findOrFail(session('hackedUser')['id']);
     }
     $user->refresh();
+    $isHacked = true;
 }
 
 ?>

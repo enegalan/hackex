@@ -19,7 +19,8 @@
                 </ul>
             </section>
         </section>
-        @include('includes.back-btn')
     </body>
+    @include('includes.back-btn')
     @include('includes.scripts', ['scripts' => []])
+    @include('includes.notifications')
 </html>

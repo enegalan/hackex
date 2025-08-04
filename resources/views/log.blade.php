@@ -26,4 +26,5 @@
         @include('includes.back-btn')
     </body>
     @include('includes.scripts', ['scripts' => ['log']])
+    @include('includes.notifications')
 </html>

@@ -30,8 +30,8 @@ class BankController extends Controller {
             'value' => 150000,
         ],
     ];
-    function loginBankAccount() {
-        if (session()->get('isHacked')) {
+    public static function loginBankAccount($hackAllow = true, $data = []) {
+        if ($hackAllow && session()->get('isHacked')) {
             $victim = session()->get('hackedUser');
             $hasCredentials = Crack::hasCredentials($victim['id']);
             if (!$hasCredentials) {
@@ -40,7 +40,10 @@ class BankController extends Controller {
             $hacker = Auth::user();
             LogController::doLog(LogController::SECURITY_ALERT, $victim, ['ip' => $hacker->ip]);
         }
-        return view('bank-account');
+        return view('bank-account')->with($data);
+    }
+    public static function autoLoginBankAccount($data) {
+        return self::loginBankAccount(false, $data);
     }
     function crack (Request $request) {
         $user_id = $request->input('user_id');
@@ -66,7 +69,7 @@ class BankController extends Controller {
             'expires_at' => calculateCrackExpiration($passwordEncryptorLevel, $passwordCrackerLevel),
             'visible' => 1,
         ]);
-        return redirect()->back()->with('message', 'Download has started.');
+        return redirect()->back()->with('success', 'Download has started.');
     }
     function deposit(Request $request) {
         $deposit_id = $request->input('deposit_id');
@@ -76,16 +79,16 @@ class BankController extends Controller {
         }
         $deposit_oc = $deposit['oc'];
         $success = BuyOCController::purchase($deposit_oc);
-        if ($success) {
+        if ($success === true) {
             $deposit_value = $deposit['value'];
             // Add deposit value to Secured Savings ignoring Max limits
             $user = Auth::user();
             $user->secured_bitcoins += $deposit_value;
             $success = $user->save();
             if ($success) {
-                return back()->with(['message' => 'Deposit successfully done!.', 'autologin' => true]);
+                return self::autoLoginBankAccount(['success' => 'Deposit successfully done!.']);
             }
         }
-        return back()->with('error', 'Deposit could not be done.');
+        return view('bank-account')->with('error', 'Deposit could not be done.');
     }
 }

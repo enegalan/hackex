@@ -30,4 +30,5 @@
         </section>
     </body>
     @include('includes.scripts', ['scripts' => ['login']])
+    @include('includes.notifications')
 </html>

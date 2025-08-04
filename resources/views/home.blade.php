@@ -218,4 +218,5 @@ session()->put('isHacked', $isHacked);
         </section>
     </body>
     @include('includes.scripts', ['scripts' => ['home']])
+    @include('includes.notifications')
 </html>

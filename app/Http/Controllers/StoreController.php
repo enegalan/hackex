@@ -36,6 +36,6 @@ class StoreController extends Controller {
         $user->save();
         LogController::doLog(LogController::PURCHASED, $user, ['app_level' => $nextLevel, 'app_name' => Apps::getAppName($app_name)]);
         ExpActions::addExp('purchased_items', $app_name, false);
-        return redirect()->back()->with('message', 'App successfully upgraded.');
+        return redirect()->back()->with('success', 'App successfully upgraded.');
     }
 }

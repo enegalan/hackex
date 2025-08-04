@@ -231,7 +231,8 @@
                 </form>
             </li>
         </ul>
-        @include('includes.back-btn')
     </body>
+    @include('includes.back-btn')
     @include('includes.scripts')
+    @include('includes.notifications')
 </html>

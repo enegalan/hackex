@@ -31,7 +31,8 @@
         <section class="scan-bottomwrap">
             <button onclick="refreshScan(this)" class="refresh-button">Refresh</button>
         </section>
-        @include('includes.back-btn')
     </body>
+    @include('includes.back-btn')
     @include('includes.scripts', ['scripts' => ['scan']])
+    @include('includes.notifications')
 </html>

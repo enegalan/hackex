@@ -86,6 +86,7 @@
         </section>
     </body>
     @include('includes.scripts', ['scripts' => ['login']])
+    @include('includes.notifications')
     @if (session('initialToggle'))
         <script>toggleLogin()</script>
     @endif

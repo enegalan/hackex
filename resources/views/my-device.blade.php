@@ -55,7 +55,8 @@
                 @endif
             </section>
         </section>
-        @include('includes.back-btn')
     </body>
+    @include('includes.back-btn')
     @include('includes.scripts', ['scripts' => ['my-device']])
+    @include('includes.notifications')
 </html>

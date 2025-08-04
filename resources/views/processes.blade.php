@@ -236,8 +236,9 @@
                 </section>
             </section>
         </section>
-        @include('includes.back-btn')
-        @include('includes.remove-btn')
     </body>
+    @include('includes.back-btn')
+    @include('includes.remove-btn')
     @include('includes.scripts', ['scripts' => ['processes', 'progress-bar']])
+    @include('includes.notifications')
 </html>

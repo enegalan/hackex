@@ -74,4 +74,5 @@
     </body>
     @include('includes.back-btn')
     @include('includes.scripts', ['scripts' => ['crack']])
+    @include('includes.notifications')
 </html>
