@@ -1,3 +1,8 @@
+@php
+    if (!Auth::check()) {
+        return;
+    }
+@endphp
 <div style="z-index: 6;" id="change-ip-confirm-modal" class="modal">
     <section class="modal-frame">
         <section id="modal-top">
@@ -7,7 +12,7 @@
             @csrf
             <section class="content">
                 <span>Purchase IP Change with 200 OC?</span>
-                <input type="hidden" name="user_id" id="input-user-id" value="1">
+                <input type="hidden" name="user_id" id="input-user-id-1" value="1">
             </section>
             <section class="buttons">
                 <button type="button" class="close cancel">Cancel</button>

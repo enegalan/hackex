@@ -1,3 +1,8 @@
+@php
+    if (!Auth::check()) {
+        return;
+    }
+@endphp
 <div style="z-index: 6;" id="spam-confirm-modal" class="modal">
     <section class="modal-frame">
         <section id="modal-top">
@@ -9,7 +14,7 @@
                 <span>Remove level </span>
                 <span class="app_level">1</span>
                 <span class="app_label">Spam</span>?
-                <input type="hidden" name="transfer_id" id="input-transfer-id" value="1">
+                <input type="hidden" name="transfer_id" id="input-transfer-id-2" value="1">
             </section>
             <section class="buttons">
                 <button type="button" class="close cancel">Cancel</button>

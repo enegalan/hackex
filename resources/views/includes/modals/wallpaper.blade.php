@@ -1,4 +1,7 @@
 @php
+    if (!Auth::check()) {
+        return;
+    }
     $user = session('hackedUser', Auth::user());
 @endphp
 <div style="z-index: 3;" id="wallpaper-modal" class="modal">

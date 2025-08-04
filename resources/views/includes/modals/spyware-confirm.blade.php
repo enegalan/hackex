@@ -1,3 +1,8 @@
+@php
+    if (!Auth::check()) {
+        return;
+    }
+@endphp
 <div style="z-index: 12;" id="spyware-confirm-modal" class="modal">
     <section class="modal-frame">
         <section id="modal-top">
@@ -7,7 +12,7 @@
             @csrf
             <section class="content">
                 <span>Stop spying on this user and remove this spyware?</span>
-                <input type="hidden" name="transfer_id" id="input-transfer-id" value="1">
+                <input type="hidden" name="transfer_id" id="input-transfer-id-3" value="1">
             </section>
             <section class="buttons">
                 <button type="button" class="close cancel">Cancel</button>

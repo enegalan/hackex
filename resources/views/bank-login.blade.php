@@ -34,15 +34,15 @@
                 <h3>Login</h3>
             @endif
             @if (!session('autologin'))
-                <div class="form">
+                <form class="form">
                     <input placeholder="username" type="text" value="{{ $user['username'] }}" name="bank-username" id="bank-username">
                     <div style="display: flex; gap:.5rem;">
-                        <input placeholder="password" type="password" value="{{ $hasCredentials ? '*********' : '' }}" name="bank-password" id="bank-password">
+                        <input placeholder="password" type="password" value="{{ $hasCredentials ? '*********' : '' }}" name="bank-password" id="bank-password" autocomplete="user-password">
                         @if (!$hasCredentials && $isHacked && Auth::user()['password_cracker_level'] > 1)
                             <button type="button" onclick="openCrackWindow({{ $user['password_cracker_level'] }}, '{{ \App\Enums\Apps::getAppName('password_cracker') }}', {{ $user['id'] }})" style="font-weight: normal; font-style: normal;" class="login-button">Crack</button>
                         @endif
                     </div>
-                </div>
+                </form>
                 @if ($isHacked && $hasCredentials || !$isHacked)
                     <form id="bank-login-form" action="/bank-account" method="post">
                         @csrf

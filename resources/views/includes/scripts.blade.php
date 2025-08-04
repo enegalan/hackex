@@ -2,137 +2,147 @@
     $user = session('hackedUser', Auth::user());
 @endphp
 <script id="common-scripts">
-    const windows = {
-        'apps': '#apps-modal',
-        'bypass': '#bypass-modal',
-        'hack': '#hack-modal',
-        'download': '#download-modal',
-        'viruses': '#viruses-modal',
-        'crack': '#crack-modal',
-        'antivirus': '#antivirus-modal',
-        'antivirus-confirm': '#antivirus-confirm-modal',
-        'spam': '#spam-modal',
-        'spam-confirm': '#spam-confirm-modal',
-        'spyware': '#spyware-modal',
-        'spyware-log': '#spyware-log-modal',
-        'spyware-confirm': '#spyware-confirm-modal',
-        'app-info': '#app-info-modal',
-        'change-ip': '#change-ip-modal',
-        'change-ip-confirm': '#change-ip-confirm-modal',
-        'player-info' : '#player-info-modal',
-        'deposit' : '#deposit-modal',
-        'wallpaper' : '#wallpaper-modal',
-    };
     function redirect(url) {
         window.location.href = url;
-    }
-    function closeWindow(windowName, refresh = true) {
-        const foundModalName = windows[windowName];
-        if (!foundModalName) throw new Error("Modal not found for " + windowName);
-        const modal = document.querySelector(foundModalName);
-        if (!modal) throw new Error("Modal not found in DOM for " + windowName);
-        if (refresh) {
-            modal.remove();
-            return;
-        }
-        const close = modal.querySelector('.close');
-        if (close) close.removeEventListener('click', closeModal);
-        window.removeEventListener('click', clickOutsideHandler);
-        function closeModal() {
-            modal.style.display = "none";
-            if (close) close.removeEventListener('click', closeModal);
-            window.removeEventListener('click', clickOutsideHandler);
-        }
-        function clickOutsideHandler(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        }
-    }
-    function openWindow(windowName, data = []) {
-        const foundModalName = windows[windowName];
-        if (!foundModalName) throw new Error("Modal not found for " + windowName);
-        const modal = document.querySelector(foundModalName);
-        if (!modal) throw new Error("Modal not found in DOM for " + windowName);
-        if (modal.style.display === "flex") return modal;
-        const close = modal.querySelector('.close');
-        function closeModal() {
-            modal.style.display = "none";
-            if (close) close.removeEventListener('click', closeModal);
-            window.removeEventListener('click', clickOutsideHandler);
-        }
-        function clickOutsideHandler(e) {
-            if (e.target === modal) {
-                closeModal();
-            }
-        }
-        modal.style.display = "flex";
-        if (close) close.addEventListener('click', closeModal);
-        window.addEventListener('click', clickOutsideHandler);
-        return modal;
     }
     function isValidIP(ipAddress) {
         const ipv4Regex = /^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$/;
         return ipv4Regex.test(ipAddress);
     }
-    function submitForm(formId, scope = null) {
-        formId = '#' + formId;
-        let form;
-        if (scope) {
-            form = scope.querySelector(formId);
-        } else {
-            form = document.querySelector(formId);
-        }
-        if (form) form.submit();
-    }
-    // Save scroll before exit
-    window.addEventListener('beforeunload', () => {
-        sessionStorage.setItem('scrollY', window.scrollY);
-    });
-    // Restore on load
-    window.addEventListener('DOMContentLoaded', () => {
-        const scrollY = sessionStorage.getItem('scrollY');
-        if (scrollY) window.scrollTo(0, parseInt(scrollY));
-    });
-    // Background initial setup
-    let body = document.body;
-    if (!body.getAttribute('wallpaper-active')) {
-        body.setAttribute('wallpaper-active', true);
-        updateBackground();
-    }
-    if (body.getAttribute('static-background')) {
-        body.style.backgroundImage = "";
-        body.style.backgroundSize = 'auto';
-        body.style.backgroundAttachment = 'auto';
-    }
-    function updateBackground() {
-        body.style.backgroundImage = "url('{{ $user ? asset($user->Wallpaper->url) : null }}')";
-        body.style.backgroundSize = 'cover';
-        body.style.backgroundAttachment = 'fixed';
-    };
-    function selectBackground(wallpaper_id) {
-        const csrfToken = document.querySelector('#wallpaper-modal input[name="_token"]').value;
-        fetch('/select-wallpaper', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken
-            },
-            body: JSON.stringify({ wallpaper_id: wallpaper_id })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success && data.wallpaper_url) {
-                body.style.backgroundImage = `url('${data.wallpaper_url}')`;
-                body.style.backgroundSize = 'cover';
-                body.style.backgroundAttachment = 'fixed';
-            }
-        })
-        .catch(error => {
-            console.error('Error changing wallpaper:', error);
-        });
-    }
 </script>
+@if (Auth::check())
+    @php
+        if (isset($core_scripts) && $core_scripts == false) {
+            return;
+        }
+    @endphp
+    <script id="core-scripts">
+        const windows = {
+            'apps': '#apps-modal',
+            'bypass': '#bypass-modal',
+            'hack': '#hack-modal',
+            'download': '#download-modal',
+            'viruses': '#viruses-modal',
+            'crack': '#crack-modal',
+            'antivirus': '#antivirus-modal',
+            'antivirus-confirm': '#antivirus-confirm-modal',
+            'spam': '#spam-modal',
+            'spam-confirm': '#spam-confirm-modal',
+            'spyware': '#spyware-modal',
+            'spyware-log': '#spyware-log-modal',
+            'spyware-confirm': '#spyware-confirm-modal',
+            'app-info': '#app-info-modal',
+            'change-ip': '#change-ip-modal',
+            'change-ip-confirm': '#change-ip-confirm-modal',
+            'player-info' : '#player-info-modal',
+            'deposit' : '#deposit-modal',
+            'wallpaper' : '#wallpaper-modal',
+        };
+        function closeWindow(windowName, refresh = false) {
+            const foundModalName = windows[windowName];
+            if (!foundModalName) throw new Error("Modal not found for " + windowName);
+            const modal = document.querySelector(foundModalName);
+            if (!modal) throw new Error("Modal not found in DOM for " + windowName);
+            if (refresh) {
+                modal.remove();
+                return;
+            }
+            const close = modal.querySelector('.close');
+            if (close) close.removeEventListener('click', closeModal);
+            window.removeEventListener('click', clickOutsideHandler);
+            function closeModal() {
+                modal.style.display = "none";
+                if (close) close.removeEventListener('click', closeModal);
+                window.removeEventListener('click', clickOutsideHandler);
+            }
+            function clickOutsideHandler(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            }
+            closeModal();
+        }
+        function openWindow(windowName, data = []) {
+            const foundModalName = windows[windowName];
+            if (!foundModalName) throw new Error("Modal not found for " + windowName);
+            const modal = document.querySelector(foundModalName);
+            if (!modal) throw new Error("Modal not found in DOM for " + windowName);
+            if (modal.style.display === "flex") return modal;
+            const close = modal.querySelector('.close');
+            function closeModal() {
+                modal.style.display = "none";
+                if (close) close.removeEventListener('click', closeModal);
+                window.removeEventListener('click', clickOutsideHandler);
+            }
+            function clickOutsideHandler(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            }
+            modal.style.display = "flex";
+            if (close) close.addEventListener('click', closeModal);
+            window.addEventListener('click', clickOutsideHandler);
+            return modal;
+        }
+        function submitForm(formId, scope = null) {
+            formId = '#' + formId;
+            let form;
+            if (scope) {
+                form = scope.querySelector(formId);
+            } else {
+                form = document.querySelector(formId);
+            }
+            if (form) form.submit();
+        }
+        // Save scroll before exit
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('scrollY', window.scrollY);
+        });
+        // Restore on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const scrollY = sessionStorage.getItem('scrollY');
+            if (scrollY) window.scrollTo(0, parseInt(scrollY));
+        });
+        // Background initial setup
+        let body = document.body;
+        if (!body.getAttribute('wallpaper-active')) {
+            body.setAttribute('wallpaper-active', true);
+            updateBackground();
+        }
+        if (body.getAttribute('static-background')) {
+            body.style.backgroundImage = "";
+            body.style.backgroundSize = 'auto';
+            body.style.backgroundAttachment = 'auto';
+        }
+        function updateBackground() {
+            body.style.backgroundImage = "url('{{ $user ? asset($user->Wallpaper->url) : null }}')";
+            body.style.backgroundSize = 'cover';
+            body.style.backgroundAttachment = 'fixed';
+        };
+        function selectBackground(wallpaper_id) {
+            const csrfToken = document.querySelector('#wallpaper-modal input[name="_token"]').value;
+            fetch('/select-wallpaper', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({ wallpaper_id: wallpaper_id })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.wallpaper_url) {
+                    body.style.backgroundImage = `url('${data.wallpaper_url}')`;
+                    body.style.backgroundSize = 'cover';
+                    body.style.backgroundAttachment = 'fixed';
+                }
+            })
+            .catch(error => {
+                console.error('Error changing wallpaper:', error);
+            });
+        }
+    </script>
+@endif
 @if (isset($scripts))
     @if (in_array("progress-bar", $scripts))
         <script id="progress-bar">
@@ -453,11 +463,13 @@
                 modal.querySelector('.app_level').innerText = app_level;
                 modal.querySelector('.app_label').innerText = app_label;
                 modal.querySelector('#input-app-name').value = app_name;
-                modal.querySelector('#input-user-id').value = victimId;
+                modal.querySelector('#input-user-id-4').value = victimId;
             }
             function openVirusesModal(victimId) {
                 const modal = openWindow('viruses');
-                modal.querySelector('#input-user-id').value = victimId;
+                modal.querySelectorAll('input[name="user_id"]').forEach(input => {
+                    input.value = victimId;
+                });
             }
             function toggleVirusList(button, virus_name, virusFormId) {
                 const modal = openWindow('viruses');
@@ -468,7 +480,7 @@
                 });
                 if (!isVisible) {
                     virusForm.style.display = "block";
-                    const inputUserId = modal.querySelector('#input-user-id');
+                    const inputUserId = modal.querySelector('#input-user-id-5');
                     const virusFormUserIdInput = virusForm.querySelector('input[name="user_id"]');
                     virusFormUserIdInput.value = inputUserId.value;
                 }
@@ -495,7 +507,7 @@
                 modal.querySelector('.app_level').innerText = app_level;
                 modal.querySelector('.app_label').innerText = app_label;
                 modal.querySelector('.antivirus_level').innerText = antivirus_level;
-                modal.querySelector('#input-transfer-id').value = transferId;
+                modal.querySelector('#input-transfer-id-1').value = transferId;
             }
             function openSpamModal() {
                 const modal = openWindow('spam');
@@ -507,7 +519,7 @@
                 const modal = openWindow('spam-confirm')
                 modal.querySelector('.app_level').innerText = app_level;
                 modal.querySelector('.app_label').innerText = app_label;
-                modal.querySelector('#input-transfer-id').value = transferId;
+                modal.querySelector('#input-transfer-id-2').value = transferId;
             }
             function openSpywareModal() {
                 const modal = openWindow('spyware');
@@ -517,14 +529,14 @@
             }
             function openSpywareLog(transferId, log) {
                 const modal = openWindow('spyware-log');
-                modal.querySelector('#input-transfer-id').value = transferId;
+                modal.querySelector('#input-transfer-id-3').value = transferId;
                 modal.querySelector('#spyware-log').value = log;
             }
             function openSpywareConfirmWindow() {
                 const spywareModal = openWindow('spyware-log')
-                const transferId = spywareModal.querySelector('#input-transfer-id').value;
+                const transferId = spywareModal.querySelector('#input-transfer-id-3').value;
                 const modal = openWindow('spyware-confirm');
-                modal.querySelector('#input-transfer-id').value = transferId;
+                modal.querySelector('#input-transfer-id-4').value = transferId;
             }
             function openAppInfoModal(app_label, app_level, app_description, app_use) {
                 const modal = openWindow('app-info');
@@ -553,7 +565,7 @@
             function openCrackWindow(password_cracker_level, password_cracker_label, user_id) {
                 const modal = openWindow('crack');
                 modal.querySelector('.password_cracker_level').innerText = password_cracker_level;
-                modal.querySelector('#input-user-id').value = user_id;
+                modal.querySelector('#input-user-id-3').value = user_id;
                 modal.querySelector('.password_cracker_label').innerText = password_cracker_label;
             }
         </script>
@@ -562,13 +574,13 @@
         <script id="my-device">
             function openChangeIpWindow(user_id) {
                 const modal = openWindow('change-ip');
-                modal.querySelector('#input-user-id').value = user_id;
+                modal.querySelector('#input-user-id-2').value = user_id;
             }
             function openChangeIpConfirmWindow() {
                 const changeIpWindow = openWindow('change-ip');
-                const user_id = changeIpWindow.querySelector('#input-user-id').value;
+                const user_id = changeIpWindow.querySelector('#input-user-id-2').value;
                 const modal = openWindow('change-ip-confirm');
-                modal.querySelector('#input-user-id').value = user_id;
+                modal.querySelector('#input-user-id-1').value = user_id;
             }
             function openWallpaperModal() {
                 const modal = openWindow('wallpaper');

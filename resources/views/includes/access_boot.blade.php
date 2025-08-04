@@ -1,3 +1,8 @@
+@php
+    if (!Auth::check()) {
+        return;
+    }
+@endphp
 <article class="access_boot_transition" style="background: #303b4c; color: white;">
     <section id="access_boot">
         <section class="hackex-logo">
@@ -12,4 +17,4 @@
         </section>
     </section>
 </article>
-@include('includes.scripts', ['scripts' => ['access_boot']])
+@include('includes.scripts', ['core_scripts' => false, 'scripts' => ['access_boot']])

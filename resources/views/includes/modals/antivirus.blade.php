@@ -1,3 +1,8 @@
+@php
+    if (!Auth::check()) {
+        return;
+    }
+@endphp
 <div style="z-index: 3;" id="antivirus-modal" class="modal">
     <section class="modal-frame">
         <section id="modal-top">
@@ -27,7 +32,7 @@
         @endphp
         <p class="virus-found">{{ count($viruses) }} Viruses Found</p>
         <section class="buttons">
-            <form id="spam-form" class="modal-content virus-list">
+            <form id="antivirus-form" class="modal-content virus-list">
                 @csrf
                 <ul class="scrollbar-none">
                     @foreach ($viruses as $virus)

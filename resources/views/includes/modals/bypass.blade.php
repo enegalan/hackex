@@ -1,3 +1,8 @@
+@php
+    if (!Auth::check()) {
+        return;
+    }
+@endphp
 <div id="bypass-modal" class="modal">
     <section class="modal-frame">
         <section id="modal-top">

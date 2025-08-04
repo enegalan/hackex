@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ env('APP_NAME') . (isset($title) ? ' | ' . $title : '') }}</title>
     {{-- Preloads --}}
-    <link rel="preload" as="image" href="{{ $user ? asset($user->Wallpaper->url) : '' }}">
+    @if ($user)
+        <link rel="preload" as="image" href="{{ asset($user->Wallpaper->url) }}">
+    @endif
     <link rel="preload" href="{{ asset('fonts/dosis.ttf') }}" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="{{ asset('fonts/neuropol.otf') }}" as="font" type="font/otf" crossorigin>
     <!-- Fonts -->

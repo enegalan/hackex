@@ -1,6 +1,9 @@
 @php
     $user = session('hackedUser', Auth::user());
     $isHacked = session('isHacked', false);
+    if (!Auth::check()) {
+        return;
+    }
 @endphp
 <div id="apps-modal" class="modal">
     <section class="modal-frame">

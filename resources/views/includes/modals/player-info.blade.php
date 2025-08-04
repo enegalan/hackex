@@ -1,6 +1,9 @@
 <?php
 
 $user = Auth::user();
+if (!$user) {
+    return;
+}
 $isHacked = false;
 $user->refresh();
 if (isset($victim_id) || session('isHacked')) {

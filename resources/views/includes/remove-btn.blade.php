@@ -1,3 +1,8 @@
+@php
+    if (!Auth::check()) {
+        return;
+    }
+@endphp
 <section style="display: none;" onclick="onRemoveButton()" id="remove-button">
     @csrf
     <button style="width: auto;" class="remove-button">Remove Selected</button>

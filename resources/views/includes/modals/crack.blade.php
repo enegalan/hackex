@@ -1,3 +1,8 @@
+@php
+    if (!Auth::check()) {
+        return;
+    }
+@endphp
 <div id="crack-modal" class="modal">
     <section class="modal-frame">
         <section id="modal-top">
@@ -9,7 +14,7 @@
                 <span>Attempt to crack a Level </span>
                 <span class="password_cracker_level">1</span>
                 <span> <span class="password_cracker_label">Encryption</span>?</span>
-                <input type="hidden" name="user_id" id="input-user-id">
+                <input type="hidden" name="user_id" id="input-user-id-3">
             </section>
             <section class="buttons">
                 <button type="button" class="close cancel">Cancel</button>

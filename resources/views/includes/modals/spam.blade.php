@@ -1,4 +1,7 @@
 @php
+    if (!Auth::check()) {
+        return;
+    }
     $spams = Auth::user()->Transfer()->where('type', \App\Models\Transfer::UPLOAD)->where('app_name', 'spam')->where('status', \App\Models\Transfer::SUCCESSFUL)->get();
 @endphp
 <div style="z-index: 3;" id="spam-modal" class="modal">

@@ -18,7 +18,7 @@
                                 @enderror
                                 </div>
                                 <div class="inputBox">
-                                    <input type="password" name="password" id="login-password" required>
+                                    <input type="password" name="password" id="login-password" required autocomplete="password">
                                     <i>Password</i> 
                                     @error('login-password')
                                         <div class="input-error-message">{{ $message }}</div>
@@ -58,13 +58,13 @@
                                 @endif
                             </div>
                             <div class="inputBox">
-                                <input type="password" name="password" id="register-password" required> <i>Password</i> 
+                                <input type="password" name="password" id="register-password" required autocomplete="password"> <i>Password</i> 
                                 @if (isset($signupErrors['password']))
                                     <div class="input-error-message">{{ $signupErrors['password'][0] }}</div>
                                 @endif
                             </div>
                             <div class="inputBox">
-                                <input type="password" name="repeat-password" id="register-repeat-password" required>
+                                <input type="password" name="repeat-password" id="register-repeat-password" required autocomplete="repeat-password">
                                 <i>Repeat Password</i>
                                 @if (isset($signupErrors['repeat-password']))
                                     <div class="input-error-message">{{ $signupErrors['repeat-password'][0] }}</div>

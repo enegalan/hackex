@@ -1,3 +1,8 @@
+@php
+    if (!Auth::check()) {
+        return;
+    }
+@endphp
 <div style="z-index: 3;" id="app-info-modal" class="modal">
     <section class="modal-frame">
         <section id="modal-top">
