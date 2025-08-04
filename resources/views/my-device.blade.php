@@ -46,16 +46,10 @@
                             <button onclick="openWallpaperModal()" class="wallpaper-button">Wallpaper</button>
                         </li>
                         <li>
-                            <button class="wiki-button">Wiki / Help</button>
+                            <button onclick="window.open('https://hackex.fandom.com/')" class="wiki-button">Wiki / Help</button>
                         </li>
                         <li>
-                            <button class="rate-button">Rate the App</button>
-                        </li>
-                        <li>
-                            <button class="faq-button">FAQ</button>
-                        </li>
-                        <li>
-                            <button class="social-links-button">Social Links</button>
+                            <button onclick="window.open('https://hackex.fandom.com/wiki/FAQs')" class="faq-button">FAQ</button>
                         </li>
                     </ul>
                 @endif
