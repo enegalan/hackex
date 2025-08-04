@@ -32,6 +32,7 @@ Route::middleware([IsFullyVerified::class, CheckDailyLogin::class])->group(funct
     Route::post('/process-retry', [UserController::class, 'processRetry']);
     
     Route::get('/scan', [ViewController::class, 'scan']);
+    Route::post('/scan-refresh', [ScanController::class, 'refreshScan']);
     Route::post('/ping', [ScanController::class, 'ping']);
     Route::post('/bypass',[ScanController::class, 'createBypass']);
     

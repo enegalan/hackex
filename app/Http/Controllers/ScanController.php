@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Bypass;
 use App\Models\User;
 use Auth;
+use Cache;
 use Illuminate\Http\Request;
 
-class ScanController extends Controller
-{
+class ScanController extends Controller {
     function ping(Request $request) {
         $ip = $request->input('ip-search');
         if (!$ip) {
@@ -36,5 +36,13 @@ class ScanController extends Controller
         ]);
         LogController::doLog(LogController::BYPASS, Auth::user(), ['ip' => $victim->ip]);
         return back()->with('message', 'Bypass has started.');
+    }
+    function refreshScan() {
+        $user_id = Auth::id();
+        Cache::forget('html_matched_users_' . $user_id);
+        Cache::forget('matched_users_' . $user_id);
+        $users = getRandomMatchedUsers(Auth::user());
+        $html = generateScanListHtml($users);
+        return response()->json($html);
     }
 }

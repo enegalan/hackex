@@ -106,7 +106,7 @@
         body.style.backgroundAttachment = 'auto';
     }
     function updateBackground() {
-        body.style.backgroundImage = "url('{{ asset($user->Wallpaper->url) }}')";
+        body.style.backgroundImage = "url('{{ $user ? asset($user->Wallpaper->url) : null }}')";
         body.style.backgroundSize = 'cover';
         body.style.backgroundAttachment = 'fixed';
     };
@@ -327,15 +327,6 @@
                     pingButton.disabled = true;
                 }
             });
-
-            const refreshButton = document.querySelector('.refresh-button');
-            refreshButton.addEventListener('click', (e) => {
-                refreshButton.disabled = true;
-                setTimeout(() => {
-                    refreshButton.disabled = false;
-                }, 1000);
-            })
-
             function openBypassWindow(ip, firewall_level, bypasser_level) {
                 const modal = openWindow('bypass');
                 const firewallSpan = modal.querySelector('.firewall_level');
@@ -348,6 +339,29 @@
                 bypasserInput.value = bypasser_level;
                 const ipInput = modal.querySelector('#input-ip');
                 ipInput.value = ip;
+            }
+            function refreshScan(scope) {
+                scope.disabled = true;
+                const ipList = document.querySelector('#ip-list');
+                ipList.innerHTML = '<span class="refresh-scan-text">Scanning devices...</span>';
+                const csrfToken = document.querySelector('#scan input[name="_token"]').value;
+                fetch('/scan-refresh', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    setTimeout(() => {
+                        ipList.innerHTML = '<ul>' + data + '</ul>';
+                        scope.disabled = false;
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.error('Error changing wallpaper:', error);
+                });
             }
         </script>
     @endif

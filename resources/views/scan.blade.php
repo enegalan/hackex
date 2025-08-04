@@ -29,7 +29,7 @@
             </section>
         </section>
         <section class="scan-bottomwrap">
-            <button onclick="window.location.reload()" class="refresh-button">Refresh</button>
+            <button onclick="refreshScan(this)" class="refresh-button">Refresh</button>
         </section>
         @include('includes.back-btn')
     </body>

@@ -34,7 +34,7 @@
 
 @font-face {
     font-family: 'dosis';
-    src: url('/fonts/dosis.ttf') format('opentype');
+    src: url('/fonts/dosis.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }

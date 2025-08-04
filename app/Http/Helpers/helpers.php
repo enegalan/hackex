@@ -25,18 +25,52 @@ function getLevelBackgroundName($level) {
 
 use \App\Models\User;
 use \App\Models\Bypass;
-function getRandomMatchedUsers(User $baseUser, int $range = 3) {
+function getRandomMatchedUsers(User $baseUser, int $range = 20) {
+    $cacheHtmlKey = 'html_matched_users_' . $baseUser->id;
+    $cacheKey = 'matched_users_' . $baseUser->id;
+    if (Cache::get($cacheKey)) {
+        return Cache::get($cacheKey);
+    }
     $excludedVictimIds = Bypass::where('user_id', $baseUser->id)
+        ->where('available', false)
         ->pluck('victim_id');
-    return User::where('id', '!=', $baseUser->id)
+    $minLevel = max(1, $baseUser->level - $range);
+    $maxLevel = $baseUser->level + $range;
+    // Find users within level range
+    $results = User::where('id', '!=', $baseUser->id)
         ->whereNotIn('id', $excludedVictimIds)
-        ->whereBetween('level', [
-            $baseUser->level - $range,
-            $baseUser->level + $range
-        ])
+        ->whereBetween('level', [$minLevel, $maxLevel])
         ->inRandomOrder()
         ->limit(5)
         ->get();
+    // If not found, ignore level filter
+    if ($results->isEmpty()) {
+        $results = User::where('id', '!=', $baseUser->id)
+            ->whereNotIn('id', $excludedVictimIds)
+            ->inRandomOrder()
+            ->limit(5)
+            ->get();
+    }
+    Cache::set($cacheKey, $results);
+    Cache::set($cacheHtmlKey, generateScanListHtml($results));
+    return $results;
+}
+
+function generateScanListHtml($users) {
+    $html = '<ul>';
+    foreach ($users as $user) {
+        $html .= '
+            <li onclick="openBypassWindow(\'' . $user->ip . '\', \'' . $user->firewall_level . '\', \'' . Auth::user()->bypasser_level . '\')" class="ip-user">
+                <span class="ip-value">' . $user->ip . '</span>
+                <div class="firewall-label">
+                    <span>Firewall level</span>
+                    <span class="firewall-value">' . $user->firewall_level . '</span>
+                </div>
+            </li>
+        ';
+    }
+    $html .= '</ul>';
+    return $html;
 }
 
 use Carbon\Carbon;
