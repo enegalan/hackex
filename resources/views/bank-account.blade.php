@@ -69,16 +69,16 @@
         <section class="bank-buttons">
             @if (!$isHacked && $user['secured_bitcoins'] == \App\Enums\MaxSavings::getMaxSaving($user->Platform->id))
                 <form style="width: 100%;">
-                    <button type="button" style="font-weight: normal" class="transfer-button">Transfer</button>
+                    <button type="button" style="font-weight: normal" class="main-btn transfer-button">Transfer</button>
                 </form>
             @else
                 <form style="width: 100%;" action="/transfer" method="post">
                     @csrf
-                    <button type="submit" style="font-weight: normal" class="transfer-button">Transfer</button>
+                    <button type="submit" style="font-weight: normal" class="main-btn transfer-button">Transfer</button>
                 </form>
             @endif
             @if (!$isHacked)
-                <button type="button" onclick="openDepositWindow()" style="font-weight: normal" class="deposit-button">Deposit</button>
+                <button type="button" onclick="openDepositWindow()" style="font-weight: normal" class="main-btn deposit-button">Deposit</button>
             @endif
         </section>
         <section class="bank-commentary">

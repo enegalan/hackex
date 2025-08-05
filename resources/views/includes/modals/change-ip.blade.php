@@ -12,7 +12,7 @@
             <span>Need an escape from the same pesky hackers? Then generate a new IP so they can't find you again. A fresh IP also clears any unwanted Spam and Spyware viruses currently plaguing your device.</span>
             <form>
                 <input type="hidden" name="user_id" id="input-user-id-2">
-                <button onclick="openChangeIpConfirmWindow()" type="button" class="change-ip-button">
+                <button onclick="openChangeIpConfirmWindow()" type="button" class="main-btn change-ip-button">
                     <span>Change IP</span>
                     <span>200 OC</span>
                 </button>

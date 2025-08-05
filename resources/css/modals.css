@@ -25,7 +25,6 @@
     align-items: center;
     padding-left: 1rem;
     padding-right: 1rem;
-    background: #1e1e1e;
 }
 
 #modal-top .title {
@@ -39,7 +38,7 @@
 }
 
 /* The Close Button */
-.close {
+.close:not(.cancel) {
     color: #a6e736;
     float: right;
     font-size: 28px;
@@ -48,8 +47,8 @@
     transition: .1s ease-in;
 }
 
-.close:hover,
-.close:focus {
+.close:not(.cancel):hover,
+.close:not(.cancel):focus {
     color: #136123;
     text-decoration: none;
     cursor: pointer;
@@ -96,7 +95,8 @@
 #antivirus-confirm-modal,
 #spam-confirm-modal,
 #spyware-confirm-modal,
-#change-ip-confirm-modal {
+#change-ip-confirm-modal,
+.confirm-modal {
     align-items: center;
     align-content: center;
 }
@@ -107,7 +107,8 @@
 #antivirus-confirm-modal #modal-top,
 #spam-confirm-modal #modal-top,
 #spyware-confirm-modal #modal-top,
-#change-ip-confirm-modal #modal-top {justify-content: center;background: none;}
+#change-ip-confirm-modal #modal-top,
+.confirm-modal #modal-top {justify-content: center;background: none;}
 
 #bypass-modal .modal-frame,
 #download-modal .modal-frame,
@@ -115,12 +116,17 @@
 #antivirus-confirm-modal .modal-frame,
 #spam-confirm-modal .modal-frame,
 #spyware-confirm-modal .modal-frame,
-#change-ip-confirm-modal .modal-frame {
+#change-ip-confirm-modal .modal-frame,
+.confirm-modal .modal-frame {
+    color: #000;
     background-color: #f4f4f4;
-    color: black;
-    padding-top: 1.5rem;
     border-radius: 18px;
-    width: 60%;
+    width: 19rem;
+    padding-top: 1.5rem;
+    min-width: 19rem;
+    max-width: 19rem;
+    margin-bottom: auto;
+    margin-top: auto;
 }
 
 #bypass-modal #modal-top .title,
@@ -129,7 +135,8 @@
 #antivirus-confirm-modal #modal-top .title,
 #spam-confirm-modal #modal-top .title,
 #spyware-confirm-modal #modal-top .title,
-#change-ip-confirm-modal #modal-top .title {
+#change-ip-confirm-modal #modal-top .title,
+.confirm-modal #modal-top .title {
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
@@ -141,7 +148,8 @@
 #antivirus-confirm-modal .modal-content,
 #spam-confirm-modal .modal-content,
 #spyware-confirm-modal .modal-content,
-#change-ip-confirm-modal .modal-content {
+#change-ip-confirm-modal .modal-content,
+.confirm-modal .modal-content {
     text-align: center;
 }
 
@@ -151,7 +159,8 @@
 #antivirus-confirm-modal .buttons,
 #spam-confirm-modal .buttons,
 #spyware-confirm-modal .buttons,
-#change-ip-confirm-modal .buttons {
+#change-ip-confirm-modal .buttons,
+.confirm-modal .buttons {
     display: flex;
     justify-content: space-around;
 }
@@ -162,7 +171,8 @@
 #antivirus-confirm-modal .buttons button,
 #spam-confirm-modal .buttons button,
 #spyware-confirm-modal .buttons button,
-#change-ip-confirm-modal .buttons button {
+#change-ip-confirm-modal .buttons button,
+.confirm-modal .buttons button {
     color: #007ae3;
     font-weight: 600;
     border-top: 1px solid #c2c2c2;
@@ -176,7 +186,8 @@
 #antivirus-confirm-modal .buttons button:hover,
 #spam-confirm-modal .buttons button:hover,
 #spyware-confirm-modal .buttons button:hover,
-#change-ip-confirm-modal .buttons button:hover {
+#change-ip-confirm-modal .buttons button:hover,
+.confirm-modal .buttons button:hover {
     background: #c2c2c2;
 }
 
@@ -186,7 +197,8 @@
 #antivirus-confirm-modal .buttons button:first-child,
 #spam-confirm-modal .buttons button:first-child,
 #spyware-confirm-modal .buttons button:first-child,
-#change-ip-confirm-modal .buttons button:first-child {
+#change-ip-confirm-modal .buttons button:first-child,
+.confirm-modal .buttons button:first-child {
     border-right: 1px solid #c2c2c2;
     border-radius: 0 0 0 16px;
 }
@@ -197,7 +209,8 @@
 #antivirus-confirm-modal .buttons button:last-child,
 #spam-confirm-modal .buttons button:last-child,
 #spyware-confirm-modal .buttons button:last-child,
-#change-ip-confirm-modal .buttons button:last-child {
+#change-ip-confirm-modal .buttons button:last-child,
+.confirm-modal .buttons button:last-child {
     border-radius: 0 0 16px 0;
 }
 
@@ -207,7 +220,8 @@
 #antivirus-confirm-modal .content,
 #spam-confirm-modal .content,
 #spyware-confirm-modal .content,
-#change-ip-confirm-modal .content {
+#change-ip-confirm-modal .content,
+.confirm-modal .content {
     font-size: 14px;
     margin-bottom: 1.5rem;
     padding-left: 1rem;
@@ -754,4 +768,193 @@
 #wallpaper-frame button:hover {
     border: 1px solid #303030;
     transition: .1s ease-in;
+}
+
+/* Add Contact modal */
+#add-contact-modal .modal-frame {
+    width: 50%;
+    height: 20%;
+    background: #1e1e1e;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    color: #bebebe;
+}
+#add-contact-modal #modal-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+}
+#add-contact-modal .app_label {
+    font-weight: bolder;
+    font-size: 20px;
+    font-stretch: expanded;
+}
+#add-contact-modal #modal-top div:nth-child(2) {
+    font-size: 14px;
+}
+
+#add-contact-form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 15px;
+}
+
+#input-ip {
+    color: black;
+}
+
+/* Requests modal */
+#requests-modal .modal-frame {
+    width: 70%;
+    height: 70%;
+    background: #1e1e1e;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 1rem 1rem;
+    color: #bebebe;
+    overflow-y: scroll;
+}
+#requests-modal #modal-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+}
+#requests-modal .app_label {
+    font-weight: bolder;
+    font-size: 20px;
+    font-stretch: expanded;
+}
+#requests-modal #modal-top div:nth-child(2) {
+    font-size: 14px;
+}
+
+#requests-form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 15px;
+}
+
+#requests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+#requests-modal .friend-request {
+    padding: 1.2rem;
+    background: #00000080;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.request-user {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.request-action {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.request-date {
+    font-size: 14px;
+}
+
+/* Contacts modal */
+#requests-modal .modal-frame {
+    width: 70%;
+    height: 70%;
+    background: #1e1e1e;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 1rem 1rem;
+    color: #bebebe;
+    overflow-y: scroll;
+}
+#requests-modal #modal-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 0;
+    padding-right: 0;
+}
+#requests-modal .app_label {
+    font-weight: bolder;
+    font-size: 20px;
+    font-stretch: expanded;
+}
+#requests-modal #modal-top div:nth-child(2) {
+    font-size: 14px;
+}
+
+#requests-form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 15px;
+}
+
+#requests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+#requests-modal .friend-request {
+    padding: 1.2rem;
+    background: #00000080;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    transition: .1s ease-in;
+}
+
+.request-user {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.request-action {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.request-date {
+    font-size: 14px;
+}
+
+/* Compose modal */
+#compose-modal #modal-top {font-weight: bolder;font-size: 20px;font-stretch: expanded;}
+
+#compose-modal section.modal-frame {
+    padding: 1.3rem;
+    height: 60%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#compose-form {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 1rem;
+    height: 100%;
+}
+
+#compose-message {
+    background: white;
+    height: 100%;
 }

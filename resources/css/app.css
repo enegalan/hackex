@@ -13,7 +13,8 @@
 @import './log/log.css';
 @import './my-device/my-device.css';
 @import './login/login.css';
-@import './access_boot/access_boot.css';
+@import './access-boot/access-boot.css';
+@import './messages/messages.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -55,7 +56,7 @@ body {
     --secondaryGreen: #94ff94;
 }
 
-input[type="search"], input[type="text"], input[type="password"] {
+input[type="search"], input[type="text"], input[type="password"], textarea {
     background-color: white;
     border-radius: 5px;
     padding: 0.25rem;
@@ -63,6 +64,7 @@ input[type="search"], input[type="text"], input[type="password"] {
     padding-right: 0.5rem;
     width: 100%;
     font-size: 20px;
+    color: black;
 }
 
 input[type="password"] {

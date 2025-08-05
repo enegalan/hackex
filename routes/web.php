@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ScanController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\UserController;
@@ -44,6 +45,14 @@ Route::middleware([IsFullyVerified::class, CheckDailyLogin::class])->group(funct
     Route::post('/buy/{app_name}', [StoreController::class, 'buy']);
     
     Route::get('/messages', [ViewController::class, 'messages']);
+    Route::get('/contacts', [MessageController::class, 'contacts']);
+    Route::get('/friend/request', [MessageController::class, 'sendRequest']);
+    Route::post('/friend/accept', [MessageController::class, 'acceptRequest']);
+    Route::post('/friend/decline', [MessageController::class, 'declineRequest']);
+    Route::post('/friend/remove', [MessageController::class, 'removeFriendship']);
+    Route::post('/friend/compose', [MessageController::class, 'compose']);
+    Route::post('/message', [MessageController::class, 'message']);
+    Route::post('/message/delete', [MessageController::class, 'deleteMessage']);
     
     Route::get('/log', [ViewController::class, 'log']);
     Route::post('/save-log', [UserController::class, 'saveLog']);

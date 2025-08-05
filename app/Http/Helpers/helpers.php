@@ -176,3 +176,13 @@ function diffInHumanTime($future, $withSeconds = true) {
     if ($withSeconds) $return.= " {$seconds}s";
     return $return;
 }
+
+function truncateWithDots($text, $limit = 100) {
+    $exceeds = strlen($text) > $limit;
+    $truncated = $exceeds
+        ? mb_substr($text, 0, $limit)
+        : $text;
+    $return = str_replace("\n", "", $truncated);
+    $return = str_replace("\n", '<br>', $truncated);
+    return str_replace('', '', ($return)) . '...';
+}

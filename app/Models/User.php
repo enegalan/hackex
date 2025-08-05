@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
-{
+class User extends Authenticatable implements MustVerifyEmail {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -61,6 +60,19 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function UserWallpaper() {
         return $this->hasOne(UserWallpaper::class);
+    }
+    public function Friend() {
+        return $this->belongsToMany(User::class, 'friendships', 'user_id', 'friend_id')
+            ->wherePivot('accepted', true);
+    }
+    public function FriendRequest() {
+        return $this->hasMany(Friendship::class, 'user_id');
+    }
+    public function SentMessage() {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+    public function ReceivedMessage() {
+        return $this->hasMany(Message::class, 'receiver_id');
     }
     public function Wallpaper() {
         return $this->hasOneThrough(

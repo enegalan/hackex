@@ -8,7 +8,7 @@
                 <form action="/ping" method="post" class="ip-searcher">
                     @csrf
                     <input placeholder="ip address" class="ip-search" type="search" name="ip-search" id="ip-search">
-                    <button disabled class="ping-button">Ping</button>
+                    <button disabled class="main-btn ping-button">Ping</button>
                 </form>
             </section>
             <section id="ip-list">
@@ -29,7 +29,7 @@
             </section>
         </section>
         <section class="scan-bottomwrap">
-            <button onclick="refreshScan(this)" class="refresh-button">Refresh</button>
+            <button onclick="refreshScan(this)" class="main-btn refresh-button">Refresh</button>
         </section>
     </body>
     @include('includes.back-btn')

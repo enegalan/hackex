@@ -11,7 +11,7 @@
         <section class="buttons">
             <input type="hidden" name="user_id" id="input-user-id-5">
             <div>
-                <button onclick="toggleVirusList(this, 'spam', 'virus-form')" type="button" class="virus-button spam-button">Spam</button>
+                <button onclick="toggleVirusList(this, 'spam', 'virus-form')" type="button" class="main-btn virus-button spam-button">Spam</button>
                 <form style="display: none;" id="virus-form" action="/upload/spam" method="post" class="modal-content virus-list">
                     @csrf
                     <ul class="scrollbar-none">
@@ -26,7 +26,7 @@
                 </form>
             </div>
             <div>
-                <button onclick="toggleVirusList(this, 'spyware', 'upload-spyware-form')" type="button" class="virus-button spyware-button">Spyware</button>
+                <button onclick="toggleVirusList(this, 'spyware', 'upload-spyware-form')" type="button" class="main-btn virus-button spyware-button">Spyware</button>
                 <form style="display: none;" id="upload-spyware-form" action="/upload/spyware" method="post" class="modal-content virus-list">
                     @csrf
                     <ul class="scrollbar-none">

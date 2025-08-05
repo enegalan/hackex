@@ -9,6 +9,16 @@
         const ipv4Regex = /^(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d{2}|[1-9]?\d)){3}$/;
         return ipv4Regex.test(ipAddress);
     }
+    function submitForm(formId, scope = null) {
+        formId = '#' + formId;
+        let form;
+        if (scope) {
+            form = scope.querySelector(formId);
+        } else {
+            form = document.querySelector(formId);
+        }
+        if (form) form.submit();
+    }
 </script>
 @if (Auth::check())
     @php
@@ -34,9 +44,14 @@
             'app-info': '#app-info-modal',
             'change-ip': '#change-ip-modal',
             'change-ip-confirm': '#change-ip-confirm-modal',
-            'player-info' : '#player-info-modal',
-            'deposit' : '#deposit-modal',
-            'wallpaper' : '#wallpaper-modal',
+            'player-info': '#player-info-modal',
+            'deposit': '#deposit-modal',
+            'wallpaper': '#wallpaper-modal',
+            'add-contact': '#add-contact-modal',
+            'requests': '#requests-modal',
+            'remove-contact': '#remove-contact-modal',
+            'compose': '#compose-modal',
+            'delete-message': '#delete-message-modal',
         };
         function closeWindow(windowName, refresh = false) {
             const foundModalName = windows[windowName];
@@ -83,16 +98,6 @@
             if (close) close.addEventListener('click', closeModal);
             window.addEventListener('click', clickOutsideHandler);
             return modal;
-        }
-        function submitForm(formId, scope = null) {
-            formId = '#' + formId;
-            let form;
-            if (scope) {
-                form = scope.querySelector(formId);
-            } else {
-                form = document.querySelector(formId);
-            }
-            if (form) form.submit();
         }
         // Save scroll before exit
         window.addEventListener('beforeunload', () => {
@@ -605,6 +610,49 @@
                     input.value = deposit_id;
                 });
                 submitForm(depositFormId, modal);
+            }
+        </script>
+    @endif
+    @if (in_array("contacts", $scripts))
+        <script id="contacts">
+            function openAddContactModal() {
+                const modal = openWindow('add-contact');
+            }
+            function closeAddContactModal() {
+                closeWindow('add-contact');
+            }
+            function openRequestsModal() {
+                const modal = openWindow('requests');
+            }
+            function closeRequestsModal() {
+                closeWindow('requests');
+            }
+            function openRemoveContactModal(friendship_id) {
+                const modal = openWindow('remove-contact');
+                modal.querySelector('input[name="friendship_id"]').value = friendship_id;
+            }
+            function closeRemoveContactModal() {
+                closeWindow('remove-contact');
+            }
+            function openComposeModal() {
+                const modal = openWindow('compose');
+            }
+            function closeComposeModal() {
+                closeWindow('compose');
+            }
+        </script>
+    @endif
+    @if (in_array("messages", $scripts))
+        <script id="messages">
+            function openComposeModal() {
+                const modal = openWindow('compose');
+            }
+            function closeComposeModal() {
+                closeWindow('compose');
+            }
+            function openMessageDeleteModal(message_id) {
+                const modal = openWindow('delete-message');
+                modal.querySelector('#input-message-id-1').value = message_id;
             }
         </script>
     @endif

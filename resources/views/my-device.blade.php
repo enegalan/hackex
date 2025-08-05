@@ -33,23 +33,23 @@
                     </div>
                 </div>
                 @if (!$isHacked)
-                    <button onclick="openChangeIpWindow({{ Auth::id() }})" class="change-ip-button">Change IP</button>
+                    <button onclick="openChangeIpWindow({{ Auth::id() }})" class="main-btn change-ip-button">Change IP</button>
                 @endif
             </section>
             <section class="other-buttons">
                 @if (!$isHacked)
                     <ul>
                         <li>
-                            <button class="leaderboards-button">Leaderboards</button>
+                            <button class="main-btn leaderboards-button">Leaderboards</button>
                         </li>
                         <li>
-                            <button onclick="openWallpaperModal()" class="wallpaper-button">Wallpaper</button>
+                            <button onclick="openWallpaperModal()" class="main-btn wallpaper-button">Wallpaper</button>
                         </li>
                         <li>
-                            <button onclick="window.open('https://hackex.fandom.com/')" class="wiki-button">Wiki / Help</button>
+                            <button onclick="window.open('https://hackex.fandom.com/')" class="main-btn wiki-button">Wiki / Help</button>
                         </li>
                         <li>
-                            <button onclick="window.open('https://hackex.fandom.com/wiki/FAQs')" class="faq-button">FAQ</button>
+                            <button onclick="window.open('https://hackex.fandom.com/wiki/FAQs')" class="main-btn faq-button">FAQ</button>
                         </li>
                     </ul>
                 @endif

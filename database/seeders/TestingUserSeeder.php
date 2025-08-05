@@ -23,6 +23,20 @@ class TestingUserSeeder extends Seeder
         $wallpaper = Wallpaper::where('name', Wallpaper::RAIDER[1])->first();
         $wallpaper = Wallpaper::where('name', Wallpaper::RAIDER[1])->first();
         $user = User::create([
+            'id' => 101,
+            'username' =>'admin',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('admin'),
+            'ip' => UserController::getAvailableIp(),
+            'platform_id' => $platform->id,
+            'network_id' => 1,
+        ]);
+        $user->UserWallpaper()->updateOrCreate([
+            'user_id' => $user->id,
+            'wallpaper_id' => $wallpaper->id,
+        ]);
+        $user->save();
+        $user = User::create([
             'username' => Hash::make(rand(0, 100)),
             'email' => Hash::make(rand(0, 100)) . '@gmail.com',
             'password' => Hash::make('password'),

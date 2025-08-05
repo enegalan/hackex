@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use App\Models\Network;
 use App\Models\Platform;
 use App\Models\User;
@@ -50,6 +51,14 @@ class AuthController extends Controller {
             'user_id' => $user->id,
             'wallpaper_id' => $wallpaper['id']
         ]);
+        $admin_id = 101; // TODO: Move this to a config
+        Message::create([
+            'sender_id' => $admin_id,
+            'receiver_id' => $user->id,
+            'subject' => 'Transmission Intercepted',
+            'message' => MessageController::INITIAL_MESSAGE,
+            'from_hackex' => true,
+        ])->save();
         Auth::login($user);
         return view('home', ['access_boot' => 'Booting Device...']);
     }

@@ -37,7 +37,7 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="buy-button">Buy</button>
+                        <button type="submit" class="main-btn buy-button">Buy</button>
                     </section>
                 </form>
             </li>
@@ -64,7 +64,7 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="buy-button">Buy</button>
+                        <button type="submit" class="main-btn buy-button">Buy</button>
                     </section>
                 </form>
             </li>
@@ -91,7 +91,7 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="buy-button">Buy</button>
+                        <button type="submit" class="main-btn buy-button">Buy</button>
                     </section>
                 </form>
             </li>
@@ -118,7 +118,7 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="buy-button">Buy</button>
+                        <button type="submit" class="main-btn buy-button">Buy</button>
                     </section>
                 </form>
             </li>
@@ -145,7 +145,7 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="buy-button">Buy</button>
+                        <button type="submit" class="main-btn buy-button">Buy</button>
                     </section>
                 </form>
             </li>
@@ -172,7 +172,7 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="buy-button">Buy</button>
+                        <button type="submit" class="main-btn buy-button">Buy</button>
                     </section>
                 </form>
             </li>
@@ -199,7 +199,7 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="buy-button">Buy</button>
+                        <button type="submit" class="main-btn buy-button">Buy</button>
                     </section>
                 </form>
             </li>
@@ -226,7 +226,7 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="buy-button">Buy</button>
+                        <button type="submit" class="main-btn buy-button">Buy</button>
                     </section>
                 </form>
             </li>

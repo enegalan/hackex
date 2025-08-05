@@ -1,0 +1,164 @@
+#messages-main, #contacts {
+    padding: 1rem;
+    padding-bottom: 8rem;
+}
+
+#contacts {
+    transition: .1 ease-in;
+}
+
+#messages-main h4, #contacts h4 {
+    color: white;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 18px;
+}
+
+.messages-info {
+    display: flex;
+    align-items: flex-start;
+    gap: .5rem;
+}
+
+.messages-frames {
+    color: white;
+}
+
+.messages-frames ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 0.8rem;
+}
+
+.messages-frames .message {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    background: #00000080;
+    transition: .1s ease-in;
+}
+
+.message-top {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-autor {
+    font-size: 12px;
+    margin-top: -4px;
+    margin-left: 1px;
+}
+
+.messages-frames .message:hover,
+#contacts .contact:hover {
+    transition: .1s ease-in;
+    background: #25252580;
+}
+
+.contacts-frames ul {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: .8rem;
+}
+
+.contacts-frames .contact {
+    color: white;
+    display: flex;
+    background: #00000080;
+    padding: 1rem;
+}
+
+.contact-top {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.subject {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    gap: .5rem;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.friend-date {
+    text-align: right;
+    font-size: 12px;
+}
+
+.subject-value {
+    font-weight: bolder;
+    font-size: 1em;
+    font-stretch: expanded;
+}
+
+.from-hackex {
+    position: relative;
+    width: auto;
+    transform: none;
+    flex-direction: column;
+    margin-bottom: .3rem;
+}
+
+.from-hackex span#logo-2 {
+    margin-top: -5px;
+    font-size: 13px;
+}
+
+#message-main {
+    padding: 1rem;
+    padding-bottom: 7rem;
+}
+
+#message-main h4 {
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: .25rem;
+}
+
+#message-main .message-top {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 14px;
+    flex-direction: row;
+}
+
+#messages-main .subject-value {
+    margin-top: -7px;
+}
+
+#message-main .message-content {
+    margin-top: .5rem;
+    padding: 1rem;
+    background: #00000080;
+    font-size: 14px;
+}
+
+#message-main .messages-frames {
+    color: #fff;
+    margin-top: 1rem;
+    padding: .7rem;
+}
+
+#contacts .subject {
+    justify-content: space-between;
+}

@@ -6,6 +6,7 @@
     text-align: center;
     width: 30px;
     height: 30px;
+    z-index: 1;
 }
 
 .player-level-value {

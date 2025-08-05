@@ -26,25 +26,7 @@ section#scan {
     gap: .5rem;
 }
 
-.ping-button,
-.refresh-button,
-.login-button,
-.transfer-button,
-.deposit-button,
-.buy-button,
-.save-button,
-.change-ip-button,
-.leaderboards-button,
-.wallpaper-button,
-.wiki-button,
-.rate-button,
-.faq-button,
-.social-links-button,
-.hack-button,
-.remove-button,
-.upload-button,
-.oc-button,
-.retry-button {
+.main-btn {
     background-color: #cecece;
     padding-left: 0.8rem;
     border-radius: 6px;
@@ -58,50 +40,12 @@ section#scan {
     text-align: center;
 }
 
-.ping-button:disabled,
-.refresh-button:disabled,
-.login-button:disabled,
-.transfer-button:disabled,
-.deposit-button:disabled,
-.buy-button:disabled,
-.save-button:disabled,
-.change-ip-button:disabled,
-.leaderboards-button:disabled,
-.wallpaper-button:disabled,
-.wiki-button:disabled,
-.rate-button:disabled,
-.faq-button:disabled,
-.social-links-button:disabled,
-.hack-button:disabled,
-.remove-button:disabled,
-.upload-button:disabled,
-.spam-button:disabled,
-.spyware-button:disabled,
-.oc-button:disabled,
-.retry-button:disabled {
+.main-btn:disabled {
     opacity: .5;
     pointer-events: none;
 }
 
-.ping-button:hover,
-.refresh-button:hover,
-.login-button:hover,
-.transfer-button:hover,
-.deposit-button:hover,
-.buy-button:hover,
-.save-button:hover,
-.change-ip-button:hover,
-.leaderboards-button:hover,
-.wallpaper-button:hover,
-.wiki-button:hover,
-.rate-button:hover,
-.faq-button:hover,
-.social-links-button:hover,
-.hack-button:hover,
-.remove-button:hover,
-.upload-button:hover,
-.oc-button:hover,
-.retry-button:hover {
+.main-btn:hover {
     background-color: #a2a2a2;
     transition: .1s ease-in;
 }

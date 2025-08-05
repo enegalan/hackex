@@ -12,7 +12,7 @@
             <div class="top-rightside">
                 <span class="close">&times;</span>
                 @if ($isHacked)
-                    <button onclick="openVirusesModal({{ $user->id }})" class="upload-button">Upload</button>
+                    <button onclick="openVirusesModal({{ $user->id }})" class="main-btn upload-button">Upload</button>
                 @endif
             </div>
         </section>
