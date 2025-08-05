@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wallpaper extends Model {
     const RAIDER = [
-        1 => 'Raider I',
-        2 => 'Raider II',
-        3 => 'Raider III',
+        1 => Platform::PLATFORMS[Platform::RAIDER_I]['name'],
+        2 => Platform::PLATFORMS[Platform::RAIDER_II]['name'],
+        3 => Platform::PLATFORMS[Platform::RAIDER_III]['name'],
     ];
     const BOLT = [
-        1 => 'Bolt I',
-        2 => 'Bolt II',
-        3 => 'Bolt III',
+        1 => Platform::PLATFORMS[Platform::BOLT_I]['name'],
+        2 => Platform::PLATFORMS[Platform::BOLT_II]['name'],
+        3 => Platform::PLATFORMS[Platform::BOLT_III]['name'],
     ];
     const NOVA = [
-        1 => 'Nova I',
-        2 => 'Nova II',
-        3 => 'Nova III',
+        1 => Platform::PLATFORMS[Platform::NOVA_I]['name'],
+        2 => Platform::PLATFORMS[Platform::NOVA_II]['name'],
+        3 => Platform::PLATFORMS[Platform::NOVA_III]['name'],
     ];
 }

@@ -15,58 +15,67 @@ class NetworkSeeder extends Seeder
     public function run(): void
     {
         Network::create([
-            'name' => '1G',
-            'download' => '250 Kbps',
-            'upload' => '50 Kbps',
-            'price' => 0,
+            'id' => Network::NET_1,
+            'name' => Network::NETWORKS[Network::NET_1]['name'],
+            'download' => Network::NETWORKS[Network::NET_1]['download'],
+            'upload' => Network::NETWORKS[Network::NET_1]['upload'],
+            'price' => Network::NETWORKS[Network::NET_1]['price'],
         ]);
         Network::create([
-            'name' => '1GS',
-            'download' => '500 Kbps',
-            'upload' => '100 Kbps',
-            'price' => 3000,
+            'id' => Network::NET_2,
+            'name' => Network::NETWORKS[Network::NET_2]['name'],
+            'download' => Network::NETWORKS[Network::NET_2]['download'],
+            'upload' => Network::NETWORKS[Network::NET_2]['upload'],
+            'price' => Network::NETWORKS[Network::NET_2]['price'],
         ]);
         Network::create([
-            'name' => '2G',
-            'download' => '500 Kbps',
-            'upload' => '100 Kbps',
-            'price' => 7000,
+            'id' => Network::NET_3,
+            'name' => Network::NETWORKS[Network::NET_3]['name'],
+            'download' => Network::NETWORKS[Network::NET_3]['download'],
+            'upload' => Network::NETWORKS[Network::NET_3]['upload'],
+            'price' => Network::NETWORKS[Network::NET_3]['price'],
         ]);
         Network::create([
-            'name' => '2GS',
-            'download' => '1 Mbps',
-            'upload' => '0.2 Mbps',
-            'price' => 12000,
+            'id' => Network::NET_4,
+            'name' => Network::NETWORKS[Network::NET_4]['name'],
+            'download' => Network::NETWORKS[Network::NET_4]['download'],
+            'upload' => Network::NETWORKS[Network::NET_4]['upload'],
+            'price' => Network::NETWORKS[Network::NET_4]['price'],
         ]);
         Network::create([
-            'name' => '3G',
-            'download' => '2 Mbps',
-            'upload' => '0.4 Mbps',
-            'price' => 20000,
+            'id' => Network::NET_5,
+            'name' => Network::NETWORKS[Network::NET_5]['name'],
+            'download' => Network::NETWORKS[Network::NET_5]['download'],
+            'upload' => Network::NETWORKS[Network::NET_5]['upload'],
+            'price' => Network::NETWORKS[Network::NET_5]['price'],
         ]);
         Network::create([
-            'name' => '3GS',
-            'download' => '3 Mbps',
-            'upload' => '0.6 Mbps',
-            'price' => 30000,
+            'id' => Network::NET_6,
+            'name' => Network::NETWORKS[Network::NET_6]['name'],
+            'download' => Network::NETWORKS[Network::NET_6]['download'],
+            'upload' => Network::NETWORKS[Network::NET_6]['upload'],
+            'price' => Network::NETWORKS[Network::NET_6]['price'],
         ]);
         Network::create([
-            'name' => '4G',
-            'download' => '100 Mbps',
-            'upload' => '50 Mbps',
-            'price' => 44000,
+            'id' => Network::NET_7,
+            'name' => Network::NETWORKS[Network::NET_7]['name'],
+            'download' => Network::NETWORKS[Network::NET_7]['download'],
+            'upload' => Network::NETWORKS[Network::NET_7]['upload'],
+            'price' => Network::NETWORKS[Network::NET_7]['price'],
         ]);
         Network::create([
-            'name' => '4GS',
-            'download' => '10 Gbps',
-            'upload' => '2 Gbps',
-            'price' => 56000,
+            'id' => Network::NET_8,
+            'name' => Network::NETWORKS[Network::NET_8]['name'],
+            'download' => Network::NETWORKS[Network::NET_8]['download'],
+            'upload' => Network::NETWORKS[Network::NET_8]['upload'],
+            'price' => Network::NETWORKS[Network::NET_8]['price'],
         ]);
         Network::create([
-            'name' => '5G',
-            'download' => '14 Gbps',
-            'upload' => '2.8 Gbps',
-            'price' => 75000,
+            'id' => Network::NET_9,
+            'name' => Network::NETWORKS[Network::NET_9]['name'],
+            'download' => Network::NETWORKS[Network::NET_9]['download'],
+            'upload' => Network::NETWORKS[Network::NET_9]['upload'],
+            'price' => Network::NETWORKS[Network::NET_9]['price'],
         ]);
     }
 }

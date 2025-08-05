@@ -14,6 +14,72 @@
             </div>
         </header>
         <ul>
+            @php
+                $nextLevelDevice = \App\Models\Platform::getNextLevelDevice(Auth::user()->Platform->name);
+            @endphp
+            @if ($nextLevelDevice)
+                <li>
+                    <form method="post" action="/buy/device">
+                        @csrf
+                        <section>
+                            <div class="app-image">
+                                <div class="mobile">
+                                    <div class="phone">
+                                        <div class="phone-mirror">
+                                            <div class="topWrapper">
+                                                <div class="camera"></div>
+                                                <div class="line-rec"></div>
+                                            </div>
+                                            <div class="logo-title">
+                                                <span id="logo-2">{{ $nextLevelDevice['brand'] }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="app-info">
+                                <div class="app-name">Device: {{ $nextLevelDevice['name'] }}</div>
+                                <div class="app-buy-info">
+                                    <div class="app-price">
+                                        <span class="app-price-value">{{ formatNumber($nextLevelDevice['price']) }}</span>
+                                        <i class="fa-solid fa-bitcoin-sign"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section>
+                            <button type="submit" class="main-btn buy-button">Buy</button>
+                        </section>
+                    </form>
+                </li>
+            @endif
+            @php
+                $nextLevelNetwork = \App\Models\Network::getNextLevelNetwork(Auth::user()->Network->name);
+            @endphp
+            @if ($nextLevelNetwork)
+                <li>
+                    <form method="post" action="/buy/network">
+                        @csrf
+                        <section>
+                            <div class="app-image">
+                                <img src="{{ asset('apps/network.webp') }}" alt="firewall">
+                            </div>
+                            <div class="app-info">
+                                <div class="app-name">Network: {{ $nextLevelNetwork['name'] }}</div>
+                                <div class="app-buy-info">
+                                    <div class="app-price">
+                                        <span class="app-price-value">{{ formatNumber($nextLevelNetwork['price']) }}</span>
+                                        <i class="fa-solid fa-bitcoin-sign"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section>
+                            <button type="submit" class="main-btn buy-button">Buy</button>
+                        </section>
+                    </form>
+                </li>
+            @endif
             <li>
                 <form method="post" action="/buy/firewall">
                     @csrf

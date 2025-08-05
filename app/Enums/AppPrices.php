@@ -4,6 +4,8 @@ namespace App\Enums;
 
 class AppPrices {
     public const BASE_PRICES = [
+        'device' => 4000,
+        'network' => 3000,
         'firewall' => 800,
         'bypasser' => 800,
         'password_cracker' => 1100,

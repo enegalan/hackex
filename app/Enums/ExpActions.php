@@ -37,6 +37,14 @@ class ExpActions {
             'level_multiplicator' => 0.55,
         ],
         'purchased_items' => [
+            'device' => [
+                'base' => 15000,
+                'level_multiplicator' => 2.5,
+            ],
+            'network' => [
+                'base' => 5000,
+                'level_multiplicator' => 2.5,
+            ],
             'antivirus' => [
                 'base' => 550,
                 'level_multiplicator' => 0.8,

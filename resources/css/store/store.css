@@ -74,3 +74,21 @@
 .buy-button {
     font-size: 18px;
 }
+
+.store-frame .app-image .mobile .phone {
+    width: 40px;
+    height: 70px;
+}
+
+.store-frame .app-image .mobile .phone .phone-mirror {
+    width: 35px;
+    height: 65px;
+}
+
+.store-frame .logo-title {
+    font-size: 6px;
+}
+
+.store-frame .topWrapper {
+    left: 16%;
+}

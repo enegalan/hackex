@@ -4,6 +4,8 @@ namespace App\Enums;
 
 class Apps {
     public const APPS = [
+        'device' => 'Device',
+        'network' => 'Network',
         'antivirus' => 'Antivirus',
         'spam' => 'Spam',
         'spyware' => 'Spyware',
@@ -13,6 +15,8 @@ class Apps {
         'password_encryptor' => 'Password Encryptor',
     ];
     public const DESCRIPTIONS = [
+        'device' => '',
+        'network' => '',
         'antivirus' => '',
         'spam' => '',
         'spyware' => '',
@@ -22,6 +26,8 @@ class Apps {
         'password_encryptor' => 'The Password Encryptor is your last defense from keeping a hacker from accessing your bank account.',
     ];
     public const USES = [
+        'device' => '',
+        'network' => '',
         'antivirus' => '',
         'spam' => '',
         'spyware' => '',

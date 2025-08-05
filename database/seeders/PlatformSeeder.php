@@ -16,51 +16,60 @@ class PlatformSeeder extends Seeder
     {
         // Raiders
         Platform::create([
-            'name' => 'Raider I',
-            'price' => 0,
-            'processor' => '1.0GHz',
+            'id' => Platform::RAIDER_I,
+            'name' => Platform::PLATFORMS[Platform::RAIDER_I]['name'],
+            'price' => Platform::PLATFORMS[Platform::RAIDER_I]['price'],
+            'processor' => Platform::PLATFORMS[Platform::RAIDER_I]['processor'],
         ]);
         Platform::create([
-            'name' => 'Raider II',
-            'price' => 4000,
-            'processor' => '1.5GHz',
+            'id' => Platform::RAIDER_II,
+            'name' => Platform::PLATFORMS[Platform::RAIDER_II]['name'],
+            'price' => Platform::PLATFORMS[Platform::RAIDER_II]['price'],
+            'processor' => Platform::PLATFORMS[Platform::RAIDER_II]['processor'],
         ]);
         Platform::create([
-            'name' => 'Raider III',
-            'price' => 9000,
-            'processor' => '2.25GHz',
+            'id' => Platform::RAIDER_III,
+            'name' => Platform::PLATFORMS[Platform::RAIDER_III]['name'],
+            'price' => Platform::PLATFORMS[Platform::RAIDER_III]['price'],
+            'processor' => Platform::PLATFORMS[Platform::RAIDER_III]['processor'],
         ]);
         // Bolt
         Platform::create([
-            'name' => 'Bolt I',
-            'price' => 18000,
-            'processor' => '1.5GHz Dual Core',
+            'id' => Platform::BOLT_I,
+            'name' => Platform::PLATFORMS[Platform::BOLT_I]['name'],
+            'price' => Platform::PLATFORMS[Platform::BOLT_I]['price'],
+            'processor' => Platform::PLATFORMS[Platform::BOLT_I]['processor'],
         ]);
         Platform::create([
-            'name' => 'Bolt II',
-            'price' => 28000,
-            'processor' => '2.25GHz Dual Core',
+            'id' => Platform::BOLT_II,
+            'name' => Platform::PLATFORMS[Platform::BOLT_II]['name'],
+            'price' => Platform::PLATFORMS[Platform::BOLT_II]['price'],
+            'processor' => Platform::PLATFORMS[Platform::BOLT_II]['processor'],
         ]);
         Platform::create([
-            'name' => 'Bolt III',
-            'price' => 40000,
-            'processor' => '3.25GHz Dual Core',
+            'id' => Platform::BOLT_III,
+            'name' => Platform::PLATFORMS[Platform::BOLT_III]['name'],
+            'price' => Platform::PLATFORMS[Platform::BOLT_III]['price'],
+            'processor' => Platform::PLATFORMS[Platform::BOLT_III]['processor'],
         ]);
         // Nova
         Platform::create([
-            'name' => 'Nova I',
-            'price' => 56000,
-            'processor' => '20GHz',
+            'id' => Platform::NOVA_I,
+            'name' => Platform::PLATFORMS[Platform::NOVA_I]['name'],
+            'price' => Platform::PLATFORMS[Platform::NOVA_I]['price'],
+            'processor' => Platform::PLATFORMS[Platform::NOVA_I]['processor'],
         ]);
         Platform::create([
-            'name' => 'Nova II',
-            'price' => 82000,
-            'processor' => '2.75GHz Quad Core',
+            'id' => Platform::NOVA_II,
+            'name' => Platform::PLATFORMS[Platform::NOVA_II]['name'],
+            'price' => Platform::PLATFORMS[Platform::NOVA_II]['price'],
+            'processor' => Platform::PLATFORMS[Platform::NOVA_II]['processor'],
         ]);
         Platform::create([
-            'name' => 'Nova III',
-            'price' => 110000,
-            'processor' => '3.75GHz Quad Core',
+            'id' => Platform::NOVA_III,
+            'name' => Platform::PLATFORMS[Platform::NOVA_III]['name'],
+            'price' => Platform::PLATFORMS[Platform::NOVA_III]['price'],
+            'processor' => Platform::PLATFORMS[Platform::NOVA_III]['processor'],
         ]);
     }
 }
