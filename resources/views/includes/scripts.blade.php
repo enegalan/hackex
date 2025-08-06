@@ -283,7 +283,6 @@
 
             // Hack
             function openHackWindow(scope, type, id, onlyRemove = false, onlyHack = false, ocShorter = 0, retry = false) {
-                console.log(scope);
                 const modal = openWindow('hack');
                 const idInputs = modal.querySelectorAll('input[name="process_id"]');
                 if (onlyRemove) {

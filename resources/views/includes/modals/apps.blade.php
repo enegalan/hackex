@@ -34,7 +34,7 @@
                                     @if ($diff === 0)
                                     @elseif ($diff > 0)
                                         <span class="negative">-{{ $diff }}</span>
-                                    @else
+                                    @elseif ($diff < 0)
                                         <span class="positive">+{{ abs($diff) }}</span>
                                     @endif
                                 @endif
@@ -56,7 +56,7 @@
                                     @if ($diff === 0)
                                     @elseif ($diff > 0)
                                         <span class="negative">-{{ $diff }}</span>
-                                    @else
+                                    @elseif ($diff < 0)
                                         <span class="positive">+{{ abs($diff) }}</span>
                                     @endif
                                 @endif
@@ -78,7 +78,7 @@
                                     @if ($diff === 0)
                                     @elseif ($diff > 0)
                                         <span class="negative">-{{ $diff }}</span>
-                                    @else
+                                    @elseif ($diff < 0)
                                         <span class="positive">+{{ abs($diff) }}</span>
                                     @endif
                                 @endif
@@ -109,7 +109,7 @@
                                     @if ($diff === 0)
                                     @elseif ($diff > 0)
                                         <span class="negative">-{{ $diff }}</span>
-                                    @else
+                                    @elseif ($diff < 0)
                                         <span class="positive">+{{ abs($diff) }}</span>
                                     @endif
                                 @endif
@@ -139,7 +139,7 @@
                                 @if ($diff === 0)
                                 @elseif ($diff > 0)
                                     <span class="negative">-{{ $diff }}</span>
-                                @else
+                                @elseif ($diff < 0)
                                     <span class="positive">+{{ abs($diff) }}</span>
                                 @endif
                             @endif
@@ -166,10 +166,13 @@
                             <span class="app-name">{{ \App\Enums\Apps::getAppName('password_cracker') }}</span>
                             <span class="app-value">Level <span class="app-level-value">{{ $user['password_cracker_level'] }}</span>
                             @if ($isHacked)
+                                @php
+                                    $diff = Auth::user()->password_cracker_level - $user->password_cracker_level;
+                                @endphp
                                 @if ($diff === 0)
                                 @elseif ($diff > 0)
                                     <span class="negative">-{{ $diff }}</span>
-                                @else
+                                @elseif ($diff < 0)
                                     <span class="positive">+{{ abs($diff) }}</span>
                                 @endif
                             @endif
@@ -202,7 +205,7 @@
                                 @if ($diff === 0)
                                 @elseif ($diff > 0)
                                     <span class="negative">-{{ $diff }}</span>
-                                @else
+                                @elseif ($diff < 0)
                                     <span class="positive">+{{ abs($diff) }}</span>
                                 @endif
                             @endif

@@ -17,6 +17,7 @@ class Crack extends Model {
     ];
     public const WORKING = 0;
     public const SUCCESSFUL = 1;
+    public const FAILED = 2;
     public function User() {
         return $this->belongsTo(User::class);
     }

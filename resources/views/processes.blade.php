@@ -122,7 +122,7 @@
                                 // Ensure crack is updated
                                 \App\Http\Controllers\CrackController::checkAndUpdateCrack($crack);
                             @endphp
-                            <li onclick="openHackWindow(this, 'crack', '{{ $crack['id'] }}', true, false, {{ $crack['status'] === \App\Models\Crack::WORKING ? formatNumber(\App\Models\Crack::generateCrackFinishValueOC($crack)) : 0 }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($crack['created_at'])->toIso8601String() }}"
+                            <li onclick="openHackWindow(this, 'crack', '{{ $crack['id'] }}', 'true', 'false', {{ $crack['status'] === \App\Models\Crack::WORKING ? formatNumber(\App\Models\Crack::generateCrackFinishValueOC($crack)) : 0 }}, {{ $crack['status'] === \App\Models\Crack::FAILED ? 'true' : 'false' }})" timezone-replacing data-created-at="{{ \Carbon\Carbon::parse($crack['created_at'])->toIso8601String() }}"
                                 data-expires-at="{{ \Carbon\Carbon::parse($crack['expires_at'])->toIso8601String() }}">
                                 <div class="process-topwrap">
                                     <div class="process-info">
@@ -160,6 +160,11 @@
                                         <div class="process-status successful">
                                             <span>Crack</span>
                                             <span> successful</span>
+                                        </div>
+                                    @elseif ($crack['status'] === \App\Models\Crack::FAILED)
+                                        <div class="process-status failed">
+                                            <span>Crack</span>
+                                            <span> failed</span>
                                         </div>
                                     @endif
                                     <div class="process-level">

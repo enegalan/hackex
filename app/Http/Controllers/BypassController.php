@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class BypassController extends Controller {
     public static function checkAndUpdateBypass(Bypass $bypass) {
         if ($bypass->status === Bypass::WORKING && now()->greaterThanOrEqualTo($bypass->expires_at)) {
-            // Has expired, check if it's succeed or failed
             $successChance = self::calculateSuccessChance(
                 $bypass->User['bypasser_level'],
                 $bypass->Victim['firewall_level']
@@ -28,7 +27,7 @@ class BypassController extends Controller {
         // Bypasser level penalty (more high, more difficult)
         $progressPenalty = min(0.5, $bypasserLevel * 0.02); // to -50%
         // Base chance for equal level players
-        $baseChance = 90;
+        $baseChance = 80;
         // Level diff modificator
         // If diff > 0 (firewall higher), decrease chance
         // Si diff < 0 (bypasser higher), increase chance
