@@ -24,6 +24,7 @@ Homestead.yaml
 Thumbs.db
 
 package-lock.json
+composer.lock
 
 nginx/*.crt
 nginx/*.key
