@@ -17,6 +17,7 @@ class AppPrices {
     ];
 
     public static function getPrice(string $app, int $level = 1): int {
+        
         $base = self::BASE_PRICES[$app] ?? 0;
         return $base * $level;
     }

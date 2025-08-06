@@ -69,7 +69,7 @@ class BankController extends Controller {
             'expires_at' => calculateCrackExpiration($passwordEncryptorLevel, $passwordCrackerLevel),
             'visible' => 1,
         ]);
-        return redirect()->back()->with('success', 'Download has started.');
+        return redirect()->back()->with('success', 'Crack has started.');
     }
     function deposit(Request $request) {
         $deposit_id = $request->input('deposit_id');

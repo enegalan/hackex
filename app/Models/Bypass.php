@@ -12,6 +12,7 @@ class Bypass extends Model {
         'expires_at',
         'status',
         'available',
+        'visible',
     ];
     public const WORKING = 0;
     public const SUCCESSFUL = 1;

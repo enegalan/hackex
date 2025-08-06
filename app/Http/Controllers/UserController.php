@@ -176,6 +176,7 @@ class UserController extends Controller {
         switch ($type) {
             case 'bypass':
                 $model = Bypass::class;
+                $virtual = true;
                 break;
             case 'crack':
                 $model = Crack::class;
@@ -313,9 +314,14 @@ class UserController extends Controller {
         // Change IP
         $user->ip = UserController::getAvailableIp();
         $user->save();
-        // Clean transfers and do bypasses unavailable where user is the victim
-        Transfer::where('victim_id', $user->id)->where('type', Transfer::UPLOAD)->delete();
+        // Do transfers and bypasses unavailable where user is the victim
+        Transfer::where('victim_id', $user->id)->update([
+            'available' => 0,
+        ]);
         Bypass::where('victim_id', $user->id)->update([
+            'available' => 0,
+        ]);
+        Crack::where('victim_id', $user->id)->update([
             'available' => 0,
         ]);
         return back()->with('success', 'IP changed successfully');

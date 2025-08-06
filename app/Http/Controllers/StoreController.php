@@ -6,6 +6,8 @@ use App\Enums\AppPrices;
 use App\Enums\Apps;
 use App\Enums\ExpActions;
 use App\Enums\MaxSavings;
+use App\Models\Bypass;
+use App\Models\Crack;
 use App\Models\Network;
 use App\Models\Platform;
 use Auth;
@@ -15,8 +17,6 @@ class StoreController extends Controller {
     function buy($app_name) {
         $user = Auth::user();
         $checking = $user->checking_bitcoins;
-        $secured = $user->secured_bitcoins;
-        $total = $checking + $secured;
         if ($app_name !== 'device' && $app_name !== 'network') {
             // Validate if level column exists
             $levelColumn = $app_name . '_level';
@@ -53,6 +53,17 @@ class StoreController extends Controller {
         }
         if ($app_name !== 'device' && $app_name !== 'network') {
             $user->$levelColumn = $nextLevel;
+            if ($app_name === 'firewall') {
+                // Do bypasses unavailable where user is the victim
+                Bypass::where('victim_id', $user->id)->update([
+                    'available' => 0,
+                ]);
+            } elseif ($app_name === 'password_encryptor') {
+                // Do cracks unavailable where user is the victim
+                Crack::where('victim_id', $user->id)->update([
+                    'available' => 0,
+                ]);
+            }
         } else {
             if ($app_name === 'device') {
                 $user->platform_id = $next_platform->id;

@@ -1,7 +1,7 @@
 <?php
     $user = session('hackedUser', Auth::user());
     $isHacked = session('hackedUser', false);
-    $hasCredentials = !$isHacked || ($isHacked && Auth::user()->Crack()->where('victim_id', $user['id'])->where('status', \App\Models\Crack::SUCCESSFUL)->exists())
+    $hasCredentials = !$isHacked || ($isHacked && Auth::user()->Crack()->where('victim_id', $user['id'])->where('status', \App\Models\Crack::SUCCESSFUL)->where('available', true)->exists())
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">

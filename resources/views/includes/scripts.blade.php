@@ -361,7 +361,7 @@
         <script id="scan">
             const ipSearchInput = document.querySelector('input#ip-search');
             ipSearchInput.addEventListener('input', (e) => {
-                const pingButton = document.querySelector('.ping-button');
+                const pingButton = document.querySelector('#scan .ping-button');
                 if (isValidIP(e.target.value)) {
                     pingButton.disabled = false;
                 } else {

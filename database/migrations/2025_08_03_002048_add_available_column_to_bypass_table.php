@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::table('bypasses', function (Blueprint $table) {
             $table->tinyInteger('available')->default(1);
         });
+        Schema::table('crack', function (Blueprint $table) {
+            $table->tinyInteger('available')->default(1);
+        });
     }
 
     /**
@@ -22,6 +25,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('bypasses', function (Blueprint $table) {
+            $table->dropColumn('available');
+        });
+        Schema::table('crack', function (Blueprint $table) {
             $table->dropColumn('available');
         });
     }

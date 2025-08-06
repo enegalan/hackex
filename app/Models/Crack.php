@@ -13,6 +13,7 @@ class Crack extends Model {
         'expires_at',
         'status',
         'visible',
+        'available',
     ];
     public const WORKING = 0;
     public const SUCCESSFUL = 1;

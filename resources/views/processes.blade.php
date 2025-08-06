@@ -31,7 +31,7 @@
             <section class="processes-tabs">
                 <div class="tabs">
                     <div class="process-tab" id="bypassing-tab">
-                        <input type="hidden" name="bypassing-total-value" id="bypassing-total-value-input" value="{{ Auth::user()->Bypass->count() }}">
+                        <input type="hidden" name="bypassing-total-value" id="bypassing-total-value-input" value="{{ Auth::user()->Bypass()->where('visible', true)->count() }}">
                         <input type="hidden" name="bypassing-running-value" id="bypassing-running-value-input" value="{{ Auth::user()->Bypass()->where('status', \App\Models\Bypass::WORKING)->count() }}">
                         <span>Bypassing</span>
                     </div>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('victim_id');
             $table->tinyInteger('status')->default(0); // 0 = working, 1 = successful, 2 = failed
             $table->timestamp('expires_at');
+            $table->tinyInteger('visible')->default(1);
             $table->timestamps();
         });
         Schema::create('cracks', function (Blueprint $table) {
