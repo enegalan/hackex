@@ -154,7 +154,6 @@
             if (!window.userId) return;
             Echo.private(`App.Models.User.${window.userId}`)
                 .notification((notification) => {
-                    console.log('notified!!', notification);
                     const level = notification.level;
                     const max_savings = notification.max_savings;
                     const oc = notification.oc;
