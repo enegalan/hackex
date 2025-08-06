@@ -5,7 +5,7 @@
         return;
     }
 @endphp
-<div id="apps-modal" class="modal">
+<div id="apps-modal" class="modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <div class="title">Apps</div>

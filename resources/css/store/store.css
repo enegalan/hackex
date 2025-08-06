@@ -9,6 +9,7 @@
     padding-bottom: 1rem;
     background: #616161;
     background: linear-gradient(0deg, #151515 30%, #4c4c4c 100%);
+    z-index: 3;
 }
 
 .store-frame header h3 {

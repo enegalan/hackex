@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PlatformSeeder::class,
             NetworkSeeder::class,
-            TestingUserSeeder::class,
             WallpaperSeeder::class,
+            TestingUserSeeder::class,
         ]);
     }
 }

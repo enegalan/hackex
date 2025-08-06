@@ -52,7 +52,7 @@ class UserController extends Controller {
         } else {
             // Transfer session user's checking_bitcoins to secured_bitcoins
             $user = Auth::user();
-            $maxSaving = \App\Enums\MaxSavings::getMaxSaving($user->Platform->id);
+            $maxSaving = $user->max_savings;
             $currentSecured = $user->secured_bitcoins;
             // Calculate how much bitcoins can be transfered
             $spaceLeft = $maxSaving - $currentSecured;

@@ -71,6 +71,11 @@ input[type="password"] {
     letter-spacing: 3px;
 }
 
+hr {
+    border: .1px solid #ffffff85;
+    width: 100%;
+}
+
 textarea:focus-visible {
     outline: none;
 }

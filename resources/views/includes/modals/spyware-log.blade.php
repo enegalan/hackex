@@ -3,7 +3,7 @@
         return;
     }
 @endphp
-<section style="z-index: 9" id="spyware-log-modal" class="modal">
+<section style="z-index: 9" id="spyware-log-modal" class="modal" closable="true">
     <section class="modal-frame">
         <textarea readonly name="log" id="spyware-log"></textarea>
         <input type="hidden" name="transfer_id" id="input-transfer-id-4">

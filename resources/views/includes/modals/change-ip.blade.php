@@ -3,7 +3,7 @@
         return;
     }
 @endphp
-<div style="z-index: 3;" id="change-ip-modal" class="modal">
+<div style="z-index: 3;" id="change-ip-modal" class="modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <div class="app_label">Generate a New IP</div>

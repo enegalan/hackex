@@ -3,7 +3,7 @@
         return;
     }
 @endphp
-<div id="viruses-modal" class="modal">
+<div id="viruses-modal" class="modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <div class="title">Viruses</div>

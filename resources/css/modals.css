@@ -958,3 +958,46 @@
     background: white;
     height: 100%;
 }
+
+/* Level Up notification */
+#level-up-modal .app_label {
+    margin-bottom: .5rem;
+    font-size: 22px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+#level-up-frame {
+    font-size: 12px;
+    font-weight: lighter;
+    margin-bottom: .8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+#level-up-modal .modal-frame {
+    display: flex;
+    flex-direction: column;
+    background: #02408f;
+    width: 18rem;
+    min-width: 18rem;
+    max-width: 18rem;
+    height: 32%;
+    margin: auto;
+    padding: 1.5rem;
+    position: relative;
+}
+
+#level-up-modal #modal-top {
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.ok-button {
+    width: fit-content;
+    align-self: center;
+}
+
+#level-up-modal .player-level {
+    transform: scale(1.4);
+}

@@ -3,75 +3,74 @@
 namespace App\Enums;
 
 use App\Models\User;
+use App\Notifications\LevelUpNotification;
 use Auth;
 use Illuminate\Http\Request;
+use Log;
 
 class ExpActions {
-    // Mapa con experiencia acumulada necesaria por nivel (del 1 al 100)
     public static array $expMap = [];
-
-    // Genera el mapa de experiencia necesaria para cada nivel
     public static function buildExpMap(int $maxLevel = 100): void
     {
-        self::$expMap = [1 => 0]; // Nivel 1 comienza en 0 exp
+        self::$expMap = [1 => 0]; // Level 1 starts with 0 exp
         for ($level = 2; $level <= $maxLevel; $level++) {
-            $expRequired = intval(100 * pow($level - 1, 1.5)); // fórmula progresiva
+            $expRequired = intval(100 * pow($level - 1, 1.5)); // progressive formula
             self::$expMap[$level] = self::$expMap[$level - 1] + $expRequired;
         }
     }
     const EXP_PER_ACTIONS = [
         'bypass_successful' => [
             'base' => 100,
-            'level_multiplicator' => 0.25,
+            'level_multiplicator' => 1.25,
         ],
         'crack_successful' => [
             'base' => 500,
-            'level_multiplicator' => 0.75,
+            'level_multiplicator' => 1.75,
         ],
         'upload_successful' => [
             'base' => 250,
-            'level_multiplicator' => 0.55,
+            'level_multiplicator' => 1.55,
         ],
         'download_successful' => [
             'base' => 250,
-            'level_multiplicator' => 0.55,
+            'level_multiplicator' => 1.55,
         ],
         'purchased_items' => [
             'device' => [
                 'base' => 15000,
-                'level_multiplicator' => 2.5,
+                'level_multiplicator' => 3.5,
             ],
             'network' => [
                 'base' => 5000,
-                'level_multiplicator' => 2.5,
+                'level_multiplicator' => 3.5,
             ],
             'antivirus' => [
                 'base' => 550,
-                'level_multiplicator' => 0.8,
+                'level_multiplicator' => 1.8,
             ],
             'spam' => [
                 'base' => 750,
-                'level_multiplicator' => 0.75,
+                'level_multiplicator' => 1.75,
             ],
             'spyware' => [
                 'base' => 450,
-                'level_multiplicator' => 0.8,
+                'level_multiplicator' => 1.8,
             ],
             'firewall' => [
                 'base' => 450,
-                'level_multiplicator' => 0.8,
+                'level_multiplicator' => 1.8,
             ],
             'bypasser' => [
                 'base' => 450,
-                'level_multiplicator' => 0.8,
+                'level_multiplicator' => 1.8,
             ],
             'password_cracker' => [
                 'base' => 900,
-                'level_multiplicator' => 0.65,
+                'level_multiplicator' => 1.65,
             ],
             'password_encryptor' => [
                 'base' => 900,
-                'level_multiplicator' => 0.65,
+                'level_multiplicator' => 1.65,
             ],
         ]
     ];
@@ -101,7 +100,7 @@ class ExpActions {
             $base = $actionExp['base'];
             $levelMultiplicator = $actionExp['level_multiplicator'];
             $level = 1;
-            if ($actionKey === 'purchase_items' && $subkey) {
+            if ($actionKey === 'purchased_items' && $subkey) {
                 $property = $subkey . '_level';
                 $level = $user->$property ?? 1;
             } else {
@@ -110,6 +109,7 @@ class ExpActions {
             $gainedExp = intval($base + $level * $levelMultiplicator);
             $user->exp += $gainedExp;
             $user->save();
+            self::getUserLevel($user); // Ensure user level is updated and notified
             $exp = [
                 'id' => $uniqueId,
                 'user_id' => Auth::id(),
@@ -137,6 +137,14 @@ class ExpActions {
                 $level = $level - 1;
                 $user->level = $level;
                 $user->save();
+                if ($user->wasChanged('level')) {
+                    $max_savings = $level * 200; // TODO: Move this to a config
+                    $user->max_savings += $max_savings;
+                    $oc = $level * 5; // TODO: Move this to a config
+                    $user->oc += $oc;
+                    $user->save();
+                    $user->notify(new LevelUpNotification($level, $max_savings, $oc));
+                }
                 return $level;
             }
         }

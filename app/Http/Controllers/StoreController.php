@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\AppPrices;
 use App\Enums\Apps;
 use App\Enums\ExpActions;
+use App\Enums\MaxSavings;
 use App\Models\Network;
 use App\Models\Platform;
 use Auth;
@@ -55,6 +56,7 @@ class StoreController extends Controller {
         } else {
             if ($app_name === 'device') {
                 $user->platform_id = $next_platform->id;
+                $user->max_savings += MaxSavings::getMaxSaving($next_platform->id);
             } elseif ($app_name === 'network') {
                 $user->network_id = $next_network->id;
             }

@@ -45,7 +45,7 @@
                         <div class="account-detail-description">
                             <span>(Max limit: </span>
                             <div style="display:flex">
-                                <span>{{ formatNumber(\App\Enums\MaxSavings::getMaxSaving($user->Platform->id)) }}</span>
+                                <span>{{ formatNumber($user->max_savings) }}</span>
                                 <span>)</span>
                             </div>
                         </div>
@@ -67,7 +67,7 @@
             </ul>
         </section>
         <section class="bank-buttons">
-            @if (!$isHacked && $user['secured_bitcoins'] == \App\Enums\MaxSavings::getMaxSaving($user->Platform->id))
+            @if (!$isHacked && $user['secured_bitcoins'] == $user->max_savings)
                 <form style="width: 100%;">
                     <button type="button" style="font-weight: normal" class="main-btn transfer-button">Transfer</button>
                 </form>

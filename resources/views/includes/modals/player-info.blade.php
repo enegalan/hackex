@@ -17,7 +17,7 @@ if (isset($victim_id) || session('isHacked')) {
 }
 
 ?>
-<div style="z-index: 3;" id="player-info-modal" class="modal">
+<div style="z-index: 3;" id="player-info-modal" class="modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <section class="player-level-info">

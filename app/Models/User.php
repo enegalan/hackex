@@ -38,6 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail {
         'notepad_level',
         'platform_id',
         'network_id',
+        'max_savings',
     ];
 
     function Platform() {

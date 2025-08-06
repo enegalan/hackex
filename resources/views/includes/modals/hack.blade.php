@@ -3,7 +3,7 @@
         return;
     }
 @endphp
-<div id="hack-modal" class="modal">
+<div id="hack-modal" class="modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <div class="title">Process Actions</div>

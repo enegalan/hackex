@@ -3,7 +3,7 @@
         return;
     }
 @endphp
-<div id="bypass-modal" class="modal">
+<div id="bypass-modal" class="modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <div class="title">Bypass Device</div>
@@ -18,7 +18,7 @@
                 <span class="bypasser_level">1</span>
                 <input type="hidden" name="bypasser_level" id="input-bypasser-level" value="1">
                 <span> Bypasser?</span>
-                <input type="hidden" name="ip" id="input-ip" value="192.168.0.1">
+                <input type="hidden" name="ip" id="input-ip-2" value="192.168.0.1">
             </section>
             <section class="buttons">
                 <button type="button" class="close cancel">Cancel</button>

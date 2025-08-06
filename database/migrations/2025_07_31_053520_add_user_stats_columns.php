@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\MaxSavings;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->integer('notepad_level')->default(1);
             $table->unsignedInteger('platform_id')->default(1);
             $table->unsignedInteger('network_id')->default(1);
+            $table->bigInteger('max_savings')->default(MaxSavings::MAX_SAVINGS[1]);
         });
     }
 

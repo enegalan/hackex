@@ -6,7 +6,7 @@
     $user->refresh();
     $friends = \App\Models\Friendship::where('accepted', true)->where('user_id', $user->id)->orWhere('friend_id', $user->id)->get();
 @endphp
-<div style="z-index: 3;" id="compose-modal" class="modal">
+<div style="z-index: 3;" id="compose-modal" class="modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <div class="app_label">Compose</div>

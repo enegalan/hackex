@@ -3,7 +3,7 @@
         return;
     }
 @endphp
-<div style="z-index: 12;" id="spyware-confirm-modal" class="modal">
+<div style="z-index: 12;" id="spyware-confirm-modal" class="modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <div class="title">Remove Confirm</div>

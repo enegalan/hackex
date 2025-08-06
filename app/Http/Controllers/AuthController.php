@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\MaxSavings;
 use App\Models\Message;
 use App\Models\Network;
 use App\Models\Platform;
@@ -36,8 +37,8 @@ class AuthController extends Controller {
                 ->withInput()
                 ->with('initialToggle', true);
         }
-        $first_platform = Platform::first();
-        $first_network = Network::first();
+        $first_platform = Platform::findOrFail(Platform::RAIDER_I);
+        $first_network = Network::findOrFail(Network::NET_1);
         $user = User::create([
             'username' => $request->input('username'),
             'email' => $request->input('email'),
@@ -45,6 +46,7 @@ class AuthController extends Controller {
             'ip' => UserController::getAvailableIp(),
             'platform_id' => $first_platform['id'],
             'network_id' => $first_network['id'],
+            'max_savings' => MaxSavings::getMaxSaving(Platform::RAIDER_I),
         ]);
         $wallpaper = Wallpaper::where('name', Wallpaper::RAIDER[1])->first();
         $user->UserWallpaper()->updateOrCreate([

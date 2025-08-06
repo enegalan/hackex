@@ -52,6 +52,7 @@
             'remove-contact': '#remove-contact-modal',
             'compose': '#compose-modal',
             'delete-message': '#delete-message-modal',
+            'level-up': '#level-up-modal',
         };
         function closeWindow(windowName, refresh = false) {
             const foundModalName = windows[windowName];
@@ -96,7 +97,7 @@
             }
             modal.style.display = "flex";
             if (close) close.addEventListener('click', closeModal);
-            window.addEventListener('click', clickOutsideHandler);
+            if (modal.getAttribute("closable") == "true") window.addEventListener('click', clickOutsideHandler);
             return modal;
         }
         // Save scroll before exit
@@ -145,6 +146,31 @@
             .catch(error => {
                 console.error('Error changing wallpaper:', error);
             });
+        }
+    </script>
+    <script id="sockets">
+        window.userId = {{ Auth::id() }};
+        window.onload = () => {
+            if (!window.userId) return;
+            Echo.private(`App.Models.User.${window.userId}`)
+                .notification((notification) => {
+                    console.log('notified!!', notification);
+                    const level = notification.level;
+                    const max_savings = notification.max_savings;
+                    const oc = notification.oc;
+                    if (level && max_savings && oc) {
+                        openLevelUpNotification(level, max_savings, oc);
+                    }
+                });
+        };
+        function openLevelUpNotification(level, max_savings, oc) {
+            if (!level || !max_savings || !oc) return;
+            const notification = openWindow('level-up');
+            notification.querySelector('.max_savings_value').innerText = max_savings;
+            notification.querySelector('.oc_value').innerText = oc;
+        }
+        function closeLevelUpNotification() {
+            closeWindow('level-up');
         }
     </script>
 @endif
@@ -352,7 +378,7 @@
                 bypasserSpan.innerText = bypasser_level;
                 const bypasserInput = modal.querySelector('#input-bypasser-level');
                 bypasserInput.value = bypasser_level;
-                const ipInput = modal.querySelector('#input-ip');
+                const ipInput = modal.querySelector('#input-ip-2');
                 ipInput.value = ip;
             }
             function refreshScan(scope) {
@@ -561,7 +587,7 @@
                 modal.querySelector('.next_level_exp_goal').innerText = next_level_exp_goal;
             }
             function closePlayerInfoModal() {
-                closeWindow('player-info', true);
+                closeWindow('player-info');
             }
         </script>
     @endif

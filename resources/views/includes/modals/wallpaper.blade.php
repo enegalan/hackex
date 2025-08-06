@@ -4,7 +4,7 @@
     }
     $user = session('hackedUser', Auth::user());
 @endphp
-<div style="z-index: 3;" id="wallpaper-modal" class="modal">
+<div style="z-index: 3;" id="wallpaper-modal" class="modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <div class="app_label">Change wallpaper</div>
