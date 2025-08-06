@@ -41,7 +41,7 @@
                                 <div class="app-name">Device: {{ $nextLevelDevice['name'] }}</div>
                                 <div class="app-buy-info">
                                     <div class="app-price">
-                                        <span class="app-price-value">{{ formatNumber($nextLevelDevice['price']) }}</span>
+                                        <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins($nextLevelDevice['price']) ? 'affordable' : '' }}">{{ formatNumber($nextLevelDevice['price']) }}</span>
                                         <i class="fa-solid fa-bitcoin-sign"></i>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                 <div class="app-name">Network: {{ $nextLevelNetwork['name'] }}</div>
                                 <div class="app-buy-info">
                                     <div class="app-price">
-                                        <span class="app-price-value">{{ formatNumber($nextLevelNetwork['price']) }}</span>
+                                        <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins($nextLevelNetwork['price']) ? 'affordable' : '' }}">{{ formatNumber($nextLevelNetwork['price']) }}</span>
                                         <i class="fa-solid fa-bitcoin-sign"></i>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('firewall', Auth::user()['firewall_level'])) }}</span>
+                                    <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins(\App\Enums\AppPrices::getPrice('firewall', Auth::user()['firewall_level'])) ? 'affordable' : '' }}">{{ formatNumber(\App\Enums\AppPrices::getPrice('firewall', Auth::user()['firewall_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('bypasser', Auth::user()['bypasser_level'])) }}</span>
+                                    <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins(\App\Enums\AppPrices::getPrice('bypasser', Auth::user()['bypasser_level'])) ? 'affordable' : '' }}">{{ formatNumber(\App\Enums\AppPrices::getPrice('bypasser', Auth::user()['bypasser_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('password_cracker', Auth::user()['password_cracker_level'])) }}</span>
+                                    <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins(\App\Enums\AppPrices::getPrice('password_cracker', Auth::user()['password_cracker_level'])) ? 'affordable' : '' }}">{{ formatNumber(\App\Enums\AppPrices::getPrice('password_cracker', Auth::user()['password_cracker_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('password_encryptor', Auth::user()['password_encryptor_level'])) }}</span>
+                                    <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins(\App\Enums\AppPrices::getPrice('password_encryptor', Auth::user()['password_encryptor_level'])) ? 'affordable' : '' }}">{{ formatNumber(\App\Enums\AppPrices::getPrice('password_encryptor', Auth::user()['password_encryptor_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -204,7 +204,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('antivirus', Auth::user()['antivirus_level'])) }}</span>
+                                    <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins(\App\Enums\AppPrices::getPrice('antivirus', Auth::user()['antivirus_level'])) ? 'affordable' : '' }}">{{ formatNumber(\App\Enums\AppPrices::getPrice('antivirus', Auth::user()['antivirus_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -231,7 +231,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('spam', Auth::user()['spam_level'])) }}</span>
+                                    <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins(\App\Enums\AppPrices::getPrice('spam', Auth::user()['spam_level'])) ? 'affordable' : '' }}">{{ formatNumber(\App\Enums\AppPrices::getPrice('spam', Auth::user()['spam_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -258,7 +258,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('spyware', Auth::user()['spyware_level'])) }}</span>
+                                    <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins(\App\Enums\AppPrices::getPrice('spyware', Auth::user()['spyware_level'])) ? 'affordable' : '' }}">{{ formatNumber(\App\Enums\AppPrices::getPrice('spyware', Auth::user()['spyware_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>
@@ -285,7 +285,7 @@
                                 </div>
                                 <div class="vertical-separator">|</div>
                                 <div class="app-price">
-                                    <span class="app-price-value">{{ formatNumber(\App\Enums\AppPrices::getPrice('notepad', Auth::user()['notepad_level'])) }}</span>
+                                    <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins(\App\Enums\AppPrices::getPrice('notepad', Auth::user()['notepad_level'])) ? 'affordable' : '' }}">{{ formatNumber(\App\Enums\AppPrices::getPrice('notepad', Auth::user()['notepad_level'])) }}</span>
                                     <i class="fa-solid fa-bitcoin-sign"></i>
                                 </div>
                             </div>

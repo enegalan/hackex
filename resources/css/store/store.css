@@ -69,7 +69,11 @@
 }
 
 .app-price-value {
-    color: #a6e736;
+    color: var(--red);
+}
+
+.app-price-value.affordable {
+    color: var(--primaryGreen);
 }
 
 .buy-button {

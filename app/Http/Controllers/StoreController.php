@@ -40,7 +40,7 @@ class StoreController extends Controller {
                 $nextLevel = $next_network['name'];
             }
         }
-        if ($total < $price) {
+        if (!self::hasEnoughBitcoins($price, $user)) {
             return redirect()->back()->with('error', 'Not enough bitcoins');
         }
         // Subtract from checking first
@@ -65,5 +65,15 @@ class StoreController extends Controller {
         LogController::doLog(LogController::PURCHASED, $user, ['app_level' => $nextLevel, 'app_name' => Apps::getAppName($app_name)]);
         ExpActions::addExp('purchased_items', $app_name, false);
         return redirect()->back()->with('success', 'App successfully upgraded.');
+    }
+    public static function hasEnoughBitcoins($price, $user = null) {
+        if (!$user) $user = Auth::user();
+        $checking = $user->checking_bitcoins;
+        $secured = $user->secured_bitcoins;
+        $total = $checking + $secured;
+        if ($total < $price) {
+            return false;
+        }
+        return true;
     }
 }
