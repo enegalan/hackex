@@ -23,7 +23,7 @@
             </section>
         </section>
     </body>
-    @include('includes.back-btn')
+    @include('includes.back-btn', ['callback' => "redirect('/messages')"])
     @include('includes.scripts', ['scripts' => ['messages']])
     @include('includes.notifications')
 </html>
