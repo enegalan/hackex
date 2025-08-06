@@ -63,3 +63,7 @@ Route::middleware([IsFullyVerified::class, CheckDailyLogin::class])->group(funct
 });
 
 require __DIR__ . '/auth.php';
+
+Route::fallback(function () {
+    return redirect('/')->with('error', 'Page not found.');
+});
