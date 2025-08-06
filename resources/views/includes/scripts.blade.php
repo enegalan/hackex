@@ -379,8 +379,8 @@
                 const ipInput = modal.querySelector('#input-ip-2');
                 ipInput.value = ip;
             }
-            function refreshScan(scope) {
-                scope.disabled = true;
+            function refreshScan(scope = null) {
+                if (scope) scope.disabled = true;
                 const ipList = document.querySelector('#ip-list');
                 ipList.innerHTML = '<span class="refresh-scan-text">Scanning devices...</span>';
                 const csrfToken = document.querySelector('#scan input[name="_token"]').value;
@@ -395,14 +395,19 @@
                 .then(data => {
                     setTimeout(() => {
                         ipList.innerHTML = '<ul>' + data + '</ul>';
-                        scope.disabled = false;
+                        if (scope) scope.disabled = false;
                     }, 1000);
                 })
                 .catch(error => {
-                    console.error('Error changing wallpaper:', error);
+                    console.error('Error refreshing scan:', error);
                 });
             }
         </script>
+        @if (!session('persist_scan'))
+            <script id="refresh-scan">
+                refreshScan();
+            </script>
+        @endif
     @endif
     @if (in_array("login", $scripts))
         <script id="login">

@@ -21,6 +21,7 @@ class ScanController extends Controller {
         if (!$user) {
             return back()->with('error', 'No device found with that IP address.');
         }
+
         return back()->with('ping_result', $user);
     }
     function createBypass(Request $request) {
@@ -32,13 +33,16 @@ class ScanController extends Controller {
         $bypasserLevel = $request->input('bypasser_level');
         $ip = $request->input('ip');
         $victim = User::where('ip', $ip)->first();
+        if (Bypass::where('user_id', Auth::id())->where('victim_id', $victim->id)->where('available', true)->where('visible', true)->exists()) {
+            return back()->with('error', 'You already have an active bypass on this device.');
+        }
         Bypass::create([
             'user_id' => Auth::id(),
             'victim_id' => $victim->id,
             'expires_at' => calculateBypassExpiration($firewallLevel, $bypasserLevel),
         ]);
         LogController::doLog(LogController::BYPASS, Auth::user(), ['ip' => $victim->ip]);
-        return back()->with('success', 'Bypass has started.');
+        return back()->with(['success' => 'Bypass has started.', 'persist_scan' => true]);
     }
     function refreshScan() {
         $user_id = Auth::id();

@@ -32,7 +32,7 @@ function getRandomMatchedUsers(User $baseUser, int $range = 20) {
         return Cache::get($cacheKey);
     }
     $excludedVictimIds = Bypass::where('user_id', $baseUser->id)
-        ->where('available', false)
+        ->where('available', true)->where('visible', true)
         ->pluck('victim_id');
     $minLevel = max(1, $baseUser->level - $range);
     $maxLevel = $baseUser->level + $range;
