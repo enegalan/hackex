@@ -32,6 +32,14 @@ if (isset($victim_id) || session('isHacked')) {
                     <span class="next_level_exp_goal">0</span>
                     <span>to next level</span>
                 </div>
+                <div>
+                    <span>Reputation:</span>
+                    <span class="reputation">{{ formatNumber($user->reputation) }}</span>
+                </div>
+                <div>
+                    <span>Score:</span>
+                    <span class="score">{{ formatNumber($user->score) }}</span>
+                </div>
             </section>
             @if (!$isHacked)
                 <section class="daily-login">

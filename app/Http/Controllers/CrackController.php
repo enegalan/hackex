@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ExpActions;
+use App\Enums\ReputationActions;
 use App\Models\Crack;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,12 @@ class CrackController extends Controller {
             $crack->save();
             if ($crack->status === Crack::SUCCESSFUL) {
                 ExpActions::addExp('crack_successful', null, true, 'crack_' . $crack->id);
+                $difficultAction = $crack->Victim->password_encryptor_level > $crack->User->password_cracker_level;
+                ReputationActions::addReputation('crack_successful', null, true, 'crack_' . $crack->id, $difficultAction);
+                // Check if user re-hacked this crack
+                if (Crack::where('user_id', $crack->User->id)->where('victim_id', $crack->Victim->id)->where('available', false)->exists()) {
+                    ReputationActions::addReputation('rehack_crack_successful', null, true, 'rehack_crack_' . $crack->id, $difficultAction);
+                }
             }
         }
         return $crack;

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ExpActions;
+use App\Enums\ReputationActions;
 use App\Models\Bypass;
+use Auth;
 use Illuminate\Http\Request;
 
 class BypassController extends Controller {
@@ -18,6 +20,12 @@ class BypassController extends Controller {
             if ($bypass->status === Bypass::SUCCESSFUL) {
                 LogController::doLog(LogController::BYPASS_SUCCESSFUL, $bypass->User, ['ip' => $bypass->Victim->ip]);
                 ExpActions::addExp('bypass_successful', null, true, 'bypass_' . $bypass->id);
+                $difficultAction = $bypass->Victim->firewall_level > $bypass->User->bypasser_level;
+                ReputationActions::addReputation('bypass_successful', null, true, 'bypass_' . $bypass->id, $difficultAction);
+                // Check if user re-hacked this bypass
+                if (Bypass::where('user_id', $bypass->User->id)->where('victim_id', $bypass->Victim->id)->where('available', false)->exists()) {
+                    ReputationActions::addReputation('rehack_bypass_successful', null, true, 'rehack_bypass_' . $bypass->id, $difficultAction);
+                }
             }
         }
         return $bypass;

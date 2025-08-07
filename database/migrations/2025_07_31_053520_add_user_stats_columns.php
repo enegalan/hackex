@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigInteger('level')->default(1);
             $table->string('ip')->unique('ip');
             $table->bigInteger('oc')->default(0);
-            $table->bigInteger('checking_bitcoins')->default(0);
+            $table->bigInteger('checking_bitcoins')->default(1500);
             $table->bigInteger('secured_bitcoins')->default(0);
             $table->longText('log')->default('');
             $table->integer('antivirus_level')->default(1);
@@ -30,6 +30,8 @@ return new class extends Migration
             $table->unsignedInteger('platform_id')->default(1);
             $table->unsignedInteger('network_id')->default(1);
             $table->bigInteger('max_savings')->default(MaxSavings::MAX_SAVINGS[1]);
+            $table->bigInteger('reputation')->default(0);
+            $table->bigInteger('score')->default(0);
         });
     }
 
