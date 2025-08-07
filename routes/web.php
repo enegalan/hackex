@@ -60,6 +60,7 @@ Route::middleware([IsFullyVerified::class, CheckDailyLogin::class])->group(funct
     Route::get('/device', [ViewController::class, 'device']);
     Route::post('/ip-change', [UserController::class, 'changeIp']);
     Route::post('/select-wallpaper', [WallpaperController::class, 'select']);
+    Route::get('/leaderboards', [ViewController::class, 'leaderboards']);
 });
 
 require __DIR__ . '/auth.php';

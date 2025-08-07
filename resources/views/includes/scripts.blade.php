@@ -582,12 +582,41 @@
             function closeAppInfoModal() {
                 closeWindow('app-info');
             }
-            function openPlayerInfoWindow(username, level, next_level_exp, next_level_exp_goal) {
+            function openPlayerInfoWindow(username, level, next_level_exp, next_level_exp_goal, reputation, score, rank, levelBgName, isLeaderboard = false) {
                 const modal = openWindow('player-info');
-                modal.querySelector('.username').innerText = username;
-                modal.querySelector('.level').innerText = level;
-                modal.querySelector('.next_level_exp').innerText = next_level_exp;
-                modal.querySelector('.next_level_exp_goal').innerText = next_level_exp_goal;
+                if (username) modal.querySelector('.username').innerText = username;
+                if (level) modal.querySelector('.level').innerText = level;
+                if (next_level_exp) modal.querySelector('.next_level_exp').innerText = next_level_exp;
+                if (next_level_exp_goal) modal.querySelector('.next_level_exp_goal').innerText = next_level_exp_goal;
+                if (reputation) modal.querySelector('.reputation').innerText = reputation;
+                if (score) modal.querySelector('.score').innerText = score;
+                if (rank != null) {
+                    modal.querySelector('.rank').parentNode.style.display = "block";
+                    modal.querySelector('.rank').innerText = rank;
+                } else {
+                    modal.querySelector('.rank').parentNode.style.display = "none";
+                }
+                const dailyLoginModal = modal.querySelector('.daily-login')
+                if (isLeaderboard) {
+                    modal.querySelector('.next_level_exp').parentNode.style.display = "none";
+                    const levelNode = modal.querySelector('.level').parentNode.cloneNode(true);
+                    const reputationParent = modal.querySelector('.reputation').parentNode;
+                    modal.querySelector('.level').parentNode.style.display = "none";
+                    reputationParent.parentNode.insertBefore(levelNode, reputationParent.nextSibling);
+                    if (dailyLoginModal) dailyLoginModal.style.display = "none";
+                    document.querySelector('#player-info-modal .modal-frame').style.height = "30%";
+                    if (levelBgName === 'anonymous') {
+                        modal.querySelector('.anonymous-mask').style.display = "block";
+                    } else {
+                        modal.querySelector('.anonymous-mask').style.display = "none";
+                    }
+                    modal.querySelector('.level-background').id = 'level-bg-' + levelBgName;
+                } else {
+                    modal.querySelector('.level').parentNode.style.display = "block";
+                    modal.querySelector('.next_level_exp').parentNode.style.display = "block";
+                    if (dailyLoginModal) dailyLoginModal.style.display = "block";
+                    document.querySelector('#player-info-modal .modal-frame').style.height = "revert-layer";
+                }
             }
             function closePlayerInfoModal() {
                 closeWindow('player-info');

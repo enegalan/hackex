@@ -1,0 +1,38 @@
+#leaderboards {
+    background: #484848;
+    color: white;
+}
+
+#leaderboards header {
+    z-index: 3;
+    background: linear-gradient(#4c4c4c, #151515 70%);
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    position: fixed;
+}
+
+.leaderboard {
+    background-color: rgb(72 72 72);
+    padding-top: 3.5rem;
+    padding-bottom: 7rem;
+}
+
+.leaderboard table {
+    width: 100%;
+}
+
+.leaderboard thead {
+    background: black;
+}
+
+.leaderboard tbody tr:nth-child(2n) {
+    background: #222;
+}
+
+.leaderboard thead tr th,
+.leaderboard tbody tr td {
+    padding: .25rem;
+    text-align: center;
+}

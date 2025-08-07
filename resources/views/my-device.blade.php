@@ -40,7 +40,7 @@
                 @if (!$isHacked)
                     <ul>
                         <li>
-                            <button class="main-btn leaderboards-button">Leaderboards</button>
+                            <button onclick="redirect('/leaderboards')" class="main-btn leaderboards-button">Leaderboards</button>
                         </li>
                         <li>
                             <button onclick="openWallpaperModal()" class="main-btn wallpaper-button">Wallpaper</button>

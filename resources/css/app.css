@@ -15,6 +15,7 @@
 @import './login/login.css';
 @import './access-boot/access-boot.css';
 @import './messages/messages.css';
+@import './leaderboards/leaderboards.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';

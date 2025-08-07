@@ -9,3 +9,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::command('transfers:pay-spam')->hourly();
+Schedule::command('wipe:monthly-scores')->monthlyOn(1, '00:00');

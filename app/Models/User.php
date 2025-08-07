@@ -41,6 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail {
         'max_savings',
         'reputation',
         'score',
+        'monthly_score',
     ];
 
     function Platform() {

@@ -5,31 +5,34 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class ViewController extends Controller {
-    function home () {
+    function home() {
         return view('home');
     }
-    function processes () {
+    function processes() {
         return view('processes');
     }
-    function scan () {
+    function scan() {
         return view('scan');
     }
-    function bankAccount () {
+    function bankAccount() {
         return view('bank-login');
     }
-    function store () {
+    function store() {
         return view('store');
     }
-    function log () {
+    function log() {
         return view('log');
     }
-    function device () {
+    function device() {
         return view('my-device');
     }
-    function messages () {
+    function messages() {
         return view('messages');
     }
-    function forgotPassword () {
+    function forgotPassword() {
         return view('forgot-password');
+    }
+    function leaderboards() {
+        return view('leaderboards');
     }
 }

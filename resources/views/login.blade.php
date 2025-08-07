@@ -44,7 +44,7 @@
                         <form action="/signup" method="post" class="form">
                             @csrf
                             <div class="inputBox">
-                                <input type="text" name="username" id="register-username" required>
+                                <input type="text" name="username" id="register-username" required maxlength="12">
                                 <i>Username</i>
                                 @if (isset($signupErrors['username']))
                                     <div class="input-error-message">{{ $signupErrors['username'][0] }}</div>

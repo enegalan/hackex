@@ -72,6 +72,7 @@ class ReputationActions {
             $gainedReputation = intval($base * $levelMultiplicator);
             $user->reputation += $gainedReputation;
             $user->score = $user->level * $user->reputation;
+            $user->monthly_score = $user->score;
             $user->save();
             $reputation = [
                 'id' => $uniqueId,

@@ -1,7 +1,6 @@
 @php
     $user = session('hackedUser', Auth::user());
     $user->refresh();
-    $maxSize = \App\Enums\MaxLogSizes::getMaxLogSize($user['notepad_level'], true);
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">

@@ -37,8 +37,8 @@ class TestingUserSeeder extends Seeder
         ]);
         $user->save();
         $user = User::create([
-            'username' => Hash::make(rand(0, 100)),
-            'email' => Hash::make(rand(0, 100)) . '@gmail.com',
+            'username' => substr(Hash::make(rand(0, 100)), 0, 20),
+            'email' => substr(Hash::make(rand(0, 100)), 0, 20) . '@gmail.com',
             'password' => Hash::make('password'),
             'ip' => UserController::getAvailableIp(),
             'platform_id' => $platform->id,
@@ -50,8 +50,8 @@ class TestingUserSeeder extends Seeder
         ]);
         $user->save();
         $user = User::create([
-            'username' => Hash::make(rand(0, 100)),
-            'email' => Hash::make(rand(0, 100)) . '@gmail.com',
+            'username' => substr(Hash::make(rand(0, 100)), 0, 20),
+            'email' => substr(Hash::make(rand(0, 100)), 0, 20) . '@gmail.com',
             'password' => Hash::make('password'),
             'ip' => UserController::getAvailableIp(),
             'platform_id' => $platform->id,
@@ -63,8 +63,8 @@ class TestingUserSeeder extends Seeder
         ]);
         $user->save();
         $user = User::create([
-            'username' => Hash::make(rand(0, 100)),
-            'email' => Hash::make(rand(0, 100)) . '@gmail.com',
+            'username' => substr(Hash::make(rand(0, 100)), 0, 20),
+            'email' => substr(Hash::make(rand(0, 100)), 0, 20) . '@gmail.com',
             'password' => Hash::make('password'),
             'ip' => UserController::getAvailableIp(),
             'platform_id' => $platform->id,
@@ -76,8 +76,8 @@ class TestingUserSeeder extends Seeder
         ]);
         $user->save();
         $user = User::create([
-            'username' => Hash::make(rand(0, 100)),
-            'email' => Hash::make(rand(0, 100)) . '@gmail.com',
+            'username' => substr(Hash::make(rand(0, 100)), 0, 20),
+            'email' => substr(Hash::make(rand(0, 100)), 0, 20) . '@gmail.com',
             'password' => Hash::make('password'),
             'ip' => UserController::getAvailableIp(),
             'platform_id' => $platform->id,
@@ -89,8 +89,8 @@ class TestingUserSeeder extends Seeder
         ]);
         $user->save();
         $user = User::create([
-            'username' => Hash::make(rand(0, 100)),
-            'email' => Hash::make(rand(0, 100)) . '@gmail.com',
+            'username' => substr(Hash::make(rand(0, 100)), 0, 20),
+            'email' => substr(Hash::make(rand(0, 100)), 0, 20) . '@gmail.com',
             'password' => Hash::make('password'),
             'ip' => UserController::getAvailableIp(),
             'platform_id' => $platform->id,
@@ -102,8 +102,8 @@ class TestingUserSeeder extends Seeder
         ]);
         $user->save();
         $user = User::create([
-            'username' => Hash::make(rand(0, 100)),
-            'email' => Hash::make(rand(0, 100)) . '@gmail.com',
+            'username' => substr(Hash::make(rand(0, 100)), 0, 20),
+            'email' => substr(Hash::make(rand(0, 100)), 0, 20) . '@gmail.com',
             'password' => Hash::make('password'),
             'ip' => UserController::getAvailableIp(),
             'platform_id' => $platform->id,
@@ -115,8 +115,8 @@ class TestingUserSeeder extends Seeder
         ]);
         $user->save();
         $user = User::create([
-            'username' => Hash::make(rand(0, 100)),
-            'email' => Hash::make(rand(0, 100)) . '@gmail.com',
+            'username' => substr(Hash::make(rand(0, 100)), 0, 20),
+            'email' => substr(Hash::make(rand(0, 100)), 0, 20) . '@gmail.com',
             'password' => Hash::make('password'),
             'ip' => UserController::getAvailableIp(),
             'platform_id' => $platform->id,
@@ -128,8 +128,8 @@ class TestingUserSeeder extends Seeder
         ]);
         $user->save();
         $user = User::create([
-            'username' => Hash::make(rand(0, 100)),
-            'email' => Hash::make(rand(0, 100)) . '@gmail.com',
+            'username' => substr(Hash::make(rand(0, 100)), 0, 20),
+            'email' => substr(Hash::make(rand(0, 100)), 0, 20) . '@gmail.com',
             'password' => Hash::make('password'),
             'ip' => UserController::getAvailableIp(),
             'platform_id' => $platform->id,
@@ -141,8 +141,8 @@ class TestingUserSeeder extends Seeder
         ]);
         $user->save();
         $user = User::create([
-            'username' => Hash::make(rand(0, 100)),
-            'email' => Hash::make(rand(0, 100)) . '@gmail.com',
+            'username' => substr(Hash::make(rand(0, 100)), 0, 20),
+            'email' => substr(Hash::make(rand(0, 100)), 0, 20) . '@gmail.com',
             'password' => Hash::make('password'),
             'ip' => UserController::getAvailableIp(),
             'platform_id' => $platform->id,

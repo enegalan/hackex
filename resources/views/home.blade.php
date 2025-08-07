@@ -32,7 +32,7 @@ session()->put('isHacked', $isHacked);
         @if ($isHacked)
             @include('includes.disconnect-btn')
         @endif
-        <section style="{{ $isHacked ? 'padding-top: 2rem;' : '' }}" onclick="openPlayerInfoWindow('{{ $user->username }}', {{ \App\Enums\ExpActions::getUserLevel($user) }}, {{ \App\Enums\ExpActions::getNextLevelExpGoal($user) - \App\Enums\ExpActions::getExpToNextLevel($user) }}, {{ \App\Enums\ExpActions::getNextLevelExpGoal($user) }})" id="player">
+        <section style="{{ $isHacked ? 'padding-top: 2rem;' : '' }}" onclick="openPlayerInfoWindow()" id="player">
             <div class="player-level">
                 <div class="level-background" id="level-bg-{{ getLevelBackgroundName(\App\Enums\ExpActions::getUserLevel($user)) }}">
                     <div class="aux-1"></div>

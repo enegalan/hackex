@@ -142,6 +142,9 @@ class ExpActions {
                     $user->max_savings += $max_savings;
                     $oc = $level * 5; // TODO: Move this to a config
                     $user->oc += $oc;
+                    // Update score
+                    $user->score = $user->level * $user->reputation;
+                    $user->monthly_score = $user->score;
                     $user->save();
                     $user->notify(new LevelUpNotification($level, $max_savings, $oc));
                 }

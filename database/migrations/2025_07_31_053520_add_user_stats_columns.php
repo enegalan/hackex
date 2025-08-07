@@ -32,6 +32,7 @@ return new class extends Migration
             $table->bigInteger('max_savings')->default(MaxSavings::MAX_SAVINGS[1]);
             $table->bigInteger('reputation')->default(0);
             $table->bigInteger('score')->default(0);
+            $table->bigInteger('monthly_score')->default(0);
         });
     }
 
