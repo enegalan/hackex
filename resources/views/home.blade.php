@@ -158,7 +158,7 @@ session()->put('isHacked', $isHacked);
                 <span class="app-label">Store</span>
             </article>
             {{-- Messages --}}
-            <article onclick="{{ !$isHacked ? "redirect('/messages')" : '' }}" window.location.href='/messages'" id="messages" class="app-frame">
+            <article onclick="{{ !$isHacked ? "redirect('/messages')" : '' }}" id="messages" class="app-frame {{ $user->ReceivedMessage()->where('read', 0)->exists() ? 'unread' : '' }}">
                 <button class="app-button">
                     <div class="envelope"></div>
                     <div class="open"></div>
@@ -166,7 +166,7 @@ session()->put('isHacked', $isHacked);
                 <span class="app-label">Messages</span>
             </article>
             {{-- Log --}}
-            <article onclick="redirect('/log')" window.location.href='/log'" id="log" class="app-frame">
+            <article onclick="redirect('/log')" id="log" class="app-frame">
                 <button class="app-button">
                     <div id="log-frame">
                         <span>EX:/></span>

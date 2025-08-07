@@ -23,11 +23,24 @@ section#apps {
     justify-content: center;
     gap: 0.25rem;
     transition: .1s ease-in;
+    position: relative;
 }
 
 .app-frame:hover {
     filter: brightness(.75);
     transition: .1s ease-in;
+}
+
+.app-frame.unread::before {
+    content: "";
+    background-color: var(--red);
+    border-radius: 100px;
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    top: -.3rem;
+    right: -.3rem;
+    z-index: 1;
 }
 
 .app-label {
