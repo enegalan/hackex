@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 
 class LogController extends Controller {
+    CONST DEVICE_SETUP = '%username%\'s device set up successfully.'; // When player is created
     const LOGGED_IN = '%ip% logged in.'; // When player logs into a device
     const SECURITY_ALERT = 'Alert from PNT Bank: Account may be compromised. Access attempted by %ip%'; // When player logs into a bank account
     const DOWNLOADING = 'Level %app_level% %app_name% downloading to %ip%'; // When hacker downloads an app
