@@ -29,35 +29,35 @@
 
 @font-face {
     font-family: 'neuropol';
-    src: url('/fonts/neuropol.otf') format('opentype');
+    src: url('/fonts/neuropol.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'dosis';
-    src: url('/fonts/dosis.ttf') format('truetype');
+    src: url('/fonts/dosis.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'main_normal';
-    src: url('/fonts/united_sans_reg_medium.otf') format('opentype');
+    src: url('/fonts/united_sans_reg_medium.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'main_bold';
-    src: url('/fonts/united_sans_reg_heavy.otf') format('opentype');
+    src: url('/fonts/united_sans_reg_heavy.woff2') format('woff2');
     font-weight: bolder;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'main_light';
-    src: url('/fonts/united_sans_reg_light.otf') format('opentype');
+    src: url('/fonts/united_sans_reg_light.woff2') format('woff2');
     font-weight: lighter;
     font-style: normal;
 }

@@ -8,28 +8,11 @@ use Auth;
 use Illuminate\Http\Request;
 
 class BankController extends Controller {
-    const DEPOSITS = [
-        1 => [
-            'id' => 1,
-            'oc' => 400,
-            'value' => 10000,
-        ],
-        2 => [
-            'id' => 2,
-            'oc' => 1200,
-            'value' => 26000,
-        ],
-        3 => [
-            'id' => 3,
-            'oc' => 2000,
-            'value' => 60000,
-        ],
-        4 => [
-            'id' => 4,
-            'oc' => 4600,
-            'value' => 150000,
-        ],
-    ];
+    public static $DEPOSITS;
+    public static function getDeposits() {
+        if (!self::$DEPOSITS) self::$DEPOSITS = config('core.earnings.oc.deposits');
+        return self::$DEPOSITS;
+    }
     public static function loginBankAccount($hackAllow = true, $data = []) {
         if ($hackAllow && session()->get('isHacked')) {
             $victim = session()->get('hackedUser');
@@ -50,10 +33,7 @@ class BankController extends Controller {
         $user = User::findOrFail($user_id);
         $auth_user = Auth::user();
         // Check if user has a crack process
-        $crack = $auth_user->Crack()->where('victim_id', $user_id)->where('status', Crack::WORKING)->first();
-        if ($crack) {
-            return redirect()->back()->with('error', 'You already have a crack process running for this user.');
-        }
+        if ($auth_user->Crack()->where('victim_id', $user_id)->where('status', Crack::WORKING)->exists()) return redirect()->back()->with('error', 'You already have a crack process running for this user.');
         // For security reasons, check if auth user is allowed to crack this user's bank account
         $canCrack = $auth_user->Bypass()
         ->where('victim_id', $user_id)
@@ -73,10 +53,8 @@ class BankController extends Controller {
     }
     function deposit(Request $request) {
         $deposit_id = $request->input('deposit_id');
-        $deposit = self::DEPOSITS[$deposit_id] ?? false;
-        if (!$deposit) {
-            return back()->with('error', 'This deposit does not exist.');
-        }
+        $deposit = self::getDeposits()[$deposit_id] ?? false;
+        if (!$deposit) return back()->with('error', 'This deposit does not exist.');
         $deposit_oc = $deposit['oc'];
         $success = BuyOCController::purchase($deposit_oc);
         if ($success === true) {

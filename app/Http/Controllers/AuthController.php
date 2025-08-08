@@ -82,11 +82,8 @@ class AuthController extends Controller {
             return view('home', ['access_boot' => 'Booting Device...']);
         } else {
             $errors = array();
-            if (!$user) {
-                $errors['login-username-email'] = 'User not found.';
-            } else if (!$correct_password) {
-                $errors['login-password'] = 'Incorrect password.';
-            }
+            if (!$user) $errors['login-username-email'] = 'User not found.';
+            else if (!$correct_password) $errors['login-password'] = 'Incorrect password.';
             return back()->withErrors($errors)->withInput();
         }
     }

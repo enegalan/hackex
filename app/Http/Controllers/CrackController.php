@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Enums\ExpActions;
 use App\Enums\ReputationActions;
 use App\Models\Crack;
-use Illuminate\Http\Request;
 
 class CrackController extends Controller {
     public static function checkAndUpdateCrack(Crack $crack) {
@@ -21,26 +20,24 @@ class CrackController extends Controller {
                 $difficultAction = $crack->Victim->password_encryptor_level > $crack->User->password_cracker_level;
                 ReputationActions::addReputation('crack_successful', null, true, 'crack_' . $crack->id, $difficultAction);
                 // Check if user re-hacked this crack
-                if (Crack::where('user_id', $crack->User->id)->where('victim_id', $crack->Victim->id)->where('available', false)->exists()) {
-                    ReputationActions::addReputation('rehack_crack_successful', null, true, 'rehack_crack_' . $crack->id, $difficultAction);
-                }
+                if (Crack::where('user_id', $crack->User->id)->where('victim_id', $crack->Victim->id)->where('available', false)->exists()) ReputationActions::addReputation('rehack_crack_successful', null, true, 'rehack_crack_' . $crack->id, $difficultAction);
             }
         }
         return $crack;
     }
     static function calculateSuccessChance(int $passwordCrackerLevel, int $passwordEncryptorLevel): int {
         $diff = $passwordEncryptorLevel - $passwordCrackerLevel;
-        // Crack level penalty (more high, more difficult)
-        $progressPenalty = min(0.5, $passwordCrackerLevel * 0.02); // to -50%
+        // Crack level penalty (more high, more difficult)ç
+        $progressPenalty = min(config('core.multiplicators.crack_success_chance.crack_penalty.from'), $passwordCrackerLevel * config('core.multiplicators.crack_success_chance.crack_penalty.level_multiplicator'));
         // Base chance for equal level players
-        $baseChance = 80;
+        $baseChance = config('core.multiplicators.crack_success_chance.equal_level_players_base');
         // Level diff modificator
         // If diff > 0 (password encryptor higher), decrease chance
-        // Si diff < 0 (password cracker higher), increase chance
-        $levelModifier = -($diff * 8); // 8% per level diff
+        // If diff < 0 (password cracker higher), increase chance
+        $levelModifier = -($diff * config('core.multiplicators.crack_success_chance.level_diff')); // 8% per level diff
         // Apply progress penalty (higher levels less chance)
         $adjustedChance = ($baseChance + $levelModifier) * (1 - $progressPenalty);
-        // Limit between 5 to 95%
-        return max(5, min(95, round($adjustedChance)));
+        // Limit chances
+        return max(config('core.multiplicators.crack_success_chance.min_chance'), min(config('core.multiplicators.crack_success_chance.max_chance'), round($adjustedChance)));
     }
 }

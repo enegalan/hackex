@@ -18,9 +18,7 @@ class UserController extends Controller {
         $max_attempts = 5000;
         while ($attempts < $max_attempts) {
             $ip = rand(1, 255) . '.' . rand(0, 255) . '.' . rand(0, 255) . '.' . rand(1, 254);
-            if (!in_array($ip, $usedIps)) {
-                return $ip;
-            }
+            if (!in_array($ip, $usedIps)) return $ip;
             $attempts++;
         }
         return $ip;
@@ -29,9 +27,7 @@ class UserController extends Controller {
         session()->put('isHacked', false);
         $hackedUser = session()->get('hackedUser');
         session()->remove('hackedUser');
-        if (!$hackedUser) {
-            return view('home');
-        }
+        if (!$hackedUser) return view('home');
         return view('home', ['access_boot' => 'Disconnecting from ' . $hackedUser->ip]);
     }
     function transfer() {
@@ -56,9 +52,7 @@ class UserController extends Controller {
             $currentSecured = $user->secured_bitcoins;
             // Calculate how much bitcoins can be transfered
             $spaceLeft = $maxSaving - $currentSecured;
-            if ($spaceLeft <= 0) {
-                return BankController::autoLoginBankAccount(['error' => 'You have reached the maximum savings limit.']);
-            }
+            if ($spaceLeft <= 0) return BankController::autoLoginBankAccount(['error' => 'You have reached the maximum savings limit.']);
             // Calculate how much bitcoins will be transfered from checking
             $transferAmount = min($user->checking_bitcoins, $spaceLeft);
             // Transfer
@@ -91,11 +85,8 @@ class UserController extends Controller {
         $success = $user->save();
         $data = [];
         if ($notify) {
-            if ($success) {
-                $data['succes'] = 'Log saved successfully.';
-            } else {
-                $data['error'] = 'Log could not be saved.';
-            }
+            if ($success) $data['succes'] = 'Log saved successfully.';
+            else $data['error'] = 'Log could not be saved.';
         }
         return redirect()->back()->with($data);
     }
@@ -108,9 +99,7 @@ class UserController extends Controller {
         if (!$auth_user->Bypass()
         ->where('victim_id', $user_id)
         ->where('status', Bypass::SUCCESSFUL)
-        ->exists()) {
-            return redirect()->back()->with('error', 'You are not able to download any app from this user.');
-        }
+        ->exists()) return redirect()->back()->with('error', 'You are not able to download any app from this user.');
         $app_level = $user[$app_name.'_level'];
         $auth_user->Transfer()->create([
             'victim_id' => $user_id,
@@ -132,9 +121,7 @@ class UserController extends Controller {
         if (!$auth_user->Bypass()
         ->where('victim_id', $user_id)
         ->where('status', Bypass::SUCCESSFUL)
-        ->exists()) {
-            return redirect()->back()->with('error', 'You are not able to download any app from this user.');
-        }
+        ->exists()) return redirect()->back()->with('error', 'You are not able to download any app from this user.');
         // Check if user has already uploaded this app - level
         $hasAlreadyUploaded = $auth_user->Transfer()
         ->where('victim_id', $user_id)
@@ -148,11 +135,8 @@ class UserController extends Controller {
             ->where('app_name', $app_name)
             ->where('app_level', $app_level)
             ->where('status', Transfer::WORKING)->exists();
-            if ($isUploading) {
-                return redirect()->back()->with('error', 'Virus is still uploading, please wait until it finishes.');
-            } else {
-                return redirect()->back()->with('error', 'You have already uploaded this virus with level ' . $app_level . '.');
-            }
+            if ($isUploading) return redirect()->back()->with('error', 'Virus is still uploading, please wait until it finishes.');
+            else return redirect()->back()->with('error', 'You have already uploaded this virus with level ' . $app_level . '.');
         }
         $auth_user->Transfer()->create([
             'victim_id' => $user_id,
@@ -204,9 +188,7 @@ class UserController extends Controller {
             }
             return $success;
         }
-        if ($back_return) {
-            return back()->with('error', 'Process is not found or you are not hacker of this process.');
-        }
+        if ($back_return) return back()->with('error', 'Process is not found or you are not hacker of this process.');
         return false;
     }
     function multiProcessRemove(Request $request) {
@@ -214,10 +196,8 @@ class UserController extends Controller {
         foreach ($data as $item) {
             $processId = $item['process_id'] ?? null;
             $processType = $item['process_type'] ?? null;
-            $allRemoved = true;
             if ($processId && $processType) {
-                $succes = $this->private__processRemove($processId, $processType, false);
-                if (!$succes) $allRemoved = false;
+                $this->private__processRemove($processId, $processType, false);
             }
         }
     }
@@ -244,9 +224,7 @@ class UserController extends Controller {
                 $process->expires_at = now();
                 $process->save();
                 return back()->with('success', 'Process shortened!');
-            } else {
-                return back()->with('error', 'Could not be able to shorten this process.');
-            }
+            } else return back()->with('error', 'Could not be able to shorten this process.');
         }
         return back()->with('error', 'Process is not found or you are not hacker of this process.');
     }
@@ -279,11 +257,8 @@ class UserController extends Controller {
             $process->expires_at = $expires_at;
             $process->status = Transfer::WORKING;
             $success = $process->save();
-            if ($success) {
-                return back()->with('message', 'Retrying process...');
-            } else {
-                return back()->with('error', 'Could not be able to shorten this process.');
-            }
+            if ($success) return back()->with('message', 'Retrying process...');
+            else return back()->with('error', 'Could not be able to shorten this process.');
         }
         return back()->with('error', 'Process is not found or you are not hacker of this process.');
     }
@@ -295,9 +270,7 @@ class UserController extends Controller {
         $bypass = Bypass::findOrFail($bypass_id);
         if ($bypass && $bypass->User['id'] == Auth::id()) {
             // Check bypass status
-            if ($bypass['available'] === 0) {
-                return back()->with('warning', 'This user is not longer available for you.');
-            }
+            if ($bypass['available'] === 0) return back()->with('warning', 'This user is not longer available for you.');
             if ($bypass['status'] === Bypass::SUCCESSFUL) {
                 LogController::doLog(LogController::LOGGED_IN, $bypass->Victim, ['ip' => $bypass->User->ip]);
                 LogController::doLog(LogController::ACCESSED, $bypass->User, ['ip' => $bypass->Victim->ip]);
@@ -308,7 +281,7 @@ class UserController extends Controller {
     }
     function changeIp(Request $request) {
         $user = Auth::user();
-        $changeIpCost = config('core.costs.change_ip');
+        $changeIpCost = config('core.costs.oc.change_ip');
         $sucess = BuyOCController::purchase($changeIpCost);
         if (!$sucess) return $sucess;
         // Change IP

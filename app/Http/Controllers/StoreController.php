@@ -11,7 +11,6 @@ use App\Models\Crack;
 use App\Models\Network;
 use App\Models\Platform;
 use Auth;
-use Illuminate\Http\Request;
 
 class StoreController extends Controller {
     function buy($app_name) {
@@ -20,9 +19,7 @@ class StoreController extends Controller {
         if ($app_name !== 'device' && $app_name !== 'network') {
             // Validate if level column exists
             $levelColumn = $app_name . '_level';
-            if (!isset($user->$levelColumn)) {
-                throw new \Exception("App '$app_name' is not valid.");
-            }
+            if (!isset($user->$levelColumn)) throw new \Exception("App '$app_name' is not valid.");
             $nextLevel = $user->$levelColumn + 1;
             $price = AppPrices::getPrice($app_name, $nextLevel);
         } else {
@@ -40,13 +37,10 @@ class StoreController extends Controller {
                 $nextLevel = $next_network['name'];
             }
         }
-        if (!self::hasEnoughBitcoins($price, $user)) {
-            return redirect()->back()->with('error', 'Not enough bitcoins');
-        }
+        if (!self::hasEnoughBitcoins($price, $user)) return redirect()->back()->with('error', 'Not enough bitcoins');
         // Subtract from checking first
-        if ($checking >= $price) {
-            $user->checking_bitcoins -= $price;
-        } else {
+        if ($checking >= $price) $user->checking_bitcoins -= $price;
+        else {
             $remaining = $price - $checking;
             $user->checking_bitcoins = 0;
             $user->secured_bitcoins -= $remaining;
@@ -82,9 +76,7 @@ class StoreController extends Controller {
         $checking = $user->checking_bitcoins;
         $secured = $user->secured_bitcoins;
         $total = $checking + $secured;
-        if ($total < $price) {
-            return false;
-        }
+        if ($total < $price) return false;
         return true;
     }
 }

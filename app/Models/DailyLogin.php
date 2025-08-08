@@ -30,7 +30,6 @@ class DailyLogin extends Model {
         ->unique();
         return $logins->count();
     }
-
     public static function getPlayerDailyLoginEarned(User $user) {
         $loginDays = self::where('user_id', $user->id)
         ->whereBetween('login_date', [now()->startOfWeek(), now()->endOfWeek()])
@@ -38,9 +37,8 @@ class DailyLogin extends Model {
         ->map(fn($d) => Carbon::parse($d)->format('Y-m-d'))
         ->unique()
         ->count();
-        return $loginDays * config('core.earnings.daily_login');
+        return $loginDays * config('core.earnings.oc.daily_login');
     }
-
     public static function getPlayerDailyLoginWeekDays(User $user) {
         $logins = self::where('user_id', $user->id)
         ->whereBetween('login_date', [now()->startOfWeek(), now()->endOfWeek()])

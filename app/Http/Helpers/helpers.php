@@ -1,20 +1,15 @@
 <?php
 
-use App\Models\Network;
 use App\Models\Transfer;
+use \App\Models\User;
+use \App\Models\Bypass;
+use Carbon\Carbon;
 
 require_once __DIR__ . '/str_camelcase.php';
 require_once __DIR__ . '/numbers.php';
 
 function getLevelBackgroundName($level) {
-    $stages = [
-        1 => 'initial',   // Round blue
-        5 => 'basic',   // Round blue with borders
-        10 => 'medium',    // Round orange
-        15 => 'advanced',    // Round with black and green background
-        20 => 'expert',   // Upward green arrow
-        30 => 'anonymous',  // Anonymous
-    ];
+    $stages = config('core.background_stages');
     $bg_name = null;
     foreach ($stages as $minLevel => $name) {
         if ($level >= $minLevel) $bg_name = $name;
@@ -22,15 +17,10 @@ function getLevelBackgroundName($level) {
     }
     return $bg_name;
 }
-
-use \App\Models\User;
-use \App\Models\Bypass;
 function getRandomMatchedUsers(User $baseUser, int $range = 20) {
     $cacheHtmlKey = 'html_matched_users_' . $baseUser->id;
     $cacheKey = 'matched_users_' . $baseUser->id;
-    if (Cache::get($cacheKey)) {
-        return Cache::get($cacheKey);
-    }
+    if (Cache::get($cacheKey)) return Cache::get($cacheKey);
     $excludedVictimIds = Bypass::where('user_id', $baseUser->id)
         ->where('available', true)->where('visible', true)
         ->pluck('victim_id');
@@ -55,7 +45,6 @@ function getRandomMatchedUsers(User $baseUser, int $range = 20) {
     Cache::set($cacheHtmlKey, generateScanListHtml($results));
     return $results;
 }
-
 function generateScanListHtml($users) {
     $html = '<ul>';
     foreach ($users as $user) {
@@ -72,12 +61,10 @@ function generateScanListHtml($users) {
     $html .= '</ul>';
     return $html;
 }
-
-use Carbon\Carbon;
 function calculateBypassExpiration(int $firewallLevel, int $bypasserLevel) {
     $levelDiff = $firewallLevel - $bypasserLevel;
     // Minimum waiting time
-    $baseMinutes = 2;
+    $baseMinutes = config('core.multiplicators.expirations.bypass_min');
     // Exponential penalty if bypasser is weaker than firewall
     if ($levelDiff > 0) {
         $extraMinutes = pow($levelDiff, 2);
@@ -90,7 +77,7 @@ function calculateBypassExpiration(int $firewallLevel, int $bypasserLevel) {
 function calculateCrackExpiration(int $passwordEncryptorLevel, int $passwordCracker) {
     $levelDiff = $passwordEncryptorLevel - $passwordCracker;
     // Minimum waiting time
-    $baseMinutes = 4;
+    $baseMinutes = config('core.multiplicators.expirations.crack_min');
     // Exponential penalty if password cracker is weaker than password encryptor
     if ($levelDiff > 0) {
         $extraMinutes = pow($levelDiff, 2);
@@ -103,13 +90,13 @@ function calculateCrackExpiration(int $passwordEncryptorLevel, int $passwordCrac
 function calculateDownloadExpiration(User $user, string $appName) {
     $network = $user->network;
     if (!$network || empty($network->download)) {
-        return now()->addMinutes(15); // fallback
+        return now()->addMinutes(config('core.multiplicators.expirations.download_fallback')); // fallback
     }
     $kbps = parseNetworkSpeedToKbps($network->download);
     $levelColumn = "{$appName}_level";
     $appLevel = $user->$levelColumn ?? 1;
     // Each level adds +MB
-    $baseSizeInKb = 50; // 50KB
+    $baseSizeInKb = config('core.multiplicators.expirations.download_base_size');
     $totalSizeInKb = $baseSizeInKb * $appLevel;
     $minutes = ceil($totalSizeInKb / max($kbps, 1));
     return now()->addMinutes($minutes);
@@ -117,13 +104,13 @@ function calculateDownloadExpiration(User $user, string $appName) {
 function calculateUploadExpiration(User $user, string $appName) {
     $network = $user->network;
     if (!$network || empty($network->upload)) {
-        return now()->addMinutes(15); // fallback
+        return now()->addMinutes(config('core.multiplicators.expirations.upload_fallback')); // fallback
     }
     $kbps = parseNetworkSpeedToKbps($network->upload);
     $levelColumn = "{$appName}_level";
     $appLevel = $user->$levelColumn ?? 1;
     // Each level adds +MB
-    $baseSizeInKb = 10; // 10KB
+    $baseSizeInKb = config('core.multiplicators.expirations.upload_base_size');
     $totalSizeInKb = $baseSizeInKb * $appLevel;
     $minutes = ceil($totalSizeInKb / max($kbps, 1));
     return now()->addMinutes($minutes);
@@ -140,13 +127,11 @@ function parseNetworkSpeedToKbps(string $download): float {
         default => $value,
     };
 }
-
 function calculateIncomePerHour(Transfer $transfer): float {
-    $BASE = config('core.earnings.spam_income_per_hour_base');
+    $BASE = config('core.earnings.bitcoin.spam_income_per_hour_base');
     $level = $transfer->app_level ?? 1;
     return $BASE * $level;
 }
-
 function getTotalEarningsForTransfer(Transfer $transfer): float {
     if (!$transfer->expires_at) return 0;
     $now = Carbon::now();
@@ -156,7 +141,6 @@ function getTotalEarningsForTransfer(Transfer $transfer): float {
     $incomePerHour = calculateIncomePerHour($transfer);
     return $incomePerHour * $hours;
 }
-
 /**
  * Returns spent time from one date in format: "Xd Xh Xm" or "Xd Xh Xm Xs".
  *
@@ -176,7 +160,6 @@ function diffInHumanTime($future, $withSeconds = true) {
     if ($withSeconds) $return.= " {$seconds}s";
     return $return;
 }
-
 function truncateWithDots($text, $limit = 100) {
     $exceeds = strlen($text) > $limit;
     $truncated = $exceeds

@@ -278,7 +278,7 @@ session()->put('isHacked', $isHacked);
                         </div>
                     </div>
                     <section id="device-app-bg">
-                        <img src="{{ asset('others/burst.png') }}" alt="Burst">
+                        <img src="{{ asset('others/burst.webp') }}" alt="Burst">
                     </section>
                 </button>
                 <span class="app-label">My Device</span>

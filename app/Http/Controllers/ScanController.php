@@ -11,17 +11,10 @@ use Illuminate\Http\Request;
 class ScanController extends Controller {
     function ping(Request $request) {
         $ip = $request->input('ip-search');
-        if (!$ip) {
-            return back()->with('error', 'Please enter an IP address.');
-        }
-        if (!filter_var($ip, FILTER_VALIDATE_IP)) {
-            return back()->with('error', 'Please enter a valid IP address.');
-        }
+        if (!$ip) return back()->with('error', 'Please enter an IP address.');
+        if (!filter_var($ip, FILTER_VALIDATE_IP)) return back()->with('error', 'Please enter a valid IP address.');
         $user = User::where('ip', $ip)->first();
-        if (!$user) {
-            return back()->with('error', 'No device found with that IP address.');
-        }
-
+        if (!$user) return back()->with('error', 'No device found with that IP address.');
         return back()->with('ping_result', $user);
     }
     function createBypass(Request $request) {
@@ -33,9 +26,7 @@ class ScanController extends Controller {
         $bypasserLevel = $request->input('bypasser_level');
         $ip = $request->input('ip');
         $victim = User::where('ip', $ip)->first();
-        if (Bypass::where('user_id', Auth::id())->where('victim_id', $victim->id)->where('available', true)->where('visible', true)->exists()) {
-            return back()->with('error', 'You already have an active bypass on this device.');
-        }
+        if (Bypass::where('user_id', Auth::id())->where('victim_id', $victim->id)->where('available', true)->where('visible', true)->exists()) return back()->with('error', 'You already have an active bypass on this device.');
         Bypass::create([
             'user_id' => Auth::id(),
             'victim_id' => $victim->id,

@@ -10,7 +10,7 @@
         </section>
         <section id="deposit-frame">
             <ul>
-                @foreach (\App\Http\Controllers\BankController::DEPOSITS as $depositId => $deposit)
+                @foreach (\App\Http\Controllers\BankController::getDeposits() as $depositId => $deposit)
                     <li onclick="submitDeposit({{ $depositId }}, 'deposit-form-{{ $depositId }}')" class="deposit">
                         <form id="deposit-form-{{ $depositId }}" action="/deposit" method="post">
                             @csrf

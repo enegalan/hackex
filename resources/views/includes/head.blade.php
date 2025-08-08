@@ -10,11 +10,11 @@
     @if ($user)
         <link rel="preload" as="image" href="{{ asset($user->Wallpaper->url) }}">
     @endif
-    <link rel="preload" href="{{ asset('fonts/dosis.ttf') }}" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="{{ asset('fonts/neuropol.otf') }}" as="font" type="font/otf" crossorigin>
-    <link rel="preload" href="{{ asset('/fonts/united_sans_reg_medium.otf') }}" as="font" type="font/otf" crossorigin>
-    <link rel="preload" href="{{ asset('/fonts/united_sans_reg_heavy.otf') }}" as="font" type="font/otf" crossorigin>
-    <link rel="preload" href="{{ asset('/fonts/united_sans_reg_light.otf') }}" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/dosis.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/neuropol.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('/fonts/united_sans_reg_medium.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('/fonts/united_sans_reg_heavy.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('/fonts/united_sans_reg_light.woff2') }}" as="font" type="font/woff2" crossorigin>
     <!-- Fonts -->
     <script src="https://kit.fontawesome.com/8e4bd12ccb.js" crossorigin="anonymous"></script>
     <!-- Styles / Scripts -->

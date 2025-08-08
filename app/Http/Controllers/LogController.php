@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use Illuminate\Http\Request;
 
 class LogController extends Controller {
     CONST DEVICE_SETUP = '%username%\'s device set up successfully.'; // When player is created
@@ -20,27 +19,21 @@ class LogController extends Controller {
     public static function generateMessage($typeMessage, $data) {
         $message = "[" . date('Y-m-d H:i') . "] ";
         $parsedMessage = $typeMessage;
-        foreach ($data as $key => $value) {
-            $parsedMessage = str_replace("%{$key}%", $value, $parsedMessage);
-        }
+        foreach ($data as $key => $value) $parsedMessage = str_replace("%{$key}%", $value, $parsedMessage);
         $message .= $parsedMessage;
         return $message;
     }
     public static function forgetLog ($to, $log_type = null) {
         $autoAddedLogs = session()->get('autoAddedLogs');
         if (!$autoAddedLogs) return true;
-        foreach ($autoAddedLogs as &$log) {
+        foreach ($autoAddedLogs as $key => $log) {
             if ($log['from_id'] == Auth::id() && $log['to_id'] == $to->id) {
-                if ($log_type) {
-                    if ($log['type'] == $log_type) {
-                        unset($log);
-                    }
-                } else {
-                    unset($log);
+                if (!$log_type || $log['type'] == $log_type) {
+                    unset($autoAddedLogs[$key]);
+                    break;
                 }
-                break;
             }
-        }
+        }        
         session()->put('autoAddedLogs', $autoAddedLogs);
     }
     public static function doLog ($log_type, $to, $data = [], $sendOnce = true) {
@@ -64,9 +57,8 @@ class LogController extends Controller {
                 'to_id' => $to->id,
                 'type' => $log_type,
             ];
-            if (!$autoAddedLogs) {
-                session()->put('autoAddedLogs', [$autoAddedLog]);
-            } else {
+            if (!$autoAddedLogs) session()->put('autoAddedLogs', [$autoAddedLog]);
+            else {
                 $autoAddedLogs[] = $autoAddedLog;
                 session()->put('autoAddedLogs', $autoAddedLogs);
             }

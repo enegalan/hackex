@@ -11,7 +11,6 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable implements MustVerifyEmail {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -43,7 +42,6 @@ class User extends Authenticatable implements MustVerifyEmail {
         'score',
         'monthly_score',
     ];
-
     function Platform() {
         return $this->belongsTo(Platform::class);
     }
@@ -97,14 +95,12 @@ class User extends Authenticatable implements MustVerifyEmail {
         'password',
         'remember_token',
     ];
-
     /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
+    protected function casts(): array {
         return [
             'password' => 'hashed',
         ];

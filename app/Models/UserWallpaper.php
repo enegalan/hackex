@@ -12,7 +12,6 @@ class UserWallpaper extends Model {
     public function User() {
         return $this->belongsTo(User::class);
     }
-
     public function Wallpaper() {
         return $this->belongsTo(Wallpaper::class);
     }
