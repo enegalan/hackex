@@ -38,7 +38,7 @@ class DailyLogin extends Model {
         ->map(fn($d) => Carbon::parse($d)->format('Y-m-d'))
         ->unique()
         ->count();
-        return $loginDays * 28; // TODO: Move this value to config
+        return $loginDays * config('core.earnings.daily_login');
     }
 
     public static function getPlayerDailyLoginWeekDays(User $user) {

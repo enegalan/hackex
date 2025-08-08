@@ -28,7 +28,7 @@ class SendGlobalMessage extends Command {
             $this->error('Message can not be empty.');
             return;
         }
-        $senderId = 101;
+        $senderId = config('core.admin_id');
         $users = User::all();
         $bar = $this->output->createProgressBar($users->count());
         $bar->start();

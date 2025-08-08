@@ -142,7 +142,7 @@ function parseNetworkSpeedToKbps(string $download): float {
 }
 
 function calculateIncomePerHour(Transfer $transfer): float {
-    $BASE = 20; // TODO: Move this to a config
+    $BASE = config('core.earnings.spam_income_per_hour_base');
     $level = $transfer->app_level ?? 1;
     return $BASE * $level;
 }

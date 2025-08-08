@@ -308,7 +308,7 @@ class UserController extends Controller {
     }
     function changeIp(Request $request) {
         $user = Auth::user();
-        $changeIpCost = 200; // TODO: Add 200 to config
+        $changeIpCost = config('core.costs.change_ip');
         $sucess = BuyOCController::purchase($changeIpCost);
         if (!$sucess) return $sucess;
         // Change IP

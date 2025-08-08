@@ -53,7 +53,7 @@ class AuthController extends Controller {
             'user_id' => $user->id,
             'wallpaper_id' => $wallpaper['id']
         ]);
-        $admin_id = 101; // TODO: Move this to a config
+        $admin_id = config('core.admin_id');
         Message::create([
             'sender_id' => $admin_id,
             'receiver_id' => $user->id,

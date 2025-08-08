@@ -138,9 +138,9 @@ class ExpActions {
                 $user->level = $level;
                 $user->save();
                 if ($user->wasChanged('level')) {
-                    $max_savings = $level * 200; // TODO: Move this to a config
+                    $max_savings = $level * config('core.multiplicators.level_up.max_savings');
                     $user->max_savings += $max_savings;
-                    $oc = $level * 5; // TODO: Move this to a config
+                    $oc = $level * config('core.multiplicators.level_up.oc');
                     $user->oc += $oc;
                     // Update score
                     $user->score = $user->level * $user->reputation;

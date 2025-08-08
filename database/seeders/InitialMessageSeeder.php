@@ -15,7 +15,7 @@ class InitialMessageSeeder extends Seeder
      */
     public function run(): void {
         $users = User::all();
-        $admin_id = 101;
+        $admin_id = config('core.admin_id');
         foreach ($users as $user) {
             Message::create([
                 'sender_id' => $admin_id,

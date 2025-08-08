@@ -22,8 +22,7 @@ class CheckDailyLogin {
                 ->whereDate('login_date', $today)
                 ->exists();
             if (!$alreadyLogged) {
-                // TODO: Move this to a config
-                $user->oc += 28;
+                $user->oc += config('core.earnings.daily_login');
                 $user->save();
                 DailyLogin::create([
                     'user_id' => $user->id,
