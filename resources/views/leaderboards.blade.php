@@ -7,7 +7,7 @@
     @include('includes.head', ['title' => 'Leaderboards'])
     <body id="leaderboards" static-background="true" >
         @include('includes.modal', ['modals' => ['player-info']])
-        <header>
+        <header class="dark-gradient-header">
             <h3>Leaderboards</h3>
         </header>
         <section class="leaderboard">

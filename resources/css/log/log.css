@@ -1,5 +1,5 @@
 form#log {
-    color: white;
+    color: var(--white);
     padding-top: 1.5rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -22,9 +22,9 @@ form#log h4 {
 
 .log-textarea textarea {
     resize: none;
-    background: #fff;
+    background: var(--white);
     width: 100%;
-    color: #000 !important;
+    color: var(--black) !important;
     padding-top: 0.3rem !important;
     padding-left: .3rem !important;
     padding-right: .5rem !important;

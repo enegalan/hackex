@@ -11,7 +11,6 @@ use App\Http\Controllers\WallpaperController;
 use App\Http\Middleware\CheckDailyLogin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\IsFullyVerified;
-use Illuminate\Http\Request;
 
 Route::middleware([IsFullyVerified::class, CheckDailyLogin::class])->group(function () {
     Route::get('/', [ViewController::class, 'home'])->name('home');

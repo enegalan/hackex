@@ -3,7 +3,7 @@
         return;
     }
 @endphp
-<div style="z-index: 6;" id="change-ip-confirm-modal" class="modal" closable="true">
+<div style="z-index: 6;" id="change-ip-confirm-modal" class="modal confirm-modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <div class="title">Confirm Purchase</div>

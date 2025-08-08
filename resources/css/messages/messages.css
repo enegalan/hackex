@@ -4,11 +4,11 @@
 }
 
 #contacts {
-    transition: .1 ease-in;
+    transition: var(--transition);
 }
 
 #messages-main h4, #contacts h4 {
-    color: white;
+    color: var(--white);
     font-weight: 600;
     font-style: italic;
     font-size: 18px;
@@ -22,7 +22,7 @@
 }
 
 .messages-frames {
-    color: white;
+    color: var(--white);
 }
 
 .messages-frames ul {
@@ -42,8 +42,8 @@
     padding-right: 1rem;
     padding-top: .5rem;
     padding-bottom: .5rem;
-    background: #00000080;
-    transition: .1s ease-in;
+    background: var(--blackTransparency);
+    transition: var(--transition);
 }
 
 .message-top {
@@ -59,8 +59,8 @@
 
 .messages-frames .message:hover,
 #contacts .contact:hover {
-    transition: .1s ease-in;
-    background: #25252580;
+    transition: var(--transition);
+    background: var(--darkGreyTransparency);
 }
 
 .contacts-frames ul {
@@ -71,9 +71,9 @@
 }
 
 .contacts-frames .contact {
-    color: white;
+    color: var(--white);
     display: flex;
-    background: #00000080;
+    background: var(--blackTransparency);
     padding: 1rem;
 }
 
@@ -129,7 +129,7 @@
 }
 
 #message-main h4 {
-    color: white;
+    color: var(--white);
     font-weight: bold;
     font-style: italic;
     margin-bottom: .25rem;
@@ -153,12 +153,12 @@
 #message-main .message-content {
     margin-top: .5rem;
     padding: 1rem;
-    background: #00000080;
+    background: var(--blackTransparency);
     font-size: 14px;
 }
 
 #message-main .messages-frames {
-    color: #fff;
+    color: var(--white);
     margin-top: 1rem;
     padding: .7rem;
 }

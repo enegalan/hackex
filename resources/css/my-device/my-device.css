@@ -1,5 +1,5 @@
 #my-device h4 {
-    color: white;
+    color: var(--white);
     font-weight: bold;
     font-style: italic;
     font-size: 18px;
@@ -10,7 +10,7 @@
 }
 
 section.device-info-frame {
-    color: white;
+    color: var(--white);
     font-size: 14px;
     padding-left: 1rem;
     padding-right: 1rem;

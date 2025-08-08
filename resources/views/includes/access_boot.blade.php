@@ -3,7 +3,7 @@
         return;
     }
 @endphp
-<article class="access_boot_transition" style="background: #303b4c; color: white;">
+<article class="access_boot_transition" style="background: #303b4c; color: var(--white);">
     <section id="access_boot">
         <section class="hackex-logo">
             <span id="logo-1">HACK</span>

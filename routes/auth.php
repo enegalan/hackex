@@ -4,7 +4,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ViewController;
 use App\Http\Middleware\Anonymous;
 use App\Http\Middleware\IsFullyVerified;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/signin', [AuthController::class, 'signin']);

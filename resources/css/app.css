@@ -70,25 +70,56 @@ body {
 }
 
 :root {
-    --black: hsl(0, 0%, 11%);
-    --primary: hsl(32, 91%, 50%);
-    --transition: 0.3s ease-in-out;
+    --black: #000;
+    --blackTransparency: #00000080;
+    --grey: #2f2f2f;
+    --grey2: #4c4c4c;
+    --darkGrey: #252525;
+    --darkGreyTransparency: #25252580;
+    --mainDark: #222;
+    --secondaryDark: #333;
+    --transition: 0.3s ease-in;
     --white: #fff;
+    --white-2: #fffefe;
     --bodyBg: #383838;
     --red: #e72020;
     --primaryGreen: #a6e736;
+    --primaryGreenHover: #77a625;
     --secondaryGreen: #94ff94;
+    --scanColor: #6bb20fab;
+    --scanColorSecondary: #6bb20f;
+    --bankLoginBg: #084b8d;
+    --bankColor: #1a5492;
+    --bankLogo: #ff7507;
+    --bitcoinColor: #fff96d;
+    --homeApps1: #fe9a48;
+    --homeApps2: #42e3ee;
+    --levels1: #2886bc;
+    --levels2: #25d21b;
+    --levels3: #b3db20;
+    --levels4: #1d4962;
+    --leaderboard: #484848;
+    --checkbox: #606062;
+    --mainButton: #cecece;
+    --mainButton2: #3d3d3d;
+    --secondaryButton: #c2c2c2;
+    --lightGrey: #ccc;
+    --disconnect: #95ff94;
+    --modal: #1e1e1e;
+    --modalText: #bebebe;
+    --boxShadow: '5px 5px 20px var(--blackTransparency)';
+    --wallpaperFrame: #303030;
 }
 
 input[type="search"], input[type="text"], input[type="password"], textarea {
-    background-color: white;
+    background-color: var(--white);
     border-radius: 5px;
     padding: 0.25rem;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     width: 100%;
     font-size: 20px;
-    color: black;
+    color: var(--black);
 }
 
 input[type="password"] {
@@ -109,17 +140,17 @@ textarea:focus-visible {
 }
 
 .input-error-message {
-    color: #e72020;
+    color: var(--red);
     font-size: 0.9em;
     margin-top: 5px;
 }
 
 .negative {
-    color: #e72020;
+    color: var(--red);
 }
 
 .positive {
-    color: #a6e736;
+    color: var(--primaryGreen);
 }
 
 .rotate-180 {
@@ -146,4 +177,20 @@ textarea:focus-visible {
 *::-webkit-scrollbar-thumb {
     background-color: #0000007d; /* color of the scroll thumb */
     border-radius: 20px; /* roundness of the scroll thumb */
+}
+
+.dark-gradient-header {
+    z-index: 3;
+    background: linear-gradient(0deg, #151515 30%, var(--grey2) 100%);
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    position: fixed;
+}
+
+.dark-gradient-header h3 {
+    font-family: 'main_bold';
+    font-style: italic;
+    font-size: 18px;
 }

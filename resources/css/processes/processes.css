@@ -3,11 +3,11 @@
     left: 50%;
     top: 50%;
     transform: translateX(-50%);
-    color: white;
+    color: var(--white);
 }
 
 #processes {
-    color: white;
+    color: var(--white);
 }
 
 #processes h4 {
@@ -58,14 +58,14 @@ section.processes-tabs {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all .1s ease-in;
+    transition: var(--transition);
     width: 100%;
     height: 3rem;
-    background: #222222;
+    background: var(--mainDark);
 }
 
 .process-tab:hover {
-    color: #a6e736;
+    color: var(--primaryGreen);
 }
 
 .process-tab span {
@@ -73,12 +73,12 @@ section.processes-tabs {
 }
 
 .process-tab.active {
-    background: #00000080;
-    color: #a6e736;
+    background: var(--blackTransparency);
+    color: var(--primaryGreen);
 }
 
 .process-tab.active:hover {
-    color: white;
+    color: var(--white);
 }
 
 .processes-topwrap {
@@ -94,12 +94,12 @@ section.processes-tabs {
 }
 
 .processes-frames > section > ul > li:hover {
-    background: #222222;
+    background: var(--mainDark);
 }
 
 .processes-frames > section.active {
     display: block;
-    background: #00000080;
+    background: var(--blackTransparency);
 }
 
 .process-date, .process-ago {
@@ -114,13 +114,13 @@ section.processes-tabs {
 }
 
 .process-status.successful {
-    color: #a6e736;
+    color: var(--primaryGreen);
 }
 .process-status.working {
-    color: white;
+    color: var(--white);
 }
 .process-status.failed {
-    color: #e72020;
+    color: var(--red);
 }
 
 .oc-label {
@@ -133,14 +133,14 @@ section.processes-tabs {
 .oc-logo {
     width: 15px;
     height: 15px;
-    border: 2px solid white;
+    border: 2px solid var(--white);
     border-radius: 4px;
     position: relative;
 }
 
 .oc-logo:before {
     content: "";
-    border: 1px solid #fff;
+    border: 1px solid var(--white);
     width: 2px;
     height: 7px;
     position: absolute;
@@ -150,7 +150,7 @@ section.processes-tabs {
 
 .oc-logo:after {
     content: "";
-    border: 1px solid #fff;
+    border: 1px solid var(--white);
     width: 8px;
     height: 2px;
     position: absolute;
@@ -170,10 +170,10 @@ section.processes-tabs {
     width: 21px;
     height: 21px;
     border-radius: 4px;
-    background-color: #606062;
-    background-image: linear-gradient(#474749, #606062);
+    background-color: var(--checkbox);
+    background-image: linear-gradient(#474749, var(--checkbox));
     box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.15);
-    transition: all 0.15s ease;
+    transition: var(--transition);
 }
 .checkbox-wrapper-65 .cbx svg {
     position: absolute;
@@ -182,7 +182,7 @@ section.processes-tabs {
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke: #fff;
+    stroke: var(--white);
     stroke-width: 2;
     stroke-dasharray: 17;
     stroke-dashoffset: 17;
@@ -204,10 +204,10 @@ section.processes-tabs {
     visibility: hidden;
 }
 .checkbox-wrapper-65 input[type="checkbox"]:checked + .cbx {
-    background-color: #606062;
+    background-color: var(--checkbox);
     background-image: linear-gradient(#255cd2, #1d52c1);
 }
 .checkbox-wrapper-65 input[type="checkbox"]:checked + .cbx svg {
     stroke-dashoffset: 0;
-    transition: all 0.15s ease;
+    transition: var(--transition);
 }

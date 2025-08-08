@@ -3,7 +3,7 @@
         return;
     }
 @endphp
-<div id="crack-modal" class="modal" closable="true">
+<div id="crack-modal" class="modal confirm-modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <div class="title">Crack Password</div>

@@ -6,17 +6,17 @@ section#scan {
 }
 
 .ip-user {
-    background-color: #00000050;
+    background-color: var(--blackTransparency);
     padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: .5rem;
-    transition: .1s ease-in;
+    transition: var(--transition);
 }
 
 .ip-user:hover {
-    background-color: #222;
-    transition: .1s ease-in;
+    background-color: var(--mainDark);
+    transition: var(--transition);
 }
 
 .ip-searcher {
@@ -27,16 +27,16 @@ section#scan {
 }
 
 .main-btn {
-    background-color: #cecece;
+    background-color: var(--mainButton);
     padding-left: 0.8rem;
     border-radius: 6px;
     padding-right: 0.8rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    color: #3d3d3d;
+    color: var(--mainButton2);
     font-weight: bold;
     letter-spacing: .25px;
-    transition: .1s ease-in;
+    transition: var(--transition);
     text-align: center;
     font-family: 'main_bold';
 }
@@ -48,7 +48,7 @@ section#scan {
 
 .main-btn:hover {
     background-color: #a2a2a2;
-    transition: .1s ease-in;
+    transition: var(--transition);
 }
 
 #ip-list {
@@ -59,7 +59,7 @@ section#scan {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
-    color: white;
+    color: var(--white);
 }
 
 .scan-bottomwrap {
@@ -70,10 +70,10 @@ section#scan {
 }
 
 .refresh-scan-text {
-    color: #fff;
+    color: var(--white);
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    text-shadow: 0 0 black;
+    text-shadow: 0 0 var(--black);
 }

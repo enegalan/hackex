@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head', ['title' => 'Store'])
-    <body static-background="true" class="store-frame" style="background: #151515; color: white;">
+    <body static-background="true" class="store-frame" style="background: #151515; color: var(--white);">
         @include('includes.modal', ['modals' => []])
-        <header>
+        <header class="dark-gradient-header">
             <h3>Store</h3>
             <div class="bank-money-label">
                 <span>Bank:</span>

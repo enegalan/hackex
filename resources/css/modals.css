@@ -4,21 +4,19 @@
     z-index: 2; /* Sit on top */
     left: 0;
     top: 0;
-    color: white;
+    color: var(--white);
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
 .modal-frame {
     position: relative;
     background-color: #131313;
     width: 80%;
     margin: 3rem auto;
 }
-
 #modal-top {
     display: flex;
     justify-content: space-between;
@@ -26,7 +24,6 @@
     padding-left: 1rem;
     padding-right: 1rem;
 }
-
 #modal-top .title {
     font-style: italic;
     font-weight: bold;
@@ -40,21 +37,20 @@
 
 /* The Close Button */
 .close:not(.cancel) {
-    color: #a6e736;
+    color: var(--primaryGreen);
     float: right;
     font-size: 28px;
     font-weight: 700;
     font-family: 'main_bold';
     padding-bottom: 4px;
-    transition: .1s ease-in;
+    transition: var(--transition);
 }
-
 .close:not(.cancel):hover,
 .close:not(.cancel):focus {
     color: #136123;
     text-decoration: none;
     cursor: pointer;
-    transition: .1s ease-in;
+    transition: var(--transition);
 }
 
 /* Apps modal */
@@ -64,23 +60,19 @@
     gap: .7rem;
     padding: .6rem;
     border: 0.5px solid #1d1d1d;
-    transition: .1s ease-in;
+    transition: var(--transition);
 }
-
 #apps-modal .modal-content ul li:hover {
     background-color: #474747;
-    transition: .1s ease-in;
+    transition: var(--transition);
 }
-
 #apps-modal .modal-content ul li .app-info {
     display: flex;
     flex-direction: column;
 }
-
 #apps-modal .modal-content ul li .app-value {
     font-size: 14px;
 }
-
 #apps-modal .top-rightside {
     display: flex;
     flex-direction: row-reverse;
@@ -90,37 +82,17 @@
     padding-bottom: 0.3rem;
 }
 
-/* Bypass, Download, Crack & Antivirus, ChangeIP Confirm modal */
-#bypass-modal,
-#download-modal,
-#crack-modal,
-#antivirus-confirm-modal,
-#spam-confirm-modal,
-#spyware-confirm-modal,
-#change-ip-confirm-modal,
+/* Confirm modal */
 .confirm-modal {
     align-items: center;
     align-content: center;
 }
-
-#bypass-modal #modal-top,
-#download-modal #modal-top,
-#crack-modal #modal-top,
-#antivirus-confirm-modal #modal-top,
-#spam-confirm-modal #modal-top,
-#spyware-confirm-modal #modal-top,
-#change-ip-confirm-modal #modal-top,
-.confirm-modal #modal-top {justify-content: center;background: none;}
-
-#bypass-modal .modal-frame,
-#download-modal .modal-frame,
-#crack-modal .modal-frame,
-#antivirus-confirm-modal .modal-frame,
-#spam-confirm-modal .modal-frame,
-#spyware-confirm-modal .modal-frame,
-#change-ip-confirm-modal .modal-frame,
+.confirm-modal #modal-top {
+    justify-content: center;
+    background: none;
+}
 .confirm-modal .modal-frame {
-    color: #000;
+    color: var(--black);
     background-color: #f4f4f4;
     border-radius: 18px;
     width: 19rem;
@@ -130,114 +102,49 @@
     margin-bottom: auto;
     margin-top: auto;
 }
-
-#bypass-modal #modal-top .title,
-#download-modal #modal-top .title,
-#crack-modal #modal-top .title,
-#antivirus-confirm-modal #modal-top .title,
-#spam-confirm-modal #modal-top .title,
-#spyware-confirm-modal #modal-top .title,
-#change-ip-confirm-modal #modal-top .title,
 .confirm-modal #modal-top .title {
     font-style: normal;
     font-weight: 600;
     font-family: 'main_bold';
     font-size: 18px;
 }
-
-#bypass-modal .modal-content,
-#download-modal .modal-content,
-#crack-modal .modal-content,
-#antivirus-confirm-modal .modal-content,
-#spam-confirm-modal .modal-content,
-#spyware-confirm-modal .modal-content,
-#change-ip-confirm-modal .modal-content,
 .confirm-modal .modal-content {
     text-align: center;
 }
-
-#bypass-modal .buttons,
-#download-modal .buttons,
-#crack-modal .buttons,
-#antivirus-confirm-modal .buttons,
-#spam-confirm-modal .buttons,
-#spyware-confirm-modal .buttons,
-#change-ip-confirm-modal .buttons,
 .confirm-modal .buttons {
     display: flex;
     justify-content: space-around;
 }
-
-#bypass-modal .buttons button,
-#download-modal .buttons button,
-#crack-modal .buttons button,
-#antivirus-confirm-modal .buttons button,
-#spam-confirm-modal .buttons button,
-#spyware-confirm-modal .buttons button,
-#change-ip-confirm-modal .buttons button,
 .confirm-modal .buttons button {
     color: #007ae3;
     font-weight: 600;
-    border-top: 1px solid #c2c2c2;
+    border-top: 1px solid var(--secondaryButton);
     width: 100%;
     padding: .8rem;
 }
-
-#bypass-modal .buttons button:hover,
-#download-modal .buttons button:hover,
-#crack-modal .buttons button:hover,
-#antivirus-confirm-modal .buttons button:hover,
-#spam-confirm-modal .buttons button:hover,
-#spyware-confirm-modal .buttons button:hover,
-#change-ip-confirm-modal .buttons button:hover,
 .confirm-modal .buttons button:hover {
-    background: #c2c2c2;
+    background: var(--secondaryButton);
 }
-
-#bypass-modal .buttons button:first-child,
-#download-modal .buttons button:first-child,
-#crack-modal .buttons button:first-child,
-#antivirus-confirm-modal .buttons button:first-child,
-#spam-confirm-modal .buttons button:first-child,
-#spyware-confirm-modal .buttons button:first-child,
-#change-ip-confirm-modal .buttons button:first-child,
 .confirm-modal .buttons button:first-child {
-    border-right: 1px solid #c2c2c2;
+    border-right: 1px solid var(--secondaryButton);
     border-radius: 0 0 0 16px;
 }
-
-#bypass-modal .buttons button:last-child,
-#download-modal .buttons button:last-child,
-#crack-modal .buttons button:last-child,
-#antivirus-confirm-modal .buttons button:last-child,
-#spam-confirm-modal .buttons button:last-child,
-#spyware-confirm-modal .buttons button:last-child,
-#change-ip-confirm-modal .buttons button:last-child,
 .confirm-modal .buttons button:last-child {
     border-radius: 0 0 16px 0;
 }
-
-#bypass-modal .content,
-#download-modal .content,
-#crack-modal .content,
-#antivirus-confirm-modal .content,
-#spam-confirm-modal .content,
-#spyware-confirm-modal .content,
-#change-ip-confirm-modal .content,
 .confirm-modal .content {
     font-size: 14px;
     margin-bottom: 1.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
 }
-
 .cancel {
     font-size: 16px !important;
 }
 
 /* Hack modal */
 #hack-modal .modal-frame {
-    background-color: #2f2f2f;
+    background-color: var(--grey);
     padding: 1.5rem 2.5rem;
     width: 35%;
     height: 25%;
@@ -245,30 +152,26 @@
     left: 50%;
     transform: translate(-50%, -100%);
     top: 50%;
-    box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 20px;
+    box-shadow: var(--blackTransparency) 5px 5px 20px;
 }
-
 #hack-modal #modal-top {
     background: 0 0;
     margin-bottom: 1rem;
     font-size: 17px;
     text-align: center;
 }
-
 #hack-modal .buttons {
     display: flex;
     flex-direction: column;
     gap: .6rem;
     align-items: center;
 }
-
 #hack-modal .buttons > * {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .hack-button,
 .remove-button,
 .oc-button,
@@ -278,7 +181,7 @@
 
 /* Viruses modal */
 #viruses-modal .modal-frame {
-    background-color: #2f2f2f;
+    background-color: var(--grey);
     width: 40%;
     height: 30%;
     padding: .8rem 2rem;
@@ -286,9 +189,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -75%);
-    box-shadow: 5px 5px 20px #00000080;
+    box-shadow: var(--boxShadow);
 }
-
 #viruses-modal #modal-top {
     text-align: left;
     background: 0 0;
@@ -296,7 +198,6 @@
     font-size: 17px;
     padding-left: 0;
 }
-
 #viruses-modal .buttons {
     flex-direction: column;
     align-items: center;
@@ -305,7 +206,6 @@
     height: 65%;
     justify-content: center;
 }
-
 #viruses-modal .buttons > * {
     width: 100%;
     display: flex;
@@ -313,65 +213,55 @@
     align-items: center;
     justify-content: center;
 }
-
 #viruses-modal input[type="checkbox"] {
     display: none;
 }
-
 #viruses-modal ul li label {
     padding-left: 1rem;
     width: 100%;
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
 }
-
 #viruses-modal ul {
-    background: #3d3d3d;
+    background: var(--mainButton2);
     padding-bottom: .2rem;
     overflow-y: scroll;
     max-height: 3.5rem;
 }
-
 #viruses-modal ul li:nth-child(2n) {
-    border-top: 2px solid #ccc;
-    border-bottom: 2px solid #ccc;
+    border-top: 2px solid var(--lightGrey);
+    border-bottom: 2px solid var(--lightGrey);
 }
-
 #viruses-modal ul li:last-of-type {
     border-bottom: none;
 }
-
 .spam-button, .spyware-button {
     width: 100%;
-    background-color: #3d3d3d;
+    background-color: var(--mainButton2);
     padding-left: 0.8rem;
     border-radius: 6px;
     padding-right: 0.8rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    color: #cecece;
+    color: var(--mainButton);
     font-weight: bold;
     font-family: 'main_bold';
     letter-spacing: .25px;
-    transition: .1s ease-in;
+    transition: var(--transition);
     text-align: center;
 }
-
 .spam-button:hover,
 .spyware-button:hover {
     background-color: #4b4b4b;
-    transition: .1s ease-in;
+    transition: var(--transition);
 }
-
 .virus-button.active {
     border-radius: 6px 6px 0 0;
     padding-bottom: 1.2rem;
 }
-
 .virus-list {
     width: 100%;
 }
-
 .virus-level {
     display: flex;
     align-items: center;
@@ -379,18 +269,15 @@
     flex-wrap: wrap;
     margin-left: 0.2rem;
     margin-right: 0.2rem;
-    background: #222;
+    background: var(--mainDark);
 }
-
 .virus-level:hover {
-    background: #00000050;
+    background: var(--blackTransparency);
 }
-
 .virus-found {
-    color: white;
+    color: var(--white);
     padding: 1.5rem;
 }
-
 .spam-general-info,
 .spyware-general-info {
     padding-left: 1.5rem;
@@ -398,7 +285,6 @@
     padding-top: 0;
     padding-bottom: 0;
 }
-
 #antivirus-modal #modal-top,
 #spam-modal #modal-top,
 #spyware-modal #modal-top {
@@ -408,13 +294,11 @@
     padding-bottom: .5rem;
     margin-bottom: .5rem;
 }
-
 #antivirus-modal .level,
 #spam-modal .level,
 #spyware-modal .level {
     font-size: 12px;
 }
-
 #antivirus-modal section.buttons,
 #spam-modal section.buttons,
 #spyware-modal section.buttons {
@@ -422,7 +306,6 @@
     width: 100%;
     height: 100%;
 }
-
 #antivirus-modal .virus-level.antivirus-level,
 #spam-modal .virus-level.spam-level,
 #spyware-modal .virus-level.spyware-level {
@@ -434,18 +317,15 @@
     padding-left: .5rem;
     padding-right: .5rem;
 }
-
 #spyware-modal .virus-level.spyware-level {
     padding-top: .5rem;
     padding-bottom: .5rem;
 }
-
 #antivirus-modal .virus-level.antivirus-level:hover,
 #spam-modal .virus-level.spam-level:hover,
 #spyware-modal .virus-level.spyware-level:hover {
-    background-color: #2f2f2f;
+    background-color: var(--grey);
 }
-
 #antivirus-modal ul,
 #spam-modal ul,
 #spyware-modal ul {
@@ -456,7 +336,6 @@
     padding-right: 1rem;
     padding-bottom: 7rem;
 }
-
 .virus-hacker-ip {
     font-size: 18px;
 }
@@ -465,18 +344,16 @@
 #spyware-log-modal {
     background: none;
 }
-
 #spyware-log-modal .modal-frame {
     padding: 1rem;
     display: flex;
-    background: black;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(43 43 43) 100%);
+    background: var(--black);
+    background: linear-gradient(0deg, transparent 0%, #2b2b2b 100%);
 }
-
 #spyware-log {
-    background: white;
+    background: var(--white);
     width: 100%;
-    color: black;
+    color: var(--black);
     padding-left: .5rem;
     padding-right: .5rem;
     padding-bottom: 5rem;
@@ -494,13 +371,13 @@
 #app-info-modal .modal-frame {
     width: 50%;
     height: 45%;
-    background: #1e1e1e;
+    background: var(--modal);
     margin-top: 12rem;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     padding-left: 2rem;
     padding-right: 2rem;
-    color: #bebebe;
+    color: var(--modalText);
 }
 #app-info-modal #modal-top {
     flex-direction: column;
@@ -517,7 +394,6 @@
 #app-info-modal #modal-top div:nth-child(2) {
     font-size: 14px;
 }
-
 #app-info-frame {
     display: flex;
     flex-direction: column;
@@ -528,14 +404,14 @@
 
 /* Change IP modal */
 #change-ip-modal .modal-frame {
-    color: #bebebe;
-    background: #1e1e1e;
+    color: var(--modalText);
+    background: var(--modal);
     width: 50%;
     height: 36%;
     margin-top: auto;
     margin-bottom: auto;
     padding: 1.5rem 2rem;
-    box-shadow: 5px 5px 20px #00000dad;
+    box-shadow: var(--boxShadow);
     max-width: 22rem;
 }
 #change-ip-modal #modal-top {
@@ -553,7 +429,6 @@
 #change-ip-modal #modal-top div:nth-child(2) {
     font-size: 14px;
 }
-
 #change-ip-frame {
     display: flex;
     flex-direction: column;
@@ -577,10 +452,9 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%);
-    background-color: #1e1e1e;
-    text-shadow: 2px 3px 3px black;
+    background-color: var(--modal);
+    text-shadow: 2px 3px 3px var(--black);
 }
-
 #player-info-modal #modal-top {
     flex-direction: column;
     justify-content: flex-start;
@@ -594,14 +468,12 @@
     position: absolute;
     background: none;
 }
-
 #player-info-modal .username {
     font-weight: bolder;
     font-family: 'main_bold';
     font-size: 20px;
     font-stretch: expanded;
 }
-
 #player-info-modal .player-level {
     position: absolute;
     left: 43.5%;
@@ -609,24 +481,20 @@
     z-index: 0;
     transform: scale(4.5);
 }
-
 .player-level-info {
     display: flex;
     flex-direction: column;
     gap: .5rem;
     align-items: flex-start;
 }
-
 .daily-login {
-    color: #a6e736;
+    color: var(--primaryGreen);
     font-size: 15px;
     width: 100%;
 }
-
 .daily-login-earned {
     font-size: 12px;
 }
-
 .days-login {
     display: flex;
     justify-content: space-between;
@@ -634,7 +502,6 @@
     gap: .5rem;
     margin-top: 1rem;
 }
-
 .day-login {
     flex-direction: column;
     display: flex;
@@ -642,9 +509,8 @@
     justify-content: space-between;
     font-size: 13px;
 }
-
 .day-logged {
-    background: #a6e736;
+    background: var(--primaryGreen);
     width: 13px;
     height: 16px;
     margin-bottom: -1px;
@@ -660,9 +526,8 @@
     margin-top: auto;
     margin-bottom: auto;
     padding: 1.2rem;
-    box-shadow: 1px 1px 20px #000;
+    box-shadow: 1px 1px 20px var(--black);
 }
-
 #deposit-modal #modal-top {
     background: none;
     font-style: italic;
@@ -673,14 +538,12 @@
     text-align: center;
     color: #a6a8ab;
 }
-
 #deposit-frame ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
 }
-
 .deposit {
     background: #adafb1;
     border-radius: 3px;
@@ -689,15 +552,25 @@
     min-width: 45%;
     max-width: 45%;
     display: flex;
-    transition: .1s ease-in;
+    transition: var(--transition);
     user-select: none;
 }
 .deposit:hover {
     background: #dadbdb;
-    transition: .1s ease-in;
+    transition: var(--transition);
 }
-.deposit_reward {display: flex;flex-direction: column;align-items: center;background: linear-gradient(180deg, rgb(255 255 255 / 17%) 50%, rgb(0 0 0 / 15%) 100%);padding-left: .6rem;padding-right: .6rem;padding-top: .1rem;border-radius: 6px 6px 0 0;width: 100%;padding-bottom: .4rem;}
-
+.deposit_reward {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(180deg, #ffffff2b 50%, #00000026 100%);
+    padding-left: .6rem;
+    padding-right: .6rem;
+    padding-top: .1rem;
+    border-radius: 6px 6px 0 0;
+    width: 100%;
+    padding-bottom: .4rem;
+}
 .deposit_cost {
     color: #3e3d3f;
     font-weight: 700;
@@ -707,7 +580,6 @@
     padding-top: .2rem;
     padding-bottom: .2rem;
 }
-
 .cryptocoins_label {
     font-weight: 200;
     font-family: 'main_light';
@@ -715,7 +587,6 @@
     margin-top: -6px;
     color: #494a4c;
 }
-
 .deposit_value {
     font-size: 18px;
     font-stretch: expanded;
@@ -723,21 +594,20 @@
     font-family: 'main_bold';
     color: #0a3b6e;
 }
-
 #deposit-frame {
     margin-top: 1rem;
 }
 
 /* Wallpaper modal */
 #wallpaper-modal .modal-frame {
-    color: #bebebe;
-    background: #1e1e1e;
+    color: var(--modalText);
+    background: var(--modal);
     width: 45%;
     height: 60%;
     margin-top: auto;
     margin-bottom: auto;
     padding: 1.5rem 2rem;
-    box-shadow: 5px 5px 20px #00000dad;
+    box-shadow: var(--boxShadow);
     max-width: 22rem;
     top: -24px;
     overflow-y: scroll;
@@ -757,7 +627,6 @@
 #wallpaper-modal #modal-top div:nth-child(2) {
     font-size: 14px;
 }
-
 #wallpaper-frame {
     display: flex;
     justify-content: flex-start;
@@ -768,7 +637,6 @@
     margin-top: .5rem;
     display: flex;
 }
-
 #wallpaper-frame ul {
     flex-wrap: wrap;
     justify-content: center;
@@ -781,26 +649,26 @@
     height: 11rem;
 }
 #wallpaper-frame button {
-    transition: .1s ease-in;
-    border-color: #303030;
+    transition: var(--transition);
+    border-color: var(--wallpaperFrame);
 }
 #wallpaper-frame button:hover {
-    border: 1px solid #303030;
-    transition: .1s ease-in;
+    border: 1px solid var(--wallpaperFrame);
+    transition: var(--transition);
 }
 
 /* Add Contact modal */
 #add-contact-modal .modal-frame {
     width: 50%;
     height: 20%;
-    background: #1e1e1e;
+    background: var(--modal);
     margin-top: auto;
     margin-bottom: auto;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     padding-left: 2rem;
     padding-right: 2rem;
-    color: #bebebe;
+    color: var(--modalText);
 }
 #add-contact-modal #modal-top {
     flex-direction: column;
@@ -817,27 +685,25 @@
 #add-contact-modal #modal-top div:nth-child(2) {
     font-size: 14px;
 }
-
 #add-contact-form {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
     font-size: 15px;
 }
-
 #input-ip {
-    color: black;
+    color: var(--black);
 }
 
 /* Requests modal */
 #requests-modal .modal-frame {
     width: 70%;
     height: 70%;
-    background: #1e1e1e;
+    background: var(--modal);
     margin-top: auto;
     margin-bottom: auto;
     padding: 1rem 1rem;
-    color: #bebebe;
+    color: var(--modalText);
     overflow-y: scroll;
 }
 #requests-modal #modal-top {
@@ -855,41 +721,35 @@
 #requests-modal #modal-top div:nth-child(2) {
     font-size: 14px;
 }
-
 #requests-form {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
     font-size: 15px;
 }
-
 #requests-list {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
     margin-top: 1rem;
 }
-
 #requests-modal .friend-request {
     padding: 1.2rem;
-    background: #00000080;
+    background: var(--blackTransparency);
     display: flex;
     justify-content: space-between;
     align-items: stretch;
 }
-
 .request-user {
     font-size: 17px;
     font-weight: 600;
     font-family: 'main_bold';
 }
-
 .request-action {
     display: flex;
     gap: 1rem;
     align-items: center;
 }
-
 .request-date {
     font-size: 14px;
 }
@@ -898,11 +758,11 @@
 #requests-modal .modal-frame {
     width: 70%;
     height: 70%;
-    background: #1e1e1e;
+    background: var(--modal);
     margin-top: auto;
     margin-bottom: auto;
     padding: 1rem 1rem;
-    color: #bebebe;
+    color: var(--modalText);
     overflow-y: scroll;
 }
 #requests-modal #modal-top {
@@ -920,42 +780,36 @@
 #requests-modal #modal-top div:nth-child(2) {
     font-size: 14px;
 }
-
 #requests-form {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
     font-size: 15px;
 }
-
 #requests-list {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
     margin-top: 1rem;
 }
-
 #requests-modal .friend-request {
     padding: 1.2rem;
-    background: #00000080;
+    background: var(--blackTransparency);
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    transition: .1s ease-in;
+    transition: var(--transition);
 }
-
 .request-user {
     font-size: 17px;
     font-weight: 600;
     font-family: 'main_bold';
 }
-
 .request-action {
     display: flex;
     gap: 1rem;
     align-items: center;
 }
-
 .request-date {
     font-size: 14px;
 }
@@ -967,14 +821,12 @@
     font-stretch: expanded;
     font-family: 'main_bold';
 }
-
 #compose-modal section.modal-frame {
     padding: 1.3rem;
     height: 60%;
     margin-top: auto;
     margin-bottom: auto;
 }
-
 #compose-form {
     display: flex;
     flex-direction: column;
@@ -982,9 +834,8 @@
     padding: 1rem;
     height: 100%;
 }
-
 #compose-message {
-    background: white;
+    background: var(--white);
     height: 100%;
 }
 
@@ -996,7 +847,6 @@
     font-style: italic;
     font-family: 'main_bold';
 }
-
 #level-up-frame {
     font-size: 12px;
     font-weight: lighter;
@@ -1005,7 +855,6 @@
     padding-right: 1rem;
     font-family: 'main_bold';
 }
-
 #level-up-modal .modal-frame {
     display: flex;
     flex-direction: column;
@@ -1018,17 +867,14 @@
     padding: 1.5rem;
     position: relative;
 }
-
 #level-up-modal #modal-top {
     flex-direction: column;
     margin-bottom: 1rem;
 }
-
 .ok-button {
     width: fit-content;
     align-self: center;
 }
-
 #level-up-modal .player-level {
     transform: scale(1.4);
 }

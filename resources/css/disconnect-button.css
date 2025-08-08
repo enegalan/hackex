@@ -5,7 +5,7 @@
     justify-content: center;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    background: #00000050;
+    background: var(--blackTransparency);
     position: fixed;
     top: 0;
     font-weight: bold;
@@ -15,30 +15,30 @@
 
 .disconnect-button {
     cursor: pointer;
-    transition: .1s ease-in;
+    transition: var(--transition);
     animation: textColorFade 3s ease-in-out forwards infinite;
 }
 
 .disconnect-button:hover {
-    color: #95ff94;
-    transition: .1s ease-in;
+    color: var(--disconnect);
+    transition: var(--transition);
     animation: none;
 }
 
 .disconnect-button:active {
-    color: rgb(87, 87, 87);
-    transition: .1s ease-in;
+    color: #575757;
+    transition: var(--transition);
     animation: none;
 }
 
 @keyframes textColorFade {
     0% {
-        color: #ffffff;
+        color: var(--white);
     }
     50% {
-        color: #95ff94;
+        color: var(--disconnect);
     }
     100% {
-        color: #ffffff;
+        color: var(--white);
     }
 }

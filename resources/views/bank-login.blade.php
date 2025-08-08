@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head')
-    <body static-background="true" style="background:#084b8d;">
+    <body static-background="true" style="background:var(--bankLoginBg);">
         @include('includes.modal', ['modals' => ['crack']])
         <section id="bank-login">
             <article style="flex-direction: row;width: 100%;pointer-events: none;" class="app-frame">

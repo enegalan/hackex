@@ -3,7 +3,7 @@
         return;
     }
 @endphp
-<div id="download-modal" class="modal" closable="true">
+<div id="download-modal" class="modal confirm-modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
             <div class="title">Confirm</div>
