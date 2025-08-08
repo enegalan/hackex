@@ -38,6 +38,7 @@ section#scan {
     letter-spacing: .25px;
     transition: .1s ease-in;
     text-align: center;
+    font-family: 'main_bold';
 }
 
 .main-btn:disabled {

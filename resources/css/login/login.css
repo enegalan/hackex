@@ -184,6 +184,7 @@ body#login-frame {
     border-radius: 4px;
     color: #fff;
     font-weight: 500;
+    font-family: 'main_normal';
     font-size: 1em;
 }
 #login-frame section .signin .content .form .inputBox input[type="submit"],
@@ -248,6 +249,7 @@ body#login-frame {
 .mail-send {
     color: #a6e736;
     font-weight: 600;
+    font-family: 'main_bold';
 }
 .signin .content .form .links a:nth-child(2):hover,
 .signup .content .form .links a:nth-child(2):hover {
@@ -263,6 +265,7 @@ body#login-frame {
     font-size: 1.35em;
     letter-spacing: 0.05em;
     cursor: pointer;
+    font-family: 'main_bold';
 }
 #login-frame input[type="submit"] {
     transition: .1s ease-in;

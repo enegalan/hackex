@@ -41,9 +41,31 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'main_normal';
+    src: url('/fonts/united_sans_reg_medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'main_bold';
+    src: url('/fonts/united_sans_reg_heavy.otf') format('opentype');
+    font-weight: bolder;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'main_light';
+    src: url('/fonts/united_sans_reg_light.otf') format('opentype');
+    font-weight: lighter;
+    font-style: normal;
+}
+
 body {
     background: var(--bodyBg);
     scroll-behavior: smooth;
+    font-family: 'main_normal';
 }
 
 :root {

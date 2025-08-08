@@ -16,6 +16,7 @@
     font-weight: bold;
     font-style: italic;
     font-size: 18px;
+    font-family: 'main_bold';
 }
 
 .bank-money-label {
@@ -66,6 +67,7 @@
     font-size: 22px;
     margin-top: -6px;
     font-weight: lighter;
+    font-family: 'main_light';
 }
 
 .app-price-value {

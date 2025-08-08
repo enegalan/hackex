@@ -11,7 +11,7 @@
 
 .player-level-value {
     text-shadow: 2px 3px 3px black;
-    font-weight: bold;
+    font-family: 'main_normal';
 }
 
 #player-name {

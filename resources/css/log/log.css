@@ -29,6 +29,7 @@ form#log h4 {
     padding-left: .3rem !important;
     padding-right: .5rem !important;
     font-size: 13px;
+    font-family: monospace;
 }
 
 .log-buttons {

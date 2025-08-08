@@ -13,6 +13,11 @@
     position: fixed;
 }
 
+#leaderboards h3 {
+    font-family: 'main_bold';
+    font-style: italic;
+}
+
 .leaderboard {
     background-color: rgb(72 72 72);
     padding-top: 3.5rem;

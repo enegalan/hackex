@@ -13,6 +13,7 @@
 #processes h4 {
     font-weight: bold;
     font-style: italic;
+    font-family: 'main_bold';
 }
 
 section.processes-info {

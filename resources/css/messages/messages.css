@@ -12,6 +12,7 @@
     font-weight: 600;
     font-style: italic;
     font-size: 18px;
+    font-family: 'main_bold';
 }
 
 .messages-info {
@@ -106,6 +107,7 @@
     font-weight: bolder;
     font-size: 1em;
     font-stretch: expanded;
+    font-family: 'main_bold';
 }
 
 .from-hackex {
@@ -131,6 +133,7 @@
     font-weight: bold;
     font-style: italic;
     margin-bottom: .25rem;
+    font-family: 'main_bold';
 }
 
 #message-main .message-top {
@@ -140,6 +143,7 @@
     font-style: italic;
     font-size: 14px;
     flex-direction: row;
+    font-family: 'main_bold';
 }
 
 #messages-main .subject-value {

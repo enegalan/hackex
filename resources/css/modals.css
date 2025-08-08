@@ -30,6 +30,7 @@
 #modal-top .title {
     font-style: italic;
     font-weight: bold;
+    font-family: 'main_bold';
 }
 
 /* Modal Content/Box */
@@ -43,6 +44,7 @@
     float: right;
     font-size: 28px;
     font-weight: 700;
+    font-family: 'main_bold';
     padding-bottom: 4px;
     transition: .1s ease-in;
 }
@@ -139,6 +141,7 @@
 .confirm-modal #modal-top .title {
     font-style: normal;
     font-weight: 600;
+    font-family: 'main_bold';
     font-size: 18px;
 }
 
@@ -348,6 +351,7 @@
     padding-bottom: 0.5rem;
     color: #cecece;
     font-weight: bold;
+    font-family: 'main_bold';
     letter-spacing: .25px;
     transition: .1s ease-in;
     text-align: center;
@@ -506,6 +510,7 @@
 }
 #app-info-modal .app_label {
     font-weight: bolder;
+    font-family: 'main_bold';
     font-size: 20px;
     font-stretch: expanded;
 }
@@ -541,6 +546,7 @@
 }
 #change-ip-modal .app_label {
     font-weight: bolder;
+    font-family: 'main_bold';
     font-size: 20px;
     font-stretch: expanded;
 }
@@ -591,6 +597,7 @@
 
 #player-info-modal .username {
     font-weight: bolder;
+    font-family: 'main_bold';
     font-size: 20px;
     font-stretch: expanded;
 }
@@ -660,6 +667,7 @@
     background: none;
     font-style: italic;
     font-weight: bold;
+    font-family: 'main_bold';
     font-size: 10.5px;
     padding: 0;
     text-align: center;
@@ -693,6 +701,7 @@
 .deposit_cost {
     color: #3e3d3f;
     font-weight: 700;
+    font-family: 'main_bold';
     font-stretch: expanded;
     font-size: 12.25px;
     padding-top: .2rem;
@@ -701,6 +710,7 @@
 
 .cryptocoins_label {
     font-weight: 200;
+    font-family: 'main_light';
     font-size: 12px;
     margin-top: -6px;
     color: #494a4c;
@@ -710,6 +720,7 @@
     font-size: 18px;
     font-stretch: expanded;
     font-weight: 650;
+    font-family: 'main_bold';
     color: #0a3b6e;
 }
 
@@ -741,6 +752,7 @@
     font-weight: bolder;
     font-size: 20px;
     font-stretch: expanded;
+    font-family: 'main_bold';
 }
 #wallpaper-modal #modal-top div:nth-child(2) {
     font-size: 14px;
@@ -800,6 +812,7 @@
     font-weight: bolder;
     font-size: 20px;
     font-stretch: expanded;
+    font-family: 'main_bold';
 }
 #add-contact-modal #modal-top div:nth-child(2) {
     font-size: 14px;
@@ -837,6 +850,7 @@
     font-weight: bolder;
     font-size: 20px;
     font-stretch: expanded;
+    font-family: 'main_bold';
 }
 #requests-modal #modal-top div:nth-child(2) {
     font-size: 14px;
@@ -867,6 +881,7 @@
 .request-user {
     font-size: 17px;
     font-weight: 600;
+    font-family: 'main_bold';
 }
 
 .request-action {
@@ -900,6 +915,7 @@
     font-weight: bolder;
     font-size: 20px;
     font-stretch: expanded;
+    font-family: 'main_bold';
 }
 #requests-modal #modal-top div:nth-child(2) {
     font-size: 14px;
@@ -931,6 +947,7 @@
 .request-user {
     font-size: 17px;
     font-weight: 600;
+    font-family: 'main_bold';
 }
 
 .request-action {
@@ -944,7 +961,12 @@
 }
 
 /* Compose modal */
-#compose-modal #modal-top {font-weight: bolder;font-size: 20px;font-stretch: expanded;}
+#compose-modal #modal-top {
+    font-weight: bolder;
+    font-size: 20px;
+    font-stretch: expanded;
+    font-family: 'main_bold';
+}
 
 #compose-modal section.modal-frame {
     padding: 1.3rem;
@@ -972,6 +994,7 @@
     font-size: 22px;
     font-weight: 600;
     font-style: italic;
+    font-family: 'main_bold';
 }
 
 #level-up-frame {
@@ -980,6 +1003,7 @@
     margin-bottom: .8rem;
     padding-left: 1rem;
     padding-right: 1rem;
+    font-family: 'main_bold';
 }
 
 #level-up-modal .modal-frame {
