@@ -66,6 +66,7 @@ body {
     background: var(--bodyBg);
     scroll-behavior: smooth;
     font-family: 'main_normal';
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -132,4 +133,17 @@ textarea:focus-visible {
 
 .scrollbar-none::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Edge */
+}
+
+*::-webkit-scrollbar {
+    width: 8px; /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent; /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #0000007d; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
 }
