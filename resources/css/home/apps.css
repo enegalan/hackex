@@ -153,7 +153,7 @@ article.app-frame#bank-account .app-button {
     position: relative;
     overflow: hidden;
     padding-top: 0.5rem;
-    background: radial-gradient(circle, #fffefe, #8b8b8b);
+    background: radial-gradient(circle, #fffefe, #afafaf);
 }
 article.app-frame#bank-account .app-button span {
     color: #1a5492;
@@ -554,13 +554,29 @@ div#apps-grid > * {
     width: 40px;
     height: 40px;
     border-radius: 6px;
+    padding: .5rem;
 }
-#apps-grid #app-1 { background: orange; grid-area: 1 / 1 / 2 / 2; }
-#apps-grid #app-2 { background: lime; grid-area: 1 / 2 / 2 / 3; }
-#apps-grid #app-3 { background: turquoise; grid-area: 2 / 1 / 3 / 2; }
-#apps-grid #app-4 { background: fuchsia; grid-area: 2 / 2 / 3 / 3; }
+#apps-grid #app-1 { background: radial-gradient(#e64900, #ee5f1f); grid-area: 1 / 1 / 2 / 2; }
+#apps-grid #app-2 { background: radial-gradient(#cae843, #a9c02b); grid-area: 1 / 2 / 2 / 3; }
+#apps-grid #app-3 { background: radial-gradient(#15d1dd, #05a8b5); grid-area: 2 / 1 / 3 / 2; }
+#apps-grid #app-4 { background: radial-gradient(#c33c7e, #a72564); grid-area: 2 / 2 / 3 / 3; }
 
 /* My Device button */
+.app-frame .mobile {
+    transform: rotate(10deg);
+}
+.app-frame .mobile .phone {
+    box-shadow: #0a5170 0 0 20px 2px;
+}
+#device-app-bg {
+    position: absolute;
+    top: 0;
+    filter: invert(1) opacity(0.05);
+    z-index: 0;
+}
+#device-app-bg img {
+    border-radius: 18px;
+}
 .mobile {
     justify-content: center;
     align-items: center;
@@ -638,4 +654,247 @@ div#apps-grid > * {
 
 .app-logo {
     width: 64px;
+}
+
+#app-1-aux,
+#app-1-aux-2,
+#app-1-aux-3 {
+    position: relative;
+}
+
+#app-1-aux:before {
+    content: "";
+    background-color: #fe9a48;
+    width: .6rem;
+    height: .5px;
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    left: -2px;
+    top: -8.2px;
+}
+
+#app-1-aux:after {
+    content: "";
+    background-color: #fe9a48;
+    width: .6rem;
+    height: .5px;
+    display: block;
+    position: absolute;
+    top: -9.3px;
+    left: 3.2px;
+    transform: rotate(90deg);
+}
+
+#app-1-aux-2:before {
+    content: "";
+    background-color: #fe9a48;
+    width: .6rem;
+    height: .5px;
+    display: block;
+    position: absolute;
+    top: -8.2px;
+    right: -18px;
+    transform: rotate(-45deg);
+}
+
+#app-1-aux-2:after {
+    content: "";
+    background-color: #fe9a48;
+    width: .6rem;
+    height: .5px;
+    display: block;
+    position: absolute;
+    bottom: -8.2px;
+    left: -2px;
+    transform: rotate(125deg);
+}
+
+#app-1-aux-3:before {
+    content: "";
+    background-color: #fe9a48;
+    width: .6rem;
+    height: .5px;
+    display: block;
+    position: absolute;
+    bottom: -9.3px;
+    left: 3.2px;
+    transform: rotate(90deg);
+}
+
+#app-1-aux-3:after {
+    content: "";
+    background-color: #fe9a48;
+    width: .6rem;
+    height: .5px;
+    display: block;
+    position: absolute;
+    bottom: -8.2px;
+    right: -17.8px;
+    transform: rotate(50deg);
+}
+
+#app-1 svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+#app-1 .app-icon-frame {
+    transform: scale(0.9);
+}
+
+.app-icon-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#app-3-point-1,
+#app-3-point-2,
+#app-3-point-3,
+#app-3-point-5,
+#app-3-point-7,
+#app-3-point-8 {
+    width: 2px;
+    height: 2px;
+    background-color: #42e3ee;
+    border-radius: 100%;
+    position: absolute;
+}
+
+#app-3-point-1 {
+    top: 0;
+    left: 0;
+}
+
+#app-3-point-2 {
+    top: .15rem;
+    right: .3rem;
+}
+
+#app-3-point-3 {
+    top: .45rem;
+    right: 0;
+}
+
+#app-3-point-5 {
+    bottom: .15rem;
+    right: .75rem;
+}
+
+#app-3-point-7 {
+    bottom: .45rem;
+    right: .75rem;
+}
+
+#app-3-point-8 {
+    bottom: 0rem;
+    left: 0;
+}
+
+#app-3-point-4 {
+    border: 1px solid #42e3ee;
+    border-radius: 100%;
+    width: 4px;
+    height: 4px;
+    position: absolute;
+    left: -.08rem;
+}
+
+#app-3-point-6 {
+    background-color: #42e3ee;
+    border-radius: 100%;
+    width: 4px;
+    height: 4px;
+    position: absolute;
+    bottom: .25rem;
+    right: 0;
+}
+
+#app-3-line-1,
+#app-3-line-2,
+#app-3-line-3,
+#app-3-line-4,
+#app-3-line-5,
+#app-3-line-6,
+#app-3-line-7,
+#app-3-line-8,
+#app-3-line-9 {
+    background-color: #42e2eea8;
+    position: absolute;
+}
+
+#app-3-line-1 {
+    width: 18px;
+    height: .1px;
+    top: 0.11rem;
+    left: 0;
+    transform: rotate(8deg);
+}
+
+#app-3-line-2 {
+    width: 6px;
+    height: .1px;
+    top: .35rem;
+    right: 0;
+    transform: rotate(45deg);
+}
+
+#app-3-line-3 {
+    width: 22px;
+    height: .1px;
+    top: .6rem;
+    right: 0;
+    transform: rotate(350deg);
+}
+
+#app-3-line-4 {
+    width: 10px;
+    height: .1px;
+    top: 0.87rem;
+    left: 0.1rem;
+    transform: rotate(20deg);
+}
+
+#app-3-line-5 {
+    width: 10px;
+    height: .1px;
+    top: 1.03rem;
+    left: .65rem;
+    transform: rotate(12deg);
+}
+
+#app-3-line-6 {
+    width: 26px;
+    height: .1px;
+    top: 0.52rem;
+    right: 0;
+    transform: rotate(38deg);
+}
+
+#app-3-line-7 {
+    width: 5px;
+    height: .1px;
+    bottom: 0.3rem;
+    left: 0.535rem;
+    transform: rotate(90deg);
+}
+
+#app-3-line-8 {
+    width: 12px;
+    height: .1px;
+    bottom: .13rem;
+    left: 0;
+    transform: rotate(166deg);
+}
+
+#app-3-line-9 {
+    width: 28px;
+    height: .1px;
+    bottom: 0.65rem;
+    left: -0.29rem;
+    transform: rotate(132deg);
 }
