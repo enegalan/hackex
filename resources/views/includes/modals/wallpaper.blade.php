@@ -27,5 +27,5 @@
             </form>
         </section>
     </section>
-    @include('includes.back-btn', ['callback' => 'closeWallpaperModal()'])
+    @include('includes.buttons.back-btn', ['callback' => 'closeWallpaperModal()'])
 </div>

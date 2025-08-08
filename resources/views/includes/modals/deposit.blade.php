@@ -28,5 +28,5 @@
             </ul>
         </section>
     </section>
-    @include('includes.back-btn', ['callback' => 'closeDepositModal()'])
+    @include('includes.buttons.back-btn', ['callback' => 'closeDepositModal()'])
 </div>

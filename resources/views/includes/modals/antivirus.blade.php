@@ -45,5 +45,5 @@
             </form>
         </section>
     </section>
-    @include('includes.back-btn', ['callback' => 'closeAntivirusModal()'])
+    @include('includes.buttons.back-btn', ['callback' => 'closeAntivirusModal()'])
 </div>

@@ -4,7 +4,7 @@
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.head', ['title' => 'Leaderboards'])
+    @include('includes.layouts.head', ['title' => 'Leaderboards'])
     <body id="leaderboards" static-background="true" >
         @include('includes.modal', ['modals' => ['player-info']])
         <header class="dark-gradient-header">
@@ -34,7 +34,7 @@
                 </tbody>
             </table>
         </section>
-        @include('includes.back-btn', ['callback', "redirect('/device')"])
+        @include('includes.buttons.back-btn', ['callback', "redirect('/device')"])
     </body>
     @include('includes.scripts', ['scripts' => ['home']])
     @include('includes.notifications')

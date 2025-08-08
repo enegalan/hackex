@@ -36,5 +36,5 @@
             </div>
         </form>
     </section>
-    @include('includes.back-btn', ['callback' => 'closeComposeModal()'])
+    @include('includes.buttons.back-btn', ['callback' => 'closeComposeModal()'])
 </div>

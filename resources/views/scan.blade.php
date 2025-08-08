@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.head', ['title' => 'Scan'])
+    @include('includes.layouts.head', ['title' => 'Scan'])
     <body>
         @include('includes.modal', ['modals' => ['bypass']])
         <section id="scan">
@@ -31,8 +31,8 @@
         <section class="scan-bottomwrap">
             <button onclick="refreshScan(this)" class="main-btn refresh-button">Refresh</button>
         </section>
+        @include('includes.buttons.back-btn')
     </body>
-    @include('includes.back-btn')
     @include('includes.scripts', ['scripts' => ['scan']])
     @include('includes.notifications')
 </html>

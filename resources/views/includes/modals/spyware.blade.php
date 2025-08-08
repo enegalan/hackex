@@ -38,5 +38,5 @@
             </form>
         </section>
     </section>
-    @include('includes.back-btn', ['callback' => 'closeSpywareModal()'])
+    @include('includes.buttons.back-btn', ['callback' => 'closeSpywareModal()'])
 </div>

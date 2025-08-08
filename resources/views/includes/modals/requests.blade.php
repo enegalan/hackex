@@ -32,5 +32,5 @@
             @endforeach
         </ul>
     </section>
-    @include('includes.back-btn', ['callback' => 'closeRequestsModal()'])
+    @include('includes.buttons.back-btn', ['callback' => 'closeRequestsModal()'])
 </div>

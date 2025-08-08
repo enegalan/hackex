@@ -4,7 +4,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.head')
+    @include('includes.layouts.head', ['title' => 'PNT Bank'])
     <body static-background="true" style="background:var(--bankLoginBg);">
         @include('includes.modal', ['modals' => ['deposit']])
         <section id="bank-login">
@@ -84,8 +84,8 @@
         <section class="bank-commentary">
             <p>*Deposits: Purchased cryptocoins are put in Savings regardless of Max Limit</p>
         </section>
+        @include('includes.buttons.back-btn')
     </body>
-    @include('includes.back-btn')
     @include('includes.scripts', ['scripts' => ['bank-account']])
     @include('includes.notifications')
 </html>

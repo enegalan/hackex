@@ -19,5 +19,5 @@
             </form>
         </section>
     </section>
-    @include('includes.back-btn', ['callback' => 'closeAppInfoModal()'])
+    @include('includes.buttons.back-btn', ['callback' => 'closeChangeIpModal()'])
 </div>

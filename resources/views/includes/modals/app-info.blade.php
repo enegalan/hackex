@@ -23,5 +23,5 @@
             </div>
         </section>
     </section>
-    @include('includes.back-btn', ['callback' => 'closeAppInfoModal()'])
+    @include('includes.buttons.back-btn', ['callback' => 'closeAppInfoModal()'])
 </div>

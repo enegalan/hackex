@@ -4,7 +4,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.head', ['title' => 'Messages'])
+    @include('includes.layouts.head', ['title' => 'My Device'])
     <body>
         @include('includes.modal', ['modals' => ['change-ip', 'change-ip-confirm', 'wallpaper']])
         <section id="my-device">
@@ -55,8 +55,8 @@
                 @endif
             </section>
         </section>
+        @include('includes.buttons.back-btn')
     </body>
-    @include('includes.back-btn')
     @include('includes.scripts', ['scripts' => ['my-device']])
     @include('includes.notifications')
 </html>

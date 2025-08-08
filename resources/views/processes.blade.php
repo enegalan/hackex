@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.head', ['title' => 'Processes'])
+    @include('includes.layouts.head', ['title' => 'Processes'])
     <body>
         @include('includes.modal', ['modals' => ['hack']])
         <section id="processes">
@@ -241,9 +241,9 @@
                 </section>
             </section>
         </section>
+        @include('includes.buttons.back-btn')
+        @include('includes.buttons.remove-btn')
     </body>
-    @include('includes.back-btn')
-    @include('includes.remove-btn')
     @include('includes.scripts', ['scripts' => ['processes', 'progress-bar']])
     @include('includes.notifications')
 </html>

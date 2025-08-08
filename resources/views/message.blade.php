@@ -4,7 +4,7 @@
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.head', ['title' => 'Message'])
+    @include('includes.layouts.head', ['title' => 'Message'])
     <body>
         @include('includes.modal', ['modals' => 'message-delete'])
         <section id="message-main">
@@ -22,8 +22,8 @@
                 </div>
             </section>
         </section>
+        @include('includes.buttons.back-btn', ['callback' => "redirect('/messages')"])
     </body>
-    @include('includes.back-btn', ['callback' => "redirect('/messages')"])
     @include('includes.scripts', ['scripts' => ['messages']])
     @include('includes.notifications')
 </html>

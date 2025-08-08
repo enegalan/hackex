@@ -13,5 +13,5 @@
             <button class="main-btn ping-button" type="submit">Ping</button>
         </form>
     </section>
-    @include('includes.back-btn', ['callback' => 'closeAddContactModal()'])
+    @include('includes.buttons.back-btn', ['callback' => 'closeAddContactModal()'])
 </div>

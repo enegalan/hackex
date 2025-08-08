@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.head', ['title' => 'Store'])
+    @include('includes.layouts.head', ['title' => 'Store'])
     <body static-background="true" class="store-frame" style="background: #151515; color: var(--white);">
         @include('includes.modal', ['modals' => []])
         <header class="dark-gradient-header">
@@ -297,8 +297,8 @@
                 </form>
             </li>
         </ul>
+        @include('includes.buttons.back-btn')
     </body>
-    @include('includes.back-btn')
     @include('includes.scripts')
     @include('includes.notifications')
 </html>

@@ -17,4 +17,3 @@
         </section>
     </section>
 </article>
-@include('includes.scripts', ['core_scripts' => false, 'scripts' => ['access_boot']])

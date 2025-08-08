@@ -49,5 +49,5 @@
             </form>
         </section>
     </section>
-    @include('includes.back-btn', ['callback' => 'closeSpamModal()'])
+    @include('includes.buttons.back-btn', ['callback' => 'closeSpamModal()'])
 </div>

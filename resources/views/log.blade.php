@@ -4,7 +4,7 @@
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.head', ['title' => 'Messages'])
+    @include('includes.layouts.head', ['title' => 'Log'])
     <body>
         @include('includes.modal', ['modals' => []])
         <form action="/save-log" method="post" id="log">
@@ -22,7 +22,7 @@
                 <button type="submit" class="main-btn save-button">Save</button>
             </section>
         </form>
-        @include('includes.back-btn')
+        @include('includes.buttons.back-btn')
     </body>
     @include('includes.scripts', ['scripts' => ['log']])
     @include('includes.notifications')

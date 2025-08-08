@@ -613,6 +613,7 @@
                     const levelNode = modal.querySelector('.level').parentNode.cloneNode(true);
                     const reputationParent = modal.querySelector('.reputation').parentNode;
                     modal.querySelector('.level').parentNode.style.display = "none";
+                    levelNode.querySelector('.level').innerText = level;
                     reputationParent.parentNode.insertBefore(levelNode, reputationParent.nextSibling);
                     if (dailyLoginModal) dailyLoginModal.style.display = "none";
                     document.querySelector('#player-info-modal .modal-frame').style.height = "30%";
@@ -649,6 +650,9 @@
             function openChangeIpWindow(user_id) {
                 const modal = openWindow('change-ip');
                 modal.querySelector('#input-user-id-2').value = user_id;
+            }
+            function closeChangeIpModal() {
+                closeWindow('change-ip');
             }
             function openChangeIpConfirmWindow() {
                 const changeIpWindow = openWindow('change-ip');

@@ -5,7 +5,7 @@
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.head', ['title' => 'Messages'])
+    @include('includes.layouts.head', ['title' => 'Messages'])
     <body>
         @include('includes.modal', ['modals' => ['compose']])
         <section id="messages-main">
@@ -49,8 +49,8 @@
                 </ul>
             </section>
         </section>
+        @include('includes.buttons.back-btn')
     </body>
-    @include('includes.back-btn')
     @include('includes.scripts', ['scripts' => ['messages']])
     @include('includes.notifications')
 </html>
