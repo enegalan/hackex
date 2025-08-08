@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head', ['title' => 'Processes'])
     <body>
-        @include('includes.modal')
+        @include('includes.modal', ['modals' => ['hack']])
         <section id="processes">
             <section class="processes-topwrap">
                 <h4>Processes</h4>

@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head', ['title' => 'Scan'])
     <body>
-        @include('includes.modal')
+        @include('includes.modal', ['modals' => ['bypass']])
         <section id="scan">
             <section class="scan-topwrap">
                 <form action="/ping" method="post" class="ip-searcher">

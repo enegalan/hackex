@@ -6,7 +6,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head', ['title' => 'Messages'])
     <body>
-        @include('includes.modal')
+        @include('includes.modal', ['modals' => ['change-ip', 'change-ip-confirm', 'wallpaper']])
         <section id="my-device">
             <h4>My Device</h4>
             <section class="device-info-frame">

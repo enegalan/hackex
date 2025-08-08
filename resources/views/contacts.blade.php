@@ -10,7 +10,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head', ['title' => 'Contacts'])
     <body>
-        @include('includes.modal')
+        @include('includes.modal', ['modals' => ['add-contact', 'requests', 'remove-contact']])
         <section id="contacts">
             <h4>Contacts</h4>
             <section class="contacts-info">

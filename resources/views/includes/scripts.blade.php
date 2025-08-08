@@ -172,6 +172,17 @@
             closeWindow('level-up');
         }
     </script>
+    <script id="back-button">
+        document.addEventListener('keydown', function(event) {
+            const target = event.target;
+            const tag = target.tagName.toLowerCase();
+            const isTyping = tag === 'input' || tag === 'textarea' || target.isContentEditable;
+            if (event.key === 'Escape' && !isTyping) {
+                event.preventDefault();
+                redirect('/');
+            }
+        });
+    </script>
 @endif
 @if (isset($scripts))
     @if (in_array("progress-bar", $scripts))
@@ -691,12 +702,6 @@
             }
             function closeRemoveContactModal() {
                 closeWindow('remove-contact');
-            }
-            function openComposeModal() {
-                const modal = openWindow('compose');
-            }
-            function closeComposeModal() {
-                closeWindow('compose');
             }
         </script>
     @endif

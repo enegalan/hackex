@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head', ['title' => 'Leaderboards'])
-    @include('includes.modal')
     <body id="leaderboards" static-background="true" >
+        @include('includes.modal', ['modals' => ['player-info']])
         <header>
             <h3>Leaderboards</h3>
         </header>
