@@ -21,7 +21,7 @@ session()->put('isHacked', $isHacked);
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head')
     <body>
-        @include('includes.modal', ['modals' => ['download', 'viruses', 'antivirus', 'antivirus-confirm', 'spam', 'spam-confirm', 'spyware', 'spyware-log', 'app-info', 'player-info']])
+        @include('includes.modal', ['modals' => ['download', 'viruses', 'apps', 'antivirus', 'antivirus-confirm', 'spam', 'spam-confirm', 'spyware', 'spyware-log', 'app-info', 'player-info']])
         @if (isset($access_boot))
             @include('includes.access_boot', ['text' => $access_boot])
             @php

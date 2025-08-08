@@ -6,7 +6,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head', ['title' => 'Messages'])
     <body>
-        @include('includes.modal')
+        @include('includes.modal', ['modals' => []])
         <form action="/save-log" method="post" id="log">
             @csrf
             <h4><b><span>{{ $user['username'] }}</span>'s </b><span>Log</span></h4>

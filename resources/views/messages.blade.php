@@ -7,7 +7,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.head', ['title' => 'Messages'])
     <body>
-        @include('includes.modal', ['modals' => ['compose', 'delete-message']])
+        @include('includes.modal', ['modals' => ['compose']])
         <section id="messages-main">
             <h4>Messages</h4>
             <section class="messages-info">

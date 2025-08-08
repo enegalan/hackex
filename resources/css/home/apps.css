@@ -246,7 +246,7 @@ article.app-frame#bank-account .app-button span {
 }
 
 .bg-element {
-    background-color: #2e496e;
+    background: #f8ab13;
     position: absolute;
     z-index: 2;
 }
@@ -369,12 +369,12 @@ article.app-frame#bank-account .app-button span {
 }
 
 .bitcoin.hover .primary-element {
-    background-color: var(--primary);
-    border: 1px solid var(--primary);
+    background-color: #fff96d;
+    border: 1px solid #fff96d;
 }
 
 .bitcoin.hover .circle {
-    border-color: var(--primary);
+    border-color: #fff96d;
     transform: rotate(-15deg);
 }
 

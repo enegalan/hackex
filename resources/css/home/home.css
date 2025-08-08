@@ -47,3 +47,28 @@ section#apps {
     color: white;
     text-shadow: 2px 3px 3px black;
 }
+
+#bank-account .app-button {
+    border-color: #386a9d;
+}
+
+#store .app-button {
+    border-color: #dddd00;
+    background: radial-gradient(circle, #faa017, #ffc60c);
+}
+
+#messages .app-button {
+    border-color: #00bcdd;
+}
+
+#log .app-button {
+    border-color: #b6d2a2;
+}
+
+#apps.app-frame .app-button {
+    border-color: #ef8c78;
+}
+
+#device .app-button {
+    border-color: #6795ab;
+}
