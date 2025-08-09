@@ -85,7 +85,6 @@ body#login-frame {
     align-items: center;
     min-height: 100vh;
     background: var(--black);
-    font-family: 'Times New Roman', Times, serif;
 }
 #login-frame section {
     position: absolute;
