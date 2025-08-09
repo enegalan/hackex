@@ -3,9 +3,9 @@
 $user = Auth::user();
 $isHacked = false;
 $user->refresh();
-if (isset($victim_id) || session('isHacked')) {
-    if (isset($victim_id)) {
-        $user = \App\Models\User::findOrFail($victim_id);
+if (session('victim_id') || session('isHacked')) {
+    if (session('victim_id')) {
+        $user = \App\Models\User::findOrFail(session('victim_id'));
     } else {
         $user = \App\Models\User::findOrFail(session('hackedUser')['id']);
     }
@@ -22,12 +22,8 @@ session()->put('isHacked', $isHacked);
     @include('includes.layouts.head', ['home' => true, 'apps' => true])
     <body>
         @include('includes.modal', ['modals' => ['download', 'viruses', 'apps', 'antivirus', 'antivirus-confirm', 'spam', 'spam-confirm', 'spyware', 'spyware-log', 'app-info', 'player-info']])
-        @if (isset($access_boot))
-            @include('includes.access_boot', ['text' => $access_boot])
-            @php
-                // To avoid infinite boots...
-                unset($access_boot);
-            @endphp
+        @if (session('access_boot'))
+            @include('includes.access_boot', ['text' => session('access_boot')])
         @endif
         @if ($isHacked)
             @include('includes.buttons.disconnect-btn')

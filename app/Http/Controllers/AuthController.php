@@ -79,7 +79,7 @@ class AuthController extends Controller {
         $correct_password = $user && Hash::check($password, $user->password);
         if ($correct_password) {
             Auth::login($user);
-            return view('home', ['access_boot' => 'Booting Device...']);
+            return redirect()->route('home')->with('access_boot', 'Booting Device...');
         } else {
             $errors = array();
             if (!$user) $errors['login-username-email'] = 'User not found.';

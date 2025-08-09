@@ -28,7 +28,7 @@ class UserController extends Controller {
         $hackedUser = session()->get('hackedUser');
         session()->remove('hackedUser');
         if (!$hackedUser) return view('home');
-        return view('home', ['access_boot' => 'Disconnecting from ' . $hackedUser->ip]);
+        return redirect()->route('home')->with('access_boot', 'Disconnecting from ' . $hackedUser->ip);
     }
     function transfer() {
         if (session()->get('isHacked')) {
@@ -274,7 +274,7 @@ class UserController extends Controller {
             if ($bypass['status'] === Bypass::SUCCESSFUL) {
                 LogController::doLog(LogController::LOGGED_IN, $bypass->Victim, ['ip' => $bypass->User->ip]);
                 LogController::doLog(LogController::ACCESSED, $bypass->User, ['ip' => $bypass->Victim->ip]);
-                return view('home', ['victim_id' => $bypass->Victim['id'], 'access_boot' => 'Accessing ' . $bypass->Victim['ip']]);
+                return redirect()->route('home')->with(['victim_id' => $bypass->Victim['id'], 'access_boot' => 'Accessing ' . $bypass->Victim['ip']]);
             }
         }
         return back()->with('error', 'Bypass is not found or you are not hacker of this bypass.');
