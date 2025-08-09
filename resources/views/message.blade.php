@@ -6,7 +6,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.layouts.head', ['title' => 'Message'])
     <body>
-        @include('includes.modal', ['modals' => 'message-delete'])
+        @include('includes.modal', ['modals' => ['message-delete']])
         <section id="message-main">
             <h4>{{ $received_message->subject }}</h4>
             <section class="messages-info">

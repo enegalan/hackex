@@ -3,6 +3,7 @@ form#log {
     padding-top: 1.5rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+    padding-bottom: 7rem;
 }
 
 form#log h4 {
@@ -24,10 +25,6 @@ form#log h4 {
     resize: none;
     background: var(--white);
     width: 100%;
-    color: var(--black) !important;
-    padding-top: 0.3rem !important;
-    padding-left: .3rem !important;
-    padding-right: .5rem !important;
     font-size: 13px;
     font-family: monospace;
 }

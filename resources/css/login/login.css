@@ -172,24 +172,6 @@ body#login-frame {
     position: relative;
     width: 100%;
 }
-#login-frame section .signin .content .form .inputBox input,
-#login-frame section .signup .content .form .inputBox input {
-    position: relative;
-    width: 100%;
-    background: var(--secondaryDark);
-    border: none;
-    outline: none;
-    padding: 25px 10px 7.5px;
-    border-radius: 4px;
-    color: var(--white);
-    font-weight: 500;
-    font-family: 'main_normal';
-    font-size: 1em;
-}
-#login-frame section .signin .content .form .inputBox input[type="submit"],
-#login-frame section .signup .content .form .inputBox input[type="submit"] {
-    padding: 7.5px 10px 7.5px !important;
-}
 #login-frame section .signin .content .form .inputBox i,
 #login-frame section .signup .content .form .inputBox i {
     position: absolute;

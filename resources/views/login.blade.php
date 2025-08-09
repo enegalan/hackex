@@ -11,15 +11,19 @@
                             <form action="/signin" method="post" class="form"> 
                                 @csrf
                                 <div class="inputBox">
-                                    <input type="text" name="username-email" id="login-username-email" required>
-                                    <i>Username or Email</i>
+                                    <div class="input-wrapper">
+                                        <input type="text" name="username-email" id="login-username-email" required placeholder="Username or Email">
+                                        <div class="input-glow"></div>
+                                    </div>
                                     @error('login-username-email')
                                     <div class="input-error-message">{{ $message }}</div>
                                 @enderror
                                 </div>
                                 <div class="inputBox">
-                                    <input type="password" name="password" id="login-password" required autocomplete="password">
-                                    <i>Password</i> 
+                                    <div class="input-wrapper">
+                                        <input type="password" name="password" id="login-password" required autocomplete="current-password" placeholder="Password">
+                                        <div class="input-glow"></div>
+                                    </div>
                                     @error('login-password')
                                         <div class="input-error-message">{{ $message }}</div>
                                     @enderror
@@ -44,28 +48,37 @@
                         <form action="/signup" method="post" class="form">
                             @csrf
                             <div class="inputBox">
-                                <input type="text" name="username" id="register-username" required maxlength="12">
-                                <i>Username</i>
+                                <div class="input-wrapper">
+                                    <input type="text" name="username" id="register-username" required maxlength="12" placeholder="Username">
+                                    <div class="input-glow"></div>
+                                </div>
                                 @if (isset($signupErrors['username']))
                                     <div class="input-error-message">{{ $signupErrors['username'][0] }}</div>
                                 @endif
                             </div>
                             <div class="inputBox">
-                                <input type="email" name="email" id="register-email" required>
-                                <i>Email</i>
+                                <div class="input-wrapper">
+                                    <input type="email" name="email" id="register-email" required placeholder="Email">
+                                    <div class="input-glow"></div>
+                                </div>
                                 @if (isset($signupErrors['email']))
                                     <div class="input-error-message">{{ $signupErrors['email'][0] }}</div>
                                 @endif
                             </div>
                             <div class="inputBox">
-                                <input type="password" name="password" id="register-password" required autocomplete="password"> <i>Password</i> 
+                                <div class="input-wrapper">
+                                    <input type="password" name="password" id="register-password" required autocomplete="new-password" placeholder="Password">
+                                    <div class="input-glow"></div>
+                                </div>
                                 @if (isset($signupErrors['password']))
                                     <div class="input-error-message">{{ $signupErrors['password'][0] }}</div>
                                 @endif
                             </div>
                             <div class="inputBox">
-                                <input type="password" name="repeat-password" id="register-repeat-password" required autocomplete="repeat-password">
-                                <i>Repeat Password</i>
+                                <div class="input-wrapper">
+                                    <input type="password" name="repeat-password" id="register-repeat-password" required autocomplete="repeat-password" placeholder="Repeat password">
+                                    <div class="input-glow"></div>
+                                </div>
                                 @if (isset($signupErrors['repeat-password']))
                                     <div class="input-error-message">{{ $signupErrors['repeat-password'][0] }}</div>
                                 @endif

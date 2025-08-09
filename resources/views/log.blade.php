@@ -11,8 +11,11 @@
             @csrf
             <h4><b><span>{{ $user['username'] }}</span>'s </b><span>Log</span></h4>
             <section class="log-textarea">
-                <textarea rows="27" name="log" id="log">{{ $user['log'] }}</textarea>
-                <input type="hidden" name="user_id" id="user-id-input" value="{{ $user['id'] }}">
+                <div class="text-area-wrapper">
+                    <textarea rows="27" name="log" id="log">{{ $user['log'] }}</textarea>
+                    <div class="textarea-glow"></div>
+                    <input type="hidden" name="user_id" id="user-id-input" value="{{ $user['id'] }}">
+                </div>
             </section>
             <section class="max-size">
                 <span>max size: </span>

@@ -29,8 +29,14 @@
                     @endif
                 </select>
             </div>
-            <input type="text" name="subject" id="compose-subject" placeholder="subject">
-            <textarea name="message" id="compose-message" placeholder="message"></textarea>
+            <div class="input-wrapper">
+                <input type="text" name="subject" id="compose-subject" placeholder="subject">
+                <div class="input-glow"></div>
+            </div>
+            <div class="text-area-wrapper">
+                <textarea name="message" id="compose-message" placeholder="message"></textarea>
+                <div class="textarea-glow"></div>
+            </div>
             <div style="display: flex; align-items: center; justify-content: center;">
                 <button style="width: auto;" class="main-btn send-button" type="submit">SEND</button>
             </div>

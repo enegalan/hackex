@@ -20,6 +20,75 @@
         if (form) form.submit();
     }
 </script>
+<script id="custom-cursor">
+    const customCursor = document.createElement('div');
+    customCursor.classList.add('custom-cursor');
+    document.body.appendChild(customCursor);
+    const cursorGlitch = document.createElement("div");
+    cursorGlitch.classList.add("cursor-glitch");
+    document.body.appendChild(cursorGlitch);
+    document.addEventListener('mousemove', function(e) {
+        customCursor.style.left = `${e.clientX}px`;
+        customCursor.style.top = `${e.clientY}px`;
+        const offsetX = (Math.random() - 0.5) * 10;
+        const offsetY = (Math.random() - 0.5) * 10;
+        cursorGlitch.style.left = `${e.clientX}px`;
+        cursorGlitch.style.top = `${e.clientY}px`;
+    });
+    document.addEventListener("click", function (e) {
+        const clickEffect = document.createElement("div");
+        clickEffect.classList.add("click-effect");
+        clickEffect.style.left = `${e.clientX}px`;
+        clickEffect.style.top = `${e.clientY}px`;
+        document.body.appendChild(clickEffect);
+        for (let i = 0; i < 5; i++) {
+            createGlitchParticle(e.clientX, e.clientY);
+        }
+        setTimeout(() => {
+            document.body.removeChild(clickEffect);
+        }, 600);
+    });
+    function createGlitchParticle(x, y) {
+        const particle = document.createElement("div");
+        particle.style.position = "fixed";
+        particle.style.width = `${Math.random() * 10 + 5}px`;
+        particle.style.height = `${Math.random() * 10 + 5}px`;
+        particle.style.background = Math.random() > 0.5 ? "var(--primaryGreen)" : "var(--secondaryGreen)";
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        particle.style.borderRadius = Math.random() > 0.7 ? "50%" : "0";
+        particle.style.filter = "blur(2px)";
+        particle.style.opacity = "0.8";
+        particle.style.zIndex = "9000";
+        particle.style.pointerEvents = "none";
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 100 + 50;
+        const vx = Math.cos(angle) * speed;
+        const vy = Math.sin(angle) * speed;
+        particle.style.transform = "translate(-50%, -50%)";
+        document.body.appendChild(particle);
+        const startTime = performance.now();
+        const duration = Math.random() * 600 + 300;
+        function animate(currentTime) {
+            const elapsed = currentTime - startTime;
+            if (elapsed < duration) {
+                const progress = elapsed / duration;
+                const x_pos = x + vx * progress;
+                const y_pos = y + vy * progress;
+                const scale = 1 - progress;
+                const opacity = 1 - progress;
+                particle.style.left = `${x_pos}px`;
+                particle.style.top = `${y_pos}px`;
+                particle.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                particle.style.opacity = opacity;
+                requestAnimationFrame(animate);
+            } else if (particle.parentNode) {
+                document.body.removeChild(particle);
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+</script>
 @if (Auth::check())
     @php
         if (isset($core_scripts) && $core_scripts == false) {
@@ -574,14 +643,14 @@
             }
             function openSpywareLog(transferId, log) {
                 const modal = openWindow('spyware-log');
-                modal.querySelector('#input-transfer-id-3').value = transferId;
+                modal.querySelector('#input-transfer-id-4').value = transferId;
                 modal.querySelector('#spyware-log').value = log;
             }
             function openSpywareConfirmWindow() {
                 const spywareModal = openWindow('spyware-log')
-                const transferId = spywareModal.querySelector('#input-transfer-id-3').value;
+                const transferId = spywareModal.querySelector('#input-transfer-id-4').value;
                 const modal = openWindow('spyware-confirm');
-                modal.querySelector('#input-transfer-id-4').value = transferId;
+                modal.querySelector('#input-transfer-id-3').value = transferId;
             }
             function openAppInfoModal(app_label, app_level, app_description, app_use) {
                 const modal = openWindow('app-info');

@@ -52,7 +52,12 @@ class UserController extends Controller {
             $currentSecured = $user->secured_bitcoins;
             // Calculate how much bitcoins can be transfered
             $spaceLeft = $maxSaving - $currentSecured;
-            if ($spaceLeft <= 0) return BankController::autoLoginBankAccount(['error' => 'You have reached the maximum savings limit.']);
+            if ($spaceLeft <= 0) {
+                return BankController::autoLoginBankAccount(['error' => 'You have reached the maximum savings limit.']);
+            }
+            if ($user->checking_bitcoins == 0) {
+                return BankController::autoLoginBankAccount(['error' => 'You have no Cryptocoins to transfer.']);
+            }
             // Calculate how much bitcoins will be transfered from checking
             $transferAmount = min($user->checking_bitcoins, $spaceLeft);
             // Transfer

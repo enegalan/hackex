@@ -7,7 +7,10 @@
             <section class="scan-topwrap">
                 <form action="/ping" method="post" class="ip-searcher">
                     @csrf
-                    <input placeholder="ip address" class="ip-search" type="search" name="ip-search" id="ip-search">
+                    <div class="input-wrapper">
+                        <input placeholder="ip address" class="ip-search" type="search" name="ip-search" id="ip-search">
+                        <div class="input-glow"></div>
+                    </div>
                     <button disabled class="main-btn ping-button">Ping</button>
                 </form>
             </section>

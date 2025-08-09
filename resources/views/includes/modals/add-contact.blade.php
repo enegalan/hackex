@@ -9,7 +9,10 @@
             <div class="app_label">Add Contact</div>
         </section>
         <form action="/friend/request" id="add-contact-form">
-            <input type="text" name="ip" id="input-ip-1" placeholder="contact ip">
+            <div class="input-wrapper">
+                <input type="text" name="ip" id="input-ip-1" placeholder="contact ip">
+                <div class="input-glow"></div>
+            </div>
             <button class="main-btn ping-button" type="submit">Ping</button>
         </form>
     </section>
