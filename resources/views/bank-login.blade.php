@@ -5,7 +5,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'PNT Bank'])
+    @include('includes.layouts.head', ['title' => 'PNT Bank', 'bank' => true])
     <body static-background="true" style="background:var(--bankLoginBg);">
         @include('includes.modal', ['modals' => ['crack']])
         <section id="bank-login">

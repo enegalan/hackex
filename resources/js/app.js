@@ -1,6 +1,8 @@
 import './bootstrap';
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 window.notify = function (message, type = 'info', onDismiss = () => {}) {
     const colors = {

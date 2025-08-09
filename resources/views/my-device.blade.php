@@ -4,7 +4,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'My Device'])
+    @include('includes.layouts.head', ['title' => 'My Device', 'wallpapers' => true])
     <body>
         @include('includes.modal', ['modals' => ['change-ip', 'change-ip-confirm', 'wallpaper']])
         <section id="my-device">

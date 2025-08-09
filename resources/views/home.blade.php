@@ -19,7 +19,7 @@ session()->put('isHacked', $isHacked);
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head')
+    @include('includes.layouts.head', ['home' => true, 'apps' => true])
     <body>
         @include('includes.modal', ['modals' => ['download', 'viruses', 'apps', 'antivirus', 'antivirus-confirm', 'spam', 'spam-confirm', 'spyware', 'spyware-log', 'app-info', 'player-info']])
         @if (isset($access_boot))
