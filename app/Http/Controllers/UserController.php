@@ -65,6 +65,7 @@ class UserController extends Controller {
             $user->secured_bitcoins += $transferAmount;
             $user->save();
             LogController::doLog(LogController::TRANSFER, $user, ['bitcoins' => $transferAmount]);
+            return BankController::autoLoginBankAccount(['success' => 'You have secured your checking Cryptocoins.']);
         }
     }
     function saveLog (Request $request) {

@@ -4,7 +4,7 @@
     }
 @endphp
 <div style="z-index: 3;" id="deposit-modal" class="modal" closable="true">
-    <section class="modal-frame">
+    <section class="card modal-frame">
         <section id="modal-top">
             <span>Purchased Cryptocoins are put in Savings regardless of Max Limit</span>
         </section>

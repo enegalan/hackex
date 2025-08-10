@@ -71,5 +71,5 @@ section#apps {
 
 #device .app-button {
     border-color: #6795ab;
-    background: radial-gradient(circle, #565656, var(--grey));
+    background: radial-gradient(circle, #565656, #2f2f2f);
 }

@@ -15,7 +15,12 @@
     position: relative;
     background-color: #131313;
     width: 80%;
-    margin: 3rem auto;
+    margin: auto auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.modal-content {
+    border-radius: 0 0 1.768em 1.768em;
 }
 #modal-top {
     display: flex;
@@ -61,9 +66,10 @@
     padding: .6rem;
     border: 0.5px solid #1d1d1d;
     transition: var(--transition);
+    min-height: 5rem;
 }
 #apps-modal .modal-content ul li:hover {
-    background-color: #474747;
+    background-color: #4747476b;
     transition: var(--transition);
 }
 #apps-modal .modal-content ul li .app-info {
@@ -146,7 +152,9 @@
 #hack-modal .modal-frame {
     background-color: var(--grey);
     padding: 1.5rem 2.5rem;
-    width: 35%;
+    width: 16rem;
+    min-width: 16rem;
+    max-width: 16rem;
     height: 25%;
     position: absolute;
     left: 50%;
@@ -181,9 +189,9 @@
 
 /* Viruses modal */
 #viruses-modal .modal-frame {
-    background-color: var(--grey);
+    background-color: var(--modal);
     width: 40%;
-    height: 30%;
+    height: 35%;
     padding: .8rem 2rem;
     position: absolute;
     top: 50%;
@@ -262,6 +270,9 @@
 .virus-list {
     width: 100%;
 }
+.virus-list .virus-level {
+    border-radius: 0;
+}
 .virus-level {
     display: flex;
     align-items: center;
@@ -269,7 +280,8 @@
     flex-wrap: wrap;
     margin-left: 0.2rem;
     margin-right: 0.2rem;
-    background: var(--mainDark);
+    background: #22222269;
+    border-radius: 1.768em;
 }
 .virus-level:hover {
     background: var(--blackTransparency);
@@ -312,19 +324,18 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: .5rem;
-    padding-right: .5rem;
+    padding: 1rem 1.5rem;
+    transition: var(--transition);
 }
 #spyware-modal .virus-level.spyware-level {
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 #antivirus-modal .virus-level.antivirus-level:hover,
 #spam-modal .virus-level.spam-level:hover,
 #spyware-modal .virus-level.spyware-level:hover {
-    background-color: var(--grey);
+    background-color: #2f2f2f6b;
+    transition: var(--transition);
 }
 #antivirus-modal ul,
 #spam-modal ul,
@@ -349,6 +360,8 @@
     display: flex;
     background: var(--black);
     background: linear-gradient(0deg, transparent 0%, #2b2b2b 100%);
+    height: 65%;
+    width: 80%;
 }
 #spyware-log {
     width: 100%;
@@ -365,7 +378,7 @@
 
 /* App Info modal */
 #app-info-modal .modal-frame {
-    width: 50%;
+    width: 24em;
     height: 45%;
     background: var(--modal);
     margin-top: 12rem;
@@ -374,6 +387,8 @@
     padding-left: 2rem;
     padding-right: 2rem;
     color: var(--modalText);
+    min-width: 24em;
+    max-width: 24em;
 }
 #app-info-modal #modal-top {
     flex-direction: column;
@@ -514,15 +529,13 @@
 
 /* Deposit modal */
 #deposit-modal .modal-frame {
-    background: #19232e;
-    border-radius: 3px;
+    background: #19232e7e;
     width: 25%;
     min-width: 18rem;
     height: 32.5%;
     margin-top: auto;
     margin-bottom: auto;
     padding: 1.2rem;
-    box-shadow: 1px 1px 20px var(--black);
 }
 #deposit-modal #modal-top {
     background: none;
@@ -599,10 +612,11 @@
     color: var(--modalText);
     background: var(--modal);
     width: 45%;
-    height: 60%;
+    height: calc(60svh - calc(var(--pads) * 2));
     margin-top: auto;
     margin-bottom: auto;
     padding: 1.5rem 2rem;
+    padding-bottom: 0;
     box-shadow: var(--boxShadow);
     max-width: 22rem;
     top: -24px;
@@ -857,10 +871,11 @@
     width: 18rem;
     min-width: 18rem;
     max-width: 18rem;
-    height: 32%;
+    height: 35.5%;
     margin: auto;
     padding: 1.5rem;
     position: relative;
+    overflow: hidden;
 }
 #level-up-modal #modal-top {
     flex-direction: column;

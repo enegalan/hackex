@@ -4,7 +4,7 @@
     }
 @endphp
 <div style="z-index: 12;" id="level-up-modal" class="modal" closable="false">
-    <section class="modal-frame">
+    <section class="card modal-frame">
         <section id="modal-top">
             <div class="app_label">LEVEL UP!</div>
             <hr>
@@ -17,7 +17,7 @@
                 gap: .7rem;
             ">
                 <span>You are now a level</span>
-                @include('includes.components.player_level')
+                @include('includes.components.player_level', ['showLevel' => true])
             </div>
         </section>
         <section id="level-up-frame">

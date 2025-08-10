@@ -6,7 +6,7 @@
     }
 @endphp
 <div id="apps-modal" class="modal" closable="true">
-    <section class="modal-frame">
+    <section class="card modal-frame">
         <section id="modal-top">
             <div class="title">Apps</div>
             <div class="top-rightside">

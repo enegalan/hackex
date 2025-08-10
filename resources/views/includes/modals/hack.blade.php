@@ -4,7 +4,7 @@
     }
 @endphp
 <div id="hack-modal" class="modal" closable="true">
-    <section class="modal-frame">
+    <section class="card modal-frame">
         <section id="modal-top">
             <div class="title">Process Actions</div>
         </section>

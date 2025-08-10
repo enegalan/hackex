@@ -19,7 +19,7 @@
             </section>
             <section class="contacts-frames">
                 @if (count($friends) === 0)
-                    <p class="empty-frame-message">You have no contacts.</p>
+                    <p class="empty-frame-message">You have no contacts</p>
                 @endif
                 <ul>
                     @foreach ($friends as $friend)

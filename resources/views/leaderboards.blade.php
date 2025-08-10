@@ -34,7 +34,7 @@
                 </tbody>
             </table>
         </section>
-        @include('includes.buttons.back-btn', ['callback', "redirect('/device')"])
+        @include('includes.buttons.back-btn', ['callback' => "redirect('/device')"])
     </body>
     @include('includes.scripts', ['scripts' => ['home']])
     @include('includes.notifications')

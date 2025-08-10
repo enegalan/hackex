@@ -72,11 +72,11 @@ body {
 :root {
     --black: #000;
     --blackTransparency: #00000080;
-    --grey: #2f2f2f;
+    --grey: #2f2f2f5a;
     --grey2: #4c4c4c;
     --darkGrey: #252525;
     --darkGreyTransparency: #25252580;
-    --mainDark: #222;
+    --mainDark: #222222c2;
     --secondaryDark: #333;
     --transition: 0.3s ease-in;
     --white: #fff;
@@ -88,6 +88,7 @@ body {
     --secondaryGreen: #94ff94;
     --scanColor: #6bb20fab;
     --scanColorSecondary: #6bb20f;
+    --loginBg: #2323237b;
     --bankLoginBg: #084b8d;
     --bankColor: #1a5492;
     --bankLogo: #ff7507;
@@ -102,16 +103,27 @@ body {
     --leaderboard: #484848;
     --checkbox: #606062;
     --mainButton: #cecece;
-    --mainButton2: #3d3d3d;
+    --mainButton2: #3d3d3d6e;
     --secondaryButton: #c2c2c2;
     --lightGrey: #ccc;
     --disconnect: #95ff94;
-    --modal: #1e1e1e;
+    --modal: #1e1e1ead;
     --modalText: #bebebe;
     --boxShadow: '5px 5px 20px var(--blackTransparency)';
     --wallpaperFrame: #303030;
     --glassBorder: rgba(255, 255, 255, 0.05);
     --glowRadius: 15px;
+}
+
+:root {
+    
+    /* vars */
+    --glow-sens: 30;
+    --card-bg: linear-gradient(8deg,var(--dark) 75%, color-mix(in hsl, var(--dark), white 2.5%) 75.5%);
+    --blend: soft-light;
+    --glow-blend: plus-lighter;
+    --glow-color: 40deg 80% 80%;
+    
 }
 
 input[type="search"], input[type="text"], input[type="password"], textarea {
@@ -135,11 +147,11 @@ input[type="password"] {
 }
 
 .input-wrapper input {
-    background-color: rgba(0, 255, 170, 0.05); 
+    background-color: #ffffff0d;
     border: 1px solid var(--glassBorder);
     border-radius: 8px;
     padding: 10px 15px;
-    color: var(--primaryGreen);
+    color: var(--white);
     font-size: clamp(0.9rem, 1.5vw, 1.2rem);
     width: clamp(150px, 20vw, 300px);
     backdrop-filter: blur(5px);
@@ -198,7 +210,6 @@ textarea:focus-visible {
     color: var(--white);
     border: 1px solid var(--glassBorder);
     border-radius: 15px;
-    font-size: clamp(1rem, 1.5vw, 1.3rem);
     line-height: 1.5;
     resize: none;
     backdrop-filter: blur(5px);
@@ -345,5 +356,119 @@ textarea:focus-visible {
     100% {
         transform: translate(-50%, -50%) scale(1.5);
         opacity: 0;
+    }
+}
+
+.card {
+    --pads: 40px;
+    --color-sens: calc(var(--glow-sens) + 20);
+    position: relative;
+    width: clamp(320px, calc(100svw - calc(var(--pads) * 2)), 600px);
+    height: calc(100svh - calc(var(--pads) * 2));
+    max-height: 600px;
+    border-radius: 1.768em;
+    isolation: isolate;
+    transform: translate3d(0, 0, 0.01px);
+    display: grid;
+    border: 1px solid rgb(255 255 255 / 25%);
+    background: var(--card-bg);
+    background-repeat: no-repeat;
+    backdrop-filter: blur(var(--glowRadius));
+}
+.card.hoverable::before,
+.card.hoverable::after,
+.card.hoverable > .glow {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    transition: opacity 0.25s ease-out;
+    z-index: -1;
+}
+.card.hoverable:not(:hover):not(.animating)::before,
+.card.hoverable:not(:hover):not(.animating)::after,
+.card.hoverable:not(:hover):not(.animating) > .glow {
+    opacity: 0;
+    transition: opacity 0.75s ease-in-out;
+}
+.card.hoverable::before {
+    border: 1px solid transparent;
+    background:
+        linear-gradient(var(--card-bg) 0 100%) padding-box,
+        linear-gradient(rgb(255 255 255 / 0%) 0% 100%) border-box,
+        radial-gradient(at 80% 55%, var(--primaryGreenHover) 0px, transparent 50%) border-box,
+        radial-gradient(at 69% 34%, var(--white-2) 0px, transparent 50%) border-box,
+        radial-gradient(at 8% 6%, var(--secondaryGreen) 0px, transparent 50%) border-box,
+        radial-gradient(at 41% 38%, hsla(192,100%,64%,1) 0px, transparent 50%) border-box,
+        radial-gradient(at 86% 85%, var(--scanColor) 0px, transparent 50%) border-box,
+        radial-gradient(at 82% 18%, var(--mainButton) 0px, transparent 50%) border-box,
+        radial-gradient(at 51% 4%, var(--lightGrey) 0px, transparent 50%) border-box,
+        linear-gradient(var(--primaryGreen) 0 100%) border-box;
+    opacity: calc((var(--pointer-d) - var(--color-sens)) / (100 - var(--color-sens)));
+    mask-image: conic-gradient(
+        from var(--pointer-°) at center,
+        black 25%, transparent 40%, transparent 60%, black 75%
+    );
+}
+.card.hoverable::after {
+    border: 1px solid transparent;
+    background:
+        radial-gradient(at 80% 55%, var(--primaryGreenHover) 0px, transparent 50%) padding-box,
+        radial-gradient(at 69% 34%, var(--white-2) 0px, transparent 50%) padding-box,
+        radial-gradient(at 8% 6%, var(--secondaryGreen) 0px, transparent 50%) padding-box,
+        radial-gradient(at 41% 38%, hsla(192,100%,64%,1) 0px, transparent 50%) padding-box,
+        radial-gradient(at 86% 85%, var(--scanColor) 0px, transparent 50%) padding-box,
+        radial-gradient(at 82% 18%, var(--mainButton) 0px, transparent 50%) padding-box,
+        radial-gradient(at 51% 4%, var(--lightGrey) 0px, transparent 50%) padding-box,
+        linear-gradient(var(--primaryGreen) 0 100%) padding-box;
+    mask-image: linear-gradient(to bottom,#000,#000),radial-gradient(ellipse at 55% 55%,black 40%,transparent 85%),radial-gradient(ellipse at 66% 66%,black 5%,transparent 40%),radial-gradient(ellipse at 33% 33%,black 5%,transparent 40%),radial-gradient(ellipse at 80% 33%,black 5%,transparent 60%),radial-gradient(ellipse at 33% 74%,black 5%,transparent 40%),conic-gradient(from var(--pointer-°)at center,transparent 5%,black 15%,black 85%,transparent 95%);
+    mask-composite: subtract, add, add, add, add, add;
+    opacity: calc((var(--pointer-d) - var(--color-sens)) / (100 - var(--color-sens)));
+    mix-blend-mode: var(--blend);
+}
+.card.hoverable > .glow {
+    --outset: var(--pads);
+    inset: calc(var(--outset) * -1);
+    pointer-events: none;
+    z-index: 1;
+    mask-image: conic-gradient(
+        from var(--pointer-°) at center,
+        black 2.5%, transparent 10%, transparent 90%, black 97.5%
+    );
+    opacity: calc((var(--pointer-d) - var(--glow-sens)) / (100 - var(--glow-sens)));
+    mix-blend-mode: var(--glow-blend);
+}
+.card.hoverable > .glow::before {
+    content: "";
+    position: absolute;
+    inset: var(--outset);
+    border-radius: inherit;
+    box-shadow:
+        inset 0 0 0 1px hsl(var(--glow-color) / 100%),
+        inset 0 0 2px 2px hsl(var(--glow-color) / 90%),
+        inset 0 0 5px 1px hsl(var(--glow-color) / 75%),
+        inset 0 0 8px 1px hsl(var(--glow-color) / 66%),
+        inset 0 0 15px 0 hsl(var(--glow-color) / 50%),
+        inset 0 0 25px 2px hsl(var(--glow-color) / 30%),
+        inset 0 0 50px 2px hsl(var(--glow-color) / 10%),
+        0 0 2px 2px hsl(var(--glow-color) / 90%),
+        0 0 5px 1px hsl(var(--glow-color) / 75%),
+        0 0 8px 1px hsl(var(--glow-color) / 66%),
+        0 0 15px 0 hsl(var(--glow-color) / 50%),
+        0 0 25px 2px hsl(var(--glow-color) / 30%),
+        0 0 50px 2px hsl(var(--glow-color) / 10%);
+}
+.card {
+    box-shadow:
+        rgba(0, 0, 0, 0.1) 0px 1px 2px,
+        rgba(0, 0, 0, 0.1) 0px 2px 4px,
+        rgba(0, 0, 0, 0.1) 0px 4px 8px,
+        rgba(0, 0, 0, 0.1) 0px 8px 16px,
+        rgba(0, 0, 0, 0.1) 0px 16px 32px,
+        rgba(0, 0, 0, 0.1) 0px 32px 64px;
+}
+@keyframes fadeContent {
+    to {
+        opacity: 1;
     }
 }
