@@ -85,7 +85,9 @@
                                     </div>
                                 </div>
                                 <progress-bar class="progress-bar {{ $bypass['status'] === 2 ? 'failed' : ''}}">
-                                    <div class="bar"></div>
+                                    <div class="bar">
+                                        <div class="bar-glow"></div>
+                                    </div>
                                 </progress-bar>
                                 <div class="process-bottomwrap">
                                     @if ($bypass['status'] === \App\Models\Bypass::WORKING)
@@ -150,7 +152,9 @@
                                     </div>
                                 </div>
                                 <progress-bar class="progress-bar {{ $crack['status'] === 2 ? 'failed' : ''}}">
-                                    <div class="bar"></div>
+                                    <div class="bar">
+                                        <div class="bar-glow"></div>
+                                    </div>
                                 </progress-bar>
                                 <div class="process-bottomwrap">
                                     @if ($crack['status'] === \App\Models\Crack::WORKING)
@@ -219,7 +223,9 @@
                                     </div>
                                 </div>
                                 <progress-bar class="progress-bar {{ $transfer['status'] === 2 ? 'failed' : ''}}">
-                                    <div class="bar"></div>
+                                    <div class="bar">
+                                        <div class="bar-glow"></div>
+                                    </div>
                                 </progress-bar>
                                 <div class="process-bottomwrap">
                                     @if ($transfer['status'] === \App\Models\Transfer::WORKING)

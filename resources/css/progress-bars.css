@@ -13,6 +13,16 @@
     border-radius: 10px;
 }
 
+.progress-bar .bar .bar-glow {
+    position: absolute;
+    left: 0;
+    width: inherit;
+    background-color: inherit;
+    height: inherit;
+    border-radius: inherit;
+    filter: blur(var(--glowRadius));
+}
+
 .progress-bar.failed .bar {
     background-color: var(--red);
 }
