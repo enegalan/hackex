@@ -98,8 +98,11 @@
     background: none;
 }
 .confirm-modal .modal-frame {
-    color: var(--black);
-    background-color: #f4f4f4;
+    display: inline-table;
+    background-color: #f4f4f41a;
+    color: white;
+    backdrop-filter: blur(var(--glowRadius));
+    border: 1px solid var(--glassBorder);
     border-radius: 18px;
     width: 19rem;
     padding-top: 1.5rem;
@@ -124,15 +127,15 @@
 .confirm-modal .buttons button {
     color: #007ae3;
     font-weight: 600;
-    border-top: 1px solid var(--secondaryButton);
+    border-top: 1px solid var(--glassBorder);
     width: 100%;
     padding: .8rem;
 }
 .confirm-modal .buttons button:hover {
-    background: var(--secondaryButton);
+    background: #c2c2c21f;
 }
 .confirm-modal .buttons button:first-child {
-    border-right: 1px solid var(--secondaryButton);
+    border-right: 1px solid var(--glassBorder);
     border-radius: 0 0 0 16px;
 }
 .confirm-modal .buttons button:last-child {
