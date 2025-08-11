@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('includes.layouts.head', ['title' => 'Store', 'store' => true, 'apps' => true, 'fontawesome' => true])
     <body static-background="true" class="store-frame" style="background: #151515; color: var(--white);">
-        @include('includes.modal', ['modals' => []])
+        @include('includes.modal', ['modals' => ['multi-buy']])
         <header class="dark-gradient-header">
             <h3>Store</h3>
             <div class="bank-money-label">
@@ -87,7 +87,7 @@
                 </li>
             @endif
             <li>
-                <form method="post" action="/buy/firewall">
+                <form>
                     @csrf
                     <section>
                         <div class="app-image">
@@ -110,14 +110,14 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button type="submit" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('firewall', 'Firewall', {{ Auth::user()['firewall_level'] }}, {{ \App\Enums\AppPrices::getPrice('firewall', Auth::user()['firewall_level']) }})" type="button" class="button buy-button">Buy</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
                 </form>
             </li>
             <li>
-                <form method="post" action="/buy/bypasser">
+                <form>
                     @csrf
                     <section>
                         <div class="app-image">
@@ -140,14 +140,14 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button type="submit" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('bypasser', 'Bypasser', {{ Auth::user()['bypasser_level'] }}, {{ \App\Enums\AppPrices::getPrice('bypasser', Auth::user()['bypasser_level']) }})" type="button" class="button buy-button">Buy</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
                 </form>
             </li>
             <li>
-                <form method="post" action="/buy/password_cracker">
+                <form>
                     @csrf
                     <section>
                         <div class="app-image">
@@ -170,14 +170,14 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button type="submit" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('password_cracker', 'Password Cracker', {{ Auth::user()['password_cracker_level'] }}, {{ \App\Enums\AppPrices::getPrice('password_cracker', Auth::user()['password_cracker_level']) }})" type="button" class="button buy-button">Buy</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
                 </form>
             </li>
             <li>
-                <form method="post" action="/buy/password_encryptor">
+                <form>
                     @csrf
                     <section>
                         <div class="app-image">
@@ -200,14 +200,14 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button type="submit" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('password_encryptor', 'Password Encryptor', {{ Auth::user()['password_encryptor_level'] }}, {{ \App\Enums\AppPrices::getPrice('password_encryptor', Auth::user()['password_encryptor_level']) }})" type="button" class="button buy-button">Buy</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
                 </form>
             </li>
             <li>
-                <form method="post" action="/buy/antivirus">
+                <form>
                     @csrf
                     <section>
                         <div class="app-image">
@@ -230,14 +230,14 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button type="submit" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('antivirus', 'Antivirus', {{ Auth::user()['antivirus_level'] }}, {{ \App\Enums\AppPrices::getPrice('antivirus', Auth::user()['antivirus_level']) }})" type="button" class="button buy-button">Buy</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
                 </form>
             </li>
             <li>
-                <form method="post" action="/buy/spam">
+                <form>
                     @csrf
                     <section>
                         <div class="app-image">
@@ -260,14 +260,14 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button type="submit" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('spam', 'Spam', {{ Auth::user()['spam_level'] }}, {{ \App\Enums\AppPrices::getPrice('spam', Auth::user()['spam_level']) }})" type="button" class="button buy-button">Buy</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
                 </form>
             </li>
             <li>
-                <form method="post" action="/buy/spyware">
+                <form>
                     @csrf
                     <section>
                         <div class="app-image">
@@ -290,14 +290,14 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button type="submit" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('spyware', 'Spyware', {{ Auth::user()['spyware_level'] }}, {{ \App\Enums\AppPrices::getPrice('spyware', Auth::user()['spyware_level']) }})" type="button" class="button buy-button">Buy</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
                 </form>
             </li>
             <li>
-                <form method="post" action="/buy/notepad">
+                <form>
                     @csrf
                     <section>
                         <div class="app-image">
@@ -320,7 +320,7 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button type="submit" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('notepad', 'Notepad', {{ Auth::user()['notepad_level'] }}, {{ \App\Enums\AppPrices::getPrice('notepad', Auth::user()['notepad_level']) }})" type="button" class="button buy-button">Buy</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
@@ -329,6 +329,6 @@
         </ul>
         @include('includes.buttons.back-btn')
     </body>
-    @include('includes.scripts')
+    @include('includes.scripts', ['scripts' => ['store']])
     @include('includes.notifications')
 </html>

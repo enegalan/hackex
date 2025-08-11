@@ -19,6 +19,11 @@
         }
         if (form) form.submit();
     }
+    function formatNumber(number) {
+        return Number(number)
+            .toFixed(0)
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
 </script>
 <script id="custom-cursor">
     const customCursor = document.createElement('div');
@@ -291,6 +296,7 @@ function animateNumber(options) {
             'compose': '#compose-modal',
             'delete-message': '#delete-message-modal',
             'level-up': '#level-up-modal',
+            'multi-buy': '#multi-buy-modal',
         };
         function closeWindow(windowName, refresh = false) {
             const foundModalName = windows[windowName];
@@ -964,6 +970,111 @@ function animateNumber(options) {
             function openMessageDeleteModal(message_id) {
                 const modal = openWindow('delete-message');
                 modal.querySelector('#input-message-id-1').value = message_id;
+            }
+        </script>
+    @endif
+    @if (in_array("store", $scripts))
+        <script id="store">
+            function openMultiBuyModal(app_name, app_label, nextLevel, nextPrice) {
+                const modal = openWindow('multi-buy');
+                modal.querySelector('input[name="app_name"]').value = app_name;
+                modal.querySelector('.app_label').innerText = app_label;
+                const levelLabel = modal.querySelector('.level');
+                const levelInput = modal.querySelector('input[name="level"]');
+                levelLabel.innerText = parseInt(nextLevel) + 1;
+                levelInput.value = parseInt(nextLevel) + 1;
+                const priceLabel = modal.querySelector('.price');
+                priceLabel.innerText = formatNumber(nextPrice);
+                
+                const decreaser = modal.querySelector('.button-decreaser');
+                const increaser = modal.querySelector('.button-increaser');
+                // Somewhat convoluted functions
+                function increaseLevel() {
+                    let level = levelLabel.innerText;
+                    level = parseInt(level);
+                    let app_name = modal.querySelector('input[name="app_name"]').value;
+                    updatePrice(app_name, level);
+                    level++;
+                    levelLabel.innerText = level;
+                    levelInput.value = level;
+                    if (level > nextLevel + 1) {
+                        decreaser.disabled = false;
+                    }
+                }
+                function decreaseLevel() {
+                    if (decreaser.disabled) return;
+                    let level = levelLabel.innerText;
+                    level = parseInt(level);
+                    level--;
+                    levelLabel.innerText = level;
+                    levelInput.value = level;
+                    level--;
+                    let app_name = modal.querySelector('input[name="app_name"]').value;
+                    updatePrice(app_name, level--);
+                    if (level + 1 === nextLevel) {
+                        decreaser.disabled = true;
+                    }
+                }
+                @php
+                    $basePrices = \App\Enums\AppPrices::getBasePrices()
+                @endphp
+                const prices = {
+                    'device': {{ $basePrices['device'] }} || 0,
+                    'network': {{ $basePrices['network'] }} || 0,
+                    'firewall': {{ $basePrices['firewall'] }} || 0,
+                    'bypasser': {{ $basePrices['bypasser'] }} || 0,
+                    'password_cracker': {{ $basePrices['password_cracker'] }} || 0,
+                    'password_encryptor': {{ $basePrices['password_encryptor'] }} || 0,
+                    'antivirus': {{ $basePrices['antivirus'] }} || 0,
+                    'spam': {{ $basePrices['spam'] }} || 0,
+                    'spyware': {{ $basePrices['spyware'] }} || 0,
+                    'notepad': {{ $basePrices['notepad'] }} || 0,
+                };
+                function updatePrice(app_name, level) {
+                    let price = priceLabel.innerText;
+                    price = parseInt(price);
+                    price = prices[app_name] * level;
+                    level--;
+                    priceLabel.innerText = formatNumber(price);
+                }
+                let holdInterval;
+                let holdDelay = 200; // initial ms
+                let holdTimeout;
+                function startHold(fn) {
+                    fn();
+                    holdDelay = 200; // reset velocity
+                    clearInterval(holdInterval);
+                    holdTimeout = setTimeout(() => {
+                        holdInterval = setInterval(() => {
+                            fn();
+                            holdDelay = Math.max(30, holdDelay - 20); // acelerate up to 30ms
+                            restartInterval(fn); // restart with new delay
+                        }, holdDelay);
+                    }, 200);
+                }
+                function restartInterval(fn) {
+                    clearInterval(holdInterval);
+                    holdInterval = setInterval(() => {
+                        fn();
+                        holdDelay = Math.max(50, holdDelay - 20);
+                        restartInterval(fn);
+                    }, holdDelay);
+                }
+                function stopHold() {
+                    clearInterval(holdInterval);
+                    clearTimeout(holdTimeout);
+                }
+                // Increaser
+                increaser.addEventListener('mousedown', () => startHold(increaseLevel));
+                increaser.addEventListener('mouseup', stopHold);
+                increaser.addEventListener('mouseleave', stopHold);
+                // Decreaser
+                decreaser.addEventListener('mousedown', () => startHold(decreaseLevel));
+                decreaser.addEventListener('mouseup', stopHold);
+                decreaser.addEventListener('mouseleave', stopHold);
+            }
+            function closeMultiBuyModal() {
+                closeWindow('multi-buy');
             }
         </script>
     @endif

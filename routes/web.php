@@ -42,6 +42,7 @@ Route::middleware([IsFullyVerified::class, CheckDailyLogin::class])->group(funct
     
     Route::get('/store', [ViewController::class, 'store']);
     Route::post('/buy/{app_name}', [StoreController::class, 'buy']);
+    Route::post('/buy', [StoreController::class, 'multiBuy']);
     
     Route::get('/messages', [ViewController::class, 'messages']);
     Route::get('/contacts', [MessageController::class, 'contacts']);

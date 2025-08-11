@@ -11,8 +11,50 @@ use App\Models\Crack;
 use App\Models\Network;
 use App\Models\Platform;
 use Auth;
+use Illuminate\Http\Request;
 
 class StoreController extends Controller {
+    function multiBuy(Request $request) {
+        $app_name = $request->input('app_name');
+        $app_level = (int)$request->input('level');
+        $user = Auth::user();
+        $checking = $user->checking_bitcoins;
+        $price = AppPrices::getPrice($app_name, $app_level - 1);
+        if (!self::hasEnoughBitcoins($price, $user)) return redirect()->back()->with('error', 'Not enough bitcoins');
+        // Validate if level column exists
+        $levelColumn = $app_name . '_level';
+        if (!isset($user->$levelColumn)) throw new \Exception("App '$app_name' is not valid.");
+        // Subtract from checking first
+        if ($checking >= $price) $user->checking_bitcoins -= $price;
+        else {
+            $remaining = $price - $checking;
+            $user->checking_bitcoins = 0;
+            $user->secured_bitcoins -= $remaining;
+        }
+        if ($app_name === 'firewall') {
+            // Do bypasses unavailable where user is the victim
+            Bypass::where('victim_id', $user->id)->update([
+                'available' => 0,
+            ]);
+        } elseif ($app_name === 'password_encryptor') {
+            // Do cracks unavailable where user is the victim
+            Crack::where('victim_id', $user->id)->update([
+                'available' => 0,
+            ]);
+        }
+        $currentLevel = $user->$levelColumn;
+        $addedLevels = $app_level - $currentLevel;
+        $user->$levelColumn = $app_level;
+        $user->save();
+        if ($addedLevels > 0) {
+            for ($i = 0; $i < $addedLevels; $i++) {
+                $boughtLevel = $currentLevel + $i + 1;
+                LogController::doLog(LogController::PURCHASED, $user, ['app_level' => $boughtLevel, 'app_name' => Apps::getAppName($app_name)], false);
+                ExpActions::addExp('purchased_items', $app_name, false);
+            }
+        }
+        return redirect()->back()->with('success', 'App successfully upgraded.');
+    }
     function buy($app_name) {
         $user = Auth::user();
         $checking = $user->checking_bitcoins;
@@ -67,7 +109,7 @@ class StoreController extends Controller {
             }
         }
         $user->save();
-        LogController::doLog(LogController::PURCHASED, $user, ['app_level' => $nextLevel, 'app_name' => Apps::getAppName($app_name)]);
+        LogController::doLog(LogController::PURCHASED, $user, ['app_level' => $nextLevel, 'app_name' => Apps::getAppName($app_name)], false);
         ExpActions::addExp('purchased_items', $app_name, false);
         return redirect()->back()->with('success', 'App successfully upgraded.');
     }
