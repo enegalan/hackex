@@ -69,16 +69,25 @@
         <section class="bank-buttons">
             @if (!$isHacked && $user['secured_bitcoins'] == $user->max_savings)
                 <form style="width: 100%;">
-                    <button type="button" style="font-family: 'main_normal'" class="main-btn transfer-button">Transfer</button>
+                    <div style="width: 100%;" class="button-wrapper">
+                        <button type="button" style="font-family: 'main_normal'" class="button transfer-button">Transfer</button>
+                        <div class="input-glow"></div>
+                    </div>
                 </form>
             @else
                 <form style="width: 100%;" action="/transfer" method="post">
                     @csrf
-                    <button type="submit" style="font-family: 'main_normal'" class="main-btn transfer-button">Transfer</button>
+                    <div style="width: 100%;" class="button-wrapper">
+                        <button type="submit" style="font-family: 'main_normal'" class="button transfer-button">Transfer</button>
+                        <div class="input-glow"></div>
+                    </div>
                 </form>
             @endif
             @if (!$isHacked)
-                <button type="button" onclick="openDepositWindow()" style="font-family: 'main_normal'" class="main-btn deposit-button">Deposit</button>
+                <div style="width: 100%;" class="button-wrapper">
+                    <button type="button" onclick="openDepositWindow()" style="font-family: 'main_normal'" class="button deposit-button">Deposit</button>
+                    <div class="input-glow"></div>
+                </div>
             @endif
         </section>
         <section class="bank-commentary">

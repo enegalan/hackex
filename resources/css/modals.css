@@ -368,12 +368,11 @@
     padding-bottom: 5rem;
 }
 
-#spyware-log-modal .remove-button {
+#spyware-log-modal .button-wrapper {
     position: fixed;
-    bottom: 6rem;
+    bottom: 3rem;
     left: 50%;
-    width: 15%;
-    transform: translateX(-50%);
+    transform: translate(-50%);
 }
 
 /* App Info modal */
@@ -867,7 +866,7 @@
 #level-up-modal .modal-frame {
     display: flex;
     flex-direction: column;
-    background: #02408f;
+    background: #02408f66;
     width: 18rem;
     min-width: 18rem;
     max-width: 18rem;

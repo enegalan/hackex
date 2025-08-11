@@ -10,7 +10,12 @@
         <section id="message-main">
             <h4>{{ $received_message->subject }}</h4>
             <section class="messages-info">
-                <button type="button" onclick="openMessageDeleteModal({{ $received_message->id }})" class="main-btn contact-button">DELETE</button>
+                <div>
+                    <div style="width: 100%" class="button-wrapper">
+                        <button type="button" onclick="openMessageDeleteModal({{ $received_message->id }})" class="button contact-button">DELETE</button>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
             </section>
             <section class="messages-frames">
                 <div class="message-top">

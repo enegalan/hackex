@@ -11,7 +11,12 @@
                         <input placeholder="ip address" class="ip-search" type="search" name="ip-search" id="ip-search">
                         <div class="input-glow"></div>
                     </div>
-                    <button disabled class="main-btn ping-button">Ping</button>
+                    <div style="width: 12%;">
+                        <div style="width: 100%;" class="button-wrapper">
+                            <button disabled class="button ping-button">Ping</button>
+                            <div class="input-glow"></div>
+                        </div>
+                    </div>
                 </form>
             </section>
             <section id="ip-list">
@@ -32,7 +37,10 @@
             </section>
         </section>
         <section class="scan-bottomwrap">
-            <button onclick="refreshScan(this)" class="main-btn refresh-button">Refresh</button>
+            <div style="width: 100%" class="button-wrapper">
+                <button onclick="refreshScan(this)" class="button refresh-button">Refresh</button>
+                <div class="input-glow"></div>
+            </div>
         </section>
         @include('includes.buttons.back-btn')
     </body>

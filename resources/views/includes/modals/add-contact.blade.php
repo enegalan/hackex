@@ -14,7 +14,12 @@
                     <input type="text" name="ip" id="input-ip-1" placeholder="contact ip">
                     <div class="input-glow"></div>
                 </div>
-                <button class="main-btn ping-button" type="submit">Ping</button>
+                <div>
+                    <div style="width: 100%;" class="button-wrapper">
+                        <button class="button ping-button" type="submit">Ping</button>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
             </form>
         </section>
     </section>

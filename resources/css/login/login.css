@@ -236,28 +236,6 @@ body#login-frame {
     color: var(--white);
     transition: var(--transition);
 }
-.signin .content .form .inputBox input[type="submit"],
-.signup .content .form .inputBox input[type="submit"] {
-    padding: 10px;
-    background: var(--primaryGreen);
-    color: var(--black);
-    font-weight: 600;
-    font-size: 1.35em;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    font-family: 'main_bold';
-}
-#login-frame input[type="submit"] {
-    transition: var(--transition);
-}
-#login-frame input[type="submit"]:hover {
-    opacity: 0.6;
-    transition: var(--transition);
-}
-#login-frame input[type="submit"]:active {
-    opacity: 0.4;
-    transition: var(--transition);
-}
 .back {
     width: 50px;
     height: 50px;

@@ -31,6 +31,11 @@
                 <span>overclocks</span>
             </div>
         </section>
-        <button onclick="closeLevelUpNotification()" class="main-btn ok-button">OK</button>
+        <div style="width: fit-content; align-self: center;">
+            <div style="width: 100%;" class="button-wrapper">
+                <button onclick="closeLevelUpNotification()" class="button ok-button">OK</button>
+                <div class="input-glow"></div>
+            </div>
+        </div>
     </section>
 </div>

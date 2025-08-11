@@ -33,23 +33,32 @@
                     </div>
                 </div>
                 @if (!$isHacked)
-                    <button onclick="openChangeIpWindow({{ Auth::id() }})" class="main-btn change-ip-button">Change IP</button>
+                    <div>
+                        <div style="width: 100%;" class="button-wrapper">
+                            <button onclick="openChangeIpWindow({{ Auth::id() }})" class="button change-ip-button">Change IP</button>
+                            <div class="input-glow"></div>
+                        </div>
+                    </div>
                 @endif
             </section>
             <section class="other-buttons">
                 @if (!$isHacked)
                     <ul>
-                        <li>
-                            <button onclick="redirect('/leaderboards')" class="main-btn leaderboards-button">Leaderboards</button>
+                        <li style="width: 100%" class="button-wrapper">
+                            <button onclick="redirect('/leaderboards')" class="button leaderboards-button">Leaderboards</button>
+                            <div class="input-glow"></div>
                         </li>
-                        <li>
-                            <button onclick="openWallpaperModal()" class="main-btn wallpaper-button">Wallpaper</button>
+                        <li style="width: 100%" class="button-wrapper">
+                            <button onclick="openWallpaperModal()" class="button wallpaper-button">Wallpaper</button>
+                            <div class="input-glow"></div>
                         </li>
-                        <li>
-                            <button onclick="window.open('https://hackex.fandom.com/')" class="main-btn wiki-button">Wiki / Help</button>
+                        <li style="width: 100%" class="button-wrapper">
+                            <button onclick="window.open('https://hackex.fandom.com/')" class="button wiki-button">Wiki / Help</button>
+                            <div class="input-glow"></div>
                         </li>
-                        <li>
-                            <button onclick="window.open('https://hackex.fandom.com/wiki/FAQs')" class="main-btn faq-button">FAQ</button>
+                        <li style="width: 100%" class="button-wrapper">
+                            <button onclick="window.open('https://hackex.fandom.com/wiki/FAQs')" class="button faq-button">FAQ</button>
+                            <div class="input-glow"></div>
                         </li>
                     </ul>
                 @endif

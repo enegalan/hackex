@@ -12,7 +12,12 @@
             <div class="top-rightside">
                 <span class="close">&times;</span>
                 @if ($isHacked)
-                    <button onclick="openVirusesModal({{ $user->id }})" class="main-btn upload-button">Upload</button>
+                    <div>
+                        <div style="width: 100%;" class="button-wrapper">
+                            <button onclick="openVirusesModal({{ $user->id }})" class="button upload-button">Upload</button>
+                            <div class="input-glow"></div>
+                        </div>
+                    </div>
                 @endif
             </div>
         </section>

@@ -50,7 +50,7 @@
             <section class="processes-frames">
                 <section id="bypassing-frame">
                     @if (Auth::user()->Bypass->count() === 0)
-                        <p class="empty-frame-message">You have no bypass processes</p>
+                        <p class="empty-frame-message">You have no bypass processes.</p>
                     @endif
                     <ul>
                         @foreach (Auth::user()->Bypass->reverse() as $bypass)
@@ -114,7 +114,7 @@
                 </section>
                 <section id="cracking-frame">
                     @if (Auth::user()->Crack->count() === 0)
-                        <p class="empty-frame-message">You have no crack processes</p>
+                        <p class="empty-frame-message">You have no crack processes.</p>
                     @endif
                     <ul>
                         @foreach (Auth::user()->Crack()->where('visible', true)->get()->reverse() as $crack)
@@ -178,7 +178,7 @@
                 </section>
                 <section id="transfer-frame">
                     @if (Auth::user()->Transfer->count() === 0)
-                        <p class="empty-frame-message">You have no network processes</p>
+                        <p class="empty-frame-message">You have no network processes.</p>
                     @endif
                     <ul>
                         @foreach (Auth::user()->Transfer()->where('visible', true)->get()->reverse() as $transfer)

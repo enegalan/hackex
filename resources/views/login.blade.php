@@ -33,8 +33,9 @@
                                     <a href="/forgot-password">Forgot Password</a>
                                     <a class="cursor-pointer" onclick="toggleLogin()">Sign up</a>
                                 </div>
-                                <div class="inputBox">
-                                    <input type="submit" id="login-button" value="Login">
+                                <div style="width: 50%" class="button-wrapper inputBox">
+                                    <input class="button" type="submit" id="login-button" value="Login">
+                                    <div class="input-glow"></div>
                                 </div>
                             </form>
                         </div>
@@ -91,8 +92,9 @@
                                     <a class="cursor-pointer" onclick="toggleLogin()">Sign in</a>
                                 </div>
                             </div>
-                            <div class="inputBox">
-                                <input type="submit" id="register-button" value="Submit">
+                            <div style="width: 50%" class="button-wrapper inputBox">
+                                <input class="button" type="submit" id="register-button" value="Submit">
+                                <div class="input-glow"></div>
                             </div>
                         </form>
                     </div>

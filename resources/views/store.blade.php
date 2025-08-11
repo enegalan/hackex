@@ -48,7 +48,10 @@
                             </div>
                         </section>
                         <section>
-                            <button type="submit" class="main-btn buy-button">Buy</button>
+                            <div style="width: 100%" class="button-wrapper">
+                                <button type="submit" class="button buy-button">Buy</button>
+                                <div class="input-glow"></div>
+                            </div>
                         </section>
                     </form>
                 </li>
@@ -75,7 +78,10 @@
                             </div>
                         </section>
                         <section>
-                            <button type="submit" class="main-btn buy-button">Buy</button>
+                            <div style="width: 100%" class="button-wrapper">
+                                <button type="submit" class="button buy-button">Buy</button>
+                                <div class="input-glow"></div>
+                            </div>
                         </section>
                     </form>
                 </li>
@@ -103,7 +109,10 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="main-btn buy-button">Buy</button>
+                        <div style="width: 100%" class="button-wrapper">
+                            <button type="submit" class="button buy-button">Buy</button>
+                            <div class="input-glow"></div>
+                        </div>
                     </section>
                 </form>
             </li>
@@ -130,7 +139,10 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="main-btn buy-button">Buy</button>
+                        <div style="width: 100%" class="button-wrapper">
+                            <button type="submit" class="button buy-button">Buy</button>
+                            <div class="input-glow"></div>
+                        </div>
                     </section>
                 </form>
             </li>
@@ -157,7 +169,10 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="main-btn buy-button">Buy</button>
+                        <div style="width: 100%" class="button-wrapper">
+                            <button type="submit" class="button buy-button">Buy</button>
+                            <div class="input-glow"></div>
+                        </div>
                     </section>
                 </form>
             </li>
@@ -184,7 +199,10 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="main-btn buy-button">Buy</button>
+                        <div style="width: 100%" class="button-wrapper">
+                            <button type="submit" class="button buy-button">Buy</button>
+                            <div class="input-glow"></div>
+                        </div>
                     </section>
                 </form>
             </li>
@@ -211,7 +229,10 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="main-btn buy-button">Buy</button>
+                        <div style="width: 100%" class="button-wrapper">
+                            <button type="submit" class="button buy-button">Buy</button>
+                            <div class="input-glow"></div>
+                        </div>
                     </section>
                 </form>
             </li>
@@ -238,7 +259,10 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="main-btn buy-button">Buy</button>
+                        <div style="width: 100%" class="button-wrapper">
+                            <button type="submit" class="button buy-button">Buy</button>
+                            <div class="input-glow"></div>
+                        </div>
                     </section>
                 </form>
             </li>
@@ -265,7 +289,10 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="main-btn buy-button">Buy</button>
+                        <div style="width: 100%" class="button-wrapper">
+                            <button type="submit" class="button buy-button">Buy</button>
+                            <div class="input-glow"></div>
+                        </div>
                     </section>
                 </form>
             </li>
@@ -292,7 +319,10 @@
                         </div>
                     </section>
                     <section>
-                        <button type="submit" class="main-btn buy-button">Buy</button>
+                        <div style="width: 100%" class="button-wrapper">
+                            <button type="submit" class="button buy-button">Buy</button>
+                            <div class="input-glow"></div>
+                        </div>
                     </section>
                 </form>
             </li>

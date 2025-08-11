@@ -26,31 +26,6 @@ section#scan {
     gap: .5rem;
 }
 
-.main-btn {
-    background-color: var(--mainButton);
-    padding-left: 0.8rem;
-    border-radius: 6px;
-    padding-right: 0.8rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    color: var(--mainButton2);
-    font-weight: bold;
-    letter-spacing: .25px;
-    transition: var(--transition);
-    text-align: center;
-    font-family: 'main_bold';
-}
-
-.main-btn:disabled {
-    opacity: .5;
-    pointer-events: none;
-}
-
-.main-btn:hover {
-    background-color: #a2a2a2;
-    transition: var(--transition);
-}
-
 #ip-list {
     padding-top: 1rem;
 }
@@ -66,7 +41,9 @@ section#scan {
     position: fixed;
     bottom: 7.5rem;
     text-align: center;
-    width: 100%;
+    width: 30%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .refresh-scan-text {

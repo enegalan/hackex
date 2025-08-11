@@ -45,18 +45,29 @@
                             <div class="input-glow"></div>
                         </div>
                         @if (!$hasCredentials && $isHacked && Auth::user()['password_cracker_level'] > 1)
-                            <button type="button" onclick="openCrackWindow({{ $user['password_cracker_level'] }}, '{{ \App\Enums\Apps::getAppName('password_cracker') }}', {{ $user['id'] }})" style="font-weight: normal; font-style: normal;" class="main-btn login-button">Crack</button>
+                            <div style="width: 20%">
+                                <div style="width: 100%;" class="button-wrapper">
+                                    <button type="button" onclick="openCrackWindow({{ $user['password_cracker_level'] }}, '{{ \App\Enums\Apps::getAppName('password_cracker') }}', {{ $user['id'] }})" style="font-weight: normal; font-style: normal;" class="button login-button">Crack</button>
+                                    <div class="input-glow"></div>
+                                </div>
+                            </div>
                         @endif
                     </div>
                 </form>
                 @if ($isHacked && $hasCredentials || !$isHacked)
                     <form id="bank-login-form" action="/bank-account" method="post">
                         @csrf
-                        <button type="submit" style="font-weight: normal; font-style: normal;" class="main-btn login-button">Login</button>
+                        <div style="width: 100%" class="button-wrapper">
+                            <button type="submit" style="font-weight: normal; font-style: normal;" class="button login-button">Login</button>
+                            <div class="input-glow"></div>
+                        </div>
                     </form>
                 @else
                     <div id="bank-login-form" action="/bank-account" method="post">
-                        <button type="button" style="width: 100%; font-weight: normal; font-style: normal;" class="main-btn login-button">Login</button>
+                        <div style="width: 100%" class="button-wrapper">
+                            <button type="button" style="width: 100%; font-weight: normal; font-style: normal;" class="button login-button">Login</button>
+                            <div class="input-glow"></div>
+                        </div>
                     </div>
                 @endif
             @endif
@@ -72,7 +83,7 @@
             </section>
         @endif
         @if (session('autologin'))
-            <script>
+            <script id="autologin">
                 let bankLoginForm = document.querySelector('#bank-login-form')
                 if (bankLoginForm) bankLoginForm.submit();
             </script>

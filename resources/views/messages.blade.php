@@ -11,8 +11,18 @@
         <section id="messages-main">
             <h4>Messages</h4>
             <section class="messages-info">
-                <button type="button" onclick="redirect('/contacts')" class="main-btn contact-button">CONTACTS</button>
-                <button type="button" onclick="openComposeModal()" class="main-btn compose-button">COMPOSE</button>
+                <div>
+                    <div style="width: 100%;" class="button-wrapper">
+                        <button type="button" onclick="redirect('/contacts')" class="button contact-button">CONTACTS</button>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="width: 100%;" class="button-wrapper">
+                        <button type="button" onclick="openComposeModal()" class="button compose-button">COMPOSE</button>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
             </section>
             <section class="messages-frames">
                 @if ($receivedMessages->count() === 0)

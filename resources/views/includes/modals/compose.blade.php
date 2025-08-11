@@ -39,7 +39,12 @@
                     <div class="textarea-glow"></div>
                 </div>
                 <div style="display: flex; align-items: center; justify-content: center;">
-                    <button style="width: auto;" class="main-btn send-button" type="submit">SEND</button>
+                    <div>
+                        <div style="width: 100%;" class="button-wrapper">
+                            <button style="width: auto;" class="button send-button" type="submit">SEND</button>
+                            <div class="input-glow"></div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>

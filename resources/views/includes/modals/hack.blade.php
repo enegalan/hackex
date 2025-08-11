@@ -12,30 +12,42 @@
                 <form id="hack-form" action="/hack" method="post" class="modal-content">
                     @csrf
                     <input type="hidden" name="process_id" id="hack-process-id">
-                    <button type="submit" class="main-btn hack-button">HACK</button>
+                    <div style="width: 100%" class="button-wrapper">
+                        <button type="submit" class="button hack-button">HACK</button>
+                        <div class="input-glow"></div>
+                    </div>
                 </form>
                 <form style="display: none" id="oc-form" action="/process-shorten" method="post" class="modal-content">
                     @csrf
                     <input type="hidden" name="type" id="oc-process-type">
                     <input type="hidden" name="process_id" id="oc-process-id">
-                    <button type="submit" class="main-btn oc-button">
-                        <span class="oc_value">1</span>
-                        <span>OC</span>
-                    </button>
+                    <div style="width: 100%" class="button-wrapper">
+                        <button type="submit" class="button oc-button">
+                            <span class="oc_value">1</span>
+                            <span>OC</span>
+                        </button>
+                        <div class="input-glow"></div>
+                    </div>
                 </form>
                 <form style="display: none" id="retry-form" action="/process-retry" method="post" class="modal-content">
                     @csrf
                     <input type="hidden" name="type" id="retry-process-type">
                     <input type="hidden" name="process_id" id="retry-process-id">
-                    <button type="submit" class="main-btn retry-button">
-                        <span>RETRY</span>
-                    </button>
+                    <div style="width: 100%" class="button-wrapper">
+                        <button type="submit" class="button retry-button">
+                            <span>RETRY</span>
+                        </button>
+                        <div class="input-glow"></div>
+                    </div>
                 </form>
                 <form id="remove-form" action="/process-remove" method="post" class="modal-content">
                     @csrf
                     <input type="hidden" name="type" id="hack-process-type">
                     <input type="hidden" name="process_id" id="remove-process-id">
-                    <button type="submit" class="main-btn remove-button">REMOVE</button>
+                    <div style="width: 100%" class="button-wrapper">
+                        <button type="submit" class="button remove-button">REMOVE</button>
+                        <div class="input-glow"></div>
+                    </div>
                 </form>
             </section>
     </section>

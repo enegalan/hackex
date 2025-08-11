@@ -11,6 +11,9 @@
             <input type="hidden" name="transfer_id" id="input-transfer-id-4">
             <input type="hidden" name="app_label" id="input-app-label">
         </div>
-        <button class="main-btn remove-button" onclick="openSpywareConfirmWindow()" type="button">Remove</button>
+            <div class="button-wrapper">
+                <button class="button remove-button" onclick="openSpywareConfirmWindow()" type="button">Remove</button>
+                <div class="input-glow"></div>
+            </div>
     </section>
 </section>

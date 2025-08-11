@@ -141,6 +141,41 @@ input[type="password"] {
     letter-spacing: 3px;
 }
 
+.button-wrapper {
+    position: relative;
+}
+
+.button-wrapper .button {
+    background-color: #ffffff1c;
+    border: 1px solid var(--glassBorder);
+    border-radius: 8px;
+    padding: 10px 15px;
+    color: var(--white);
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+    width: inherit;
+    backdrop-filter: blur(5px);
+    transition: var(--transition);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2),
+        0 0 0 var(--glow-radius) rgba(0, 255, 170, 0);
+}
+
+.button-wrapper .button:hover {
+    background-color: #ffffff23;
+    transition: var(--transition);
+}
+
+.button-wrapper .button:active {
+    background-color: #ffffff10;
+    transition: var(--transition);
+}
+
+.button-wrapper .button:focus {
+    outline: none;
+    border-color: var(--primaryGreen);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2),
+        0 0 0 4px rgba(0, 255, 170, 0.2);
+}
+
 .input-wrapper {
     position: relative;
     width: 100%;
@@ -173,7 +208,7 @@ input[type="password"] {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
+    width: inherit;
     height: 100%;
     background: radial-gradient(ellipse at center, var(--primaryGreen) 0%, transparent 70%);
     opacity: 0;
@@ -182,7 +217,8 @@ input[type="password"] {
     transition: opacity 0.3s ease;
 }
 
-.input-wrapper input:focus + .input-glow {
+.input-wrapper input:focus + .input-glow,
+.button-wrapper .button:hover + .input-glow {
     opacity: 0.2;
 }
 

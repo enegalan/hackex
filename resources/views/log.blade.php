@@ -22,7 +22,12 @@
                 <span>{{ \App\Enums\MaxLogSizes::getMaxLogSize($user['notepad_level'], true) }}</span>
             </section>
             <section class="log-buttons">
-                <button type="submit" class="main-btn save-button">Save</button>
+                <div>
+                    <div style="width: 100%;" class="button-wrapper">
+                        <button type="submit" class="button save-button">Save</button>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
             </section>
         </form>
         @include('includes.buttons.back-btn')

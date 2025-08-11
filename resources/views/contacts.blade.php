@@ -14,12 +14,22 @@
         <section id="contacts">
             <h4>Contacts</h4>
             <section class="contacts-info">
-                <button onclick="openAddContactModal()" type="button" class="main-btn add-button">Add</button>
-                <button onclick="openRequestsModal()" type="button" class="main-btn requests-button">Requests</button>
+                <div>
+                    <div style="width: 100%;" class="button-wrapper">
+                        <button onclick="openAddContactModal()" type="button" class="button add-button">Add</button>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="width: 100%;" class="button-wrapper">
+                        <button onclick="openRequestsModal()" type="button" class="button requests-button">Requests</button>
+                        <div class="input-glow"></div>
+                    </div>
+                </div>
             </section>
             <section class="contacts-frames">
                 @if (count($friends) === 0)
-                    <p class="empty-frame-message">You have no contacts</p>
+                    <p class="empty-frame-message">You have no contacts.</p>
                 @endif
                 <ul>
                     @foreach ($friends as $friend)
