@@ -181,7 +181,7 @@ input[type="password"] {
     width: 100%;
 }
 
-.input-wrapper input {
+.input-wrapper input, select {
     background-color: #ffffff0d;
     border: 1px solid var(--glassBorder);
     border-radius: 8px;
@@ -196,7 +196,7 @@ input[type="password"] {
     width: 100%;
 }
 
-.input-wrapper input:focus {
+.input-wrapper input:focus, select:focus {
     outline: none;
     border-color: var(--primaryGreen);
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2),

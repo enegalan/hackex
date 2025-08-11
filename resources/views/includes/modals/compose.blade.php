@@ -15,7 +15,7 @@
             <form method="post" action="/friend/compose" id="compose-form">
                 @csrf
                 <div style="display:flex; align-items: center; justify-content: left; gap: .5rem;">
-                    <label for="to">To:</label>
+                    <label for="compose-to">To:</label>
                     <select name="to" id="compose-to">
                         @if ($friends->count() === 0)
                             <option value="-1">You have no contacts</option>
