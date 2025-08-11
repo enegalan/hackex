@@ -16,7 +16,7 @@
                 </div>
                 <div>
                     <div style="width: 100%;" class="button-wrapper">
-                        <button class="button ping-button" type="submit">Ping</button>
+                        <button class="button button-green ping-button" type="submit">Ping</button>
                         <div class="input-glow"></div>
                     </div>
                 </div>

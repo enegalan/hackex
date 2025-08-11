@@ -29,7 +29,7 @@ article.app-frame#processes .app-button {
 article.app-frame#processes .app-button #part-1,
 article.app-frame#processes .app-button #part-2,
 article.app-frame#processes .app-button #part-3 {
-    background: #596571;
+    background: #5965719c;
     border-radius: 50px;
     width: 100%;
     height: 20px;
@@ -43,6 +43,7 @@ article.app-frame#processes .app-button div:before {
     position: absolute;
     background: var(--primaryGreen);
     background: linear-gradient(90deg,var(--primaryGreen) 0%, #49D10F 83%);
+    box-shadow: 0 0 10px var(--primaryGreen);
 }
 article.app-frame#processes .app-button #part-1:before {width: 85%;}
 article.app-frame#processes .app-button #part-2:before {width: 45%;}
@@ -136,6 +137,7 @@ article.app-frame#scan .app-button #part-12 {
 }
 article.app-frame#scan .app-button #part-13 {
     border: 7px solid var(--scanColorSecondary);
+    box-shadow: 0 0 10px var(--primaryGreen);
 }
 article.app-frame#scan .app-button #part-14 {
     border: 2px solid var(--scanColorSecondary);
@@ -144,7 +146,7 @@ article.app-frame#scan .app-button #part-14 {
     left: 42px;
     transform: rotate(125deg);
     top: 36px;
-    box-shadow: #ffffff61 -12px -2px 11px 0px;
+    box-shadow: -12px 0 10px var(--primaryGreen);
 }
 
 /* Bank Account button */
@@ -174,6 +176,7 @@ article.app-frame#bank-account .app-button span {
     border-radius: 100px;
     width: 50%;
     height: 100%;
+    box-shadow: 0 0 10px var(--bankLogo);
 }
 #bank-logo #part-1 #part-2 {
     background: var(--white);
@@ -373,6 +376,7 @@ article.app-frame#bank-account .app-button span {
 .bitcoin.hover .circle {
     border-color: var(--bitcoinColor);
     transform: rotate(-15deg);
+    box-shadow: 0 0 10px var(--bitcoinColor);
 }
 
 /* Messages button */
@@ -501,10 +505,10 @@ div#apps-grid > * {
     border-radius: 6px;
     padding: .5rem;
 }
-#apps-grid #app-1 { background: radial-gradient(#e64900, #ee5f1f); grid-area: 1 / 1 / 2 / 2; }
-#apps-grid #app-2 { background: radial-gradient(#cae843, #a9c02b); grid-area: 1 / 2 / 2 / 3; }
-#apps-grid #app-3 { background: radial-gradient(#15d1dd, #05a8b5); grid-area: 2 / 1 / 3 / 2; }
-#apps-grid #app-4 { background: radial-gradient(#c33c7e, #a72564); grid-area: 2 / 2 / 3 / 3; }
+#apps-grid #app-1 { background: radial-gradient(#e64900, #ee5f1f); grid-area: 1 / 1 / 2 / 2; box-shadow: 0 0 10px #e64900;}
+#apps-grid #app-2 { background: radial-gradient(#cae843, #a9c02b); grid-area: 1 / 2 / 2 / 3; box-shadow: 0 0 10px #cae843;}
+#apps-grid #app-3 { background: radial-gradient(#15d1dd, #05a8b5); grid-area: 2 / 1 / 3 / 2; box-shadow: 0 0 10px #15d1dd;}
+#apps-grid #app-4 { background: radial-gradient(#c33c7e, #a72564); grid-area: 2 / 2 / 3 / 3; box-shadow: 0 0 10px #c33c7e;}
 
 /* My Device button */
 .app-frame .mobile {

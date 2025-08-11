@@ -176,6 +176,48 @@ input[type="password"] {
         0 0 0 4px rgba(0, 255, 170, 0.2);
 }
 
+.button-wrapper .button.button-red {
+    background-color: #e720203d;
+}
+
+.button-wrapper .button.button-red:hover {
+    background-color: #e7202065;
+    transition: var(--transition);
+}
+
+.button-wrapper .button.button-red:active {
+    background-color: #e7202056;
+    transition: var(--transition);
+}
+
+.button-wrapper .button.button-red:focus {
+    outline: none;
+    border-color: var(--red);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2),
+        0 0 0 4px rgba(255, 0, 0, 0.2);
+}
+
+.button-wrapper .button.button-green {
+    background-color: #a6e73624;
+}
+
+.button-wrapper .button.button-red:hover {
+    background-color: #a6e73647;
+    transition: var(--transition);
+}
+
+.button-wrapper .button.button-red:active {
+    background-color: #a6e73635;
+    transition: var(--transition);
+}
+
+.button-wrapper .button.button-red:focus {
+    outline: none;
+    border-color: var(--primaryGreen);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2),
+        0 0 0 4px rgba(106, 255, 0, 0.2);
+}
+
 .input-wrapper {
     position: relative;
     width: 100%;

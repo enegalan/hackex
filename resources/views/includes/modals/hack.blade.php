@@ -45,7 +45,7 @@
                     <input type="hidden" name="type" id="hack-process-type">
                     <input type="hidden" name="process_id" id="remove-process-id">
                     <div style="width: 100%" class="button-wrapper">
-                        <button type="submit" class="button remove-button">REMOVE</button>
+                        <button type="submit" class="button button-red remove-button">REMOVE</button>
                         <div class="input-glow"></div>
                     </div>
                 </form>

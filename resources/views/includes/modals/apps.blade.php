@@ -14,7 +14,7 @@
                 @if ($isHacked)
                     <div>
                         <div style="width: 100%;" class="button-wrapper">
-                            <button onclick="openVirusesModal({{ $user->id }})" class="button upload-button">Upload</button>
+                            <button onclick="openVirusesModal({{ $user->id }})" class="button button-green upload-button">Upload</button>
                             <div class="input-glow"></div>
                         </div>
                     </div>
