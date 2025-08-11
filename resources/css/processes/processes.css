@@ -174,6 +174,7 @@ section.processes-tabs {
     background-image: linear-gradient(#474749, var(--checkbox));
     box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.15);
     transition: var(--transition);
+    backdrop-filter: blur(var(--glowRadius));
 }
 .checkbox-wrapper-65 .cbx svg {
     position: absolute;
@@ -194,6 +195,7 @@ section.processes-tabs {
 }
 .checkbox-wrapper-65 {
     user-select: none;
+    position: relative;
 }
 .checkbox-wrapper-65 label {
     display: inline-block;
@@ -205,9 +207,13 @@ section.processes-tabs {
 }
 .checkbox-wrapper-65 input[type="checkbox"]:checked + .cbx {
     background-color: var(--checkbox);
-    background-image: linear-gradient(#255cd2, #1d52c1);
+    background-image: linear-gradient(#255cd2de, #1d52c147);
+    transition: var(--transition);
 }
 .checkbox-wrapper-65 input[type="checkbox"]:checked + .cbx svg {
     stroke-dashoffset: 0;
     transition: var(--transition);
+}
+.checkbox-wrapper-65 input[type="checkbox"]:checked ~ .cbx-glow {
+    opacity: 1;
 }

@@ -101,7 +101,7 @@ body {
     --levels3: #b3db20;
     --levels4: #1d4962;
     --leaderboard: #484848;
-    --checkbox: #606062;
+    --checkbox: #60606224;
     --mainButton: #cecece;
     --mainButton2: #3d3d3d6e;
     --secondaryButton: #c2c2c2;
@@ -214,6 +214,20 @@ input[type="password"] {
     opacity: 0;
     filter: blur(10px);
     z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.cbx-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 30px;
+    background: radial-gradient(ellipse at center, #255cd2de 0%, transparent 70%);
+    opacity: 0;
+    filter: blur(10px);
+    z-index: 0;
     transition: opacity 0.3s ease;
 }
 

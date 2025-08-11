@@ -80,6 +80,7 @@
                                                     <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
                                                 </svg>
                                             </span>
+                                            <div class="cbx-glow"></div>
                                         </label>
                                     </div>
                                 </div>
@@ -144,6 +145,7 @@
                                                     <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
                                                 </svg>
                                             </span>
+                                            <div class="cbx-glow"></div>
                                         </label>
                                     </div>
                                 </div>
@@ -212,6 +214,7 @@
                                                     <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
                                                 </svg>
                                             </span>
+                                            <div class="cbx-glow"></div>
                                         </label>
                                     </div>
                                 </div>
