@@ -732,6 +732,18 @@ function animateNumber(options) {
                     });
                 }, 150);
             });
+            document.querySelectorAll('.verify-code-input').forEach((input, index, inputs) => {
+                input.addEventListener('input', () => {
+                    if (input.value.length === 1 && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                });
+                input.addEventListener('keydown', e => {
+                    if (e.key === 'Backspace' && !input.value && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+            });
         </script>
     @endif
     @if (in_array('log', $scripts))

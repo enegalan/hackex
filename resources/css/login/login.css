@@ -261,3 +261,47 @@ body#login-frame {
         height: calc(20vw - 2px);
     }
 }
+
+.verify-code-inputs {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.verify-code-input {
+    width: 3rem !important;
+    text-align: center;
+    height: 3rem;
+    color: var(--white) !important;
+    background-color: #ffffff1c !important;
+    border: 1px solid var(--glassBorder);
+}
+
+.verify-code-input:hover {
+    background-color: #ffffff23 !important;
+    transition: var(--transition);
+}
+
+.verify-code-input:active {
+    background-color: #ffffff10 !important;
+    transition: var(--transition);
+}
+
+.verify-code-input:focus {
+    outline: none;
+    border-color: var(--primaryGreen);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2),
+        0 0 0 4px rgba(0, 255, 170, 0.2);
+}
+
+#verify-password-code {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+#reset-password-code {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+}
