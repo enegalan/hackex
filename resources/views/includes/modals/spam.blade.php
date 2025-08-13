@@ -8,7 +8,7 @@
     <section class="card modal-frame">
         <section>
             <section id="modal-top">
-                <div class="title">Active Spam</div>
+                <div class="title">{{ __('apps.active_spam') }}</div>
             </section>
             @php
                 $viruses = [];
@@ -27,8 +27,8 @@
                     $total_earning_rate += $earning_rate;
                 }
             @endphp
-            <p class="spam-general-info">Total Running: {{ count($spams) }}</p>
-            <p class="spam-general-info">Earning Rate: {{ $total_earning_rate }}/hr</p>
+            <p class="spam-general-info">{{ __('apps.total_running') }}: {{ count($spams) }}</p>
+            <p class="spam-general-info">{{ __('apps.earning_rate') }}: {{ $total_earning_rate }}/{{ __('apps.hour_abbreviation') }}</p>
             <section class="buttons">
                 <form style="width: 100%; margin-top: .5rem;" id="spam-form" class="modal-content spam-list">
                     @csrf
@@ -37,12 +37,12 @@
                             <li class="virus-level spam-level" onclick="openSpamConfirmWindow({{ $virus['id'] }}, {{ $virus['app_level'] }}, '{{ $virus['app_label'] }}')">
                                 <div style="display: flex; gap: 0.5rem;">
                                     <span class="virus-hacker-ip">{{ $virus['ip'] }}</span>
-                                    <label for="spam-level-{{ $virus['app_level'] }}">(Level {{ $virus['app_level'] }})</label>
+                                    <label for="spam-level-{{ $virus['app_level'] }}">({{ __('common.level') }} {{ $virus['app_level'] }})</label>
                                 </div>
                                 <div style="display: flex; flex-direction: column;">
-                                    <span>Total Earnings: {{ $virus['total_earnings'] }} Cryptocoins</span>
-                                    <span>Earning Rate: {{ $virus['earning_rate'] }}/hr</span>
-                                    <span>Active for: {{ $virus['active_for'] }}</span>
+                                    <span>{{ __('apps.total_earnings') }}: {{ $virus['total_earnings'] }} {{ __('common.cryptocoins') }}</span>
+                                    <span>{{ __('apps.earning_rate') }}: {{ $virus['earning_rate'] }}/{{ __('apps.hour_abbreviation') }}</span>
+                                    <span>{{ __('apps.active_for') }}: {{ $virus['active_for'] }}</span>
                                 </div>
                             </li>
                         @endforeach

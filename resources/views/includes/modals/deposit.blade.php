@@ -6,7 +6,7 @@
 <div style="z-index: 3;" id="deposit-modal" class="modal" closable="true">
     <section class="card modal-frame">
         <section id="modal-top">
-            <span>Purchased Cryptocoins are put in Savings regardless of Max Limit</span>
+            <span>{{ __('bank.deposits_mention') }}</span>
         </section>
         <section id="deposit-frame">
             <ul>
@@ -18,7 +18,7 @@
                         </form>
                         <span class="deposit_reward">
                             <span class="deposit_value">{{ $deposit['value'] }}</span>
-                            <span class="cryptocoins_label">Cryptocoins</span>
+                            <span class="cryptocoins_label">{{ __('common.cryptocoins') }}</span>
                         </span>
                         <span class="deposit_cost">
                             <span>{{ $deposit['oc'] }} OC</span>

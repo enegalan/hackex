@@ -10,17 +10,17 @@
             <section id="modal-top">
                 <div class="app_label">Bypasser</div>
                 <div>
-                    <span>Level</span>
+                    <span>{{ ucfirst(__('common.level')) }}</span>
                     <span class="app_level">1</span>
                 </div>
             </section>
             <section id="app-info-frame">
                 <div>
-                    <h4>Description:</h4>
+                    <h4>{{ __('apps.description') }}:</h4>
                     <span class="app_description"></span>
                 </div>
                 <div>
-                    <h4>Use:</h4>
+                    <h4>{{ __('apps.use') }}:</h4>
                     <span class="app_use"></span>
                 </div>
             </section>

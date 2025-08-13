@@ -4,7 +4,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'PNT Bank', 'bank' => true, 'fontawesome' => true])
+    @include('includes.layouts.head', ['title' => __('bank.pnt_bank'), 'bank' => true, 'fontawesome' => true])
     <body static-background="true" style="background:var(--bankLoginBg);">
         @include('includes.modal', ['modals' => ['deposit']])
         <section id="bank-login">
@@ -26,13 +26,13 @@
             </article>
         </section>
         <section class="bank-welcome">
-            <span id="welcome-user">Welcome, {{ $user['username'] }}</span>
+            <span id="welcome-user">{{ __('bank.welcome_user', ['username' => $user['username']]) }}</span>
         </section>
         <section class="bank-account">
             <ul>
                 <li>
                     <div class="account-detail">
-                        <span class="account-detail-title">Checking</span>
+                        <span class="account-detail-title">{{ __('bank.checking') }}</span>
                     </div>
                     <div>
                         <span>{{ formatNumber($user['checking_bitcoins']) }}</span>
@@ -41,9 +41,9 @@
                 </li>
                 <li>
                     <div class="account-detail">
-                        <span class="account-detail-title">Secured Savings</span>
+                        <span class="account-detail-title">{{ __('bank.secured_savings') }}</span>
                         <div class="account-detail-description">
-                            <span>(Max limit: </span>
+                            <span>({{ __('bank.max_limit') }}: </span>
                             <div style="display:flex">
                                 <span>{{ formatNumber($user->max_savings) }}</span>
                                 <span>)</span>
@@ -57,7 +57,7 @@
                 </li>
                 <li>
                     <div class="account-detail">
-                        <span class="account-detail-title">Total</span>
+                        <span class="account-detail-title">{{ __('common.total') }}</span>
                     </div>
                     <div>
                         <span>{{ formatNumber($user['checking_bitcoins'] + $user['secured_bitcoins']) }}</span>
@@ -70,7 +70,7 @@
             @if (!$isHacked && $user['secured_bitcoins'] == $user->max_savings)
                 <form style="width: 100%;">
                     <div style="width: 100%;" class="button-wrapper">
-                        <button type="button" style="font-family: 'main_normal'" class="button transfer-button">Transfer</button>
+                        <button type="button" style="font-family: 'main_normal'" class="button transfer-button">{{ __('bank.transfer') }}</button>
                         <div class="input-glow"></div>
                     </div>
                 </form>
@@ -78,20 +78,20 @@
                 <form style="width: 100%;" action="/transfer" method="post">
                     @csrf
                     <div style="width: 100%;" class="button-wrapper">
-                        <button type="submit" style="font-family: 'main_normal'" class="button transfer-button">Transfer</button>
+                        <button type="submit" style="font-family: 'main_normal'" class="button transfer-button">{{ __('bank.deposit') }}</button>
                         <div class="input-glow"></div>
                     </div>
                 </form>
             @endif
             @if (!$isHacked)
                 <div style="width: 100%;" class="button-wrapper">
-                    <button type="button" onclick="openDepositWindow()" style="font-family: 'main_normal'" class="button deposit-button">Deposit</button>
+                    <button type="button" onclick="openDepositWindow()" style="font-family: 'main_normal'" class="button deposit-button">{{ __('bank.deposit') }}</button>
                     <div class="input-glow"></div>
                 </div>
             @endif
         </section>
         <section class="bank-commentary">
-            <p>*Deposits: Purchased cryptocoins are put in Savings regardless of Max Limit</p>
+            <p>*{{ __('bank.deposits') }}: {{ __('bank.deposits_mention') }}</p>
         </section>
         @include('includes.buttons.back-btn')
     </body>

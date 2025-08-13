@@ -4,12 +4,12 @@
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'Log'])
+    @include('includes.layouts.head', ['title' => __('common.log')])
     <body>
         @include('includes.modal', ['modals' => []])
         <form action="/save-log" method="post" id="log">
             @csrf
-            <h4><b><span>{{ $user['username'] }}</span>'s </b><span>Log</span></h4>
+            <h4><b><span>{{ __('home.device_of', ['username' => $user['username']]) }} </b><span>{{ __('common.log') }}</span></h4>
             <section class="log-textarea">
                 <div class="text-area-wrapper">
                     <textarea rows="27" name="log" id="log">{{ $user['log'] }}</textarea>
@@ -18,13 +18,13 @@
                 </div>
             </section>
             <section class="max-size">
-                <span>max size: </span>
+                <span>{{ __('log.max_size') }}: </span>
                 <span>{{ \App\Enums\MaxLogSizes::getMaxLogSize($user['notepad_level'], true) }}</span>
             </section>
             <section class="log-buttons">
                 <div>
                     <div style="width: 100%;" class="button-wrapper">
-                        <button type="submit" class="button save-button">Save</button>
+                        <button type="submit" class="button save-button">{{ __('common.save') }}</button>
                         <div class="input-glow"></div>
                     </div>
                 </div>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'Store', 'store' => true, 'apps' => true, 'fontawesome' => true])
+    @include('includes.layouts.head', ['title' => __('common.store'), 'store' => true, 'apps' => true, 'fontawesome' => true])
     <body static-background="true" class="store-frame" style="background: #151515; color: var(--white);">
         @include('includes.modal', ['modals' => ['multi-buy']])
         <header class="dark-gradient-header">
-            <h3>Store</h3>
+            <h3>{{ __('common.store') }}</h3>
             <div class="bank-money-label">
-                <span>Bank:</span>
+                <span>{{ __('store.bank') }}:</span>
                 <div class="bank-money">
                     <span id="money-value">{{ formatNumber(Auth::user()['secured_bitcoins'] + Auth::user()['checking_bitcoins']) }}</span>
                     <i class="fa-solid fa-bitcoin-sign"></i>
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="app-info">
-                                <div class="app-name">Device: {{ $nextLevelDevice['name'] }}</div>
+                                <div class="app-name">{{ __('apps.device') }}: {{ $nextLevelDevice['name'] }}</div>
                                 <div class="app-buy-info">
                                     <div class="app-price">
                                         <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins($nextLevelDevice['price']) ? 'affordable' : '' }}">{{ formatNumber($nextLevelDevice['price']) }}</span>
@@ -49,7 +49,7 @@
                         </section>
                         <section>
                             <div style="width: 100%" class="button-wrapper">
-                                <button type="submit" class="button buy-button">Buy</button>
+                                <button type="submit" class="button buy-button">{{ __('store.buy') }}</button>
                                 <div class="input-glow"></div>
                             </div>
                         </section>
@@ -65,10 +65,10 @@
                         @csrf
                         <section>
                             <div class="app-image">
-                                <img src="{{ asset('apps/network.webp') }}" alt="firewall">
+                                <img src="{{ asset('apps/network.webp') }}" alt="{{ __('apps.network') }}">
                             </div>
                             <div class="app-info">
-                                <div class="app-name">Network: {{ $nextLevelNetwork['name'] }}</div>
+                                <div class="app-name">{{ __('apps.network') }}: {{ $nextLevelNetwork['name'] }}</div>
                                 <div class="app-buy-info">
                                     <div class="app-price">
                                         <span class="app-price-value {{ \App\Http\Controllers\StoreController::hasEnoughBitcoins($nextLevelNetwork['price']) ? 'affordable' : '' }}">{{ formatNumber($nextLevelNetwork['price']) }}</span>
@@ -79,7 +79,7 @@
                         </section>
                         <section>
                             <div style="width: 100%" class="button-wrapper">
-                                <button type="submit" class="button buy-button">Buy</button>
+                                <button type="submit" class="button buy-button">{{ __('store.buy') }}</button>
                                 <div class="input-glow"></div>
                             </div>
                         </section>
@@ -91,13 +91,13 @@
                     @csrf
                     <section>
                         <div class="app-image">
-                            <img src="{{ asset('apps/firewall.webp') }}" alt="firewall">
+                            <img src="{{ asset('apps/firewall.webp') }}" alt="{{ __('apps.firewall') }}">
                         </div>
                         <div class="app-info">
-                            <div class="app-name">Firewall</div>
+                            <div class="app-name">{{ __('apps.firewall') }}</div>
                             <div class="app-buy-info">
                                 <div class="app-level">
-                                    <span>Level</span>
+                                    <span>{{ ucfirst(__('common.level')) }}</span>
                                     <span class="app-level-value">{{ Auth::user()['firewall_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
@@ -110,7 +110,7 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button onclick="openMultiBuyModal('firewall', 'Firewall', {{ Auth::user()['firewall_level'] }}, {{ \App\Enums\AppPrices::getPrice('firewall', Auth::user()['firewall_level']) }})" type="button" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('firewall', '{{ __('apps.firewall') }}', {{ Auth::user()['firewall_level'] }}, {{ \App\Enums\AppPrices::getPrice('firewall', Auth::user()['firewall_level']) }})" type="button" class="button buy-button">{{ __('store.buy') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
@@ -121,13 +121,13 @@
                     @csrf
                     <section>
                         <div class="app-image">
-                            <img src="{{ asset('apps/bypasser.webp') }}" alt="bypasser">
+                            <img src="{{ asset('apps/bypasser.webp') }}" alt="{{ __('apps.bypasser') }}">
                         </div>
                         <div class="app-info">
-                            <div class="app-name">Bypasser</div>
+                            <div class="app-name">{{ __('apps.bypasser') }}</div>
                             <div class="app-buy-info">
                                 <div class="app-level">
-                                    <span>Level</span>
+                                    <span>{{ ucfirst(__('common.level')) }}</span>
                                     <span class="app-level-value">{{ Auth::user()['bypasser_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
@@ -140,7 +140,7 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button onclick="openMultiBuyModal('bypasser', 'Bypasser', {{ Auth::user()['bypasser_level'] }}, {{ \App\Enums\AppPrices::getPrice('bypasser', Auth::user()['bypasser_level']) }})" type="button" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('bypasser', '{{ __('apps.bypasser') }}', {{ Auth::user()['bypasser_level'] }}, {{ \App\Enums\AppPrices::getPrice('bypasser', Auth::user()['bypasser_level']) }})" type="button" class="button buy-button">{{ __('store.buy') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
@@ -151,13 +151,13 @@
                     @csrf
                     <section>
                         <div class="app-image">
-                            <img src="{{ asset('apps/password_cracker.webp') }}" alt="password_cracker">
+                            <img src="{{ asset('apps/password_cracker.webp') }}" alt="{{ __('apps.password_cracker') }}">
                         </div>
                         <div class="app-info">
-                            <div class="app-name">Password Cracker</div>
+                            <div class="app-name">{{ __('apps.password_cracker') }}</div>
                             <div class="app-buy-info">
                                 <div class="app-level">
-                                    <span>Level</span>
+                                    <span>{{ ucfirst(__('common.level')) }}</span>
                                     <span class="app-level-value">{{ Auth::user()['password_cracker_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
@@ -170,7 +170,7 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button onclick="openMultiBuyModal('password_cracker', 'Password Cracker', {{ Auth::user()['password_cracker_level'] }}, {{ \App\Enums\AppPrices::getPrice('password_cracker', Auth::user()['password_cracker_level']) }})" type="button" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('password_cracker', '{{ __('apps.password_cracker') }}', {{ Auth::user()['password_cracker_level'] }}, {{ \App\Enums\AppPrices::getPrice('password_cracker', Auth::user()['password_cracker_level']) }})" type="button" class="button buy-button">{{ __('store.buy') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
@@ -181,13 +181,13 @@
                     @csrf
                     <section>
                         <div class="app-image">
-                            <img src="{{ asset('apps/password_encryptor.webp') }}" alt="password_encryptor">
+                            <img src="{{ asset('apps/password_encryptor.webp') }}" alt="{{ __('apps.password_encryptor') }}">
                         </div>
                         <div class="app-info">
-                            <div class="app-name">Password Encryptor</div>
+                            <div class="app-name">{{ __('apps.password_encryptor') }}</div>
                             <div class="app-buy-info">
                                 <div class="app-level">
-                                    <span>Level</span>
+                                    <span>{{ ucfirst(__('common.level')) }}</span>
                                     <span class="app-level-value">{{ Auth::user()['password_encryptor_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
@@ -200,7 +200,7 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button onclick="openMultiBuyModal('password_encryptor', 'Password Encryptor', {{ Auth::user()['password_encryptor_level'] }}, {{ \App\Enums\AppPrices::getPrice('password_encryptor', Auth::user()['password_encryptor_level']) }})" type="button" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('password_encryptor', '{{ __('apps.password_encryptor') }}', {{ Auth::user()['password_encryptor_level'] }}, {{ \App\Enums\AppPrices::getPrice('password_encryptor', Auth::user()['password_encryptor_level']) }})" type="button" class="button buy-button">{{ __('store.buy') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
@@ -211,13 +211,13 @@
                     @csrf
                     <section>
                         <div class="app-image">
-                            <img src="{{ asset('apps/antivirus.webp') }}" alt="antivirus">
+                            <img src="{{ asset('apps/antivirus.webp') }}" alt="{{ __('apps.antivirus') }}">
                         </div>
                         <div class="app-info">
-                            <div class="app-name">Antivirus</div>
+                            <div class="app-name">{{ __('apps.antivirus') }}</div>
                             <div class="app-buy-info">
                                 <div class="app-level">
-                                    <span>Level</span>
+                                    <span>{{ ucfirst(__('common.level')) }}</span>
                                     <span class="app-level-value">{{ Auth::user()['antivirus_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
@@ -230,7 +230,7 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button onclick="openMultiBuyModal('antivirus', 'Antivirus', {{ Auth::user()['antivirus_level'] }}, {{ \App\Enums\AppPrices::getPrice('antivirus', Auth::user()['antivirus_level']) }})" type="button" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('antivirus', {{ __('apps.antivirus') }}, {{ Auth::user()['antivirus_level'] }}, {{ \App\Enums\AppPrices::getPrice('antivirus', Auth::user()['antivirus_level']) }})" type="button" class="button buy-button">{{ __('store.buy') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
@@ -241,13 +241,13 @@
                     @csrf
                     <section>
                         <div class="app-image">
-                            <img src="{{ asset('apps/spam.webp') }}" alt="spam">
+                            <img src="{{ asset('apps/spam.webp') }}" alt="{{ __('apps.spam') }}">
                         </div>
                         <div class="app-info">
-                            <div class="app-name">Spam</div>
+                            <div class="app-name">{{ __('apps.spam') }}</div>
                             <div class="app-buy-info">
                                 <div class="app-level">
-                                    <span>Level</span>
+                                    <span>{{ ucfirst(__('common.level')) }}</span>
                                     <span class="app-level-value">{{ Auth::user()['spam_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
@@ -260,7 +260,7 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button onclick="openMultiBuyModal('spam', 'Spam', {{ Auth::user()['spam_level'] }}, {{ \App\Enums\AppPrices::getPrice('spam', Auth::user()['spam_level']) }})" type="button" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('spam', '{{ __('apps.spam') }}', {{ Auth::user()['spam_level'] }}, {{ \App\Enums\AppPrices::getPrice('spam', Auth::user()['spam_level']) }})" type="button" class="button buy-button">{{ __('store.buy') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
@@ -271,13 +271,13 @@
                     @csrf
                     <section>
                         <div class="app-image">
-                            <img src="{{ asset('apps/spyware.webp') }}" alt="spyware">
+                            <img src="{{ asset('apps/spyware.webp') }}" alt="{{ __('apps.spyware') }}">
                         </div>
                         <div class="app-info">
-                            <div class="app-name">Spyware</div>
+                            <div class="app-name">{{ __('apps.spyware') }}</div>
                             <div class="app-buy-info">
                                 <div class="app-level">
-                                    <span>Level</span>
+                                    <span>{{ ucfirst(__('common.level')) }}</span>
                                     <span class="app-level-value">{{ Auth::user()['spyware_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
@@ -290,7 +290,7 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button onclick="openMultiBuyModal('spyware', 'Spyware', {{ Auth::user()['spyware_level'] }}, {{ \App\Enums\AppPrices::getPrice('spyware', Auth::user()['spyware_level']) }})" type="button" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('spyware', '{{ __('apps.spyware') }}', {{ Auth::user()['spyware_level'] }}, {{ \App\Enums\AppPrices::getPrice('spyware', Auth::user()['spyware_level']) }})" type="button" class="button buy-button">{{ __('store.buy') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>
@@ -301,13 +301,13 @@
                     @csrf
                     <section>
                         <div class="app-image">
-                            <img src="{{ asset('apps/notepad.webp') }}" alt="notepad">
+                            <img src="{{ asset('apps/notepad.webp') }}" alt="{{ __('apps.notepad') }}">
                         </div>
                         <div class="app-info">
-                            <div class="app-name">Notepad</div>
+                            <div class="app-name">{{ __('apps.notepad') }}</div>
                             <div class="app-buy-info">
                                 <div class="app-level">
-                                    <span>Level</span>
+                                    <span>{{ ucfirst(__('common.level')) }}</span>
                                     <span class="app-level-value">{{ Auth::user()['notepad_level'] }}</span>
                                 </div>
                                 <div class="vertical-separator">|</div>
@@ -320,7 +320,7 @@
                     </section>
                     <section>
                         <div style="width: 100%" class="button-wrapper">
-                            <button onclick="openMultiBuyModal('notepad', 'Notepad', {{ Auth::user()['notepad_level'] }}, {{ \App\Enums\AppPrices::getPrice('notepad', Auth::user()['notepad_level']) }})" type="button" class="button buy-button">Buy</button>
+                            <button onclick="openMultiBuyModal('notepad', '{{ __('apps.notepad') }}', {{ Auth::user()['notepad_level'] }}, {{ \App\Enums\AppPrices::getPrice('notepad', Auth::user()['notepad_level']) }})" type="button" class="button buy-button">{{ __('store.buy') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </section>

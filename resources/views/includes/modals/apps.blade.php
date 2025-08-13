@@ -8,13 +8,13 @@
 <div id="apps-modal" class="modal" closable="true">
     <section class="card modal-frame">
         <section id="modal-top">
-            <div class="title">Apps</div>
+            <div class="title">{{ __('common.apps') }}</div>
             <div class="top-rightside">
                 <span class="close">&times;</span>
                 @if ($isHacked)
                     <div>
                         <div style="width: 100%;" class="button-wrapper">
-                            <button onclick="openVirusesModal({{ $user->id }})" class="button button-green upload-button">Upload</button>
+                            <button onclick="openVirusesModal({{ $user->id }})" class="button button-green upload-button">{{ __('apps.upload') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </div>
@@ -27,14 +27,14 @@
                     @php
                         $diff = Auth::user()->antivirus_level - $user->antivirus_level;
                     @endphp
-                    <li {!! $isHacked && $diff < 0 ? 'onclick="openDownloadModal(\'' . $user->id . '\', \'antivirus\', \'' . $user->antivirus_level . '\', \'Antivirus\')"' : (!$isHacked ? 'onclick="openAntivirusModal()"' : '') !!}>
+                    <li {!! $isHacked && $diff < 0 ? 'onclick="openDownloadModal(\'' . $user->id . '\', \'antivirus\', \'' . $user->antivirus_level . '\', \'' . __('apps.antivirus') . '\')"' : (!$isHacked ? 'onclick="openAntivirusModal()"' : '') !!}>
                         <div class="app-logo">
-                            <img src="{{ asset('apps/antivirus.webp') }}" alt="antivirus">
+                            <img src="{{ asset('apps/antivirus.webp') }}" alt="{{ __('apps.antivirus') }}">
                         </div>
                         <div class="app-info">
                             <span class="app-name">{{ \App\Enums\Apps::getAppName('antivirus') }}</span>
                             <span class="app-value">
-                                Level <span class="app-level-value">{{ $user['antivirus_level'] }}</span>
+                                {{ ucfirst(__('common.level')) }} <span class="app-level-value">{{ $user['antivirus_level'] }}</span>
                                 @if ($isHacked)
                                     @if ($diff === 0)
                                     @elseif ($diff > 0)
@@ -49,14 +49,14 @@
                     @php
                         $diff = Auth::user()->spam_level - $user->spam_level;
                     @endphp
-                    <li {!! $isHacked && $diff < 0 ? 'onclick="openDownloadModal(\'' . $user->id . '\', \'spam\', \'' . $user->spam_level . '\', \'Spam\')"' : (!$isHacked ? 'onclick="openSpamModal()"' : '') !!}>
+                    <li {!! $isHacked && $diff < 0 ? 'onclick="openDownloadModal(\'' . $user->id . '\', \'spam\', \'' . $user->spam_level . '\', \'' . __('apps.spam') . '\')"' : (!$isHacked ? 'onclick="openSpamModal()"' : '') !!}>
                         <div class="app-logo">
-                            <img src="{{ asset('apps/spam.webp') }}" alt="spam">
+                            <img src="{{ asset('apps/spam.webp') }}" alt="{{ __('apps.spam') }}">
                         </div>
                         <div class="app-info">
                             <span class="app-name">{{ \App\Enums\Apps::getAppName('spam') }}</span>
                             <span class="app-value">
-                                Level <span class="app-level-value">{{ $user['spam_level'] }}</span>
+                                {{ ucfirst(__('common.level')) }} <span class="app-level-value">{{ $user['spam_level'] }}</span>
                                 @if ($isHacked)
                                     @if ($diff === 0)
                                     @elseif ($diff > 0)
@@ -71,14 +71,14 @@
                     @php
                         $diff = Auth::user()->spyware_level - $user->spyware_level;
                     @endphp
-                    <li {!! $isHacked && $diff < 0 ? 'onclick="openDownloadModal(\'' . $user->id . '\', \'spyware\', \'' . $user->spyware_level . '\', \'Spyware\')"' : (!$isHacked ? 'onclick="openSpywareModal()"' : '') !!}>
+                    <li {!! $isHacked && $diff < 0 ? 'onclick="openDownloadModal(\'' . $user->id . '\', \'spyware\', \'' . $user->spyware_level . '\', \'' . __('apps.spyware') . '\')"' : (!$isHacked ? 'onclick="openSpywareModal()"' : '') !!}>
                         <div class="app-logo">
-                            <img src="{{ asset('apps/spyware.webp') }}" alt="spyware">
+                            <img src="{{ asset('apps/spyware.webp') }}" alt="{{ __('apps.spyware') }}">
                         </div>
                         <div class="app-info">
                             <span class="app-name">{{ \App\Enums\Apps::getAppName('spyware') }}</span>
                             <span class="app-value">
-                                Level <span class="app-level-value">{{ $user['spyware_level'] }}</span>
+                                {{ ucfirst(__('common.level')) }} <span class="app-level-value">{{ $user['spyware_level'] }}</span>
                                 @if ($isHacked)
                                     @if ($diff === 0)
                                     @elseif ($diff > 0)
@@ -94,7 +94,7 @@
                         $diff = Auth::user()->firewall_level - $user->firewall_level;
                         $onclick = '';
                         if ($isHacked && $diff < 0) {
-                            $onclick = 'onclick="openDownloadModal(\'' . $user->id . '\', \'firewall\', \'' . $user->firewall_level . '\', \'Firewall\')"';
+                            $onclick = 'onclick="openDownloadModal(\'' . $user->id . '\', \'firewall\', \'' . $user->firewall_level . '\', \'' . __('apps.firewall') . '\')"';
                         } elseif (!$isHacked) {
                             $appName = \App\Enums\Apps::getAppName('firewall');
                             $appDesc = \App\Enums\Apps::getAppDescription('firewall');
@@ -104,12 +104,12 @@
                     @endphp
                     <li {!! $onclick !!}>
                         <div class="app-logo">
-                            <img src="{{ asset('apps/firewall.webp') }}" alt="firewall">
+                            <img src="{{ asset('apps/firewall.webp') }}" alt="{{ __('apps.firewall') }}">
                         </div>
                         <div class="app-info">
                             <span class="app-name">{{ \App\Enums\Apps::getAppName('firewall') }}</span>
                             <span class="app-value">
-                                Level <span class="app-level-value">{{ $user['firewall_level'] }}</span>
+                                {{ ucfirst(__('common.level')) }} <span class="app-level-value">{{ $user['firewall_level'] }}</span>
                                 @if ($isHacked)
                                     @if ($diff === 0)
                                     @elseif ($diff > 0)
@@ -125,7 +125,7 @@
                         $diff = Auth::user()->bypasser_level - $user->bypasser_level;
                         $onclick = '';
                         if ($isHacked && $diff < 0) {
-                            $onclick = 'onclick="openDownloadModal(\'' . $user->id . '\', \'bypasser\', \'' . $user->bypasser_level . '\', \'Bypasser\')"';
+                            $onclick = 'onclick="openDownloadModal(\'' . $user->id . '\', \'bypasser\', \'' . $user->bypasser_level . '\', \'' . __('apps.bypasser') . '\')"';
                         } elseif (!$isHacked) {
                             $appName = \App\Enums\Apps::getAppName('bypasser');
                             $appDesc = \App\Enums\Apps::getAppDescription('bypasser');
@@ -135,11 +135,11 @@
                     @endphp
                     <li {!! $onclick !!}>
                         <div class="app-logo">
-                            <img src="{{ asset('apps/bypasser.webp') }}" alt="bypasser">
+                            <img src="{{ asset('apps/bypasser.webp') }}" alt="{{ __('apps.bypasser') }}">
                         </div>
                         <div class="app-info">
                             <span class="app-name">{{ \App\Enums\Apps::getAppName('bypasser') }}</span>
-                            <span class="app-value">Level <span class="app-level-value">{{ $user['bypasser_level'] }}</span>
+                            <span class="app-value">{{ ucfirst(__('common.level')) }} <span class="app-level-value">{{ $user['bypasser_level'] }}</span>
                             @if ($isHacked)
                                 @if ($diff === 0)
                                 @elseif ($diff > 0)
@@ -155,7 +155,7 @@
                         $diff = Auth::user()->password_cracker_level - $user->password_cracker_level;
                         $onclick = '';
                         if ($isHacked && $diff < 0) {
-                            $onclick = 'onclick="openDownloadModal(\'' . $user->id . '\', \'password_cracker\', \'' . $user->password_cracker_level . '\', \'Password cracker\')"';
+                            $onclick = 'onclick="openDownloadModal(\'' . $user->id . '\', \'password_cracker\', \'' . $user->password_cracker_level . '\', \'' . __('apps.password_cracker') . '\')"';
                         } elseif (!$isHacked) {
                             $appName = \App\Enums\Apps::getAppName('password_cracker');
                             $appDesc = \App\Enums\Apps::getAppDescription('password_cracker');
@@ -165,11 +165,11 @@
                     @endphp
                     <li {!! $onclick !!}>
                         <div class="app-logo">
-                            <img src="{{ asset('apps/password_cracker.webp') }}" alt="password_cracker">
+                            <img src="{{ asset('apps/password_cracker.webp') }}" alt="{{ __('apps.password_cracker') }}">
                         </div>
                         <div class="app-info">
                             <span class="app-name">{{ \App\Enums\Apps::getAppName('password_cracker') }}</span>
-                            <span class="app-value">Level <span class="app-level-value">{{ $user['password_cracker_level'] }}</span>
+                            <span class="app-value">{{ ucfirst(__('common.level')) }} <span class="app-level-value">{{ $user['password_cracker_level'] }}</span>
                             @if ($isHacked)
                                 @php
                                     $diff = Auth::user()->password_cracker_level - $user->password_cracker_level;
@@ -188,7 +188,7 @@
                         $diff = Auth::user()->password_encryptor_level - $user->password_encryptor_level;
                         $onclick = '';
                         if ($isHacked && $diff < 0) {
-                            $onclick = 'onclick="openDownloadModal(\'' . $user->id . '\', \'password_encryptor\', \'' . $user->password_encryptor_level . '\', \'Password encryptor\')"';
+                            $onclick = 'onclick="openDownloadModal(\'' . $user->id . '\', \'password_encryptor\', \'' . $user->password_encryptor_level . '\', \'' . __('apps.password_encryptor') . '\')"';
                         } elseif (!$isHacked) {
                             $appName = \App\Enums\Apps::getAppName('password_encryptor');
                             $appDesc = \App\Enums\Apps::getAppDescription('password_encryptor');
@@ -198,11 +198,11 @@
                     @endphp
                     <li {!! $onclick !!}>
                         <div class="app-logo">
-                            <img src="{{ asset('apps/password_encryptor.webp') }}" alt="password_encryptor">
+                            <img src="{{ asset('apps/password_encryptor.webp') }}" alt="{{ __('apps.password_encryptor') }}">
                         </div>
                         <div class="app-info">
                             <span class="app-name">{{ \App\Enums\Apps::getAppName('password_encryptor') }}</span>
-                            <span class="app-value">Level <span class="app-level-value">{{ $user['password_encryptor_level'] }}</span>
+                            <span class="app-value">{{ ucfirst(__('common.level')) }} <span class="app-level-value">{{ $user['password_encryptor_level'] }}</span>
                             @if ($isHacked)
                                 @php
                                     $diff = Auth::user()->password_encryptor_level - $user->password_encryptor_level;

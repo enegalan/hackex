@@ -3,46 +3,58 @@
 namespace App\Enums;
 
 class Apps {
-    public const APPS = [
-        'device' => 'Device',
-        'network' => 'Network',
-        'antivirus' => 'Antivirus',
-        'spam' => 'Spam',
-        'spyware' => 'Spyware',
-        'firewall' => 'Firewall',
-        'bypasser' => 'Bypasser',
-        'password_cracker' => 'Password Cracker',
-        'password_encryptor' => 'Password Encryptor',
-    ];
-    public const DESCRIPTIONS = [
-        'device' => '',
-        'network' => '',
-        'antivirus' => '',
-        'spam' => '',
-        'spyware' => '',
-        'firewall' => 'The Firewall is your protector from malicious devices emaking it more difficult for attackers to access your device.',
-        'bypasser' => 'The Bypasser is your tool for bypassing Firewalls and accessing other devices.',
-        'password_cracker' => 'The Password Cracker is a tool used for decrypting an encrypted password.',
-        'password_encryptor' => 'The Password Encryptor is your last defense from keeping a hacker from accessing your bank account.',
-    ];
-    public const USES = [
-        'device' => '',
-        'network' => '',
-        'antivirus' => '',
-        'spam' => '',
-        'spyware' => '',
-        'firewall' => 'Attackers with a Bypasser level lower than your Firewall will take longer to bypass and have lower chance of a successful hack.',
-        'bypasser' => 'Devices with a Firewall level higher than your Bypasser will take longer to bypass and have lower chance of a successful hack.',
-        'password_cracker' => 'A victim\'s Password Encryptor level higher than your Password Cracker level will take longer to crack.',
-        'password_encryptor' => 'A Password Encryptor level higher than a hacker\'s Password Cracker level will take longer for them to crack.',
-    ];
+    public static $APPS;
+    public static $DESCRIPTIONS;
+    public static $USES;
+    public static function buildApps() {
+        self::$APPS = [
+            'device' => __('apps.device'),
+            'network' => __('apps.network'),
+            'antivirus' => __('apps.antivirus'),
+            'spam' => __('apps.spam'),
+            'spyware' => __('apps.spyware'),
+            'firewall' => __('apps.firewall'),
+            'bypasser' => __('apps.bypasser'),
+            'password_cracker' => __('apps.password_cracker'),
+            'password_encryptor' => __('apps.password_encryptor'),
+        ];
+    }
+    public static function buildDescriptions() {
+        self::$DESCRIPTIONS = [
+            'device' => __('apps.descriptions.device'),
+            'network' => __('apps.descriptions.network'),
+            'antivirus' => __('apps.descriptions.antivirus'),
+            'spam' => __('apps.descriptions.spam'),
+            'spyware' => __('apps.descriptions.spyware'),
+            'firewall' => __('apps.descriptions.firewall'),
+            'bypasser' => __('apps.descriptions.bypasser'),
+            'password_cracker' => __('apps.descriptions.password_cracker'),
+            'password_encryptor' => __('apps.descriptions.password_encryptor'),
+        ];
+    }
+    public static function buildUses() {
+        self::$USES = [
+            'device' => __('apps.uses.device'),
+            'network' => __('apps.uses.network'),
+            'antivirus' => __('apps.uses.antivirus'),
+            'spam' => __('apps.uses.spam'),
+            'spyware' => __('apps.uses.spyware'),
+            'firewall' => __('apps.uses.firewall'),
+            'bypasser' => __('apps.uses.bypasser'),
+            'password_cracker' => __('apps.uses.password_cracker'),
+            'password_encryptor' => __('apps.uses.password_encryptor'),
+        ];
+    }
     public static function getAppName(string $app_name): string {
-        return self::APPS[$app_name] ?? '';
+        if (!self::$APPS) self::buildApps();
+        return self::$APPS[$app_name] ?? '';
     }
     public static function getAppDescription(string $app_name): string {
-        return self::DESCRIPTIONS[$app_name] ?? '';
+        if (!self::$DESCRIPTIONS) self::buildDescriptions();
+        return self::$DESCRIPTIONS[$app_name] ?? '';
     }
     public static function getAppUse(string $app_name): string {
-        return self::USES[$app_name] ?? '';
+        if (!self::$USES) self::buildUses();
+        return self::$USES[$app_name] ?? '';
     }
 }

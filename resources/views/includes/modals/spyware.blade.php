@@ -8,7 +8,7 @@
     <section class="card modal-frame">
         <section>
             <section id="modal-top">
-                <div class="title">Active Spyware</div>
+                <div class="title">{{ __('apps.active_spyware') }}</div>
             </section>
             @php
                 $viruses = [];
@@ -22,7 +22,7 @@
                     ];
                 }
             @endphp
-            <p class="spyware-general-info">Total Running: {{ count($spywares) }}</p>
+            <p class="spyware-general-info">{{ __('apps.total_running') }}: {{ count($spywares) }}</p>
             <section class="buttons">
                 <form style="width: 100%; margin-top: .5rem;" id="spyware-form" class="modal-content spyware-list">
                     @csrf
@@ -31,7 +31,7 @@
                             <li class="virus-level spyware-level" onclick="openSpywareLog({{ $virus['id'] }}, {{ json_encode($virus['log']) }})">
                                 <div style="display: flex; gap: 0.5rem;flex-direction: column;">
                                     <span class="virus-hacker-ip">{{ $virus['ip'] }}</span>
-                                    <label for="spyware-level-{{ $virus['app_level'] }}">Level: {{ $virus['app_level'] }}</label>
+                                    <label for="spyware-level-{{ $virus['app_level'] }}">{{ ucfirst(__('common.level')) }}: {{ $virus['app_level'] }}</label>
                                 </div>
                             </li>
                         @endforeach

@@ -30,7 +30,7 @@ session()->put('isHacked', $isHacked);
         @endif
         <section style="{{ $isHacked ? 'padding-top: 2rem;' : '' }}" onclick="openPlayerInfoWindow()" id="player">
             @include('includes.components.player_level', ['user' => $user, 'showLevel' => true])
-            <div id="player-name"><b><span id="player-name-value">{{ $user['username'] }}</span><span>'s</span></b></div>
+            <div id="player-name"><b><span id="player-name-value">{{ __('home.device_of', ['username' => $user['username']]) }}</span></b></div>
             <div id="player-platform">{{ $user->Platform['name'] }}</div>
         </section>
         <section id="apps">
@@ -41,7 +41,7 @@ session()->put('isHacked', $isHacked);
                     <div id="part-2"></div>
                     <div id="part-3"></div>
                 </button>
-                <span class="app-label">Processes</span>
+                <span class="app-label">{{ __('common.processes') }}</span>
             </article>
             {{-- Scan --}}
             <article onclick="{{ !$isHacked ? "redirect('/scan')" : '' }}" id="scan" class="app-frame">
@@ -61,7 +61,7 @@ session()->put('isHacked', $isHacked);
                     <div id="part-13"></div>
                     <div id="part-14"></div>
                 </button>
-                <span class="app-label">Scan</span>
+                <span class="app-label">{{ __('common.scan') }}</span>
             </article>
             {{-- Bank Account --}}
             <article onclick="redirect('/bank-account')" id="bank-account" class="app-frame">
@@ -77,7 +77,7 @@ session()->put('isHacked', $isHacked);
                     </div>
                     <span>PNT</span>
                 </button>
-                <span class="app-label">Bank Account</span>
+                <span class="app-label">{{ __('common.bank_account') }}</span>
             </article>
             {{-- Store --}}
             <article onclick="{{ !$isHacked ? "redirect('/store')" : '' }}" id="store" class="app-frame">
@@ -102,7 +102,7 @@ session()->put('isHacked', $isHacked);
                             </div>
                         </div>
                 </button>
-                <span class="app-label">Store</span>
+                <span class="app-label">{{ __('common.store') }}</span>
             </article>
             {{-- Messages --}}
             <article onclick="{{ !$isHacked ? "redirect('/messages')" : '' }}" id="messages" class="app-frame {{ $user->ReceivedMessage()->where('read', 0)->exists() ? 'unread' : '' }}">
@@ -110,7 +110,7 @@ session()->put('isHacked', $isHacked);
                     <div class="envelope"></div>
                     <div class="open"></div>
                 </button>
-                <span class="app-label">Messages</span>
+                <span class="app-label">{{ __('common.messages') }}</span>
             </article>
             {{-- Log --}}
             <article onclick="redirect('/log')" id="log" class="app-frame">
@@ -128,7 +128,7 @@ session()->put('isHacked', $isHacked);
                         </div>
                     </div>
                 </button>
-                <span class="app-label">Log</span>
+                <span class="app-label">{{ __('common.log') }}</span>
             </article>
             {{-- Apps --}}
             <article onclick="openWindow('apps')" id="apps" class="app-frame">
@@ -205,7 +205,7 @@ session()->put('isHacked', $isHacked);
                         </div>
                     </div>
                 </button>
-                <span class="app-label">Apps</span>
+                <span class="app-label">{{ __('common.apps') }}</span>
             </article>
             {{-- My Device --}}
             <article onclick="redirect('/device')" id="device" class="app-frame">
@@ -228,7 +228,7 @@ session()->put('isHacked', $isHacked);
                         <img src="{{ asset('others/burst.webp') }}" alt="Burst">
                     </section>
                 </button>
-                <span class="app-label">My Device</span>
+                <span class="app-label">{{ __('common.my_device') }}</span>
             </article>
         </section>
     </body>

@@ -5,28 +5,28 @@
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'Messages'])
+    @include('includes.layouts.head', ['title' => __('common.messages')])
     <body>
         @include('includes.modal', ['modals' => ['compose']])
         <section id="messages-main">
-            <h4>Messages</h4>
+            <h4>{{ __('common.messages') }}</h4>
             <section class="messages-info">
                 <div>
                     <div style="width: 100%;" class="button-wrapper">
-                        <button type="button" onclick="redirect('/contacts')" class="button contact-button">CONTACTS</button>
+                        <button type="button" onclick="redirect('/contacts')" class="button contact-button">{{ strtoupper(__('common.contacts')) }}</button>
                         <div class="input-glow"></div>
                     </div>
                 </div>
                 <div>
                     <div style="width: 100%;" class="button-wrapper">
-                        <button type="button" onclick="openComposeModal()" class="button compose-button">COMPOSE</button>
+                        <button type="button" onclick="openComposeModal()" class="button compose-button">{{ strtoupper(__('common.compose')) }}</button>
                         <div class="input-glow"></div>
                     </div>
                 </div>
             </section>
             <section class="messages-frames">
                 @if ($receivedMessages->count() === 0)
-                    <p class="empty-frame-message">Your inbox is empty.</p>
+                    <p class="empty-frame-message">{{ __('messages.no_inbox') }}</p>
                 @endif
                 <ul>
                     @foreach ($receivedMessages as $receivedMessage)
@@ -48,7 +48,7 @@
                                 <div class="date-autor">
                                     <span class="message-date">{{ $receivedMessage['created_at'] }}</span>
                                     <span>-</span>
-                                    <span class="message-date">{{ $receivedMessage['from_hackex'] ? 'Hack Ex Admin' : $receivedMessage->Sender->username }}</span>
+                                    <span class="message-date">{{ $receivedMessage['from_hackex'] ? __('messages.hackex_admin') : $receivedMessage->Sender->username }}</span>
                                 </div>
                             </div>
                             <div class="message-content">

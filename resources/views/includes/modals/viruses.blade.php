@@ -6,13 +6,13 @@
 <div id="viruses-modal" class="modal" closable="true" style="z-index: 4">
     <section class="card modal-frame">
         <section id="modal-top">
-            <div class="title">Viruses</div>
+            <div class="title">{{ __('apps.viruses') }}</div>
         </section>
         <section class="buttons">
             <input type="hidden" name="user_id" id="input-user-id-5">
             <div>
                 <div style="width: 100%;" class="button-wrapper">
-                    <button onclick="toggleVirusList(this, 'spam', 'virus-form')" type="button" class="button virus-button spam-button">Spam</button>
+                    <button onclick="toggleVirusList(this, 'spam', 'virus-form')" type="button" class="button virus-button spam-button">{{ __('apps.spam') }}</button>
                     <div class="input-glow"></div>
                 </div>
                 <form style="display: none;" id="virus-form" action="/upload/spam" method="post" class="modal-content virus-list">
@@ -20,7 +20,7 @@
                     <ul class="scrollbar-none">
                         @foreach (range(Auth::user()['spam_level'], 1, -1) as $level)
                             <li class="virus-level spam-level" onclick="submitUpload('virus-form')">
-                                <label for="spam-level-{{ Auth::user()['spam_level'] }}">level {{ $level }}</label>
+                                <label for="spam-level-{{ Auth::user()['spam_level'] }}">{{ __('common.level') }} {{ $level }}</label>
                                 <input type="checkbox" name="app_level" id="spam-level-{{ $level }}">
                             </li>
                         @endforeach
@@ -30,7 +30,7 @@
             </div>
             <div>
                 <div style="width: 100%;" class="button-wrapper">
-                    <button onclick="toggleVirusList(this, 'spyware', 'upload-spyware-form')" type="button" class="button virus-button spyware-button">Spyware</button>
+                    <button onclick="toggleVirusList(this, 'spyware', 'upload-spyware-form')" type="button" class="button virus-button spyware-button">{{ __('apps.spyware') }}</button>
                     <div class="input-glow"></div>
                 </div>
                 <form style="display: none;" id="upload-spyware-form" action="/upload/spyware" method="post" class="modal-content virus-list">
@@ -38,7 +38,7 @@
                     <ul class="scrollbar-none">
                         @foreach (range(Auth::user()['spyware_level'], 1, -1) as $level)
                             <li class="virus-level spyware-level" onclick="submitUpload('upload-spyware-form')">
-                                <label for="spyware-level-{{ $level }}">level {{ $level }}</label>
+                                <label for="spyware-level-{{ $level }}">{{ __('common.level') }} {{ $level }}</label>
                                 <input type="checkbox" name="app_level" id="spyware-level-{{ $level }}">
                             </li>
                         @endforeach

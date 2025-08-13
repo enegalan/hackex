@@ -9,7 +9,7 @@ class BuyOCController extends Controller {
     public static function purchase($value) {
         $user = Auth::user();
         // Validate enough OC
-        if ($user->oc < $value) return back()->with('error', 'Not enough OC');
+        if ($user->oc < $value) return back()->with('error', __('errors.not_enough_oc'));
         // Discount OC
         $user->oc -= $value;
         return true;

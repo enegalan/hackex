@@ -7,8 +7,8 @@
     <section class="card modal-frame">
         <section>
             <section id="modal-top">
-                <div class="title">Antivirus</div>
-                <div class="level">(Level {{ Auth::user()['antivirus_level'] }})</div>
+                <div class="title">{{ __('apps.antivirus') }}</div>
+                <div class="level">({{ ucfirst(__('common.level')) }} {{ Auth::user()['antivirus_level'] }})</div>
             </section>
             @php
                 $viruses = [];
@@ -31,7 +31,7 @@
                     ];
                 }
             @endphp
-            <p class="virus-found">{{ count($viruses) }} Viruses Found</p>
+            <p class="virus-found">{{ count($viruses) }} {{ __('apps.virus_found') }}</p>
             <section class="buttons">
                 <form id="antivirus-form" class="modal-content virus-list">
                     @csrf
@@ -39,7 +39,7 @@
                         @foreach ($viruses as $virus)
                             <li class="virus-level antivirus-level" onclick="openAntivirusConfirmWindow({{ $virus['id'] }}, {{ $virus['app_level'] }}, '{{ $virus['app_label'] }}', {{ Auth::user()['antivirus_level'] }})">
                                 <span class="virus-hacker-ip">{{ $virus['ip'] }}</span>
-                                <label for="virus-level-{{ $virus['app_level'] }}">{{ $virus['app_label'] }} level {{ $virus['app_level'] }}</label>
+                                <label for="virus-level-{{ $virus['app_level'] }}">{{ $virus['app_label'] }} {{ __('common.level') }} {{ $virus['app_level'] }}</label>
                             </li>
                         @endforeach
                     </ul>

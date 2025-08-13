@@ -20,9 +20,8 @@ class PasswordCodeController extends Controller {
             ['code' => $code, 'created_at' => Carbon::now()]
         );
         Mail::to($request->email)->send(new PasswordResetCode($code));
-        return back()->with(['success' => 'Recovery code has been sent.', 'validateCode' => true]);
+        return back()->with(['success' => __('notifies.message.request_send'), 'validateCode' => true]);
     }
-
     public function verifyCode(Request $request) {
         $code1 = $request->input('code1');
         $code2 = $request->input('code2');
@@ -37,22 +36,21 @@ class PasswordCodeController extends Controller {
             ->where('code', $code)
             ->first();
         if (!$record) {
-            return back()->withErrors(['code' => 'Invalid code']);
+            return back()->withErrors(['code' => __('errors.forgot_password.code_invalid')]);
         }
         // Check expiration (10 min)
         if (Carbon::parse($record->created_at)->addMinutes(10)->isPast()) {
-            return back()->withErrors(['code' => 'Code has expired']);
+            return back()->withErrors(['code' => __('errors.forgot_password.code_expired')]);
         }
         return redirect()->back()->with(['resetPassword' => true]);
     }
-
     public function resetPassword(Request $request) {
         $password = $request->input('password');
         if (!$password || is_null($password)) {
-            return redirect()->back()->with(['resetPassword' => true])->withErrors(['password' => 'Password field must be specified']);
+            return redirect()->back()->with(['resetPassword' => true])->withErrors(['password' => __('errors.forgot_password.password_null')]);
         }
         if (strlen($password) < 8) {
-            return redirect()->back()->with(['resetPassword' => true])->withErrors(['password' => 'Password must have at least 8 characters']);
+            return redirect()->back()->with(['resetPassword' => true])->withErrors(['password' => __('errors.forgot_password.password_invalid')]);
         }
         $user = User::where('email', session('password_reset_email'))->first();
         if (!$user) return redirect()->back();
@@ -60,6 +58,6 @@ class PasswordCodeController extends Controller {
         $user->save();
         DB::table('password_resets_codes')->where('email', $user->email)->delete();
         session()->forget('password_reset_email');
-        return redirect()->route('home')->with('success', 'Password correctly updated');
+        return redirect()->route('home')->with('success', __('notifies.forgot_password.password_updated'));
     }
 }

@@ -4,7 +4,7 @@
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'Message'])
+    @include('includes.layouts.head', ['title' => __('common.message')])
     <body>
         @include('includes.modal', ['modals' => ['message-delete']])
         <section id="message-main">
@@ -12,7 +12,7 @@
             <section class="messages-info">
                 <div>
                     <div style="width: 100%" class="button-wrapper">
-                        <button type="button" onclick="openMessageDeleteModal({{ $received_message->id }})" class="button contact-button">DELETE</button>
+                        <button type="button" onclick="openMessageDeleteModal({{ $received_message->id }})" class="button contact-button">{{ strtoupper(__('message.delete')) }}</button>
                         <div class="input-glow"></div>
                     </div>
                 </div>

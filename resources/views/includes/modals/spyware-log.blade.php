@@ -12,7 +12,7 @@
             <input type="hidden" name="app_label" id="input-app-label">
         </div>
             <div class="button-wrapper">
-                <button class="button button-red remove-button" onclick="openSpywareConfirmWindow()" type="button">Remove</button>
+                <button class="button button-red remove-button" onclick="openSpywareConfirmWindow()" type="button">{{ __('common.remove') }}</button>
                 <div class="input-glow"></div>
             </div>
     </section>

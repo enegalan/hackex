@@ -5,7 +5,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'PNT Bank', 'bank' => true])
+    @include('includes.layouts.head', ['title' => __('bank.pnt_bank'), 'bank' => true])
     <body static-background="true" style="background:var(--bankLoginBg);">
         @include('includes.modal', ['modals' => ['crack']])
         <section id="bank-login">
@@ -27,27 +27,31 @@
             </article>
         </section>
         <section class="bank-welcome">
-            Welcome{{ session('autologin') ? ', ' . $user['username'] : ' to PNT Bank' }}
+            @if (session('autologin'))
+                {{ __('bank.welcome_user', ['username' => $user['username']]) }}
+            @else
+                {{ __('bank.welcome') }}
+            @endif
         </section>
         <section class="bank-login-frame">
             @if (!session('autologin'))
-                <h3>Login</h3>
+                <h3>{{ __('bank.login') }}</h3>
             @endif
             @if (!session('autologin'))
                 <form class="form">
                     <div class="input-wrapper">
-                        <input placeholder="username" type="text" value="{{ $user['username'] }}" name="bank-username" id="bank-username">
+                        <input placeholder="{{ __('bank.username') }}" type="text" value="{{ $user['username'] }}" name="bank-username" id="bank-username">
                         <div class="input-glow"></div>
                     </div>
                     <div style="display: flex; gap:.5rem;">
                         <div class="input-wrapper">
-                            <input placeholder="password" type="password" value="{{ $hasCredentials ? '*********' : '' }}" name="bank-password" id="bank-password" autocomplete="user-password">
+                            <input placeholder="{{ __('bank.password') }}" type="password" value="{{ $hasCredentials ? '*********' : '' }}" name="bank-password" id="bank-password" autocomplete="user-password">
                             <div class="input-glow"></div>
                         </div>
                         @if (!$hasCredentials && $isHacked && Auth::user()['password_cracker_level'] > 1)
                             <div style="width: 20%">
                                 <div style="width: 100%;" class="button-wrapper">
-                                    <button type="button" onclick="openCrackWindow({{ $user['password_cracker_level'] }}, '{{ \App\Enums\Apps::getAppName('password_cracker') }}', {{ $user['id'] }})" style="font-weight: normal; font-style: normal;" class="button login-button">Crack</button>
+                                    <button type="button" onclick="openCrackWindow({{ $user['password_cracker_level'] }}, '{{ \App\Enums\Apps::getAppName('password_cracker') }}', {{ $user['id'] }})" style="font-weight: normal; font-style: normal;" class="button login-button">{{ __('bank.crack') }}</button>
                                     <div class="input-glow"></div>
                                 </div>
                             </div>
@@ -58,14 +62,14 @@
                     <form id="bank-login-form" action="/bank-account" method="post">
                         @csrf
                         <div style="width: 100%" class="button-wrapper">
-                            <button type="submit" style="font-weight: normal; font-style: normal;" class="button login-button">Login</button>
+                            <button type="submit" style="font-weight: normal; font-style: normal;" class="button login-button">{{ __('bank.login') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </form>
                 @else
                     <div id="bank-login-form" action="/bank-account" method="post">
                         <div style="width: 100%" class="button-wrapper">
-                            <button type="button" style="width: 100%; font-weight: normal; font-style: normal;" class="button login-button">Login</button>
+                            <button type="button" style="width: 100%; font-weight: normal; font-style: normal;" class="button login-button">{{ __('bank.login') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </div>
@@ -79,7 +83,7 @@
         </section>
         @if (!session('autologin'))
             <section class="bank-quote">
-                <q>Trust your life.</q>
+                <q>{{ __('bank.quote') }}</q>
             </section>
         @endif
         @if (session('autologin'))

@@ -20,7 +20,7 @@ class StoreController extends Controller {
         $user = Auth::user();
         $checking = $user->checking_bitcoins;
         $price = AppPrices::getPrice($app_name, $app_level - 1);
-        if (!self::hasEnoughBitcoins($price, $user)) return redirect()->back()->with('error', 'Not enough bitcoins');
+        if (!self::hasEnoughBitcoins($price, $user)) return redirect()->back()->with('error', __('errors.not_enough_bitcoins'));
         // Validate if level column exists
         $levelColumn = $app_name . '_level';
         if (!isset($user->$levelColumn)) throw new \Exception("App '$app_name' is not valid.");
@@ -53,7 +53,7 @@ class StoreController extends Controller {
                 ExpActions::addExp('purchased_items', $app_name, false);
             }
         }
-        return redirect()->back()->with('success', 'App successfully upgraded.');
+        return redirect()->back()->with('success', __('notifies.store.app_upgraded'));
     }
     function buy($app_name) {
         $user = Auth::user();
@@ -79,7 +79,7 @@ class StoreController extends Controller {
                 $nextLevel = $next_network['name'];
             }
         }
-        if (!self::hasEnoughBitcoins($price, $user)) return redirect()->back()->with('error', 'Not enough bitcoins');
+        if (!self::hasEnoughBitcoins($price, $user)) return redirect()->back()->with('error', __('errors.not_enough_bitcoins'));
         // Subtract from checking first
         if ($checking >= $price) $user->checking_bitcoins -= $price;
         else {
@@ -111,7 +111,7 @@ class StoreController extends Controller {
         $user->save();
         LogController::doLog(LogController::PURCHASED, $user, ['app_level' => $nextLevel, 'app_name' => Apps::getAppName($app_name)], false);
         ExpActions::addExp('purchased_items', $app_name, false);
-        return redirect()->back()->with('success', 'App successfully upgraded.');
+        return redirect()->back()->with('success', __('notifies.store.app_upgraded'));
     }
     public static function hasEnoughBitcoins($price, $user = null) {
         if (!$user) $user = Auth::user();

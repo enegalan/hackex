@@ -10,17 +10,17 @@
     <section class="card modal-frame">
         <section>
             <section id="modal-top">
-                <div class="app_label">Compose</div>
+                <div class="app_label">{{ __('common.compose') }}</div>
             </section>
             <form method="post" action="/friend/compose" id="compose-form">
                 @csrf
                 <div style="display:flex; align-items: center; justify-content: left; gap: .5rem;">
-                    <label for="compose-to">To:</label>
+                    <label for="compose-to">{{ __('common.to') }}:</label>
                     <select name="to" id="compose-to">
                         @if ($friends->count() === 0)
-                            <option value="-1">You have no contacts</option>
+                            <option value="-1">{{ __('compose.no_contact') }}</option>
                         @else
-                            <option value="-1">Select a contact...</option>
+                            <option value="-1">{{ __('compose.select_contact') }}</option>
                             @foreach ($friends as $friend)
                                 @php
                                     $requestMaker = $friend->User->id === Auth::id() ? $friend->Friend : $friend->User;
@@ -31,17 +31,17 @@
                     </select>
                 </div>
                 <div class="input-wrapper">
-                    <input type="text" name="subject" id="compose-subject" placeholder="subject">
+                    <input type="text" name="subject" id="compose-subject" placeholder="{{ __('compose.subject') }}">
                     <div class="input-glow"></div>
                 </div>
                 <div class="text-area-wrapper">
-                    <textarea name="message" id="compose-message" placeholder="message"></textarea>
+                    <textarea name="message" id="compose-message" placeholder="{{ __('compose.message') }}"></textarea>
                     <div class="textarea-glow"></div>
                 </div>
                 <div style="display: flex; align-items: center; justify-content: center;">
                     <div>
                         <div style="width: 100%;" class="button-wrapper">
-                            <button style="width: auto;" class="button send-button" type="submit">SEND</button>
+                            <button style="width: auto;" class="button send-button" type="submit">{{ __('compose.send') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </div>

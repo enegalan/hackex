@@ -28,7 +28,7 @@ class UserController extends Controller {
         $hackedUser = session()->get('hackedUser');
         session()->remove('hackedUser');
         if (!$hackedUser) return view('home');
-        return redirect()->route('home')->with('access_boot', 'Disconnecting from ' . $hackedUser->ip);
+        return redirect()->route('home')->with('access_boot', __('common.disconnect_device', ['ip' => $hackedUser->ip]));
     }
     function transfer() {
         if (session()->get('isHacked')) {
@@ -44,7 +44,7 @@ class UserController extends Controller {
             $victim->save();
             $auth_user->save();
             LogController::doLog(LogController::WITHDRAWAL, $victim, ['bitcoins' => $checking_bitcoins, 'ip' => $auth_user->ip]);
-            return view('bank-account')->with('success', $checking_bitcoins . ' Cryptocoins successfully transfered to your bank account.');
+            return view('bank-account')->with('success', __('notifies.user.hacker_transfered', ['bitcoins' => $checking_bitcoins]));
         } else {
             // Transfer session user's checking_bitcoins to secured_bitcoins
             $user = Auth::user();
@@ -53,10 +53,10 @@ class UserController extends Controller {
             // Calculate how much bitcoins can be transfered
             $spaceLeft = $maxSaving - $currentSecured;
             if ($spaceLeft <= 0) {
-                return BankController::autoLoginBankAccount(['error' => 'You have reached the maximum savings limit.']);
+                return BankController::autoLoginBankAccount(['error' => __('errors.user.max_savings_limit')]);
             }
             if ($user->checking_bitcoins == 0) {
-                return BankController::autoLoginBankAccount(['error' => 'You have no Cryptocoins to transfer.']);
+                return BankController::autoLoginBankAccount(['error' => __('errors.user.no_crypto_to_transfer')]);
             }
             // Calculate how much bitcoins will be transfered from checking
             $transferAmount = min($user->checking_bitcoins, $spaceLeft);
@@ -65,7 +65,7 @@ class UserController extends Controller {
             $user->secured_bitcoins += $transferAmount;
             $user->save();
             LogController::doLog(LogController::TRANSFER, $user, ['bitcoins' => $transferAmount]);
-            return BankController::autoLoginBankAccount(['success' => 'You have secured your checking Cryptocoins.']);
+            return BankController::autoLoginBankAccount(['success' => __('notifies.user.user_transfered')]);
         }
     }
     function saveLog (Request $request) {
@@ -91,8 +91,8 @@ class UserController extends Controller {
         $success = $user->save();
         $data = [];
         if ($notify) {
-            if ($success) $data['succes'] = 'Log saved successfully.';
-            else $data['error'] = 'Log could not be saved.';
+            if ($success) $data['success'] = __('notifies.user.log_saved');
+            else $data['error'] = __('errors.user.log_error');
         }
         return redirect()->back()->with($data);
     }
@@ -105,7 +105,7 @@ class UserController extends Controller {
         if (!$auth_user->Bypass()
         ->where('victim_id', $user_id)
         ->where('status', Bypass::SUCCESSFUL)
-        ->exists()) return redirect()->back()->with('error', 'You are not able to download any app from this user.');
+        ->exists()) return redirect()->back()->with('error', __('errors.user.download_error'));
         $app_level = $user[$app_name.'_level'];
         $auth_user->Transfer()->create([
             'victim_id' => $user_id,
@@ -116,18 +116,18 @@ class UserController extends Controller {
             'visible' => 1,
         ]);
         LogController::doLog(LogController::DOWNLOADING, $user, ['app_level' => $app_level, 'app_name' => $app_name, 'ip' => $auth_user->ip], false);
-        return redirect()->back()->with('message', 'Download has started.');
+        return redirect()->back()->with('message', __('notifies.user.download_started'));
     }
     function upload ($app_name, Request $request) {
         $user_id = $request->input('user_id');
         $user = User::findOrFail($user_id);
         $auth_user = Auth::user();
         $app_level = $auth_user[$app_name.'_level'];
-        // For security reasons, check if auth user is allowed to download this user's apps
+        // For security reasons, check if auth user is allowed to upload to this user's device
         if (!$auth_user->Bypass()
         ->where('victim_id', $user_id)
         ->where('status', Bypass::SUCCESSFUL)
-        ->exists()) return redirect()->back()->with('error', 'You are not able to download any app from this user.');
+        ->exists()) return redirect()->back()->with('error', __('errors.user.upload_error'));
         // Check if user has already uploaded this app - level
         $hasAlreadyUploaded = $auth_user->Transfer()
         ->where('victim_id', $user_id)
@@ -141,8 +141,8 @@ class UserController extends Controller {
             ->where('app_name', $app_name)
             ->where('app_level', $app_level)
             ->where('status', Transfer::WORKING)->exists();
-            if ($isUploading) return redirect()->back()->with('error', 'Virus is still uploading, please wait until it finishes.');
-            else return redirect()->back()->with('error', 'You have already uploaded this virus with level ' . $app_level . '.');
+            if ($isUploading) return redirect()->back()->with('error', __('errors.user.virus_uploading'));
+            else return redirect()->back()->with('error', __('errors.user.virus_uploaded', ['level' => $app_level]));
         }
         $auth_user->Transfer()->create([
             'victim_id' => $user_id,
@@ -153,7 +153,7 @@ class UserController extends Controller {
             'visible' => 1,
         ]);
         LogController::doLog(LogController::UPLOADING, $auth_user, ['app_level' => $app_level, 'app_name' => $app_name, 'ip' => $user->ip], false);
-        return redirect()->back()->with('message', 'Upload has started.');
+        return redirect()->back()->with('message', __('notifies.user.upload_started'));
     }
     function processRemove(Request $request) {
         $process_id = $request->input('process_id');
@@ -188,13 +188,13 @@ class UserController extends Controller {
             LogController::forgetLog($process->Victim);
             if ($back_return) {
                 if ($success) {
-                    return back()->with('success', 'Process deleted.');
+                    return back()->with('success', __('notifies.user.process_deleted'));
                 }
-                return back()->with('error', 'Could not be able to delete this process.');
+                return back()->with('error', __('errors.user.process_remove_error'));
             }
             return $success;
         }
-        if ($back_return) return back()->with('error', 'Process is not found or you are not hacker of this process.');
+        if ($back_return) return back()->with('error', __('errors.user.process_unexpected'));
         return false;
     }
     function multiProcessRemove(Request $request) {
@@ -229,10 +229,10 @@ class UserController extends Controller {
             if ($success === true) {
                 $process->expires_at = now();
                 $process->save();
-                return back()->with('success', 'Process shortened!');
-            } else return back()->with('error', 'Could not be able to shorten this process.');
+                return back()->with('success', __('notifies.user.process_shortened'));
+            } else return back()->with('error', __('errors.user.process_shorten_error'));
         }
-        return back()->with('error', 'Process is not found or you are not hacker of this process.');
+        return back()->with('error', __('errors.user.process_unexpected'));
     }
     function processRetry(Request $request) {
         $process_id = $request->input('process_id');
@@ -263,10 +263,10 @@ class UserController extends Controller {
             $process->expires_at = $expires_at;
             $process->status = Transfer::WORKING;
             $success = $process->save();
-            if ($success) return back()->with('message', 'Retrying process...');
-            else return back()->with('error', 'Could not be able to shorten this process.');
+            if ($success) return back()->with('message', __('notifies.user.process_retry'));
+            else return back()->with('error', __('errors.user.process_shorten_error'));
         }
-        return back()->with('error', 'Process is not found or you are not hacker of this process.');
+        return back()->with('error', __('errors.user.process_unexpected'));
     }
     function hackRedirect() {
         return redirect()->route('home');
@@ -276,14 +276,14 @@ class UserController extends Controller {
         $bypass = Bypass::findOrFail($bypass_id);
         if ($bypass && $bypass->User['id'] == Auth::id()) {
             // Check bypass status
-            if ($bypass['available'] === 0) return back()->with('warning', 'This user is not longer available for you.');
+            if ($bypass['available'] === 0) return back()->with('warning', __('errors.user.bypass_warning'));
             if ($bypass['status'] === Bypass::SUCCESSFUL) {
                 LogController::doLog(LogController::LOGGED_IN, $bypass->Victim, ['ip' => $bypass->User->ip]);
                 LogController::doLog(LogController::ACCESSED, $bypass->User, ['ip' => $bypass->Victim->ip]);
-                return redirect()->route('home')->with(['victim_id' => $bypass->Victim['id'], 'access_boot' => 'Accessing ' . $bypass->Victim['ip']]);
+                return redirect()->route('home')->with(['victim_id' => $bypass->Victim['id'], 'access_boot' => __('common.access_device', ['ip' => $bypass->Victim->ip])]);
             }
         }
-        return back()->with('error', 'Bypass is not found or you are not hacker of this bypass.');
+        return back()->with('error', __('errors.user.bypass_error'));
     }
     function changeIp(Request $request) {
         $user = Auth::user();
@@ -303,6 +303,6 @@ class UserController extends Controller {
         Crack::where('victim_id', $user->id)->update([
             'available' => 0,
         ]);
-        return back()->with('success', 'IP changed successfully');
+        return back()->with('success', __('notifies.user.ip_changed'));
     }
 }

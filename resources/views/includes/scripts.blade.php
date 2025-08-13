@@ -643,7 +643,7 @@ function animateNumber(options) {
             function refreshScan(scope = null) {
                 if (scope) scope.disabled = true;
                 const ipList = document.querySelector('#ip-list');
-                ipList.innerHTML = '<span class="refresh-scan-text">Scanning devices...</span>';
+                ipList.innerHTML = '<span class="refresh-scan-text">' + '{{ __('scan.scanning') }}' + '</span>';
                 const csrfToken = document.querySelector('#scan input[name="_token"]').value;
                 fetch('/scan-refresh', {
                     method: 'POST',

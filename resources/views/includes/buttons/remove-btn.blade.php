@@ -7,7 +7,7 @@
     @csrf
     <div style="width: max-content;">
         <div style="width: 100%;" class="button-wrapper">
-            <button class="button button-red remove-button">Remove Selected</button>
+            <button class="button button-red remove-button">{{ __('common.remove_selected') }}</button>
             <div class="input-glow"></div>
         </div>
     </div>

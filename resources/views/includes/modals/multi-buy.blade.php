@@ -10,7 +10,7 @@
             @csrf
             <input type="hidden" name="app_name">
             <section id="modal-top">
-                <span>Select wich level of <span class="app_label">Firewall</span> you want to upgrade to:</span>
+                <span>{!! __('store.select_buy') !!}</span>
             </section>
             <section id="multi-buy-frame">
                 <div class="level-frame">
@@ -27,11 +27,11 @@
                 </div>
                 <div class="buttons">
                     <div style="width: 100%" class="button-wrapper">
-                        <button type="button" class="button cancel-button" onclick="closeMultiBuyModal()">Cancel</button>
+                        <button type="button" class="button cancel-button" onclick="closeMultiBuyModal()">{{ __('common.cancel') }}</button>
                         <div class="input-glow"></div>
                     </div>
                     <div style="width: 100%" class="button-wrapper">
-                        <button type="submit" class="button ok-button">Ok</button>
+                        <button type="submit" class="button ok-button">{{ __('common.ok') }}</button>
                         <div class="input-glow"></div>
                     </div>
                 </div>

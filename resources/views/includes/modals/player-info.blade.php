@@ -23,25 +23,25 @@ if (isset($victim_id) || session('isHacked')) {
             <section class="player-level-info">
                 <div class="username">{{ $user->username }}</div>
                 <div>
-                    <span>Rank:</span>
+                    <span>{{ __('common.rank') }}:</span>
                     <span class="rank">0</span>
                 </div>
                 <div>
-                    <span>Level:</span>
+                    <span>{{ ucfirst(__('common.level')) }}:</span>
                     <span class="level">{{ \App\Enums\ExpActions::getUserLevel($user) }}</span>
                 </div>
                 <div style="font-size: 11px; margin-top: -4px;">
                     <span class="next_level_exp">{{ \App\Enums\ExpActions::getNextLevelExpGoal($user) - \App\Enums\ExpActions::getExpToNextLevel($user) }}</span>
-                    <span>of</span>
+                    <span>{{ __('common.of') }}</span>
                     <span class="next_level_exp_goal">{{ \App\Enums\ExpActions::getNextLevelExpGoal($user) }}</span>
-                    <span>to next level</span>
+                    <span>{{ __('common.to_next_level') }}</span>
                 </div>
                 <div>
-                    <span>Score:</span>
+                    <span>{{ __('common.score') }}:</span>
                     <span class="score">{{ formatNumber($user->score) }}</span>
                 </div>
                 <div>
-                    <span>Reputation:</span>
+                    <span>{{ __('common.reputation') }}:</span>
                     <span class="reputation">{{ formatNumber($user->reputation) }}</span>
                 </div>
             </section>
@@ -50,10 +50,10 @@ if (isset($victim_id) || session('isHacked')) {
                     <section class="day-streak">
                         <div class="day-streak-frame">
                             <span class="day_streak">{{ \App\Models\DailyLogin::getPlayerDailyStreak(Auth::user()) }}</span>
-                            <span>Day Streak</span>
+                            <span>{{ __('common.day_streak') }}</span>
                         </div>
                         <div class="daily-login-earned">
-                            <span>Earned</span>
+                            <span>{{ __('common.earned') }}</span>
                             <span class="daily_login_earned">{{ \App\Models\DailyLogin::getPlayerDailyLoginEarned(Auth::user()) }}</span>
                             <span>OC</span>
                         </div>

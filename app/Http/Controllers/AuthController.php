@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Locales;
 use App\Enums\MaxSavings;
 use App\Models\Message;
 use App\Models\Network;
@@ -28,7 +29,7 @@ class AuthController extends Controller {
                 'password' => 'required|string|min:8',
                 'repeat-password' => 'required|string|same:password',
             ], [
-                'repeat-password.same' => 'Passwords does not match.',
+                'repeat-password.same' => __('errors.auth.not_match_password'),
             ]);
         } catch (ValidationException $e) {
             $errors = array('signup' => $e->errors());
@@ -47,6 +48,7 @@ class AuthController extends Controller {
             'platform_id' => $first_platform['id'],
             'network_id' => $first_network['id'],
             'max_savings' => MaxSavings::getMaxSaving(Platform::RAIDER_I),
+            'locale' => $request->getPreferredLanguage(Locales::$availableLocales),
         ]);
         $wallpaper = Wallpaper::where('name', Wallpaper::RAIDER[1])->first();
         $user->UserWallpaper()->updateOrCreate([
@@ -63,7 +65,7 @@ class AuthController extends Controller {
         ])->save();
         LogController::doLog(LogController::DEVICE_SETUP, $user, ['username', $user->username]);
         Auth::login($user);
-        return view('home', ['access_boot' => 'Booting Device...']);
+        return view('home', ['access_boot' => __('common.boot_device')]);
     }
     function signin(Request $request) {
         $request->validate([
@@ -78,12 +80,17 @@ class AuthController extends Controller {
             : User::where('username', $usernameEmail)->first();
         $correct_password = $user && Hash::check($password, $user->password);
         if ($correct_password) {
+            $locale = $request->getPreferredLanguage(Locales::$availableLocales);
+            if ($locale) {
+                $user->locale = $locale;
+                $user->save();
+            }
             Auth::login($user);
-            return redirect()->route('home')->with('access_boot', 'Booting Device...');
+            return redirect()->route('home')->with('access_boot', __('common.boot_device'));
         } else {
             $errors = array();
-            if (!$user) $errors['login-username-email'] = 'User not found.';
-            else if (!$correct_password) $errors['login-password'] = 'Incorrect password.';
+            if (!$user) $errors['login-username-email'] = __('errors.user.not_found');
+            else if (!$correct_password) $errors['login-password'] = __('errors.auth.incorrect_password');
             return back()->withErrors($errors)->withInput();
         }
     }

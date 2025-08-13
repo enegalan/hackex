@@ -10,10 +10,10 @@
             <span id="logo-2">EX</span>
         </section>
         <section class="boot_text">
-            <span>{{ $text ?: 'Booting Device...' }}</span>
+            <span>{{ $text ?: __('common.boot_device') }}</span>
         </section>
         <section class="hackex-version">
-            <span>Version {{ env('APP_VERSION') }}</span>
+            <span>{{ __('common.version') }} {{ env('APP_VERSION') }}</span>
         </section>
     </section>
 </article>

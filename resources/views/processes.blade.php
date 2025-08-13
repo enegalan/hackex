@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'Processes'])
+    @include('includes.layouts.head', ['title' => __('common.processes')])
     <body>
         @include('includes.modal', ['modals' => ['hack']])
         <section id="processes">
             <section class="processes-topwrap">
-                <h4>Processes</h4>
+                <h4>{{ __('common.processes') }}</h4>
                 <section class="processes-info">
                     <section class="processes-counters">
                         <div class="total-counter">
-                            <span>Total: </span>
+                            <span>{{ __('common.total') }}: </span>
                             <span id="total-value">0</span>
                         </div>
                         <div class="running-counter">
-                            <span>Running: </span>
+                            <span>{{ __('common.running') }}: </span>
                             <span id="running-value">0</span>
                         </div>
                     </section>
@@ -33,24 +33,24 @@
                     <div class="process-tab" id="bypassing-tab">
                         <input type="hidden" name="bypassing-total-value" id="bypassing-total-value-input" value="{{ Auth::user()->Bypass()->where('visible', true)->count() }}">
                         <input type="hidden" name="bypassing-running-value" id="bypassing-running-value-input" value="{{ Auth::user()->Bypass()->where('status', \App\Models\Bypass::WORKING)->count() }}">
-                        <span>Bypassing</span>
+                        <span>{{ __('processes.bypassing_tab') }}</span>
                     </div>
                     <div class="process-tab" id="cracking-tab">
                         <input type="hidden" name="cracking-total-value" id="cracking-total-value-input" value="{{ Auth::user()->Crack()->where('visible', true)->count() }}">
                         <input type="hidden" name="cracking-running-value" id="cracking-running-value-input" value="{{ Auth::user()->Crack()->where('visible', true)->where('status', \App\Models\Crack::WORKING)->count() }}">
-                        <span>Cracking</span>
+                        <span>{{ __('processes.cracking_tab') }}</span>
                     </div>
                     <div class="process-tab" id="transfer-tab">
                         <input type="hidden" name="transfer-total-value" id="transfer-total-value-input" value="{{ Auth::user()->Transfer()->where('visible', true)->count() }}">
                         <input type="hidden" name="transfer-running-value" id="transfer-running-value-input" value="{{ Auth::user()->Transfer()->where('visible', true)->where('status', \App\Models\Transfer::WORKING)->count() }}">
-                        <span>Network</span>
+                        <span>{{ __('processes.network_tab') }}</span>
                     </div>
                 </div>
             </section>
             <section class="processes-frames">
                 <section id="bypassing-frame">
                     @if (Auth::user()->Bypass->count() === 0)
-                        <p class="empty-frame-message">You have no bypass processes.</p>
+                        <p class="empty-frame-message">{{ __('processes.no_bypass') }}</p>
                     @endif
                     <ul>
                         @foreach (Auth::user()->Bypass->reverse() as $bypass)
@@ -65,11 +65,10 @@
                                         <span class="process-ip">{{ $bypass->Victim['ip'] }}</span>
                                         @if ($bypass['status'] === \App\Models\Bypass::WORKING)
                                             {{-- Working --}}
-                                            <span class="process-date">Bypassing</span>
+                                            <span class="process-date">{{ __('processes.bypassing') }}</span>
                                         @else
                                             {{-- Successful or Failed --}}
-                                            <span class="process-date">{{ diffInHumanTime($bypass['expires_at'], false) }}</span>
-                                            <span class="process-ago"> ago</span>
+                                            <span class="process-date">{{ __('processes.process_ago', ['ago' => diffInHumanTime($bypass['expires_at'], false)]) }}</span>
                                         @endif
                                     </div>
                                     <div onclick="event.stopPropagation()" class="checkbox-wrapper-65">
@@ -97,17 +96,15 @@
                                         </div>
                                     @elseif ($bypass['status'] === \App\Models\Bypass::SUCCESSFUL)
                                         <div class="process-status successful">
-                                            <span>Bypass</span>
-                                            <span> successful</span>
+                                            <span>{{ __('processes.bypass_successful') }}</span>
                                         </div>
                                     @elseif ($bypass['status'] === \App\Models\Bypass::FAILED)
                                         <div class="process-status failed">
-                                            <span>Bypass</span>
-                                            <span> failed</span>
+                                            <span>{{ __('processes.bypass_failed') }}</span>
                                         </div>
                                     @endif
                                     <div class="process-level">
-                                        <span>Firewall level </span>
+                                        <span>{{ __('processes.firewall_level') }} </span>
                                         <span>{{ $bypass->Victim['firewall_level'] }}</span>
                                     </div>
                                 </div>
@@ -117,7 +114,7 @@
                 </section>
                 <section id="cracking-frame">
                     @if (Auth::user()->Crack->count() === 0)
-                        <p class="empty-frame-message">You have no crack processes.</p>
+                        <p class="empty-frame-message">{{ __('processes.no_crack') }}</p>
                     @endif
                     <ul>
                         @foreach (Auth::user()->Crack()->where('visible', true)->get()->reverse() as $crack)
@@ -132,11 +129,10 @@
                                         <span class="process-ip">{{ $crack->Victim['ip'] }}</span>
                                         @if ($crack['status'] === \App\Models\Bypass::WORKING)
                                             {{-- Working --}}
-                                            <span class="process-date">Cracking</span>
+                                            <span class="process-date">{{ __('processes.cracking') }}</span>
                                         @else
                                             {{-- Successful or Failed --}}
-                                            <span class="process-date">{{ diffInHumanTime($crack['expires_at'], false) }}</span>
-                                            <span class="process-ago"> ago</span>
+                                            <span class="process-date">{{ __('processes.process_ago', ['ago' => diffInHumanTime($crack['expires_at'], false)]) }}</span>
                                         @endif
                                     </div>
                                     <div onclick="event.stopPropagation()" class="checkbox-wrapper-65">
@@ -164,17 +160,15 @@
                                         </div>
                                     @elseif ($crack['status'] === \App\Models\Crack::SUCCESSFUL)
                                         <div class="process-status successful">
-                                            <span>Crack</span>
-                                            <span> successful</span>
+                                            <span>{{ __('processes.crack_successful') }}</span>
                                         </div>
                                     @elseif ($crack['status'] === \App\Models\Crack::FAILED)
                                         <div class="process-status failed">
-                                            <span>Crack</span>
-                                            <span> failed</span>
+                                            <span>{{ __('processes.crack_failed') }}</span>
                                         </div>
                                     @endif
                                     <div class="process-level">
-                                        <span>Encryptor level </span>
+                                        <span>{{ __('processes.encryptor_level') }} </span>
                                         <span>{{ $crack->Victim['password_encryptor_level'] }}</span>
                                     </div>
                                 </div>
@@ -184,7 +178,7 @@
                 </section>
                 <section id="transfer-frame">
                     @if (Auth::user()->Transfer->count() === 0)
-                        <p class="empty-frame-message">You have no network processes.</p>
+                        <p class="empty-frame-message">{{ __('processes.no_network') }}</p>
                     @endif
                     <ul>
                         @foreach (Auth::user()->Transfer()->where('visible', true)->get()->reverse() as $transfer)
@@ -200,14 +194,13 @@
                                         @if ($transfer['status'] === \App\Models\Transfer::WORKING)
                                             {{-- Working --}}
                                             @if ($transfer['type'] === \App\Models\Transfer::DOWNLOAD)
-                                                <span class="process-date">Downloading</span>
+                                                <span class="process-date">{{ __('processes.downloading') }}</span>
                                             @else
-                                                <span class="process-date">Uploading</span>
+                                                <span class="process-date">{{ __('processes.uploading') }}</span>
                                             @endif
                                         @else
                                             {{-- Successful or Failed --}}
-                                            <span class="process-date">{{ diffInHumanTime($transfer['expires_at'], false) }}</span>
-                                            <span class="process-ago"> ago</span>
+                                            <span class="process-date">{{ __('processes.process_ago', ['ago' => diffInHumanTime($transfer['expires_at'], false)]) }}</span>
                                         @endif
                                     </div>
                                     <div onclick="event.stopPropagation()" class="checkbox-wrapper-65">
@@ -235,12 +228,15 @@
                                         </div>
                                     @elseif ($transfer['status'] === \App\Models\Transfer::SUCCESSFUL)
                                         <div class="process-status successful">
-                                            <span>Bypass</span>
-                                            <span> successful</span>
+                                            @if ($transfer->type === \App\Models\Transfer::DOWNLOAD)
+                                                <span>{{ __('processes.download_successful') }}</span>
+                                            @elseif ( $transfer->type === \App\Models\Transfer::UPLOAD)
+                                                <span>{{ __('processes.upload_successful') }}</span>
+                                            @endif
                                         </div>
                                     @endif
                                     <div class="process-level">
-                                        <span>{{ \App\Enums\Apps::getAppName($transfer->app_name) }} level </span>
+                                        <span>{{ \App\Enums\Apps::getAppName($transfer->app_name) }} {{ __('common.level') }} </span>
                                         <span>{{ $transfer->type === \App\Models\Transfer::DOWNLOAD ? $transfer->Victim[$transfer->app_name . '_level'] : $transfer->app_level }}</span>
                                     </div>
                                 </div>

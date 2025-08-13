@@ -21,8 +21,8 @@
                 <input type="hidden" name="ip" id="input-ip-2" value="192.168.0.1">
             </section>
             <section class="buttons">
-                <button type="button" class="close cancel">Cancel</button>
-                <button type="submit" class="cursor-pointer">Ok</button>
+                <button type="button" class="close cancel">{{ __('common.cancel') }}</button>
+                <button type="submit" class="cursor-pointer">{{ __('common.ok') }}</button>
             </section>
         </form>
     </section>

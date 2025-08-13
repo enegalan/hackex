@@ -52,7 +52,7 @@ function generateScanListHtml($users) {
             <li onclick="openBypassWindow(\'' . $user->ip . '\', \'' . $user->firewall_level . '\', \'' . Auth::user()->bypasser_level . '\')" class="ip-user">
                 <span class="ip-value">' . $user->ip . '</span>
                 <div class="firewall-label">
-                    <span>Firewall level</span>
+                    <span>' . __('processes.firewall_level') . '</span>
                     <span class="firewall-value">' . $user->firewall_level . '</span>
                 </div>
             </li>

@@ -4,5 +4,5 @@
     }
 @endphp
 <section class="disconnect-button" onclick="redirect('/disconnect')" id="disconnect">
-    Disconnect
+    {{ __('common.disconnect') }}
 </section>

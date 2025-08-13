@@ -18,7 +18,7 @@ class BankController extends Controller {
             $victim = session()->get('hackedUser');
             $hasCredentials = Crack::hasCredentials($victim['id']);
             if (!$hasCredentials) {
-                return back()->with('error', 'You have no credentials for this bank account.');
+                return back()->with('error', __('errors.bank.no_credentials'));
             }
             $hacker = Auth::user();
             LogController::doLog(LogController::SECURITY_ALERT, $victim, ['ip' => $hacker->ip]);
@@ -33,14 +33,14 @@ class BankController extends Controller {
         $user = User::findOrFail($user_id);
         $auth_user = Auth::user();
         // Check if user has a crack process
-        if ($auth_user->Crack()->where('victim_id', $user_id)->where('status', Crack::WORKING)->exists()) return redirect()->back()->with('error', 'You already have a crack process running for this user.');
+        if ($auth_user->Crack()->where('victim_id', $user_id)->where('status', Crack::WORKING)->exists()) return redirect()->back()->with('error', __('errors.bank.already_cracking'));
         // For security reasons, check if auth user is allowed to crack this user's bank account
         $canCrack = $auth_user->Bypass()
         ->where('victim_id', $user_id)
         ->where('status', Crack::SUCCESSFUL)
         ->exists() && $auth_user['password_cracker_level'] > 1;
         if (!$canCrack) {
-            return redirect()->back()->with('error', 'You are not allowed to crack this user.');
+            return redirect()->back()->with('error', __('errors.bank.crack_not_allowed'));
         }
         $passwordEncryptorLevel = $user->password_encryptor_level;
         $passwordCrackerLevel = $auth_user['password_cracker_level'];
@@ -49,12 +49,12 @@ class BankController extends Controller {
             'expires_at' => calculateCrackExpiration($passwordEncryptorLevel, $passwordCrackerLevel),
             'visible' => 1,
         ]);
-        return redirect()->back()->with('success', 'Crack has started.');
+        return redirect()->back()->with('success', __('notifies.bank.crack_started'));
     }
     function deposit(Request $request) {
         $deposit_id = $request->input('deposit_id');
         $deposit = self::getDeposits()[$deposit_id] ?? false;
-        if (!$deposit) return back()->with('error', 'This deposit does not exist.');
+        if (!$deposit) return back()->with('error', __('errors.bank.deposit_not_found'));
         $deposit_oc = $deposit['oc'];
         $success = BuyOCController::purchase($deposit_oc);
         if ($success === true) {
@@ -64,9 +64,9 @@ class BankController extends Controller {
             $user->secured_bitcoins += $deposit_value;
             $success = $user->save();
             if ($success) {
-                return self::autoLoginBankAccount(['success' => 'Deposit successfully done!.']);
+                return self::autoLoginBankAccount(['success' => __('notifies.bank.deposit_success')]);
             }
         }
-        return view('bank-account')->with('error', 'Deposit could not be done.');
+        return view('bank-account')->with('error', __('errors.bank.deposit_error'));
     }
 }

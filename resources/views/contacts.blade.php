@@ -8,28 +8,28 @@
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'Contacts'])
+    @include('includes.layouts.head', ['title' => __('common.contacts')])
     <body>
         @include('includes.modal', ['modals' => ['add-contact', 'requests', 'remove-contact']])
         <section id="contacts">
-            <h4>Contacts</h4>
+            <h4>{{ __('common.contacts') }}</h4>
             <section class="contacts-info">
                 <div>
                     <div style="width: 100%;" class="button-wrapper">
-                        <button onclick="openAddContactModal()" type="button" class="button add-button">Add</button>
+                        <button onclick="openAddContactModal()" type="button" class="button add-button">{{ __('contacts.add') }}</button>
                         <div class="input-glow"></div>
                     </div>
                 </div>
                 <div>
                     <div style="width: 100%;" class="button-wrapper">
-                        <button onclick="openRequestsModal()" type="button" class="button requests-button">Requests</button>
+                        <button onclick="openRequestsModal()" type="button" class="button requests-button">{{ __('contacts.requests') }}</button>
                         <div class="input-glow"></div>
                     </div>
                 </div>
             </section>
             <section class="contacts-frames">
                 @if (count($friends) === 0)
-                    <p class="empty-frame-message">You have no contacts.</p>
+                    <p class="empty-frame-message">{{ __('contacts.no_contact') }}</p>
                 @endif
                 <ul>
                     @foreach ($friends as $friend)
@@ -46,8 +46,7 @@
                                     <span class="subject-value">{{ $requestMaker->ip }}</span>
                                 </div>
                                 <div class="friend-date">
-                                    <span>Since</span>
-                                    <span class="friend-date">{{ $requestMaker->created_at }}</span>
+                                    <span class="friend-date">{{ __('contacts.friend_since', ['date' => $requestMaker->created_at]) }}</span>
                                 </div>
                             </div>
                         </li>

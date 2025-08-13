@@ -41,6 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail {
         'reputation',
         'score',
         'monthly_score',
+        'locale',
     ];
     function Platform() {
         return $this->belongsTo(Platform::class);

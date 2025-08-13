@@ -6,19 +6,17 @@
 <div id="crack-modal" class="modal confirm-modal" closable="true">
     <section class="modal-frame">
         <section id="modal-top">
-            <div class="title">Crack Password</div>
+            <div class="title">{{ __('confirm.crack_password') }}</div>
         </section>
         <form action="/crack" method="post" class="modal-content">
             @csrf
             <section class="content">
-                <span>Attempt to crack a Level </span>
-                <span class="password_cracker_level">1</span>
-                <span> <span class="password_cracker_label">Encryption</span>?</span>
+                {{ __('confirm.crack_confirm') }}
                 <input type="hidden" name="user_id" id="input-user-id-3">
             </section>
             <section class="buttons">
-                <button type="button" class="close cancel">Cancel</button>
-                <button type="submit" class="cursor-pointer">Ok</button>
+                <button type="button" class="close cancel">{{ __('common.cancel') }}</button>
+                <button type="submit" class="cursor-pointer">{{ __('common.ok') }}</button>
             </section>
         </form>
     </section>

@@ -102,7 +102,7 @@ section.processes-tabs {
     background: var(--blackTransparency);
 }
 
-.process-date, .process-ago {
+.process-date {
     font-size: 12px;
 }
 .process-ip {

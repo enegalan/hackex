@@ -8,10 +8,10 @@
     <section class="card modal-frame">
         <section>
             <section id="modal-top">
-                <div class="app_label">Contact Requests</div>
+                <div class="app_label">{{ __('contacts.contact_requests') }}</div>
             </section>
             @if ($friendRequests->count() === 0)
-                <p class="empty-frame-message">You have no contact requests.</p>
+                <p class="empty-frame-message">{{ __('contacts.no_request') }}</p>
             @endif
             <ul id="requests-list">
                 @foreach ($friendRequests as $friendRequest)
@@ -25,7 +25,7 @@
                                 @csrf
                                 <input type="hidden" name="friend_request_id" value="{{ $friendRequest->id }}">
                                 <div style="width: 100%;" class="button-wrapper">
-                                    <button class="button accept-button" type="submit">Accept</button>
+                                    <button class="button accept-button" type="submit">{{ __('common.accept') }}</button>
                                     <div class="input-glow"></div>
                                 </div>
                             </form>
@@ -33,7 +33,7 @@
                                 @csrf
                                 <input type="hidden" name="friend_request_id" value="{{ $friendRequest->id }}">
                                 <div style="width: 100%;" class="button-wrapper">
-                                    <button class="button decline-button" type="submit">Decline</button>
+                                    <button class="button decline-button" type="submit">{{ __('common.decline') }}</button>
                                     <div class="input-glow"></div>
                                 </div>
                             </form>

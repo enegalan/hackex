@@ -6,15 +6,15 @@
 <div style="z-index: 3;" id="change-ip-modal" class="modal" closable="true">
     <section class="card modal-frame">
         <section id="modal-top">
-            <div class="app_label">Generate a New IP</div>
+            <div class="app_label">{{ __('device.generate_ip') }}</div>
         </section>
         <section id="change-ip-frame">
-            <span>Need an escape from the same pesky hackers? Then generate a new IP so they can't find you again. A fresh IP also clears any unwanted Spam and Spyware viruses currently plaguing your device.</span>
+            <span>{{ __('device.generate_ip_mention') }}</span>
             <form>
                 <input type="hidden" name="user_id" id="input-user-id-2">
                 <div style="width: 100%;" class="button-wrapper">
                     <button onclick="openChangeIpConfirmWindow()" type="button" class="button change-ip-button">
-                        <span>Change IP</span>
+                        <span>{{ __('device.change_ip') }}</span>
                         <span>200 OC</span>
                     </button>
                     <div class="input-glow"></div>

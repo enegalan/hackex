@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use Auth;
 
 class LogController extends Controller {
-    CONST DEVICE_SETUP = '%username%\'s device set up successfully.'; // When player is created
-    const LOGGED_IN = '%ip% logged in.'; // When player logs into a device
-    const SECURITY_ALERT = 'Alert from PNT Bank: Account may be compromised. Access attempted by %ip%'; // When player logs into a bank account
-    const DOWNLOADING = 'Level %app_level% %app_name% downloading to %ip%'; // When hacker downloads an app
-    const UPLOADING = 'Level %app_level% %app_name% uploading to %ip%'; // When user uploads an app to someone
-    const ACCESSED = 'Accessed device at %ip%'; // When auth user logs into another device
-    const BYPASS = 'Bypass of device at %ip%'; // When user bypasses a device
-    const BYPASS_SUCCESSFUL = 'Bypass of device at %ip% successful'; // When user device bypass is successful
-    const PURCHASED = 'Purchased level %app_level% %app_name%';
-    const TRANSFER = 'Transfer of %bitcoins% Cryptocoins to savings.';
-    const WITHDRAWAL = 'Withdrawal of %bitcoins% Cryptocoins to account at %ip%'; // When hackers transfers money to the their account
+    CONST DEVICE_SETUP = __('log.logs.device_setup'); // When player is created
+    const LOGGED_IN = __('log.logs.logged_in'); // When player logs into a device
+    const SECURITY_ALERT = __('log.logs.security_alert'); // When player logs into a bank account
+    const DOWNLOADING = __('log.logs.downloading'); // When hacker downloads an app
+    const UPLOADING = __('log.logs.uploading'); // When user uploads an app to someone
+    const ACCESSED = __('log.logs.accessed'); // When auth user logs into another device
+    const BYPASS = __('log.logs.bypass'); // When user bypasses a device
+    const BYPASS_SUCCESSFUL = __('log.logs.bypass_successful'); // When user device bypass is successful
+    const PURCHASED = __('log.logs.purchased');
+    const TRANSFER = __('log.logs.transfer');
+    const WITHDRAWAL = __('log.logs.withdrawal'); // When hackers transfers money to the their account
     public static function generateMessage($typeMessage, $data) {
         $message = "[" . date('Y-m-d H:i') . "] ";
         $parsedMessage = $typeMessage;
@@ -33,7 +33,7 @@ class LogController extends Controller {
                     break;
                 }
             }
-        }        
+        }
         session()->put('autoAddedLogs', $autoAddedLogs);
     }
     public static function doLog ($log_type, $to, $data = [], $sendOnce = true) {

@@ -4,18 +4,18 @@
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'Leaderboards', 'leaderboards' => true])
+    @include('includes.layouts.head', ['title' => __('leaderboard.leaderboards'), 'leaderboards' => true])
     <body id="leaderboards" static-background="true" >
         @include('includes.modal', ['modals' => ['player-info']])
         <header class="dark-gradient-header">
-            <h3>Leaderboards</h3>
+            <h3>{{ __('leaderboard.leaderboards') }}</h3>
         </header>
         <section class="leaderboard">
             <table>
                 <thead>
-                    <th>Rank</th>
-                    <th>Alias</th>
-                    <th>Total</th>
+                    <th>{{ __('common.rank') }}</th>
+                    <th>{{ __('leaderboard.alias') }}</th>
+                    <th>{{ __('common.total') }}</th>
                 </thead>
                 <tbody>
                     @php

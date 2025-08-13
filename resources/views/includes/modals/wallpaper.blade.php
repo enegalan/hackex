@@ -8,7 +8,7 @@
     <section class="card modal-frame">
         <section>
             <section id="modal-top">
-                <div class="app_label">Change wallpaper</div>
+                <div class="app_label">{{ __('device.change_wallpaper') }}</div>
             </section>
             <section id="wallpaper-frame">
                 <form>

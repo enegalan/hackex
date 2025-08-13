@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    @include('includes.layouts.head', ['title' => 'Scan'])
+    @include('includes.layouts.head', ['title' => __('common.scan')])
     <body>
         @include('includes.modal', ['modals' => ['bypass']])
         <section id="scan">
@@ -8,12 +8,12 @@
                 <form action="/ping" method="post" class="ip-searcher">
                     @csrf
                     <div class="input-wrapper">
-                        <input placeholder="ip address" class="ip-search" type="search" name="ip-search" id="ip-search">
+                        <input placeholder="{{ __('scan.ip_address') }}" class="ip-search" type="search" name="ip-search" id="ip-search">
                         <div class="input-glow"></div>
                     </div>
                     <div style="width: 12%;">
                         <div style="width: 100%;" class="button-wrapper">
-                            <button disabled class="button ping-button">Ping</button>
+                            <button disabled class="button ping-button">{{ __('common.ping') }}</button>
                             <div class="input-glow"></div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                         <li onclick="openBypassWindow('{{ $user['ip'] }}', '{{ $user['firewall_level'] }}', '{{ Auth::user()['bypasser_level'] }}' )" class="ip-user">
                             <span class="ip-value">{{ $user['ip'] }}</span>
                             <div class="firewall-label">
-                                <span>Firewall level</span>
+                                <span>{{ __('processes.firewall_level') }}</span>
                                 <span class="firewall-value">{{ $user['firewall_level'] }}</span>
                             </div>
                         </li>
@@ -38,7 +38,7 @@
         </section>
         <section class="scan-bottomwrap">
             <div style="width: 100%" class="button-wrapper">
-                <button onclick="refreshScan(this)" class="button refresh-button">Refresh</button>
+                <button onclick="refreshScan(this)" class="button refresh-button">{{ __('common.refresh') }}</button>
                 <div class="input-glow"></div>
             </div>
         </section>

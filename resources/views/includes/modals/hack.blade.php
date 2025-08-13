@@ -6,14 +6,14 @@
 <div id="hack-modal" class="modal" closable="true">
     <section class="card modal-frame">
         <section id="modal-top">
-            <div class="title">Process Actions</div>
+            <div class="title">{{ __('processes.process_actions') }}</div>
         </section>
         <section class="buttons">
                 <form id="hack-form" action="/hack" method="post" class="modal-content">
                     @csrf
                     <input type="hidden" name="process_id" id="hack-process-id">
                     <div style="width: 100%" class="button-wrapper">
-                        <button type="submit" class="button hack-button">HACK</button>
+                        <button type="submit" class="button hack-button">{{ __('processes.hack') }}</button>
                         <div class="input-glow"></div>
                     </div>
                 </form>
@@ -35,7 +35,7 @@
                     <input type="hidden" name="process_id" id="retry-process-id">
                     <div style="width: 100%" class="button-wrapper">
                         <button type="submit" class="button retry-button">
-                            <span>RETRY</span>
+                            <span>{{ __('processes.retry') }}</span>
                         </button>
                         <div class="input-glow"></div>
                     </div>
@@ -45,7 +45,7 @@
                     <input type="hidden" name="type" id="hack-process-type">
                     <input type="hidden" name="process_id" id="remove-process-id">
                     <div style="width: 100%" class="button-wrapper">
-                        <button type="submit" class="button button-red remove-button">REMOVE</button>
+                        <button type="submit" class="button button-red remove-button">{{ strtoupper(__('common.remove')) }}</button>
                         <div class="input-glow"></div>
                     </div>
                 </form>
