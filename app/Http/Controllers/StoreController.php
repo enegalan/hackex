@@ -49,7 +49,7 @@ class StoreController extends Controller {
         if ($addedLevels > 0) {
             for ($i = 0; $i < $addedLevels; $i++) {
                 $boughtLevel = $currentLevel + $i + 1;
-                LogController::doLog(LogController::PURCHASED, $user, ['app_level' => $boughtLevel, 'app_name' => Apps::getAppName($app_name)], false);
+                LogController::doLog(LogController::getConstant('PURCHASED', $user->locale), $user, ['app_level' => $boughtLevel, 'app_name' => Apps::getAppName($app_name)], false);
                 ExpActions::addExp('purchased_items', $app_name, false);
             }
         }
@@ -109,7 +109,7 @@ class StoreController extends Controller {
             }
         }
         $user->save();
-        LogController::doLog(LogController::PURCHASED, $user, ['app_level' => $nextLevel, 'app_name' => Apps::getAppName($app_name)], false);
+        LogController::doLog(LogController::getConstant('PURCHASED', $user->locale), $user, ['app_level' => $nextLevel, 'app_name' => Apps::getAppName($app_name)], false);
         ExpActions::addExp('purchased_items', $app_name, false);
         return redirect()->back()->with('success', __('notifies.store.app_upgraded'));
     }

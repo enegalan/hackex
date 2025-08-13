@@ -21,7 +21,7 @@ class BankController extends Controller {
                 return back()->with('error', __('errors.bank.no_credentials'));
             }
             $hacker = Auth::user();
-            LogController::doLog(LogController::SECURITY_ALERT, $victim, ['ip' => $hacker->ip]);
+            LogController::doLog(LogController::getConstant('SECURITY_ALERT', $victim['locale']), $victim, ['ip' => $hacker->ip]);
         }
         return view('bank-account')->with($data);
     }

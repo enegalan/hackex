@@ -43,7 +43,7 @@ class UserController extends Controller {
             // Finaly save both models
             $victim->save();
             $auth_user->save();
-            LogController::doLog(LogController::WITHDRAWAL, $victim, ['bitcoins' => $checking_bitcoins, 'ip' => $auth_user->ip]);
+            LogController::doLog(LogController::getConstant('WITHDRAWAL', $victim->locale), $victim, ['bitcoins' => $checking_bitcoins, 'ip' => $auth_user->ip]);
             return view('bank-account')->with('success', __('notifies.user.hacker_transfered', ['bitcoins' => $checking_bitcoins]));
         } else {
             // Transfer session user's checking_bitcoins to secured_bitcoins
@@ -64,7 +64,7 @@ class UserController extends Controller {
             $user->checking_bitcoins -= $transferAmount;
             $user->secured_bitcoins += $transferAmount;
             $user->save();
-            LogController::doLog(LogController::TRANSFER, $user, ['bitcoins' => $transferAmount]);
+            LogController::doLog(LogController::getConstant('TRANSFER', $user->locale), $user, ['bitcoins' => $transferAmount]);
             return BankController::autoLoginBankAccount(['success' => __('notifies.user.user_transfered')]);
         }
     }
@@ -115,7 +115,7 @@ class UserController extends Controller {
             'expires_at' => calculateDownloadExpiration($user, $app_name),
             'visible' => 1,
         ]);
-        LogController::doLog(LogController::DOWNLOADING, $user, ['app_level' => $app_level, 'app_name' => $app_name, 'ip' => $auth_user->ip], false);
+        LogController::doLog(LogController::getConstant('DOWNLOADING', $user->locale), $user, ['app_level' => $app_level, 'app_name' => $app_name, 'ip' => $auth_user->ip], false);
         return redirect()->back()->with('message', __('notifies.user.download_started'));
     }
     function upload ($app_name, Request $request) {
@@ -152,7 +152,7 @@ class UserController extends Controller {
             'expires_at' => calculateUploadExpiration($auth_user, $app_name),
             'visible' => 1,
         ]);
-        LogController::doLog(LogController::UPLOADING, $auth_user, ['app_level' => $app_level, 'app_name' => $app_name, 'ip' => $user->ip], false);
+        LogController::doLog(LogController::getConstant('UPLOADING'), $auth_user, ['app_level' => $app_level, 'app_name' => $app_name, 'ip' => $user->ip], false);
         return redirect()->back()->with('message', __('notifies.user.upload_started'));
     }
     function processRemove(Request $request) {
@@ -278,8 +278,8 @@ class UserController extends Controller {
             // Check bypass status
             if ($bypass['available'] === 0) return back()->with('warning', __('errors.user.bypass_warning'));
             if ($bypass['status'] === Bypass::SUCCESSFUL) {
-                LogController::doLog(LogController::LOGGED_IN, $bypass->Victim, ['ip' => $bypass->User->ip]);
-                LogController::doLog(LogController::ACCESSED, $bypass->User, ['ip' => $bypass->Victim->ip]);
+                LogController::doLog(LogController::getConstant('LOGGED_IN', $bypass->Victim->locale), $bypass->Victim, ['ip' => $bypass->User->ip]);
+                LogController::doLog(LogController::getConstant('ACCESSED', $bypass->User->locale), $bypass->User, ['ip' => $bypass->Victim->ip]);
                 return redirect()->route('home')->with(['victim_id' => $bypass->Victim['id'], 'access_boot' => __('common.access_device', ['ip' => $bypass->Victim->ip])]);
             }
         }

@@ -32,7 +32,7 @@ class ScanController extends Controller {
             'victim_id' => $victim->id,
             'expires_at' => calculateBypassExpiration($firewallLevel, $bypasserLevel),
         ]);
-        LogController::doLog(LogController::BYPASS, Auth::user(), ['ip' => $victim->ip]);
+        LogController::doLog(LogController::getConstant('BYPASS'), Auth::user(), ['ip' => $victim->ip]);
         return back()->with(['success' => __('notifies.scan.bypass_started'), 'persist_scan' => true]);
     }
     function refreshScan() {

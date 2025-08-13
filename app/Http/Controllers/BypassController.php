@@ -16,7 +16,7 @@ class BypassController extends Controller {
             $bypass->status = rand(1, 100) <= $successChance ? Bypass::SUCCESSFUL : Bypass::FAILED;
             $bypass->save();
             if ($bypass->status === Bypass::SUCCESSFUL) {
-                LogController::doLog(LogController::BYPASS_SUCCESSFUL, $bypass->User, ['ip' => $bypass->Victim->ip]);
+                LogController::doLog(LogController::getConstant('BYPASS_SUCCESSFUL', $bypass->User->locale), $bypass->User, ['ip' => $bypass->Victim->ip]);
                 ExpActions::addExp('bypass_successful', null, true, 'bypass_' . $bypass->id);
                 $difficultAction = $bypass->Victim->firewall_level > $bypass->User->bypasser_level;
                 ReputationActions::addReputation('bypass_successful', null, true, 'bypass_' . $bypass->id, $difficultAction);

@@ -3,19 +3,41 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Exception;
 
 class LogController extends Controller {
-    CONST DEVICE_SETUP = __('log.logs.device_setup'); // When player is created
-    const LOGGED_IN = __('log.logs.logged_in'); // When player logs into a device
-    const SECURITY_ALERT = __('log.logs.security_alert'); // When player logs into a bank account
-    const DOWNLOADING = __('log.logs.downloading'); // When hacker downloads an app
-    const UPLOADING = __('log.logs.uploading'); // When user uploads an app to someone
-    const ACCESSED = __('log.logs.accessed'); // When auth user logs into another device
-    const BYPASS = __('log.logs.bypass'); // When user bypasses a device
-    const BYPASS_SUCCESSFUL = __('log.logs.bypass_successful'); // When user device bypass is successful
-    const PURCHASED = __('log.logs.purchased');
-    const TRANSFER = __('log.logs.transfer');
-    const WITHDRAWAL = __('log.logs.withdrawal'); // When hackers transfers money to the their account
+    public static $const;
+    public static function buildConstants() {
+        $DEVICE_SETUP = 'log.logs.device_setup'; // When player is created
+        $LOGGED_IN = 'log.logs.logged_in'; // When player logs into a device
+        $SECURITY_ALERT = 'log.logs.security_alert'; // When player logs into a bank account
+        $DOWNLOADING = 'log.logs.downloading'; // When hacker downloads an app
+        $UPLOADING = 'log.logs.uploading'; // When user uploads an app to someone
+        $ACCESSED = 'log.logs.accessed'; // When auth user logs into another device
+        $BYPASS = 'log.logs.bypass'; // When user bypasses a device
+        $BYPASS_SUCCESSFUL = 'log.logs.bypass_successful'; // When user device bypass is successful
+        $PURCHASED = 'log.logs.purchased';
+        $TRANSFER = 'log.logs.transfer';
+        $WITHDRAWAL = 'log.logs.withdrawal'; // When hackers transfers money to the their account
+        self::$const = [
+            'DEVICE_SETUP' => $DEVICE_SETUP,
+            'LOGGED_IN' => $LOGGED_IN,
+            'SECURITY_ALERT' => $SECURITY_ALERT,
+            'DOWNLOADING' => $DOWNLOADING,
+            'UPLOADING' => $UPLOADING,
+            'ACCESSED' => $ACCESSED,
+            'BYPASS' => $BYPASS,
+            'BYPASS_SUCCESSFUL' => $BYPASS_SUCCESSFUL,
+            'PURCHASED' => $PURCHASED,
+            'TRANSFER' => $TRANSFER,
+            'WITHDRAWAL' => $WITHDRAWAL,
+        ];
+    }
+    public static function getConstant($constName, $locale = null) {
+        if (self::$const === null) self::buildConstants();
+        if (!isset(self::$const[$constName])) throw new Exception('Non-existent log constant: ' . $constName);
+        return __(self::$const[$constName], [], $locale);
+    }
     public static function generateMessage($typeMessage, $data) {
         $message = "[" . date('Y-m-d H:i') . "] ";
         $parsedMessage = $typeMessage;

@@ -63,7 +63,7 @@ class AuthController extends Controller {
             'message' => MessageController::INITIAL_MESSAGE,
             'from_hackex' => true,
         ])->save();
-        LogController::doLog(LogController::DEVICE_SETUP, $user, ['username', $user->username]);
+        LogController::doLog(LogController::getConstant('DEVICE_SETUP'), $user, ['username', $user->username]);
         Auth::login($user);
         return view('home', ['access_boot' => __('common.boot_device')]);
     }
